@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='us-ascii'?>
+
+<PRINTERS>
+
+<printer>
+	
+	<NAME>Test Printer One</NAME>
+	<TENSION>.35</TENSION>
+	<COMPRESSION>.05</COMPRESSION>
+	<IMPACT>.001</IMPACT>
+	<PART_COMPLEXITY>8</PART_COMPLEXITY>
+	<LEAD_TIME>5</LEAD_TIME>
+	<EOC>false</EOC> 
+	<ROM>aluminum, stainless</ROM>
+	<TOLERANCE>.0001</TOLERANCE>
+	<FINISH>MATTE</FINISH>
+	
+</printer>
+
+
+<printer>
+
+	<NAME>Test Printer One</NAME>
+	<TENSION>.37</TENSION>
+	<COMPRESSION>.0001</COMPRESSION>
+	<IMPACT>.3</IMPACT>
+	<PART_COMPLEXITY>11</PART_COMPLEXITY>
+	<LEAD_TIME>1</LEAD_TIME>
+	<EOC>true</EOC> 
+	<ROM>Stainless</ROM>
+	<TOLERANCE>.01</TOLERANCE>
+	<FINISH>GLOSS</FINISH>
+	
+
+</printer>
+
+</PRINTERS>
