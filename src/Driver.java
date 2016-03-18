@@ -60,7 +60,7 @@ public class Driver {
 			scanner.nextLine();
 			String finish = scanner.nextLine();
 			
-			printerList.setMatches(tension, compression, impact, complexity, leadTime, eoc, rom, tolerance, finish);
+			printerList.setMatches(tension, compression, impact, complexity, leadTime, eoc, storeROM(rom), tolerance, finish);
 			
 			outputSearchedList(printerList);
 			
@@ -164,7 +164,7 @@ public class Driver {
 					// SPECIFICALLY ROM SECTION
 					NodeList listROM = eElement.getElementsByTagName("ROM");  // Now we create a new list specifically for just ROM.
 					String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
-					romArrayEX = storeROM(lineToBeAdded);
+					romArrayEX = storeROM(lineToBeAdded);						// Call our method to update changes to the rom.
 					for (int jojo = 0; jojo < romArrayEX.length; jojo++) {
 						System.out.println(romArrayEX[jojo]);
 					}
@@ -251,8 +251,8 @@ public class Driver {
 
 		System.out.println("The length of this god damn fucking array is: " + romArray.length);
 
-		for (int jiji = 0; jiji < romArray.length; jiji++) {
-			System.out.println("The ROM attribute in this bitch is: " + romArray[jiji]);
+		for (int jojo = 0; jojo < romArray.length; jojo++) {
+			System.out.println("The ROM attribute in this bitch is: " + romArray[jojo]);
 		}
 		return romArray;
 	}

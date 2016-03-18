@@ -39,7 +39,7 @@ public class PrinterList {
 	 */
 	
 	public void setMatches(double tension, double compression, double impact, 
-			double complexity, double leadTime, boolean eoc, String rom, double tolerance, String finish){
+			double complexity, double leadTime, boolean eoc, String [] rom, double tolerance, String finish){
 		
 		
 		//PrinterList newMatch = new PrinterList();
@@ -77,8 +77,10 @@ public class PrinterList {
 			//if(eoc == printer.isEoc()) // Sort of odd. Assuming EOC is a parameter that can be desired true or not necessary (false)
 			//	printer.setMatches(true, 5);
 
-			if(rom.equalsIgnoreCase(printer.getRom())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
-				printer.setMatches(true, 6); 
+			for (int g = 0; g < rom.length; g++) {
+				if(rom[g].equalsIgnoreCase(printer.getRom())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
+					printer.setMatches(true, 6);
+			}
 			
 			if(tolerance <= printer.getTolerance())
 				printer.setMatches(true, 7);

@@ -14,7 +14,7 @@ public class Printer {
 	private double leadTime;
 	private boolean eoc;
 	private String rom;
-	private String [] arrayOfROM;
+	private String [] arrayOfROM;			// The actual array obtains values when instantiated in the Driver file.
 	private double tolerance;
 	private String finish;
 	
@@ -34,6 +34,7 @@ public class Printer {
 		leadTime = 0;
 		eoc = false;
 		rom = "";
+		arrayOfROM = new String[0];			// Will revise at a later point.
 		tolerance = 0;
 		finish = "";
 		
@@ -42,7 +43,7 @@ public class Printer {
 		
 	}
 
-	Printer(String name, double tension, double compression, double impact, 
+	/*Printer(String name, double tension, double compression, double impact,
 			double complexity, double leadTime, boolean eoc, String rom, double tolerance, String finish){
 		
 		this.name = name;
@@ -57,7 +58,7 @@ public class Printer {
 		this.finish = finish;
 		
 		matches = new boolean[9];
-	}
+	}*/
 
 	Printer(String name, double tension, double compression, double impact,
 			double complexity, double leadTime, boolean eoc, String [] rom, double tolerance, String finish){
@@ -152,6 +153,8 @@ public class Printer {
 	public String getRom() {
 		return rom;
 	}
+
+	public String[] getArrayRom() { return arrayOfROM; }
 
 	public void setRom(String rom) {
 		this.rom = rom;
