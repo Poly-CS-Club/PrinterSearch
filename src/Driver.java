@@ -201,33 +201,46 @@ public class Driver {
 	public static void outputSearchedList(PrinterList printers){
 		
 		ArrayList<Printer> list = printers.getPrinterList();
-		
+				
 		ArrayList<Printer> outputList = new ArrayList<Printer>(); // Handle if no matches exist and is empty. 
 		
 		for(int i=0;i<list.size();i++){
 		
 			int matches = 0;
-			Printer tempPrinter;
 			
 			for(Printer printer : list){
-				
+								
 				int currentMatches = printer.getTotalMatches();
 				
-				if(currentMatches > 0 && currentMatches >= matches){
+				if(currentMatches > 0 && !(outputList.contains(printer))){
 					matches = printer.getTotalMatches();
 					outputList.add(printer);
 				}
 			}
+			
+			// Basic Sorting of list
+			int position, scan;
+			Printer tempPrinter;
+
+			for(position=list.size()-1;position >=0;position--){
+				for(scan=0;scan<=position-1;scan++){
+					if(list.get(scan).getTotalMatches() > list.get(scan+1).getTotalMatches()){
+						
+						tempPrinter = list.get(scan+1);
+						list.set(scan+1, list.get(scan));
+						list.set(scan, tempPrinter);
+
+					}		
+				}
+			}
 		}
 		
-		
-		// Output to Console
-		
-		for(int i=0;i<outputList.size();i++){
+		// Output to Console - Sorted by highest matches first.
+		for(int i=list.size()-1;i>=0;i--){
 			System.out.println("\n\n---------------------------------");
 			System.out.println("Printer Name: " + outputList.get(i).getName());
 			System.out.println("# Of Matches: " + outputList.get(i).getTotalMatches()); 
-			System.out.println("\n--------------------------------------");
+			System.out.println("\n----------------------------------");
 		}
 	}
 
