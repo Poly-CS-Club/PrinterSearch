@@ -109,9 +109,10 @@ public class Driver {
 				double complexity;
 				double leadTime;
 				boolean eoc;
-				String rom;
+				String [] romArrayEX;
+				String rom = "";
 				double tolerance;
-				String finish;
+				String finish = "";
 				
 				Node nNode = nList.item(i);
 				
@@ -120,38 +121,55 @@ public class Driver {
 				if(nNode.getNodeType() == Node.ELEMENT_NODE){
 					
 					Element eElement = (Element)nNode;
-					
-					name = eElement.getElementsByTagName("NAME").item(0).getTextContent();
+
+					name = getString("NAME", eElement);
+					//name = eElement.getElementsByTagName("NAME").item(0).getTextContent();
 					System.out.println(name);
-					
-					tension = Double.parseDouble(eElement.getElementsByTagName("TENSION").item(0).getTextContent());
+
+
+					tension = Double.parseDouble(getString("TENSION", eElement));
+					//tension = Double.parseDouble(eElement.getElementsByTagName("TENSION").item(0).getTextContent());
 					System.out.println(tension);
 					
-					compression = Double.parseDouble(eElement.getElementsByTagName("COMPRESSION").item(0).getTextContent());
+					compression = Double.parseDouble(getString("COMPRESSION", eElement));
+					//compression = Double.parseDouble(eElement.getElementsByTagName("COMPRESSION").item(0).getTextContent());
 					System.out.println(compression);
 					
-					impact = Double.parseDouble(eElement.getElementsByTagName("IMPACT").item(0).getTextContent());
+					impact = Double.parseDouble(getString("IMPACT", eElement));
+					//impact = Double.parseDouble(eElement.getElementsByTagName("IMPACT").item(0).getTextContent());
 					System.out.println(impact);
 					
-					complexity = Double.parseDouble(eElement.getElementsByTagName("PART_COMPLEXITY").item(0).getTextContent());
+					complexity = Double.parseDouble(getString("PART_COMPLEXITY", eElement));
+					//complexity = Double.parseDouble(eElement.getElementsByTagName("PART_COMPLEXITY").item(0).getTextContent());
 					System.out.println(complexity);
 					
-					leadTime = Double.parseDouble(eElement.getElementsByTagName("LEAD_TIME").item(0).getTextContent());
+					leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
+					//leadTime = Double.parseDouble(eElement.getElementsByTagName("LEAD_TIME").item(0).getTextContent());
 					System.out.println(leadTime);
 					
-					eoc = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
+					eoc = Boolean.valueOf((getString("EOC", eElement)));
+					//eoc = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
 					System.out.println(eoc);
+
+
+					// SPECIFICALLY ROM SECTION
+					NodeList listROM = eElement.getElementsByTagName("ROM");  // Now we create a new list specifically for just ROM.
+					String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
+					romArrayEX = storeROM(lineToBeAdded);
+					for (int jojo = 0; jojo < romArrayEX.length; jojo++) {
+						System.out.println(romArrayEX[jojo]);
+					}
 					
-					rom = eElement.getElementsByTagName("ROM").item(0).getTextContent();
-					System.out.println(rom);
-					
-					tolerance = Double.parseDouble(eElement.getElementsByTagName("TOLERANCE").item(0).getTextContent());
+					tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
+					//tolerance = Double.parseDouble(eElement.getElementsByTagName("TOLERANCE").item(0).getTextContent());
 					System.out.println(tolerance);
 					
-					finish = eElement.getElementsByTagName("FINISH").item(0).getTextContent();
+					finish = getString("FINISH", eElement);
+					//finish = eElement.getElementsByTagName("FINISH").item(0).getTextContent();
 					System.out.println(finish);
 					
-					printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, rom, tolerance, finish));
+					//printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, rom, tolerance, finish));
+					printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, romArrayEX, tolerance, finish));
 					System.out.println("Added: " + printerList.getPrinter(0).getName());
 				}
 			}
@@ -202,5 +220,31 @@ public class Driver {
 			System.out.println("# Of Matches: " + outputList.get(i).getTotalMatches()); 
 			System.out.println("\n--------------------------------------");
 		}
+	}
+
+	public static String getString(String tagName, Element element) {
+		NodeList list = element.getElementsByTagName(tagName);
+		if (list != null && list.getLength() > 0) {
+			NodeList subList = list.item(0).getChildNodes();
+
+			if (subList != null && subList.getLength() > 0) {
+				return subList.item(0).getNodeValue();
+			}
+		}
+
+		return null;
+	}
+
+	public static String[] storeROM(String romInput) {
+		//String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
+
+		String [] romArray = romInput.split("\\s+");                   // Split our storing between whitespace.
+
+		System.out.println("The length of this god damn fucking array is: " + romArray.length);
+
+		for (int jiji = 0; jiji < romArray.length; jiji++) {
+			System.out.println("The ROM attribute in this bitch is: " + romArray[jiji]);
+		}
+		return romArray;
 	}
 }

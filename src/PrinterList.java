@@ -74,16 +74,16 @@ public class PrinterList {
 			if(leadTime <= printer.getLeadTime())
 				printer.setMatches(true, 4);
 			
-			if(eoc == printer.isEoc()) // Sort of odd. Assuming EOC is a parameter that can be desired true or not necessary (false)
-				printer.setMatches(true, 5);
-			
-			if(rom.equals(printer.getRom())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
+			//if(eoc == printer.isEoc()) // Sort of odd. Assuming EOC is a parameter that can be desired true or not necessary (false)
+			//	printer.setMatches(true, 5);
+
+			if(rom.equalsIgnoreCase(printer.getRom())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
 				printer.setMatches(true, 6); 
 			
 			if(tolerance <= printer.getTolerance())
 				printer.setMatches(true, 7);
 			
-			if(finish.equals(printer.getFinish())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
+			if(finish.equalsIgnoreCase(printer.getFinish())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
 				printer.setMatches(true, 8);
 				
 		} 

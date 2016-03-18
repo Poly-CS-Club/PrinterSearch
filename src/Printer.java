@@ -14,6 +14,7 @@ public class Printer {
 	private double leadTime;
 	private boolean eoc;
 	private String rom;
+	private String [] arrayOfROM;
 	private double tolerance;
 	private String finish;
 	
@@ -55,6 +56,23 @@ public class Printer {
 		this.tolerance = tolerance;
 		this.finish = finish;
 		
+		matches = new boolean[9];
+	}
+
+	Printer(String name, double tension, double compression, double impact,
+			double complexity, double leadTime, boolean eoc, String [] rom, double tolerance, String finish){
+
+		this.name = name;
+		this.tension = tension;
+		this.compression = compression;
+		this.impact = impact;
+		this.complexity = complexity;
+		this.leadTime = leadTime;
+		this.eoc = eoc;
+		this.arrayOfROM = rom;
+		this.tolerance = tolerance;
+		this.finish = finish;
+
 		matches = new boolean[9];
 	}
 
