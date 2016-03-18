@@ -46,7 +46,7 @@ public class Driver {
 			System.out.println("Lead Time: ");
 			double leadTime = scanner.nextDouble();
 			
-			System.out.println("Ease of Customizing: ");
+			System.out.println("Ease of Customizing (true/false): "); // Will need to better validate this input.
 			boolean eoc = scanner.nextBoolean();
 			
 			System.out.println("Range of Materials: ");
@@ -202,7 +202,5 @@ public class Driver {
 			System.out.println("# Of Matches: " + outputList.get(i).getTotalMatches()); 
 			System.out.println("\n--------------------------------------");
 		}
-		
 	}
-
 }

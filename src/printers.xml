@@ -20,7 +20,7 @@
 
 <printer>
 
-	<NAME>Test Printer One</NAME>
+	<NAME>Test Printer Two</NAME>
 	<TENSION>.37</TENSION>
 	<COMPRESSION>.0001</COMPRESSION>
 	<IMPACT>.3</IMPACT>
