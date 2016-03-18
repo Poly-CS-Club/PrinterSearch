@@ -42,10 +42,10 @@ public class ExampleXML {
 
                 String [] romArray = lineToBeAdded.split("\\s+");                   // Split our storing between whitespace.
 
-                System.out.println("The length of this god damn fucking array is: " + romArray.length);
+                System.out.println("The length of this array is: " + romArray.length);
 
                 for (int jiji = 0; jiji < romArray.length; jiji++) {
-                    System.out.println("The ROM attribute in this bitch is: " + romArray[jiji]);
+                    System.out.println("The ROM attribute in this is: " + romArray[jiji]);
                 }
             }
 

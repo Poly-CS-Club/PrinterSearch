@@ -67,7 +67,16 @@ public class Driver {
 			
 			// Continue entering new input?
 			System.out.println("Perform New Search? (y/n)");
-			if(scanner.nextLine().equals("n")){
+			String continueSearch = scanner.nextLine();
+			if(continueSearch.equalsIgnoreCase("n")){
+				newInput = false;
+				System.out.println("Program ending...");
+			} else if(continueSearch.equalsIgnoreCase("no")) {
+				newInput = false;
+				System.out.println("Program ending...");
+			} else if ((continueSearch.equalsIgnoreCase("yes")) || (continueSearch.equalsIgnoreCase("y"))) {
+				newInput = true;
+			} else {
 				newInput = false;
 				System.out.println("Program ending...");
 			}
