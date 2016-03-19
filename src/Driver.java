@@ -15,6 +15,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.transform.*;
+import javax.xml.transform.stream.*;
+import javax.xml.transform.dom.*;
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+
 
 public class Driver {
 
@@ -30,6 +36,14 @@ public class Driver {
 		do {
 			
 			System.out.println("Enter your specifications: ");
+
+			System.out.println("Enter 'ADD' to add a new printer");
+
+            // Branch of user adding a new printer to the list
+            if (scanner.nextLine().equals("ADD")) {
+                addPrinter();
+                continue;
+            }
 			
 			System.out.println("Tension: ");
 			double tension = scanner.nextDouble();
@@ -96,7 +110,7 @@ public class Driver {
 		
 		// Build list of Printer objects from XML file;
 		try{
-			File file = new File("src/printers.xml");
+			File file = new File("printers.xml");
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
@@ -197,6 +211,120 @@ public class Driver {
 			}
 		return printerList;
 	}
+
+
+	/** Adds a printer element to printers.xml
+     * @author trevor forrey
+     * @param printers
+     */
+    public static void addPrinter() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nYou Are Adding A New Printer\n");
+
+        /**
+         * Taking in printer parameters from user
+         */
+        System.out.println("Name of printer: ");
+        String printerName = scanner.nextLine();
+
+        System.out.println("Tension: ");
+        double printerTension = scanner.nextDouble();
+
+        System.out.println("Compression: ");
+        double printerCompression = scanner.nextDouble();
+
+        System.out.println("Impact: ");
+        double printerImpact = scanner.nextDouble();
+
+        System.out.println("Complexity: ");
+        double printerComplexity = scanner.nextDouble();
+
+        System.out.println("Lead Time: ");
+        double printerLeadTime = scanner.nextDouble();
+
+        System.out.println("Ease of Customizing (true/false): "); // Will need to better validate this input.
+        boolean printerEoc = scanner.nextBoolean();
+
+        System.out.println("Tolerance: ");
+        double printerTolerance = scanner.nextDouble();
+
+        System.out.println("Desired Finish Type: ");
+        scanner.nextLine();
+        String printerFinish = scanner.nextLine();
+
+
+        try {
+            /**
+             * Creates link to xml file
+             */
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse("printers.xml");
+            Element root = document.getDocumentElement();
+
+            /**
+             * Creates printer root element
+             */
+            Element newPrinter = document.createElement("printer");
+
+
+            /**
+             * Inserts user given parameters into the new printer xml element in the following order:
+             *
+             * Creates element to represent attribute of printer
+             * appends child element that holds value of the attribute
+             * appends element to the new printer element
+             */
+            Element name = document.createElement("NAME");
+            name.appendChild(document.createTextNode(printerName));
+            newPrinter.appendChild(name);
+
+            Element tension = document.createElement("TENSION");
+            tension.appendChild(document.createTextNode(Double.toString(printerTension)));
+            newPrinter.appendChild(tension);
+
+            Element compression = document.createElement("COMPRESSION");
+            compression.appendChild(document.createTextNode(Double.toString(printerCompression)));
+            newPrinter.appendChild(compression);
+
+            Element impact = document.createElement("IMPACT");
+            impact.appendChild(document.createTextNode(Double.toString(printerImpact)));
+            newPrinter.appendChild(impact);
+
+            Element leadTime = document.createElement("LEADTIME");
+            leadTime.appendChild(document.createTextNode(Double.toString(printerLeadTime)));
+            newPrinter.appendChild(leadTime);
+
+            Element easeOfChange = document.createElement("EASEOFCHANGE");
+            easeOfChange.appendChild(document.createTextNode(Boolean.toString(printerEoc)));
+            newPrinter.appendChild(easeOfChange);
+
+            Element tolerance = document.createElement("TOLERANCE");
+            tolerance.appendChild(document.createTextNode(Double.toString(printerTolerance)));
+            newPrinter.appendChild(tolerance);
+
+            Element finish = document.createElement("FINISH");
+            finish.appendChild(document.createTextNode(printerFinish));
+            newPrinter.appendChild(finish);
+
+
+            root.appendChild(newPrinter);
+
+
+            DOMSource source = new DOMSource(document);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            StreamResult result = new StreamResult("printers.xml");
+            transformer.transform(source, result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
 	
 	public static void outputSearchedList(PrinterList printers){
 		
