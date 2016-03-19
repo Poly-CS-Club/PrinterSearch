@@ -1,5 +1,5 @@
 /** @author Jake Leonard
- * 
+ *
  */
 
 import java.util.*;
@@ -25,16 +25,16 @@ import javax.xml.parsers.*;
 public class Driver {
 
 	public static void main(String[] args) {
-		
+
 		PrinterList printerList = generatePrinterList();
-		
+
 		/* The following is simply a rudimentary test of search functionality
-		 * 
+		 *
 		 */
 		Scanner scanner = new Scanner(System.in);
 		boolean newInput = true;
 		do {
-			
+
 			System.out.println("Enter your specifications: ");
 
 			System.out.println("Enter 'ADD' to add a new printer");
@@ -44,41 +44,41 @@ public class Driver {
                 addPrinter();
                 continue;
             }
-			
+
 			System.out.println("Tension: ");
 			double tension = scanner.nextDouble();
-			
+
 			System.out.println("Compression: ");
 			double compression = scanner.nextDouble();
-			
+
 			System.out.println("Impact: ");
 			double impact = scanner.nextDouble();
-			
+
 			System.out.println("Complexity: ");
 			double complexity = scanner.nextDouble();
-			
+
 			System.out.println("Lead Time: ");
 			double leadTime = scanner.nextDouble();
-			
+
 			System.out.println("Ease of Customizing (true/false): "); // Will need to better validate this input.
 			boolean eoc = scanner.nextBoolean();
-			
+
 			System.out.println("Range of Materials: ");
 			scanner.nextLine(); // Clear buffer
 			String rom = scanner.nextLine();
-			
+
 			System.out.println("Tolerance: ");
 			double tolerance = scanner.nextDouble();
-			
+
 			System.out.println("Desired Finish Type: ");
 			scanner.nextLine();
 			String finish = scanner.nextLine();
-			
+
 			printerList.setMatches(tension, compression, impact, complexity, leadTime, eoc, storeROM(rom), tolerance, finish);
-			
+
 			outputSearchedList(printerList);
-			
-			
+
+
 			// Continue entering new input?
 			System.out.println("Perform New Search? (y/n)");
 			String continueSearch = scanner.nextLine();
@@ -94,37 +94,37 @@ public class Driver {
 				newInput = false;
 				System.out.println("Program ending...");
 			}
-				
+
 		} while(newInput == true);
 
 
 	}
-	
+
 	/*
 	 * Generates printer list from XML file
 	 * Returns list to calling method
 	 */
 	public static PrinterList generatePrinterList(){
-		
+
 		PrinterList printerList = new PrinterList();
-		
+
 		// Build list of Printer objects from XML file;
 		try{
 			File file = new File("printers.xml");
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			
+
 			System.out.println("Root element:" + document.getDocumentElement().getNodeName());
-			
+
 			NodeList nList = document.getElementsByTagName("printer");
-			
+
 			/* The following iterates through the child-nodes of "printer" tags,
 			 * retrieving the text within as String, converts, and then printers to console
 			 * for evaluation.
 			 */
 			for(int i=0;i<nList.getLength();i++){
-				
+
 				String name;
 				double tension;
 				double compression;
@@ -136,13 +136,13 @@ public class Driver {
 				String rom = "";
 				double tolerance;
 				String finish = "";
-				
+
 				Node nNode = nList.item(i);
-				
+
 				System.out.println(nNode.getNodeName());
-				
+
 				if(nNode.getNodeType() == Node.ELEMENT_NODE){
-					
+
 					Element eElement = (Element)nNode;
 
 					name = getString("NAME", eElement);
@@ -153,23 +153,23 @@ public class Driver {
 					tension = Double.parseDouble(getString("TENSION", eElement));
 					//tension = Double.parseDouble(eElement.getElementsByTagName("TENSION").item(0).getTextContent());
 					System.out.println(tension);
-					
+
 					compression = Double.parseDouble(getString("COMPRESSION", eElement));
 					//compression = Double.parseDouble(eElement.getElementsByTagName("COMPRESSION").item(0).getTextContent());
 					System.out.println(compression);
-					
+
 					impact = Double.parseDouble(getString("IMPACT", eElement));
 					//impact = Double.parseDouble(eElement.getElementsByTagName("IMPACT").item(0).getTextContent());
 					System.out.println(impact);
-					
+
 					complexity = Double.parseDouble(getString("PART_COMPLEXITY", eElement));
 					//complexity = Double.parseDouble(eElement.getElementsByTagName("PART_COMPLEXITY").item(0).getTextContent());
 					System.out.println(complexity);
-					
+
 					leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
 					//leadTime = Double.parseDouble(eElement.getElementsByTagName("LEAD_TIME").item(0).getTextContent());
 					System.out.println(leadTime);
-					
+
 					eoc = Boolean.valueOf((getString("EOC", eElement)));
 					//eoc = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
 					System.out.println(eoc);
@@ -182,21 +182,21 @@ public class Driver {
 					for (int jojo = 0; jojo < romArrayEX.length; jojo++) {
 						System.out.println(romArrayEX[jojo]);
 					}
-					
+
 					tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
 					//tolerance = Double.parseDouble(eElement.getElementsByTagName("TOLERANCE").item(0).getTextContent());
 					System.out.println(tolerance);
-					
+
 					finish = getString("FINISH", eElement);
 					//finish = eElement.getElementsByTagName("FINISH").item(0).getTextContent();
 					System.out.println(finish);
-					
+
 					//printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, rom, tolerance, finish));
 					printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, romArrayEX, tolerance, finish));
 					System.out.println("Added: " + printerList.getPrinter(0).getName());
 				}
 			}
-				
+
 			}catch(FileNotFoundException e){
 				System.out.println("File Not Found" + e);
 			} catch (ParserConfigurationException e) {
@@ -317,6 +317,8 @@ public class Driver {
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+  					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             StreamResult result = new StreamResult("printers.xml");
             transformer.transform(source, result);
         } catch (Exception ex) {
@@ -325,27 +327,27 @@ public class Driver {
     }
 
 
-	
+
 	public static void outputSearchedList(PrinterList printers){
-		
+
 		ArrayList<Printer> list = printers.getPrinterList();
-				
-		ArrayList<Printer> outputList = new ArrayList<Printer>(); // Handle if no matches exist and is empty. 
-		
+
+		ArrayList<Printer> outputList = new ArrayList<Printer>(); // Handle if no matches exist and is empty.
+
 		for(int i=0;i<list.size();i++){
-		
+
 			int matches = 0;
-			
+
 			for(Printer printer : list){
-								
+
 				int currentMatches = printer.getTotalMatches();
-				
+
 				if(currentMatches > 0 && !(outputList.contains(printer))){
 					matches = printer.getTotalMatches();
 					outputList.add(printer);
 				}
 			}
-			
+
 			// Basic Sorting of list
 			int position, scan;
 			Printer tempPrinter;
@@ -353,21 +355,21 @@ public class Driver {
 			for(position=list.size()-1;position >=0;position--){
 				for(scan=0;scan<=position-1;scan++){
 					if(list.get(scan).getTotalMatches() > list.get(scan+1).getTotalMatches()){
-						
+
 						tempPrinter = list.get(scan+1);
 						list.set(scan+1, list.get(scan));
 						list.set(scan, tempPrinter);
 
-					}		
+					}
 				}
 			}
 		}
-		
+
 		// Output to Console - Sorted by highest matches first.
 		for(int i=list.size()-1;i>=0;i--){
 			System.out.println("\n\n---------------------------------");
 			System.out.println("Printer Name: " + outputList.get(i).getName());
-			System.out.println("# Of Matches: " + outputList.get(i).getTotalMatches()); 
+			System.out.println("# Of Matches: " + outputList.get(i).getTotalMatches());
 			System.out.println("\n----------------------------------");
 		}
 	}
