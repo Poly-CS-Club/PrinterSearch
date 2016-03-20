@@ -89,6 +89,7 @@ public class AddPrinterUI {
 		
 		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
+		m_Main_F.setMinimumSize(new Dimension(frameWidth, 100));
 		m_Main_F.setLocation((screenWidth/2) - (frameWidth/2),(screenHeight/2) - (frameHeight/2));// centering
 		m_Main_F.setResizable(false);
 		m_Main_F.setLayout(new GridLayout(3,1,10,1));
