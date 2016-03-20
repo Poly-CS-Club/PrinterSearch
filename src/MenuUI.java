@@ -107,11 +107,29 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 	
 	m_SearchResult_P.add(new PrinterUI(1,frameWidth, frameHeight,"Name","Tension","Compression","Impact","Part Complexity","Lead Time","EOC","ROM","Tolerance","Finish"));
-	m_SearchResult_P.add(new PrinterUI(2,frameWidth, frameHeight));
-	m_SearchResult_P.add(new PrinterUI(3,frameWidth, frameHeight));
-	m_SearchResult_P.add(new PrinterUI(4,frameWidth, frameHeight));
-	m_SearchResult_P.add(new PrinterUI(5,frameWidth, frameHeight));
-	m_SearchResult_P.add(new PrinterUI(6,frameWidth, frameHeight));
+	Driver driver = new Driver();
+	PrinterList printerList = driver.generatePrinterList();
+	
+	for(int i = 2; i <= printerList.getNumberOfPrinters() +1; i++)
+	{
+		Printer currentPrinter = printerList.getPrinter(i-2);
+		String isEaseOfChange = "True";
+		if(!currentPrinter.isEaseOfChange())
+			isEaseOfChange = "False";
+		
+		m_SearchResult_P.add(new PrinterUI(i,frameWidth, frameHeight,
+				currentPrinter.getName() + "",
+				currentPrinter.getTension()+ "",
+				currentPrinter.getCompression()+ "",
+				currentPrinter.getImpact()+ "",
+				currentPrinter.getComplexity()+ "",
+				currentPrinter.getLeadTime()+ "",
+				isEaseOfChange,
+				currentPrinter.getRangeOfMaterials(),
+				currentPrinter.getTolerance()+ "",
+				currentPrinter.getFinish()+ ""));
+	}
+	
 	
 }
 /**
