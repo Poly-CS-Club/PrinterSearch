@@ -21,13 +21,48 @@ public class PrinterUI extends JLabel implements Serializable
         this.finish = new JLabel(finish);
         
         setPreferredSize(new Dimension(frameWidth-200, 25));
+        setMinimumSize(new Dimension(frameWidth-220, 25));
+        setMaximumSize(new Dimension(frameWidth-190, 25));
         setLayout(new GridLayout(1,9,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
-        if(index %2 == 0)
-        setBackground(Color.gray);
+        if(m_index % 2 == 0)
+        {
+        	setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        }else
+        {
+        	setBorder(BorderFactory.createLineBorder(Color.black));
+        }
+
+        designComponents();
+        addComponents();
+    }
+    
+    PrinterUI(int index, int frameWidth, int frameHeight)
+    {
+        m_index = index;
+        this.name = new JLabel("default");
+        this.tenstion = new JLabel("default");
+        this.comprestion = new JLabel("default");
+        this.impact = new JLabel("default");
+        this.partComplexity = new JLabel("default");
+        this.leadTime = new JLabel("default");
+        this.EOC = new JLabel("default");
+        this.tolerance = new JLabel("default");
+        this.finish = new JLabel("default");
         
-        setBorder(BorderFactory.createLineBorder(Color.black));
-        
+        setPreferredSize(new Dimension(frameWidth-200, 30));
+        setMinimumSize(new Dimension(frameWidth-220, 30));
+        setMaximumSize(new Dimension(frameWidth-190, 30));
+        setLayout(new GridLayout(1,9,2,2));
+        setAlignmentX(Component.CENTER_ALIGNMENT);
+        if(m_index % 2 == 0)
+        {
+        	setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+        }else
+        {
+        	setBorder(BorderFactory.createLineBorder(Color.black));
+        }
+
         designComponents();
         addComponents();
     }
