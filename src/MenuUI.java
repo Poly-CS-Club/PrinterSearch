@@ -33,7 +33,7 @@ private JFrame m_Menu_F;
 private JPanel m_SearchResult_P, m_SearchParam_P;
 private JLabel m_SearchParam_L;
 private JButton m_FilterResults_B;
-private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LoadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
+private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
 private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 private JToolBar m_ToolBar;
 
@@ -66,7 +66,7 @@ private void createComponents() {
 	m_BroadSearch_TF = new JTextField();
 	m_Tenstion_TF = new JTextField();
 	m_Impact_TF = new JTextField();
-	m_LoadTime_TF = new JTextField();
+	m_LeadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
 	m_EOC_TF = new JTextField();
 	
@@ -188,9 +188,9 @@ private void designSearchParam(int frameWidth, int frameHeight)
 	m_Impact_TF.setMinimumSize(new Dimension(150, 25));
 	m_Impact_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_LoadTime_TF.setMaximumSize(new Dimension(170, 25));
-	m_LoadTime_TF.setMinimumSize(new Dimension(150, 25));
-	m_LoadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_LeadTime_TF.setMaximumSize(new Dimension(170, 25));
+	m_LeadTime_TF.setMinimumSize(new Dimension(150, 25));
+	m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_PartComplexity_TF.setMaximumSize(new Dimension(170, 25));
 	m_PartComplexity_TF.setMinimumSize(new Dimension(150, 25));
@@ -278,7 +278,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_LoadTime_TF);
+	m_SearchParam_P.add(m_LeadTime_TF);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);

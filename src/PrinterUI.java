@@ -41,13 +41,14 @@ public class PrinterUI extends JLabel implements Serializable
         this.partComplexity = new JLabel(partComplexity);
         this.leadTime = new JLabel(leadTime);
         this.EOC = new JLabel(EOC);
+        this.ROM = new JLabel(ROM);
         this.tolerance = new JLabel(tolerance);
         this.finish = new JLabel(finish);
         
         setPreferredSize(new Dimension(frameWidth-200, 25));
         setMinimumSize(new Dimension(frameWidth-220, 25));
         setMaximumSize(new Dimension(frameWidth-190, 25));
-        setLayout(new GridLayout(1,9,2,2));
+        setLayout(new GridLayout(1,10,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         if(m_index % 2 == 0)
         {
@@ -78,6 +79,7 @@ public class PrinterUI extends JLabel implements Serializable
         this.partComplexity = new JLabel("default");
         this.leadTime = new JLabel("default");
         this.EOC = new JLabel("default");
+        this.ROM = new JLabel("Default");
         this.tolerance = new JLabel("default");
         this.finish = new JLabel("default");
         
@@ -110,6 +112,7 @@ public class PrinterUI extends JLabel implements Serializable
         this.partComplexity.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.leadTime.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.EOC.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.ROM.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.finish.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
@@ -126,6 +129,7 @@ public class PrinterUI extends JLabel implements Serializable
         add(this.partComplexity);
         add(this.leadTime);
         add(this.EOC);
+        add(this.ROM);
         add(this.tolerance);
         add(this.finish);
         

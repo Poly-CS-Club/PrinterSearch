@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 public class AddPrinterUI {
 
 	private JFrame m_Main_F;
-	private JTextField m_Name_TF, m_Tenstion_TF, m_Impact_TF, m_LoadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF, m_Compression_TF;
+	private JTextField m_Name_TF, m_Tenstion_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF, m_Compression_TF;
 	private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
@@ -48,7 +48,7 @@ public class AddPrinterUI {
 		m_Compression_TF = new JTextField();
 		m_Tenstion_TF = new JTextField();
 		m_Impact_TF = new JTextField();
-		m_LoadTime_TF = new JTextField();
+		m_LeadTime_TF = new JTextField();
 		m_PartComplexity_TF = new JTextField();
 		m_EOC_TF = new JTextField();
 		
@@ -97,9 +97,9 @@ public class AddPrinterUI {
 		m_Impact_TF.setMinimumSize(new Dimension(150, 25));
 		m_Impact_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_LoadTime_TF.setMaximumSize(new Dimension(170, 25));
-		m_LoadTime_TF.setMinimumSize(new Dimension(150, 25));
-		m_LoadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+		m_LeadTime_TF.setMaximumSize(new Dimension(170, 25));
+		m_LeadTime_TF.setMinimumSize(new Dimension(150, 25));
+		m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		m_PartComplexity_TF.setMaximumSize(new Dimension(170, 25));
 		m_PartComplexity_TF.setMinimumSize(new Dimension(150, 25));
@@ -154,7 +154,7 @@ public class AddPrinterUI {
 		m_Input_P.add(m_Compression_TF);
 		m_Input_P.add(m_Impact_TF);
 		m_Input_P.add(m_PartComplexity_TF);
-		m_Input_P.add(m_LoadTime_TF);
+		m_Input_P.add(m_LeadTime_TF);
 		m_Input_P.add(m_EOC_TF);
 		m_Input_P.add(m_ROM_CB);
 		m_Input_P.add(m_Tolerance_TF);
