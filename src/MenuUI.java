@@ -74,7 +74,7 @@ private void createComponents() {
 	
 	m_Tolerance_TF = new JTextField();
 	
-	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});
+	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these from a file or something...
 	m_ROM_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless"});
 	
 	m_SearchResult_P = new JPanel();
@@ -277,7 +277,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	label = new JLabel("Load Time:");
+	label = new JLabel("Lead Time:");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
