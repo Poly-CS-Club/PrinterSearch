@@ -1,10 +1,3 @@
-/**
- * 
- * @author Joshua Becker
- * @version 1.1
- * GUI for the Printer Search Program.
- *
- */
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -25,6 +18,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+/**
+ * GUI for the Printer Search Program.
+ * 
+ * @author  Joshua Becker
+ * @version 1.1
+ * @see     PrinterUI
+ * @see     AddPrinterUI
+ */
 public class MenuUI
 {
 	
@@ -40,6 +41,10 @@ public static void main(String args [])
 {
 	new MenuUI();
 }
+
+/**
+ * Creates window for Printer Search Program
+ */
 public MenuUI()
 {
     createComponents();
@@ -49,8 +54,9 @@ public MenuUI()
     
     m_Menu_F.setVisible(true);
 }
+
 /**
- * 
+ * Instantiates GUI components.
  */
 private void createComponents() {
 	m_Menu_F = new JFrame("Menu");
@@ -73,8 +79,9 @@ private void createComponents() {
 	
 	m_FilterResults_B = new JButton("Filter Results");
 }
+
 /**
- * 
+ * Sets GUI component values.
  */
 private void designComponents() {
 	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
@@ -96,10 +103,12 @@ private void designComponents() {
 	
 	designToolBar();
 }
+
 /**
+ * Sets values for search result GUI components.
  * 
- * @param frameWidth
- * @param frameHeight
+ * @param frameWidth  the width of the frame
+ * @param frameHeight the width of the height
  */
 private void designSearchResult(int frameWidth, int frameHeight) {
 	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
@@ -132,8 +141,9 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 	
 	
 }
+
 /**
- * 
+ * Sets values for the tool bar GUI components.
  */
 private void designToolBar()
 {
@@ -152,10 +162,12 @@ private void designToolBar()
 	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 }
+
 /**
+ * Sets values for search parameter GUI components.
  * 
- * @param frameWidth
- * @param frameHeight
+ * @param frameWidth  the width of the frame
+ * @param frameHeight the height of the frame
  */
 private void designSearchParam(int frameWidth, int frameHeight)
 {
@@ -203,12 +215,16 @@ private void designSearchParam(int frameWidth, int frameHeight)
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
 }
 
+/**
+ * Adds action listeners to GUI components.
+ */
 private void addActionListeners()
 {
 	m_FilterResults_B.addActionListener(new ButtonListener());
 }
+
 /**
- * 
+ * Add components to menu frame.
  */
 private void addComponents() {
 	addSearchParamComponents();
@@ -218,8 +234,9 @@ private void addComponents() {
 	m_Menu_F.add(m_SearchParam_P, BorderLayout.LINE_START);
 	m_Menu_F.add(m_SearchResult_P, BorderLayout.LINE_END);
 }
+
 /**
- * 
+ * Add components to the search panel of the GUI.
  */
 private void addSearchParamComponents() {
 	JLabel label = new JLabel("\n");
@@ -320,6 +337,12 @@ private void addSearchParamComponents() {
 	
 }
 
+/**
+ * An action listener for a button.
+ * 
+ * @author Joshua Becker
+ *
+ */
 private class ButtonListener implements ActionListener
 {
 

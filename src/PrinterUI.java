@@ -2,10 +2,34 @@ import java.awt.*;
 import javax.swing.*;
 import java.io.*;
 
+/**
+ * A JLabel containing printer information.
+ * 
+ * @author Joshua Becker
+ *
+ */
 public class PrinterUI extends JLabel implements Serializable
 {
 	private JLabel name, tenstion, comprestion, impact, partComplexity, leadTime, EOC, ROM, tolerance, finish;
     private int m_index;
+    
+    /**
+     * Create a label with specified printer information.
+     * 
+     * @param index           the index number
+     * @param frameWidth      the width of the frame
+     * @param frameHeight     the height of the frame
+     * @param name            the String with the printer's name
+     * @param tenstion        the String with the printer's tension value
+     * @param comprestion     the String with the printer's compression value
+     * @param impact          the String with the printer's impact value
+     * @param partComplexity  the String with the printer's complexity
+     * @param leadTime        the String with the printer's lead time
+     * @param EOC             the String with the printer's ease of customization
+     * @param ROM             the String with the printer's range of materials
+     * @param tolerance       the String with the printer's tolerance value
+     * @param finish          the String with the printer's finish
+     */
     PrinterUI(int index, int frameWidth, int frameHeight, String name, String tenstion, String comprestion, String impact, String partComplexity, 
     		String leadTime, String EOC, String ROM, String tolerance, String finish)
     {
@@ -37,6 +61,13 @@ public class PrinterUI extends JLabel implements Serializable
         addComponents();
     }
     
+    /**
+     * Create a default printer label.
+     * 
+     * @param index       the index number
+     * @param frameWidth  the width of the frame
+     * @param frameHeight the height of the frame
+     */
     PrinterUI(int index, int frameWidth, int frameHeight)
     {
         m_index = index;
@@ -66,6 +97,10 @@ public class PrinterUI extends JLabel implements Serializable
         designComponents();
         addComponents();
     }
+    
+    /**
+     * Centers printer information labels on X-axis.
+     */
     private void designComponents()
     {
     	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -78,6 +113,10 @@ public class PrinterUI extends JLabel implements Serializable
         this.tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.finish.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
+    
+    /**
+     * Adds printer information labels to printerUI label.
+     */
     private void addComponents()
     {
         add(this.name);

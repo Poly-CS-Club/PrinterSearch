@@ -85,7 +85,7 @@ public class Printer {
 	 * @param complexity        the double with the specified complexity
 	 * @param leadTime          the double with the specified lead time
 	 * @param easeOfChange      the boolean representing the ease of change
-	 * @param rangeOfMaterials  the HashSet withthe range of materials
+	 * @param rangeOfMaterials  the HashSet with the range of materials
 	 * @param tolerance         the double with the specified tolerance
 	 * @param finish            the String representing the finish
 	 */
