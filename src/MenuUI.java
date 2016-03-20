@@ -52,6 +52,7 @@ public MenuUI()
     addActionListeners();
     addComponents();
     
+    m_Menu_F.pack();
     m_Menu_F.setVisible(true);
 }
 
