@@ -44,4 +44,16 @@
         <TOLERANCE>1</TOLERANCE>
         <FINISH>Matte</FINISH>
     </printer>
+<printer>
+        <NAME>Next Test</NAME>
+        <TENSION>2</TENSION>
+        <COMPRESSION>4</COMPRESSION>
+        <IMPACT>1</IMPACT>
+        <PART_COMPLEXITY>21</PART_COMPLEXITY>
+        <LEAD_TIME>4</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>2</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
 </PRINTERS>

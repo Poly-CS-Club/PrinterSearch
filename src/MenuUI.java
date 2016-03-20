@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.JViewport;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 
@@ -41,6 +43,9 @@ private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
 private Driver m_Driver;
 
+private final int FRAME_WIDTH;
+private final int FRAME_HEIGHT;
+
 public static void main(String args [])
 {
 	new MenuUI();
@@ -51,9 +56,16 @@ public static void main(String args [])
  */
 public MenuUI()
 {
+	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
+	int screenWidth = gd.getDisplayMode().getWidth();
+	int screenHeight = gd.getDisplayMode().getHeight();
+	
+	FRAME_WIDTH = (int) ((int) screenWidth *0.75);
+	FRAME_HEIGHT = (int) ((int) screenHeight *0.75);
+
 	m_Driver = new Driver();
     createComponents();
-    designComponents();
+    designComponents(screenWidth, screenHeight);
     addActionListeners();
     addComponents();
     
@@ -90,27 +102,22 @@ private void createComponents() {
 /**
  * Sets GUI component values.
  */
-private void designComponents() {
-	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
-	int screenWidth = gd.getDisplayMode().getWidth();
-	int screenHeight = gd.getDisplayMode().getHeight();
-	
-	int frameWidth = (int) ((int) screenWidth *0.75);
-	int frameHeight = (int) ((int) screenHeight *0.75);
+private void designComponents(int screenWidth, int screenHeight) {
     
 	m_Menu_F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	m_Menu_F.setLayout(new BorderLayout(5,5));
-	m_Menu_F.setSize(frameWidth, frameHeight);
-	m_Menu_F.setLocation((screenWidth/2) - (frameWidth/2),(screenHeight/2) - (frameHeight/2));// centering
+	m_Menu_F.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
+	m_Menu_F.setLocation((screenWidth/2) - (FRAME_WIDTH /2),(screenHeight/2) - (FRAME_HEIGHT/2));// centering
 	m_Menu_F.setResizable(false);
 	
 	m_ScrollPane.setOpaque(false);
 	m_ScrollPane.setVerticalScrollBarPolicy(
 			m_ScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	
-	designSearchParam(frameWidth, frameHeight);
+	designSearchParam();
 	
-	designSearchResult(frameWidth, frameHeight);
+	designSearchResult();
 	
 	designToolBar();
 }
@@ -118,15 +125,15 @@ private void designComponents() {
 /**
  * Sets values for search result GUI components.
  * 
- * @param frameWidth  the width of the frame
- * @param frameHeight the width of the height
+ * @param FRAME_WIDTH   the width of the frame
+ * @param FRAME_HEIGHT the width of the height
  */
-private void designSearchResult(int frameWidth, int frameHeight) {
+private void designSearchResult() {
 	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
-	m_SearchResult_P.setPreferredSize(new Dimension(frameWidth - 190, frameHeight));
+	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH  - 190, FRAME_HEIGHT));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 	
-	m_SearchResult_P.add(new PrinterUI(1,frameWidth, frameHeight,
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Part Complex.",
 			"Lead Time","EOC","ROM","Tolerance","Finish"));
 	PrinterList printerList = m_Driver.generatePrinterList();
@@ -138,7 +145,7 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 		if(!currentPrinter.isEaseOfChange())
 			isEaseOfChange = "False";
 		
-		m_SearchResult_P.add(new PrinterUI(i,frameWidth, frameHeight,
+		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
 				currentPrinter.getName() + "",
 				currentPrinter.getTension()+ "",
 				currentPrinter.getCompression()+ "",
@@ -150,9 +157,47 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 				currentPrinter.getTolerance()+ "",
 				currentPrinter.getFinish()+ ""));
 	}
-	
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT));
+	m_ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	m_ScrollPane.setViewportView(m_SearchResult_P);
-	m_ScrollPane.getViewport().setOpaque(false);
+	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
+	//m_ScrollPane.getViewport().setOpaque(false);
 }
 
 /**
@@ -179,16 +224,16 @@ private void designToolBar()
 /**
  * Sets values for search parameter GUI components.
  * 
- * @param frameWidth  the width of the frame
- * @param frameHeight the height of the frame
+ * @param FRAME_WIDTH   the width of the frame
+ * @param FRAME_HEIGHT the height of the frame
  */
-private void designSearchParam(int frameWidth, int frameHeight)
+private void designSearchParam()
 {
 	Dimension defaultMaxSize = new Dimension(170, 25),
 			  defaultMinSize = new Dimension(150, 25);
 	
 	m_SearchParam_P.setLayout(new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
-	m_SearchParam_P.setPreferredSize(new Dimension(175, frameHeight));
+	m_SearchParam_P.setPreferredSize(new Dimension(175, FRAME_HEIGHT));
 	m_SearchParam_P.setBorder(BorderFactory.createLineBorder(Color.black));
 	
 	m_BroadSearch_TF.setMaximumSize(defaultMaxSize);
@@ -245,9 +290,11 @@ private void addActionListeners()
 private void addComponents() {
 	addSearchParamComponents();
 	
+	m_ScrollPane.add(m_SearchParam_P);
 	m_Menu_F.add(m_ToolBar, BorderLayout.PAGE_START);
 	m_Menu_F.add(m_SearchParam_P, BorderLayout.LINE_START);
 	m_Menu_F.add(m_ScrollPane, BorderLayout.LINE_END);
+	m_Menu_F.setPreferredSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 	// TODO: Commented out for scroll bar
 	//m_Menu_F.add(m_SearchResult_P, BorderLayout.LINE_END);
 }
