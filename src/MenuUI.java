@@ -173,44 +173,47 @@ private void designToolBar()
  */
 private void designSearchParam(int frameWidth, int frameHeight)
 {
+	Dimension defaultMaxSize = new Dimension(170, 25),
+			  defaultMinSize = new Dimension(150, 25);
+	
 	m_SearchParam_P.setLayout(new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
 	m_SearchParam_P.setPreferredSize(new Dimension(175, frameHeight));
 	m_SearchParam_P.setBorder(BorderFactory.createLineBorder(Color.black));
 	
-	m_BroadSearch_TF.setMaximumSize(new Dimension(170, 25));
-	m_BroadSearch_TF.setMinimumSize(new Dimension(150, 25));
+	m_BroadSearch_TF.setMaximumSize(defaultMaxSize);
+	m_BroadSearch_TF.setMinimumSize(defaultMinSize);
 	m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Tenstion_TF.setMaximumSize(new Dimension(170, 25));
-	m_Tenstion_TF.setMinimumSize(new Dimension(150, 25));
+	m_Tenstion_TF.setMaximumSize(defaultMaxSize);
+	m_Tenstion_TF.setMinimumSize(defaultMinSize);
 	m_Tenstion_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Impact_TF.setMaximumSize(new Dimension(170, 25));
-	m_Impact_TF.setMinimumSize(new Dimension(150, 25));
+	m_Impact_TF.setMaximumSize(defaultMaxSize);
+	m_Impact_TF.setMinimumSize(defaultMinSize);
 	m_Impact_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_LeadTime_TF.setMaximumSize(new Dimension(170, 25));
-	m_LeadTime_TF.setMinimumSize(new Dimension(150, 25));
+	m_LeadTime_TF.setMaximumSize(defaultMaxSize);
+	m_LeadTime_TF.setMinimumSize(defaultMinSize);
 	m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_PartComplexity_TF.setMaximumSize(new Dimension(170, 25));
-	m_PartComplexity_TF.setMinimumSize(new Dimension(150, 25));
+	m_PartComplexity_TF.setMaximumSize(defaultMaxSize);
+	m_PartComplexity_TF.setMinimumSize(defaultMinSize);
 	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_EOC_TF.setMaximumSize(new Dimension(170, 25));
-	m_EOC_TF.setMinimumSize(new Dimension(150, 25));
+	m_EOC_TF.setMaximumSize(defaultMaxSize);
+	m_EOC_TF.setMinimumSize(defaultMinSize);
 	m_EOC_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_ROM_CB.setMaximumSize(new Dimension(170, 25));
-	m_ROM_CB.setMinimumSize(new Dimension(150, 25));
+	m_ROM_CB.setMaximumSize(defaultMaxSize);
+	m_ROM_CB.setMinimumSize(defaultMinSize);
 	m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Tolerance_TF.setMaximumSize(new Dimension(170, 25));
-	m_Tolerance_TF.setMinimumSize(new Dimension(150, 25));
+	m_Tolerance_TF.setMaximumSize(defaultMaxSize);
+	m_Tolerance_TF.setMinimumSize(defaultMinSize);
 	m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Finish_CB.setMaximumSize(new Dimension(170, 25));
-	m_Finish_CB.setMinimumSize(new Dimension(150, 25));
+	m_Finish_CB.setMaximumSize(defaultMaxSize);
+	m_Finish_CB.setMinimumSize(defaultMinSize);
 	m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));

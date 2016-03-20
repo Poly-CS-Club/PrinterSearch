@@ -71,11 +71,14 @@ public class AddPrinterUI {
 	 */
 	private void designComponents() {
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
-		int screenWidth = gd.getDisplayMode().getWidth();
-		int screenHeight = gd.getDisplayMode().getHeight();
+		int screenWidth = gd.getDisplayMode().getWidth(),
+		    screenHeight = gd.getDisplayMode().getHeight();
 		
-		int frameWidth = (int) (screenWidth * 0.75);
-		int frameHeight = (int) (screenHeight * 0.12);
+		int frameWidth = (int) (screenWidth * 0.75),
+		    frameHeight = (int) (screenHeight * 0.12);
+		
+		Dimension defaultMaxSize = new Dimension(170, 25),
+				  defaultMinSize = new Dimension(150, 25);
 		
 		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
@@ -83,44 +86,44 @@ public class AddPrinterUI {
 		m_Main_F.setResizable(false);
 		m_Main_F.setLayout(new GridLayout(3,1,10,1));
 		
-		m_Compression_TF.setMaximumSize(new Dimension(170, 25));
-		m_Compression_TF.setMinimumSize(new Dimension(150, 25));
+		m_Compression_TF.setMaximumSize(defaultMaxSize);
+		m_Compression_TF.setMinimumSize(defaultMinSize);
 		m_Compression_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_Name_TF.setMaximumSize(new Dimension(170, 25));
-		m_Name_TF.setMinimumSize(new Dimension(150, 25));
+		m_Name_TF.setMaximumSize(defaultMaxSize);
+		m_Name_TF.setMinimumSize(defaultMinSize);
 		m_Name_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_Tenstion_TF.setMaximumSize(new Dimension(170, 25));
-		m_Tenstion_TF.setMinimumSize(new Dimension(150, 25));
+		m_Tenstion_TF.setMaximumSize(defaultMaxSize);
+		m_Tenstion_TF.setMinimumSize(defaultMinSize);
 		m_Tenstion_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_Impact_TF.setMaximumSize(new Dimension(170, 25));
-		m_Impact_TF.setMinimumSize(new Dimension(150, 25));
+		m_Impact_TF.setMaximumSize(defaultMaxSize);
+		m_Impact_TF.setMinimumSize(defaultMinSize);
 		m_Impact_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_LeadTime_TF.setMaximumSize(new Dimension(170, 25));
-		m_LeadTime_TF.setMinimumSize(new Dimension(150, 25));
+		m_LeadTime_TF.setMaximumSize(defaultMaxSize);
+		m_LeadTime_TF.setMinimumSize(defaultMinSize);
 		m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_PartComplexity_TF.setMaximumSize(new Dimension(170, 25));
-		m_PartComplexity_TF.setMinimumSize(new Dimension(150, 25));
+		m_PartComplexity_TF.setMaximumSize(defaultMaxSize);
+		m_PartComplexity_TF.setMinimumSize(defaultMinSize);
 		m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_EOC_CB.setMaximumSize(new Dimension(170, 25));
-		m_EOC_CB.setMinimumSize(new Dimension(150, 25));
+		m_EOC_CB.setMaximumSize(defaultMaxSize);
+		m_EOC_CB.setMinimumSize(defaultMinSize);
 		m_EOC_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_ROM_CB.setMaximumSize(new Dimension(170, 25));
-		m_ROM_CB.setMinimumSize(new Dimension(150, 25));
+		m_ROM_CB.setMaximumSize(defaultMaxSize);
+		m_ROM_CB.setMinimumSize(defaultMinSize);
 		m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_Tolerance_TF.setMaximumSize(new Dimension(170, 25));
-		m_Tolerance_TF.setMinimumSize(new Dimension(150, 25));
+		m_Tolerance_TF.setMaximumSize(defaultMaxSize);
+		m_Tolerance_TF.setMinimumSize(defaultMinSize);
 		m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_Finish_CB.setMaximumSize(new Dimension(170, 25));
-		m_Finish_CB.setMinimumSize(new Dimension(150, 25));
+		m_Finish_CB.setMaximumSize(defaultMaxSize);
+		m_Finish_CB.setMinimumSize(defaultMinSize);
 		m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		m_AddPrinter_B.setPreferredSize(new Dimension(150,25));
