@@ -11,6 +11,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -18,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -41,6 +44,7 @@ public MenuUI()
 {
     createComponents();
     designComponents();
+    addActionListeners();
     addComponents();
     
     m_Menu_F.setVisible(true);
@@ -113,24 +117,29 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 /**
  * 
  */
-public void designToolBar()
+private void designToolBar()
 {
 	JButton button = new JButton("Settings");
 	button.setActionCommand("Settings");
+	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
 	button = new JButton("Help");
 	button.setActionCommand("Help");
+	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
 	button = new JButton("Add Printer");
 	button.setActionCommand("Add Printer");
+	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 }
 /**
  * 
+ * @param frameWidth
+ * @param frameHeight
  */
-public void designSearchParam(int frameWidth, int frameHeight)
+private void designSearchParam(int frameWidth, int frameHeight)
 {
 	m_SearchParam_P.setLayout(new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
 	m_SearchParam_P.setPreferredSize(new Dimension(175, frameHeight));
@@ -174,6 +183,11 @@ public void designSearchParam(int frameWidth, int frameHeight)
 	
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
+}
+
+private void addActionListeners()
+{
+	m_FilterResults_B.addActionListener(new ButtonListener());
 }
 /**
  * 
@@ -285,6 +299,30 @@ private void addSearchParamComponents() {
 	m_SearchParam_P.add(label);
 	
 	m_SearchParam_P.add(m_FilterResults_B);
+	
+}
+
+private class ButtonListener implements ActionListener
+{
+
+	@Override
+	public void actionPerformed(ActionEvent action) {
+		String command = action.getActionCommand();
+		switch(command)
+		{
+			case "Filter Results": //TODO implement this.
+				break;
+			case "Help": //TODO Help Window or Pop-up
+				break;
+			case "Settings"://TODO Settings Window or pop-up
+				break;
+			case "Add Printer": new AddPrinterUI(m_Menu_F);
+				break;
+			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
+				break;
+		}
+		
+	}
 	
 }
 }
