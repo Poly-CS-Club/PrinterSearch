@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 /**
  * GUI for the Printer Search Program.
@@ -36,6 +38,7 @@ private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_Tension_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
 private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 private JToolBar m_ToolBar;
+private JScrollPane m_ScrollPane;
 private Driver m_Driver;
 
 public static void main(String args [])
@@ -77,6 +80,7 @@ private void createComponents() {
 	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these from a file or something...
 	m_ROM_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless"});
 	
+	m_ScrollPane = new JScrollPane();
 	m_SearchResult_P = new JPanel();
 	m_SearchParam_P = new JPanel();
 	
@@ -100,6 +104,10 @@ private void designComponents() {
 	m_Menu_F.setLocation((screenWidth/2) - (frameWidth/2),(screenHeight/2) - (frameHeight/2));// centering
 	m_Menu_F.setResizable(false);
 	
+	m_ScrollPane.setOpaque(false);
+	m_ScrollPane.setVerticalScrollBarPolicy(
+			m_ScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	
 	designSearchParam(frameWidth, frameHeight);
 	
 	designSearchResult(frameWidth, frameHeight);
@@ -118,7 +126,9 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 	m_SearchResult_P.setPreferredSize(new Dimension(frameWidth - 190, frameHeight));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 	
-	m_SearchResult_P.add(new PrinterUI(1,frameWidth, frameHeight,"Name","Tension","Compression","Impact","Part Complexity","Lead Time","EOC","ROM","Tolerance","Finish"));
+	m_SearchResult_P.add(new PrinterUI(1,frameWidth, frameHeight,
+			"Name","Tension","Compression","Impact", "Part Complex.",
+			"Lead Time","EOC","ROM","Tolerance","Finish"));
 	PrinterList printerList = m_Driver.generatePrinterList();
 	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
@@ -141,7 +151,8 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 				currentPrinter.getFinish()+ ""));
 	}
 	
-	
+	m_ScrollPane.setViewportView(m_SearchResult_P);
+	m_ScrollPane.getViewport().setOpaque(false);
 }
 
 /**
@@ -207,7 +218,7 @@ private void designSearchParam(int frameWidth, int frameHeight)
 	m_ROM_CB.setMaximumSize(defaultMaxSize);
 	m_ROM_CB.setMinimumSize(defaultMinSize);
 	m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
+
 	m_Tolerance_TF.setMaximumSize(defaultMaxSize);
 	m_Tolerance_TF.setMinimumSize(defaultMinSize);
 	m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -236,7 +247,9 @@ private void addComponents() {
 	
 	m_Menu_F.add(m_ToolBar, BorderLayout.PAGE_START);
 	m_Menu_F.add(m_SearchParam_P, BorderLayout.LINE_START);
-	m_Menu_F.add(m_SearchResult_P, BorderLayout.LINE_END);
+	m_Menu_F.add(m_ScrollPane, BorderLayout.LINE_END);
+	// TODO: Commented out for scroll bar
+	//m_Menu_F.add(m_SearchResult_P, BorderLayout.LINE_END);
 }
 
 /**

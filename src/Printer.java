@@ -231,7 +231,6 @@ public class Printer {
 		// Add multi-line compatibility with HTML
 		rangeOfMaterialsString = "<html>" + rangeOfMaterialsString + "</html>";
 		
-		System.out.println(rangeOfMaterialsString);
 		return rangeOfMaterialsString;
 	}
 

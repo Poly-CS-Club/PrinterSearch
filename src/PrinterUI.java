@@ -34,16 +34,16 @@ public class PrinterUI extends JLabel implements Serializable
     		String leadTime, String EOC, String ROM, String tolerance, String finish)
     {
         m_index = index;
-        this.name = new JLabel(name);
-        this.tension = new JLabel(tenstion);
-        this.comprestion = new JLabel(comprestion);
-        this.impact = new JLabel(impact);
-        this.partComplexity = new JLabel(partComplexity);
-        this.leadTime = new JLabel(leadTime);
-        this.EOC = new JLabel(EOC);
-        this.ROM = new JLabel(ROM);
-        this.tolerance = new JLabel(tolerance);
-        this.finish = new JLabel(finish);
+        this.name = new JLabel(name, JTextField.CENTER);
+        this.tension = new JLabel(tenstion, JTextField.CENTER);
+        this.comprestion = new JLabel(comprestion, JTextField.CENTER);
+        this.impact = new JLabel(impact, JTextField.CENTER);
+        this.partComplexity = new JLabel(partComplexity, JTextField.CENTER);
+        this.leadTime = new JLabel(leadTime, JTextField.CENTER);
+        this.EOC = new JLabel(EOC, JTextField.CENTER);
+        this.ROM = new JLabel(ROM, JTextField.CENTER);
+        this.tolerance = new JLabel(tolerance, JTextField.CENTER);
+        this.finish = new JLabel(finish, JTextField.CENTER);
         
         setPreferredSize(new Dimension(frameWidth-200, 25));
         setMinimumSize(new Dimension(frameWidth-220, 25));
@@ -72,16 +72,16 @@ public class PrinterUI extends JLabel implements Serializable
     PrinterUI(int index, int frameWidth, int frameHeight)
     {
         m_index = index;
-        name = new JLabel("default");
-        tension = new JLabel("default");
-        comprestion = new JLabel("default");
-        impact = new JLabel("default");
-        partComplexity = new JLabel("default");
-        leadTime = new JLabel("default");
-        EOC = new JLabel("default");
-        ROM = new JLabel("Default");
-        tolerance = new JLabel("default");
-        finish = new JLabel("default");
+        name = new JLabel("default", JTextField.CENTER);
+        tension = new JLabel("default", JTextField.CENTER);
+        comprestion = new JLabel("default", JTextField.CENTER);
+        impact = new JLabel("default", JTextField.CENTER);
+        partComplexity = new JLabel("default", JTextField.CENTER);
+        leadTime = new JLabel("default", JTextField.CENTER);
+        EOC = new JLabel("default", JTextField.CENTER);
+        ROM = new JLabel("Default", JTextField.CENTER);
+        tolerance = new JLabel("default", JTextField.CENTER);
+        finish = new JLabel("default", JTextField.CENTER);
         
         setPreferredSize(new Dimension(frameWidth-200, 30));
         setMinimumSize(new Dimension(frameWidth-220, 30));
