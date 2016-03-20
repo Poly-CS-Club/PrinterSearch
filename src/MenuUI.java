@@ -110,7 +110,7 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 	Driver driver = new Driver();
 	PrinterList printerList = driver.generatePrinterList();
 	
-	for(int i = 2; i <= printerList.getNumberOfPrinters() +1; i++)
+	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
 	{
 		Printer currentPrinter = printerList.getPrinter(i-2);
 		String isEaseOfChange = "True";
