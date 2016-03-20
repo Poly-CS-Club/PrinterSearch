@@ -32,7 +32,7 @@ public class Driver {
 	/**
 	 * Tests search functionality
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		PrinterList printerList = generatePrinterList();
 
@@ -106,7 +106,7 @@ public class Driver {
 		} while(newInput == true);
 
 
-	}
+	}*/
 
 	/**
 	 * Generates printer list from XML file and returns list to calling method.

@@ -24,6 +24,11 @@ public class PrinterList {
 	public ArrayList<Printer> getPrinterList() {
 		return printerList;
 	}
+	
+	public int getNumberOfPrinters()
+	{
+		return printerList.size();
+	}
 
 	public void setPrinterList(ArrayList<Printer> printerList) {
 		this.printerList = printerList;
