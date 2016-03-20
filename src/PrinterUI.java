@@ -45,9 +45,9 @@ public class PrinterUI extends JLabel implements Serializable
         this.tolerance = new JLabel(tolerance, JTextField.CENTER);
         this.finish = new JLabel(finish, JTextField.CENTER);
         
-        setPreferredSize(new Dimension(frameWidth-200, 25));
-        setMinimumSize(new Dimension(frameWidth-220, 25));
-        setMaximumSize(new Dimension(frameWidth-190, 50));
+        setPreferredSize(new Dimension(frameWidth-200, 40));
+        setMinimumSize(new Dimension(frameWidth-220, 40));
+        setMaximumSize(new Dimension(frameWidth-190, 60));
         setLayout(new GridLayout(1,10,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         if(m_index % 2 == 0)
