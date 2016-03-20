@@ -239,7 +239,7 @@ public class Driver {
 	 * Adds a printer element to printers.xml based on user input.
      */
     public void addPrinter() {
-
+    	
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\nYou Are Adding A New Printer\n");
@@ -348,7 +348,89 @@ public class Driver {
         }
     }
 
+    /**
+	 * Adds a printer element to printers.xml based on user input.
+     */
+    public void addPrinter(String printerName, String printerTension, String printerCompression, String printerPartComplexity, String printerROM, String printerImpact, 
+    		String printerLeadTime, String printerEaseOfChange, String printerTolerance, String printerFinish) {
+        try {
+            /*
+             * Creates link to xml file
+             */
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse("src\\printers.xml");
+            Element root = document.getDocumentElement();
 
+            /*
+             * Creates printer root element
+             */
+            Element newPrinter = document.createElement("printer");
+
+
+            /*
+             * Inserts user given parameters into the new printer xml element in the following order:
+             *
+             * Creates element to represent attribute of printer,
+             * appends child element that holds value of the attribute,
+             * appends element to the new printer element
+             */
+            Element name = document.createElement("NAME");
+            name.appendChild(document.createTextNode(printerName));
+            newPrinter.appendChild(name);
+
+            Element tension = document.createElement("TENSION");
+            tension.appendChild(document.createTextNode(printerTension));
+            newPrinter.appendChild(tension);
+
+            Element compression = document.createElement("COMPRESSION");
+            compression.appendChild(document.createTextNode(printerCompression));
+            newPrinter.appendChild(compression);
+
+            Element impact = document.createElement("IMPACT");
+            impact.appendChild(document.createTextNode(printerImpact));
+            newPrinter.appendChild(impact);
+            
+            Element partComplexity = document.createElement("PART_COMPLEXITY");
+            partComplexity.appendChild(document.createTextNode(printerPartComplexity));
+            newPrinter.appendChild(partComplexity);
+            
+            Element leadTime = document.createElement("LEAD_TIME");
+            leadTime.appendChild(document.createTextNode(printerLeadTime));
+            newPrinter.appendChild(leadTime);
+
+            Element easeOfChange = document.createElement("EOC");
+            easeOfChange.appendChild(document.createTextNode(printerEaseOfChange));
+            newPrinter.appendChild(easeOfChange);
+
+            Element ROM = document.createElement("ROM");
+            ROM.appendChild(document.createTextNode(printerROM));
+            newPrinter.appendChild(ROM);
+            
+            Element tolerance = document.createElement("TOLERANCE");
+            tolerance.appendChild(document.createTextNode(printerTolerance));
+            newPrinter.appendChild(tolerance);
+
+            Element finish = document.createElement("FINISH");
+            finish.appendChild(document.createTextNode(printerFinish));
+            newPrinter.appendChild(finish);
+
+
+            root.appendChild(newPrinter);
+
+
+            DOMSource source = new DOMSource(document);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+  					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            StreamResult result = new StreamResult("src\\printers.xml");
+            transformer.transform(source, result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
     /**
 	 * Displays a list of printer matches sorted from highest number of matching
 	 * attributes to lowest on the console.

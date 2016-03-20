@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='us-ascii'?>
-
+<?xml version="1.0" encoding="us-ascii" standalone="no"?>
 <PRINTERS>
 
 <printer>
@@ -33,5 +32,28 @@
 	
 
 </printer>
-
+<printer>
+        <NAME>TEST</NAME>
+        <TENSION>1</TENSION>
+        <COMPRESSION>1</COMPRESSION>
+        <IMPACT>1</IMPACT>
+        <PART_COMPLEXITY>1</PART_COMPLEXITY>
+        <LEAD_TIME>1</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>1</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>Next Test</NAME>
+        <TENSION>2</TENSION>
+        <COMPRESSION>4</COMPRESSION>
+        <IMPACT>1</IMPACT>
+        <PART_COMPLEXITY>21</PART_COMPLEXITY>
+        <LEAD_TIME>4</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>2</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
 </PRINTERS>

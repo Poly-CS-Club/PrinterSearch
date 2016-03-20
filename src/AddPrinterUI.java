@@ -24,12 +24,14 @@ import javax.swing.JTextField;
 public class AddPrinterUI {
 
 	private JFrame m_Main_F;
-	private JTextField m_Name_TF, m_Tenstion_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF, m_Compression_TF;
-	private JComboBox<String>  m_Finish_CB, m_ROM_CB;
+	private JTextField m_Name_TF, m_Tenstion_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_Tolerance_TF, m_Compression_TF;
+	private JComboBox<String>  m_Finish_CB, m_ROM_CB, m_EOC_CB;
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
-	public AddPrinterUI(JFrame mainFrame)
+	private Driver m_Driver;
+	public AddPrinterUI(JFrame mainFrame, Driver driver)
 	{
+		m_Driver = driver;
 	    createComponents();
 	    designComponents();
 	    addActionListeners();
@@ -50,7 +52,6 @@ public class AddPrinterUI {
 		m_Impact_TF = new JTextField();
 		m_LeadTime_TF = new JTextField();
 		m_PartComplexity_TF = new JTextField();
-		m_EOC_TF = new JTextField();
 		
 		m_Labels_P = new JPanel(new GridLayout(1,10,2,2));
 		m_Input_P = new JPanel(new GridLayout(1,10,2,2));
@@ -60,6 +61,7 @@ public class AddPrinterUI {
 		
 		m_Finish_CB = new JComboBox<String>(new String [] {"Matte", "Gloss", "Add New"});
 		m_ROM_CB = new JComboBox<String>(new String [] {"Aluminum", "Stainless", "Add New"});
+		m_EOC_CB = new JComboBox<String>(new String [] {"true", "false"});
 		
 		m_AddPrinter_B = new JButton("Add New Printer");
 	}
@@ -105,9 +107,9 @@ public class AddPrinterUI {
 		m_PartComplexity_TF.setMinimumSize(new Dimension(150, 25));
 		m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_EOC_TF.setMaximumSize(new Dimension(170, 25));
-		m_EOC_TF.setMinimumSize(new Dimension(150, 25));
-		m_EOC_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+		m_EOC_CB.setMaximumSize(new Dimension(170, 25));
+		m_EOC_CB.setMinimumSize(new Dimension(150, 25));
+		m_EOC_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		m_ROM_CB.setMaximumSize(new Dimension(170, 25));
 		m_ROM_CB.setMinimumSize(new Dimension(150, 25));
@@ -155,7 +157,7 @@ public class AddPrinterUI {
 		m_Input_P.add(m_Impact_TF);
 		m_Input_P.add(m_PartComplexity_TF);
 		m_Input_P.add(m_LeadTime_TF);
-		m_Input_P.add(m_EOC_TF);
+		m_Input_P.add(m_EOC_CB);
 		m_Input_P.add(m_ROM_CB);
 		m_Input_P.add(m_Tolerance_TF);
 		m_Input_P.add(m_Finish_CB);
@@ -181,7 +183,9 @@ public class AddPrinterUI {
 			String command = action.getActionCommand();
 			switch(command)
 			{
-				case "Add New Printer": //TODO: implement this...
+				case "Add New Printer":
+						m_Driver.addPrinter(m_Name_TF.getText(), m_Tenstion_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
+								m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
 						JOptionPane.showMessageDialog(m_Main_F,"Printer Added to DataBase","Message", JOptionPane.PLAIN_MESSAGE);
 					break;
 				default: JOptionPane.showMessageDialog(m_Main_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);

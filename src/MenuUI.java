@@ -36,6 +36,7 @@ private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
 private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 private JToolBar m_ToolBar;
+private Driver m_Driver;
 
 public static void main(String args [])
 {
@@ -47,6 +48,7 @@ public static void main(String args [])
  */
 public MenuUI()
 {
+	m_Driver = new Driver();
     createComponents();
     designComponents();
     addActionListeners();
@@ -117,8 +119,7 @@ private void designSearchResult(int frameWidth, int frameHeight) {
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 	
 	m_SearchResult_P.add(new PrinterUI(1,frameWidth, frameHeight,"Name","Tension","Compression","Impact","Part Complexity","Lead Time","EOC","ROM","Tolerance","Finish"));
-	Driver driver = new Driver();
-	PrinterList printerList = driver.generatePrinterList();
+	PrinterList printerList = m_Driver.generatePrinterList();
 	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
 	{
@@ -229,7 +230,6 @@ private void addActionListeners()
  */
 private void addComponents() {
 	addSearchParamComponents();
-	
 	
 	m_Menu_F.add(m_ToolBar, BorderLayout.PAGE_START);
 	m_Menu_F.add(m_SearchParam_P, BorderLayout.LINE_START);
@@ -358,7 +358,7 @@ private class ButtonListener implements ActionListener
 				break;
 			case "Settings"://TODO Settings Window or pop-up
 				break;
-			case "Add Printer": new AddPrinterUI(m_Menu_F);
+			case "Add Printer": new AddPrinterUI(m_Menu_F, m_Driver);
 				break;
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 				break;
