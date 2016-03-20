@@ -119,7 +119,7 @@ public class Driver {
 
 		// Build list of Printer objects from XML file;
 		try{
-			File file = new File("printers.xml");
+			File file = new File("src\\printers.xml");
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
@@ -238,7 +238,7 @@ public class Driver {
 	/**
 	 * Adds a printer element to printers.xml based on user input.
      */
-    public static void addPrinter() {
+    public void addPrinter() {
 
         Scanner scanner = new Scanner(System.in);
 

@@ -89,9 +89,7 @@ public class Printer {
 	 * @param tolerance         the double with the specified tolerance
 	 * @param finish            the String representing the finish
 	 */
-	public Printer(String name, double tension, double compression, double impact, double complexity,
-			double leadTime, boolean easeOfChange, HashSet<String> rangeOfMaterials,
-			 double tolerance, String finish){
+	public Printer(String name, double tension, double compression, double impact, double complexity, double leadTime, boolean easeOfChange, HashSet<String> rangeOfMaterials, double tolerance, String finish){
 
 		this.name = name;
 		this.tension = tension;
