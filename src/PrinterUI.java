@@ -10,7 +10,7 @@ import java.io.*;
  */
 public class PrinterUI extends JLabel implements Serializable
 {
-	private JLabel name, tenstion, comprestion, impact, partComplexity, leadTime, EOC, ROM, tolerance, finish;
+	private JLabel name, tension, comprestion, impact, partComplexity, leadTime, EOC, ROM, tolerance, finish;
     private int m_index;
     
     /**
@@ -35,7 +35,7 @@ public class PrinterUI extends JLabel implements Serializable
     {
         m_index = index;
         this.name = new JLabel(name);
-        this.tenstion = new JLabel(tenstion);
+        this.tension = new JLabel(tenstion);
         this.comprestion = new JLabel(comprestion);
         this.impact = new JLabel(impact);
         this.partComplexity = new JLabel(partComplexity);
@@ -47,7 +47,7 @@ public class PrinterUI extends JLabel implements Serializable
         
         setPreferredSize(new Dimension(frameWidth-200, 25));
         setMinimumSize(new Dimension(frameWidth-220, 25));
-        setMaximumSize(new Dimension(frameWidth-190, 25));
+        setMaximumSize(new Dimension(frameWidth-190, 50));
         setLayout(new GridLayout(1,10,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         if(m_index % 2 == 0)
@@ -72,16 +72,16 @@ public class PrinterUI extends JLabel implements Serializable
     PrinterUI(int index, int frameWidth, int frameHeight)
     {
         m_index = index;
-        this.name = new JLabel("default");
-        this.tenstion = new JLabel("default");
-        this.comprestion = new JLabel("default");
-        this.impact = new JLabel("default");
-        this.partComplexity = new JLabel("default");
-        this.leadTime = new JLabel("default");
-        this.EOC = new JLabel("default");
-        this.ROM = new JLabel("Default");
-        this.tolerance = new JLabel("default");
-        this.finish = new JLabel("default");
+        name = new JLabel("default");
+        tension = new JLabel("default");
+        comprestion = new JLabel("default");
+        impact = new JLabel("default");
+        partComplexity = new JLabel("default");
+        leadTime = new JLabel("default");
+        EOC = new JLabel("default");
+        ROM = new JLabel("Default");
+        tolerance = new JLabel("default");
+        finish = new JLabel("default");
         
         setPreferredSize(new Dimension(frameWidth-200, 30));
         setMinimumSize(new Dimension(frameWidth-220, 30));
@@ -106,15 +106,15 @@ public class PrinterUI extends JLabel implements Serializable
     private void designComponents()
     {
     	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.tenstion.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.comprestion.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.impact.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.partComplexity.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.leadTime.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.EOC.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.ROM.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.finish.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tension.setAlignmentX(Component.CENTER_ALIGNMENT);
+        comprestion.setAlignmentX(Component.CENTER_ALIGNMENT);
+        impact.setAlignmentX(Component.CENTER_ALIGNMENT);
+        partComplexity.setAlignmentX(Component.CENTER_ALIGNMENT);
+        leadTime.setAlignmentX(Component.CENTER_ALIGNMENT);
+        EOC.setAlignmentX(Component.CENTER_ALIGNMENT);
+        ROM.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
+        finish.setAlignmentX(Component.CENTER_ALIGNMENT);
     }
     
     /**
@@ -122,16 +122,16 @@ public class PrinterUI extends JLabel implements Serializable
      */
     private void addComponents()
     {
-        add(this.name);
-        add(this.tenstion);
-        add(this.comprestion);
-        add(this.impact);
-        add(this.partComplexity);
-        add(this.leadTime);
-        add(this.EOC);
-        add(this.ROM);
-        add(this.tolerance);
-        add(this.finish);
+        add(name);
+        add(tension);
+        add(comprestion);
+        add(impact);
+        add(partComplexity);
+        add(leadTime);
+        add(EOC);
+        add(ROM);
+        add(tolerance);
+        add(finish);
         
     }
 }

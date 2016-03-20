@@ -194,20 +194,45 @@ public class Printer {
 	/**
 	 * Adds specified material to printer's range of materials list.
 	 * 
-	 * @author Marcinina Alvaran
 	 * @param  material the material to add to the range of materials
 	 */
 	public void addMaterial(String material) {
 		rangeOfMaterials.add(material);
 	}
 	
-	/*
-	 *  TODO: Check HashSet implementation of range of materials
-	 *  HashSet string looks like [material_1, material_2] with
-	 *  brackets and spaces as is.
+	/**
+	 *  Returns a String with the range of materials.
+	 *  <p>
+	 *  If the range of materials has more than one element, then a
+	 *  multi-line String is returned.
 	 */
 	public String getRangeOfMaterials() {
-		return "" + rangeOfMaterials;
+		String rawString,
+		       rangeOfMaterialsString = "";
+		String[] rangeOfMaterialsArray;
+		
+		// Convert HashSet to String
+		rawString = "" + rangeOfMaterials;
+		rangeOfMaterialsArray = rawString.split(", ");
+		if (rangeOfMaterialsArray.length > 1) {
+		    for (int index = 0; index < rangeOfMaterialsArray.length-1; index++)
+			    rangeOfMaterialsString += (rangeOfMaterialsArray[index] + "<br>");
+		    rangeOfMaterialsString += rangeOfMaterialsArray[rangeOfMaterialsArray.length-1];
+		}
+		else {
+			rangeOfMaterialsString = rawString;
+		}
+		
+		// Remove brackets
+		rangeOfMaterialsString = String.copyValueOf(
+				rangeOfMaterialsString.toCharArray(),1,
+				rangeOfMaterialsString.length()-2);
+		
+		// Add multi-line compatibility with HTML
+		rangeOfMaterialsString = "<html>" + rangeOfMaterialsString + "</html>";
+		
+		System.out.println(rangeOfMaterialsString);
+		return rangeOfMaterialsString;
 	}
 
 	public double getTolerance() {

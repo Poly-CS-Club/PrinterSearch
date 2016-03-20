@@ -29,6 +29,13 @@ public class AddPrinterUI {
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
 	private Driver m_Driver;
+	
+	/**
+	 * Creates a printer UI with specified frame and driver.
+	 * 
+	 * @param mainFrame the specified JFrame
+	 * @param driver    the specified driver
+	 */
 	public AddPrinterUI(JFrame mainFrame, Driver driver)
 	{
 		m_Driver = driver;
