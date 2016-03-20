@@ -1,12 +1,29 @@
 /**
  * 
- * @author Joshua
+ * @author Joshua Becker
+ * @version 1.1
+ * GUI for the Printer Search Program.
  *
  */
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 public class MenuUI
 {
@@ -15,7 +32,8 @@ private JFrame m_Menu_F;
 private JPanel m_SearchResult_P, m_SearchParam_P;
 private JLabel m_SearchParam_L;
 private JButton m_FilterResults_B;
-private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LoadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_ROM_TF, m_Tolerance_TF, m_Finish_TF;
+private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LoadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
+private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 private JToolBar m_ToolBar;
 
 public static void main(String args [])
@@ -26,6 +44,7 @@ public MenuUI()
 {
     createComponents();
     designComponents();
+    addActionListeners();
     addComponents();
     
     m_Menu_F.setVisible(true);
@@ -43,9 +62,11 @@ private void createComponents() {
 	m_LoadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
 	m_EOC_TF = new JTextField();
-	m_ROM_TF = new JTextField();
+	
 	m_Tolerance_TF = new JTextField();
-	m_Finish_TF = new JTextField();
+	
+	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});
+	m_ROM_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless"});
 	
 	m_SearchResult_P = new JPanel();
 	m_SearchParam_P = new JPanel();
@@ -81,34 +102,44 @@ private void designComponents() {
  * @param frameHeight
  */
 private void designSearchResult(int frameWidth, int frameHeight) {
-	//m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
-	//m_SearchResult_P.setPreferredSize(new Dimension(frameWidth - 180, frameHeight));
-	//m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
+	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
+	m_SearchResult_P.setPreferredSize(new Dimension(frameWidth - 190, frameHeight));
+	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 	
 	m_SearchResult_P.add(new PrinterUI(1,frameWidth, frameHeight,"Name","Tension","Compression","Impact","Part Complexity","Lead Time","EOC","ROM","Tolerance","Finish"));
+	m_SearchResult_P.add(new PrinterUI(2,frameWidth, frameHeight));
+	m_SearchResult_P.add(new PrinterUI(3,frameWidth, frameHeight));
+	m_SearchResult_P.add(new PrinterUI(4,frameWidth, frameHeight));
+	m_SearchResult_P.add(new PrinterUI(5,frameWidth, frameHeight));
+	m_SearchResult_P.add(new PrinterUI(6,frameWidth, frameHeight));
 	
 }
 /**
  * 
  */
-public void designToolBar()
+private void designToolBar()
 {
 	JButton button = new JButton("Settings");
 	button.setActionCommand("Settings");
+	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
 	button = new JButton("Help");
 	button.setActionCommand("Help");
+	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
 	button = new JButton("Add Printer");
 	button.setActionCommand("Add Printer");
+	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 }
 /**
  * 
+ * @param frameWidth
+ * @param frameHeight
  */
-public void designSearchParam(int frameWidth, int frameHeight)
+private void designSearchParam(int frameWidth, int frameHeight)
 {
 	m_SearchParam_P.setLayout(new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
 	m_SearchParam_P.setPreferredSize(new Dimension(175, frameHeight));
@@ -138,20 +169,25 @@ public void designSearchParam(int frameWidth, int frameHeight)
 	m_EOC_TF.setMinimumSize(new Dimension(150, 25));
 	m_EOC_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_ROM_TF.setMaximumSize(new Dimension(170, 25));
-	m_ROM_TF.setMinimumSize(new Dimension(150, 25));
-	m_ROM_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_ROM_CB.setMaximumSize(new Dimension(170, 25));
+	m_ROM_CB.setMinimumSize(new Dimension(150, 25));
+	m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_Tolerance_TF.setMaximumSize(new Dimension(170, 25));
 	m_Tolerance_TF.setMinimumSize(new Dimension(150, 25));
 	m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Finish_TF.setMaximumSize(new Dimension(170, 25));
-	m_Finish_TF.setMinimumSize(new Dimension(150, 25));
-	m_Finish_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Finish_CB.setMaximumSize(new Dimension(170, 25));
+	m_Finish_CB.setMinimumSize(new Dimension(150, 25));
+	m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
+}
+
+private void addActionListeners()
+{
+	m_FilterResults_B.addActionListener(new ButtonListener());
 }
 /**
  * 
@@ -236,7 +272,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_ROM_TF);
+	m_SearchParam_P.add(m_ROM_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -256,13 +292,37 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_Finish_TF);
+	m_SearchParam_P.add(m_Finish_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
 	m_SearchParam_P.add(m_FilterResults_B);
+	
+}
+
+private class ButtonListener implements ActionListener
+{
+
+	@Override
+	public void actionPerformed(ActionEvent action) {
+		String command = action.getActionCommand();
+		switch(command)
+		{
+			case "Filter Results": //TODO implement this.
+				break;
+			case "Help": //TODO Help Window or Pop-up
+				break;
+			case "Settings"://TODO Settings Window or pop-up
+				break;
+			case "Add Printer": new AddPrinterUI(m_Menu_F);
+				break;
+			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
+				break;
+		}
+		
+	}
 	
 }
 }
