@@ -15,6 +15,7 @@ import java.awt.GraphicsEnvironment;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +29,8 @@ private JFrame m_Menu_F;
 private JPanel m_SearchResult_P, m_SearchParam_P;
 private JLabel m_SearchParam_L;
 private JButton m_FilterResults_B;
-private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LoadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_ROM_TF, m_Tolerance_TF, m_Finish_TF;
+private JTextField m_BroadSearch_TF, m_Tenstion_TF, m_Impact_TF, m_LoadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
+private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 private JToolBar m_ToolBar;
 
 public static void main(String args [])
@@ -56,9 +58,11 @@ private void createComponents() {
 	m_LoadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
 	m_EOC_TF = new JTextField();
-	m_ROM_TF = new JTextField();
+	
 	m_Tolerance_TF = new JTextField();
-	m_Finish_TF = new JTextField();
+	
+	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});
+	m_ROM_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless"});
 	
 	m_SearchResult_P = new JPanel();
 	m_SearchParam_P = new JPanel();
@@ -156,17 +160,17 @@ public void designSearchParam(int frameWidth, int frameHeight)
 	m_EOC_TF.setMinimumSize(new Dimension(150, 25));
 	m_EOC_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_ROM_TF.setMaximumSize(new Dimension(170, 25));
-	m_ROM_TF.setMinimumSize(new Dimension(150, 25));
-	m_ROM_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_ROM_CB.setMaximumSize(new Dimension(170, 25));
+	m_ROM_CB.setMinimumSize(new Dimension(150, 25));
+	m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_Tolerance_TF.setMaximumSize(new Dimension(170, 25));
 	m_Tolerance_TF.setMinimumSize(new Dimension(150, 25));
 	m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Finish_TF.setMaximumSize(new Dimension(170, 25));
-	m_Finish_TF.setMinimumSize(new Dimension(150, 25));
-	m_Finish_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Finish_CB.setMaximumSize(new Dimension(170, 25));
+	m_Finish_CB.setMinimumSize(new Dimension(150, 25));
+	m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -254,7 +258,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_ROM_TF);
+	m_SearchParam_P.add(m_ROM_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -274,7 +278,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_Finish_TF);
+	m_SearchParam_P.add(m_Finish_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
