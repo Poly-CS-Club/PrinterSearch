@@ -32,7 +32,7 @@ public class Printer {
 	/**
 	 * Instantiates a printer with default values.
 	 */
-	Printer(){
+	public Printer(){
 		
 		name = "";
 		tension = 0;
@@ -89,7 +89,7 @@ public class Printer {
 	 * @param tolerance         the double with the specified tolerance
 	 * @param finish            the String representing the finish
 	 */
-	Printer(String name, double tension, double compression, double impact, double complexity,
+	public Printer(String name, double tension, double compression, double impact, double complexity,
 			double leadTime, boolean easeOfChange, HashSet<String> rangeOfMaterials,
 			 double tolerance, String finish){
 
