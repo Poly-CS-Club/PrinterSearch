@@ -1,7 +1,3 @@
-/** @author Jake Leonard
- *
- */
-
 import java.util.*;
 import java.io.*;
 
@@ -21,16 +17,25 @@ import javax.xml.transform.dom.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 
-
+/** 
+ * A test of an implementation of the PrinterList class by
+ * allowing the user to add printers to the printer list and searching
+ * the subsequent list.
+ * 
+ * @author  Jake Leonard, Trevor Forrey, (others on team), Marcinina Alvaran
+ * @version (TODO: to be included by original programmer)
+ * @see PrinterList
+ * @see Printer
+ */
 public class Driver {
 
+	/**
+	 * Tests search functionality
+	 */
 	public static void main(String[] args) {
 
 		PrinterList printerList = generatePrinterList();
 
-		/* The following is simply a rudimentary test of search functionality
-		 *
-		 */
 		Scanner scanner = new Scanner(System.in);
 		boolean newInput = true;
 		do {
@@ -60,8 +65,9 @@ public class Driver {
 			System.out.println("Lead Time: ");
 			double leadTime = scanner.nextDouble();
 
-			System.out.println("Ease of Customizing (true/false): "); // Will need to better validate this input.
-			boolean eoc = scanner.nextBoolean();
+			// TODO: Will need to better validate this input.
+			System.out.println("Ease of Customization (true/false): ");
+			boolean easeOfChange = scanner.nextBoolean();
 
 			System.out.println("Range of Materials: ");
 			scanner.nextLine(); // Clear buffer
@@ -74,12 +80,13 @@ public class Driver {
 			scanner.nextLine();
 			String finish = scanner.nextLine();
 
-			printerList.setMatches(tension, compression, impact, complexity, leadTime, eoc, storeROM(rom), tolerance, finish);
+			printerList.setMatches(tension, compression, impact, complexity, leadTime,
+					               easeOfChange, storeROM(rom), tolerance, finish);
 
 			outputSearchedList(printerList);
 
 
-			// Continue entering new input?
+			// TODO: Continue entering new input?
 			System.out.println("Perform New Search? (y/n)");
 			String continueSearch = scanner.nextLine();
 			if(continueSearch.equalsIgnoreCase("n")){
@@ -88,7 +95,8 @@ public class Driver {
 			} else if(continueSearch.equalsIgnoreCase("no")) {
 				newInput = false;
 				System.out.println("Program ending...");
-			} else if ((continueSearch.equalsIgnoreCase("yes")) || (continueSearch.equalsIgnoreCase("y"))) {
+			} else if ((continueSearch.equalsIgnoreCase("yes"))
+					   || (continueSearch.equalsIgnoreCase("y"))) {
 				newInput = true;
 			} else {
 				newInput = false;
@@ -100,9 +108,10 @@ public class Driver {
 
 	}
 
-	/*
-	 * Generates printer list from XML file
-	 * Returns list to calling method
+	/**
+	 * Generates printer list from XML file and returns list to calling method.
+	 * 
+	 * @return the printer list generated from XML file
 	 */
 	public static PrinterList generatePrinterList(){
 
@@ -131,9 +140,14 @@ public class Driver {
 				double impact;
 				double complexity;
 				double leadTime;
-				boolean eoc;
+				boolean easeOfChange;
+				/* TODO: Commented out to try HashSet implementation of rom
 				String [] romArrayEX;
 				String rom = "";
+				*/
+				String rangeOfMaterialsString = "";
+				String[] rangeOfMaterialsArray;
+				HashSet<String> rangeOfMaterialsSet = new HashSet<String>();
 				double tolerance;
 				String finish = "";
 
@@ -170,11 +184,11 @@ public class Driver {
 					//leadTime = Double.parseDouble(eElement.getElementsByTagName("LEAD_TIME").item(0).getTextContent());
 					System.out.println(leadTime);
 
-					eoc = Boolean.valueOf((getString("EOC", eElement)));
-					//eoc = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
-					System.out.println(eoc);
+					easeOfChange = Boolean.valueOf((getString("EOC", eElement)));
+					//easeOfChange = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
+					System.out.println(easeOfChange);
 
-
+					/* TODO: Commented out to try HashSet implementation of rom
 					// SPECIFICALLY ROM SECTION
 					NodeList listROM = eElement.getElementsByTagName("ROM");  // Now we create a new list specifically for just ROM.
 					String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
@@ -182,6 +196,12 @@ public class Driver {
 					for (int jojo = 0; jojo < romArrayEX.length; jojo++) {
 						System.out.println(romArrayEX[jojo]);
 					}
+					*/
+					
+					// TODO: Check compatibility of HashSet implementation of range of materials
+					rangeOfMaterialsString = getString("ROM", eElement);
+					System.out.println(rangeOfMaterialsString);
+					rangeOfMaterialsSet = stringToHashSet(rangeOfMaterialsString);
 
 					tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
 					//tolerance = Double.parseDouble(eElement.getElementsByTagName("TOLERANCE").item(0).getTextContent());
@@ -191,8 +211,10 @@ public class Driver {
 					//finish = eElement.getElementsByTagName("FINISH").item(0).getTextContent();
 					System.out.println(finish);
 
-					//printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, rom, tolerance, finish));
-					printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, romArrayEX, tolerance, finish));
+					//printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, easeOfChange, rom, tolerance, finish));
+					printerList.addPrinter(new Printer(name, tension, compression, impact,
+							                           complexity, leadTime, easeOfChange,
+							                           rangeOfMaterialsSet, tolerance, finish));
 					System.out.println("Added: " + printerList.getPrinter(0).getName());
 				}
 			}
@@ -213,9 +235,8 @@ public class Driver {
 	}
 
 
-	/** Adds a printer element to printers.xml
-     * @author trevor forrey
-     * @param printers
+	/**
+	 * Adds a printer element to printers.xml based on user input.
      */
     public static void addPrinter() {
 
@@ -223,7 +244,7 @@ public class Driver {
 
         System.out.println("\nYou Are Adding A New Printer\n");
 
-        /**
+        /*
          * Taking in printer parameters from user
          */
         System.out.println("Name of printer: ");
@@ -244,8 +265,9 @@ public class Driver {
         System.out.println("Lead Time: ");
         double printerLeadTime = scanner.nextDouble();
 
-        System.out.println("Ease of Customizing (true/false): "); // Will need to better validate this input.
-        boolean printerEoc = scanner.nextBoolean();
+        // Will need to better validate this input.
+        System.out.println("Ease of Customizing (true/false): ");
+        boolean printerEaseOfChange = scanner.nextBoolean();
 
         System.out.println("Tolerance: ");
         double printerTolerance = scanner.nextDouble();
@@ -256,7 +278,7 @@ public class Driver {
 
 
         try {
-            /**
+            /*
              * Creates link to xml file
              */
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -264,17 +286,17 @@ public class Driver {
             Document document = documentBuilder.parse("printers.xml");
             Element root = document.getDocumentElement();
 
-            /**
+            /*
              * Creates printer root element
              */
             Element newPrinter = document.createElement("printer");
 
 
-            /**
+            /*
              * Inserts user given parameters into the new printer xml element in the following order:
              *
-             * Creates element to represent attribute of printer
-             * appends child element that holds value of the attribute
+             * Creates element to represent attribute of printer,
+             * appends child element that holds value of the attribute,
              * appends element to the new printer element
              */
             Element name = document.createElement("NAME");
@@ -298,7 +320,7 @@ public class Driver {
             newPrinter.appendChild(leadTime);
 
             Element easeOfChange = document.createElement("EASEOFCHANGE");
-            easeOfChange.appendChild(document.createTextNode(Boolean.toString(printerEoc)));
+            easeOfChange.appendChild(document.createTextNode(Boolean.toString(printerEaseOfChange)));
             newPrinter.appendChild(easeOfChange);
 
             Element tolerance = document.createElement("TOLERANCE");
@@ -327,12 +349,18 @@ public class Driver {
     }
 
 
-
+    /**
+	 * Displays a list of printer matches sorted from highest number of matching
+	 * attributes to lowest on the console.
+	 * 
+	 * @param printers the ArrayList of printers
+	 */
 	public static void outputSearchedList(PrinterList printers){
 
 		ArrayList<Printer> list = printers.getPrinterList();
 
-		ArrayList<Printer> outputList = new ArrayList<Printer>(); // Handle if no matches exist and is empty.
+		// Handle if no matches exist and is empty.
+		ArrayList<Printer> outputList = new ArrayList<Printer>();
 
 		for(int i=0;i<list.size();i++){
 
@@ -367,13 +395,21 @@ public class Driver {
 
 		// Output to Console - Sorted by highest matches first.
 		for(int i=list.size()-1;i>=0;i--){
-			System.out.println("\n\n---------------------------------");
-			System.out.println("Printer Name: " + outputList.get(i).getName());
-			System.out.println("# Of Matches: " + outputList.get(i).getTotalMatches());
-			System.out.println("\n----------------------------------");
+			System.out.println(
+					"\n\n---------------------------------" +
+			        "     Printer Name: " + outputList.get(i).getName() +
+			        "Number Of Matches: " + outputList.get(i).getTotalMatches() +
+			        "\n----------------------------------");
 		}
 	}
 
+	/**
+	 * Insert description here.
+	 * 
+	 * @param tagName the String with a printer tag
+	 * @param element the Element
+	 * @return a String with...
+	 */
 	public static String getString(String tagName, Element element) {
 		NodeList list = element.getElementsByTagName(tagName);
 		if (list != null && list.getLength() > 0) {
@@ -387,6 +423,7 @@ public class Driver {
 		return null;
 	}
 
+	/* TODO: Commented out to try HashSet implementation of rom
 	public static String[] storeROM(String romInput) {
 		//String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
 
@@ -398,5 +435,22 @@ public class Driver {
 			System.out.println("The ROM attribute in this bitch is: " + romArray[jojo]);
 		}
 		return romArray;
+	}
+	*/
+	
+	/**
+	 * Converts a String list delimited by ", " (without quotes) into a HashSet.
+	 * @param list
+	 * @return
+	 */
+	public static HashSet<String> stringToHashSet(String list) {
+		String[] listArray;
+		HashSet<String> hashSet = new HashSet<String>();
+		
+		listArray = list.split(", ");
+		for (String element : listArray)
+			hashSet.add(element);
+		
+		return hashSet;
 	}
 }

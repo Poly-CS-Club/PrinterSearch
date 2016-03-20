@@ -1,9 +1,11 @@
-/** @author Jake Leonard
- * 
- * 
- *
- */
+import java.util.HashSet;
 
+/**
+ * A 3D metal printer.
+ * 
+ * @author  Jake Leonard, (others on team), Marcinina Alvaran
+ * @version (to be added by original programmer)
+ */
 public class Printer {
 	
 	private String name;
@@ -12,9 +14,12 @@ public class Printer {
 	private double impact;
 	private double complexity;
 	private double leadTime;
-	private boolean eoc;
+	private boolean easeOfChange;
+	/*
 	private String rom;
 	private String [] arrayOfROM;			// The actual array obtains values when instantiated in the Driver file.
+	*/
+	private HashSet<String> rangeOfMaterials;
 	private double tolerance;
 	private String finish;
 	
@@ -24,6 +29,9 @@ public class Printer {
 	 */
 	private boolean[] matches;
 	
+	/**
+	 * Instantiates a printer with default values.
+	 */
 	Printer(){
 		
 		name = "";
@@ -32,19 +40,25 @@ public class Printer {
 		impact = 0;
 		complexity = 0;
 		leadTime = 0;
-		eoc = false;
+		easeOfChange = false;
+		/*
 		rom = "";
 		arrayOfROM = new String[0];			// Will revise at a later point.
+		*/
+		rangeOfMaterials = new HashSet<String>();
 		tolerance = 0;
 		finish = "";
 		
-		matches = new boolean[9]; // Should default to false.
-		
+		// Marci's attempt at false defaulting
+		matches = new boolean[9];
+		for (int index=0; index<9; index++)
+			matches[index] = false;
 		
 	}
 
 	/*Printer(String name, double tension, double compression, double impact,
-			double complexity, double leadTime, boolean eoc, String rom, double tolerance, String finish){
+			double complexity, double leadTime, boolean easeOfChange,
+			String rom, double tolerance, String finish){
 		
 		this.name = name;
 		this.tension = tension;
@@ -52,7 +66,7 @@ public class Printer {
 		this.impact = impact;
 		this.complexity = complexity;
 		this.leadTime = leadTime;
-		this.eoc = eoc;
+		this.easeOfChange = easeOfChange;
 		this.rom = rom;
 		this.tolerance = tolerance;
 		this.finish = finish;
@@ -60,8 +74,24 @@ public class Printer {
 		matches = new boolean[9];
 	}*/
 
-	Printer(String name, double tension, double compression, double impact,
-			double complexity, double leadTime, boolean eoc, String [] rom, double tolerance, String finish){
+	/**
+	 * Instantiates a printer with specified values and a boolean list representing
+	 * matches values for all parameters except name.
+	 * 
+	 * @param name              the String with the specified printer name
+	 * @param tension           the double with the specified tension
+	 * @param compression       the double with the specified compression
+	 * @param impact            the double with the specified impact
+	 * @param complexity        the double with the specified complexity
+	 * @param leadTime          the double with the specified lead time
+	 * @param easeOfChange      the boolean representing the ease of change
+	 * @param rangeOfMaterials  the HashSet withthe range of materials
+	 * @param tolerance         the double with the specified tolerance
+	 * @param finish            the String representing the finish
+	 */
+	Printer(String name, double tension, double compression, double impact, double complexity,
+			double leadTime, boolean easeOfChange, HashSet<String> rangeOfMaterials,
+			 double tolerance, String finish){
 
 		this.name = name;
 		this.tension = tension;
@@ -69,8 +99,8 @@ public class Printer {
 		this.impact = impact;
 		this.complexity = complexity;
 		this.leadTime = leadTime;
-		this.eoc = eoc;
-		this.arrayOfROM = rom;
+		this.easeOfChange = easeOfChange;
+		this.rangeOfMaterials = rangeOfMaterials;
 		this.tolerance = tolerance;
 		this.finish = finish;
 
@@ -142,14 +172,16 @@ public class Printer {
 		this.leadTime = leadTime;
 	}
 
-	public boolean isEoc() {
-		return eoc;
+	public boolean isEaseOfChange() {
+		return easeOfChange;
 	}
 
-	public void setEoc(boolean eoc) {
-		this.eoc = eoc;
+	public void setEaseOfChange(boolean easeOfChange) {
+		this.easeOfChange = easeOfChange;
 	}
 
+	// TODO: Review possibility of using a set for range of materials
+	/*
 	public String getRom() {
 		return rom;
 	}
@@ -158,6 +190,26 @@ public class Printer {
 
 	public void setRom(String rom) {
 		this.rom = rom;
+	}
+	*/
+	
+	/**
+	 * Adds specified material to printer's range of materials list.
+	 * 
+	 * @author Marcinina Alvaran
+	 * @param  material the material to add to the range of materials
+	 */
+	public void addMaterial(String material) {
+		rangeOfMaterials.add(material);
+	}
+	
+	/*
+	 *  TODO: Check HashSet implementation of range of materials
+	 *  HashSet string looks like [material_1, material_2] with
+	 *  brackets and spaces as is.
+	 */
+	public String getRangeOfMaterials() {
+		return "" + rangeOfMaterials;
 	}
 
 	public double getTolerance() {
