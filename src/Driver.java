@@ -348,9 +348,20 @@ public class Driver {
         }
     }
 
-    /**
-	 * Adds a printer element to printers.xml based on user input.
-     */
+/**
+ * Adds a printer element to printers.xml based on user input.
+ * 
+ * @param printerName
+ * @param printerTension
+ * @param printerCompression
+ * @param printerPartComplexity
+ * @param printerROM
+ * @param printerImpact
+ * @param printerLeadTime
+ * @param printerEaseOfChange
+ * @param printerTolerance
+ * @param printerFinish
+ */
     public void addPrinter(String printerName, String printerTension, String printerCompression, String printerPartComplexity, String printerROM, String printerImpact, 
     		String printerLeadTime, String printerEaseOfChange, String printerTolerance, String printerFinish) {
         try {

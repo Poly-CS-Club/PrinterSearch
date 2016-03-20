@@ -184,6 +184,8 @@ public class AddPrinterUI {
 			switch(command)
 			{
 				case "Add New Printer":
+					//TODO check all inputs to see if valid or not.
+					//TODO create window or pop-up for invalid inputs...
 						m_Driver.addPrinter(m_Name_TF.getText(), m_Tenstion_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
 								m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
 						JOptionPane.showMessageDialog(m_Main_F,"Printer Added to DataBase","Message", JOptionPane.PLAIN_MESSAGE);
