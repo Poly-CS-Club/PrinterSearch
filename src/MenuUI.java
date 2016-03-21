@@ -42,9 +42,13 @@ private JComboBox<String>  m_Finish_CB, m_ROM_CB;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
 private Driver m_Driver;
+private MenuUI m_MenuUI;
 
 private final int FRAME_WIDTH;
 private final int FRAME_HEIGHT;
+
+private int screenWidth;
+private int screenHeight;
 
 public static void main(String args [])
 {
@@ -57,8 +61,8 @@ public static void main(String args [])
 public MenuUI()
 {
 	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
-	int screenWidth = gd.getDisplayMode().getWidth();
-	int screenHeight = gd.getDisplayMode().getHeight();
+	screenWidth = gd.getDisplayMode().getWidth();
+	screenHeight = gd.getDisplayMode().getHeight();
 	
 	FRAME_WIDTH = (int) ((int) screenWidth *0.75);
 	FRAME_HEIGHT = (int) ((int) screenHeight *0.75);
@@ -71,6 +75,8 @@ public MenuUI()
     
     m_Menu_F.pack();
     m_Menu_F.setVisible(true);
+    
+    m_MenuUI = this;
 }
 
 /**
@@ -161,6 +167,12 @@ private void designSearchResult() {
 	m_ScrollPane.setViewportView(m_SearchResult_P);
 	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 	//m_ScrollPane.getViewport().setOpaque(false);
+}
+
+public void resetResults(){
+	
+    designComponents(screenWidth, screenHeight);
+	
 }
 
 /**
@@ -364,6 +376,12 @@ private void addSearchParamComponents() {
 	
 }
 
+public JFrame getM_Menu_F(){
+	
+	return  m_Menu_F;
+	
+}
+
 /**
  * An action listener for a button.
  * 
@@ -384,7 +402,7 @@ private class ButtonListener implements ActionListener
 				break;
 			case "Settings"://TODO Settings Window or pop-up
 				break;
-			case "Add Printer": new AddPrinterUI(m_Menu_F, m_Driver);
+			case "Add Printer": new AddPrinterUI(m_Menu_F, m_Driver, m_MenuUI);
 				break;
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 				break;

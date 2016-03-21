@@ -56,4 +56,184 @@
         <TOLERANCE>2</TOLERANCE>
         <FINISH>Matte</FINISH>
     </printer>
+<printer>
+        <NAME>Printer A - Vendor A</NAME>
+        <TENSION>.005</TENSION>
+        <COMPRESSION>.125</COMPRESSION>
+        <IMPACT>.0001</IMPACT>
+        <PART_COMPLEXITY>6</PART_COMPLEXITY>
+        <LEAD_TIME>7</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.07</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>Model A - Vendor B</NAME>
+        <TENSION>.001</TENSION>
+        <COMPRESSION>.005</COMPRESSION>
+        <IMPACT>.003</IMPACT>
+        <PART_COMPLEXITY>6</PART_COMPLEXITY>
+        <LEAD_TIME>4</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.003</TOLERANCE>
+        <FINISH>Gloss</FINISH>
+    </printer>
+<printer>
+        <NAME>Model B - Vendor A</NAME>
+        <TENSION>.005</TENSION>
+        <COMPRESSION>.125</COMPRESSION>
+        <IMPACT>.5</IMPACT>
+        <PART_COMPLEXITY>.03</PART_COMPLEXITY>
+        <LEAD_TIME>6</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.125</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>Model C - Vendor A</NAME>
+        <TENSION>.5</TENSION>
+        <COMPRESSION>.4</COMPRESSION>
+        <IMPACT>.3</IMPACT>
+        <PART_COMPLEXITY>3</PART_COMPLEXITY>
+        <LEAD_TIME>6</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.001</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>Model C - Vendor C</NAME>
+        <TENSION>.5</TENSION>
+        <COMPRESSION>.3</COMPRESSION>
+        <IMPACT>.6</IMPACT>
+        <PART_COMPLEXITY>6</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.125</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>Model A - Vendor E</NAME>
+        <TENSION>.125</TENSION>
+        <COMPRESSION>.05</COMPRESSION>
+        <IMPACT>125</IMPACT>
+        <PART_COMPLEXITY>3</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>5</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>randytest</NAME>
+        <TENSION>125</TENSION>
+        <COMPRESSION>125</COMPRESSION>
+        <IMPACT>125</IMPACT>
+        <PART_COMPLEXITY>125</PART_COMPLEXITY>
+        <LEAD_TIME>125</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>125</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>test4</NAME>
+        <TENSION>4</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>6</IMPACT>
+        <PART_COMPLEXITY>7</PART_COMPLEXITY>
+        <LEAD_TIME>8</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>9</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>test x</NAME>
+        <TENSION>4</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>6</IMPACT>
+        <PART_COMPLEXITY>7</PART_COMPLEXITY>
+        <LEAD_TIME>9</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>9</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>test y</NAME>
+        <TENSION>4</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>6</IMPACT>
+        <PART_COMPLEXITY>7</PART_COMPLEXITY>
+        <LEAD_TIME>9</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>9</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>print z</NAME>
+        <TENSION>15</TENSION>
+        <COMPRESSION>15</COMPRESSION>
+        <IMPACT>15</IMPACT>
+        <PART_COMPLEXITY>15</PART_COMPLEXITY>
+        <LEAD_TIME>15</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>15</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>printerXC</NAME>
+        <TENSION>5</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>5</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>5</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>printerYV</NAME>
+        <TENSION>5</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>5</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>5</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>TestC</NAME>
+        <TENSION>.5</TENSION>
+        <COMPRESSION>.3</COMPRESSION>
+        <IMPACT>.6</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.05</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>TestPostCloseAddNewPrinter</NAME>
+        <TENSION>.05</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>5</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>5</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
 </PRINTERS>

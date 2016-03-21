@@ -24,11 +24,13 @@ import javax.swing.JTextField;
 public class AddPrinterUI {
 
 	private JFrame m_Main_F;
-	private JTextField m_Name_TF, m_Tenstion_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_Tolerance_TF, m_Compression_TF;
+	private JFrame m_OldFrame;
+	private JTextField m_Name_TF, m_Tension_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_Tolerance_TF, m_Compression_TF;
 	private JComboBox<String>  m_Finish_CB, m_ROM_CB, m_EOC_CB;
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
 	private Driver m_Driver;
+	private MenuUI m_MenuUI;
 	
 	/**
 	 * Creates a printer UI with specified frame and driver.
@@ -36,13 +38,17 @@ public class AddPrinterUI {
 	 * @param mainFrame the specified JFrame
 	 * @param driver    the specified driver
 	 */
-	public AddPrinterUI(JFrame mainFrame, Driver driver)
+	public AddPrinterUI(JFrame mainFrame, Driver driver, MenuUI menuUI)
 	{
 		m_Driver = driver;
+		m_MenuUI = menuUI;
+		m_OldFrame = mainFrame;
+		
 	    createComponents();
 	    designComponents();
 	    addActionListeners();
 	    addComponents();
+	    
 	    
 	    m_Main_F.pack();
 	    m_Main_F.setVisible(true);
@@ -55,7 +61,7 @@ public class AddPrinterUI {
 		
 		m_Name_TF = new JTextField();
 		m_Compression_TF = new JTextField();
-		m_Tenstion_TF = new JTextField();
+		m_Tension_TF = new JTextField();
 		m_Impact_TF = new JTextField();
 		m_LeadTime_TF = new JTextField();
 		m_PartComplexity_TF = new JTextField();
@@ -66,7 +72,7 @@ public class AddPrinterUI {
 		
 		m_Tolerance_TF = new JTextField();
 		
-		m_Finish_CB = new JComboBox<String>(new String [] {"Matte", "Gloss", "Add New"});
+		m_Finish_CB = new JComboBox<String>(new String [] {"Matte", "Gloss", "Add New"}); 
 		m_ROM_CB = new JComboBox<String>(new String [] {"Aluminum", "Stainless", "Add New"});
 		m_EOC_CB = new JComboBox<String>(new String [] {"true", "false"});
 		
@@ -102,9 +108,9 @@ public class AddPrinterUI {
 		m_Name_TF.setMinimumSize(defaultMinSize);
 		m_Name_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_Tenstion_TF.setMaximumSize(defaultMaxSize);
-		m_Tenstion_TF.setMinimumSize(defaultMinSize);
-		m_Tenstion_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+		m_Tension_TF.setMaximumSize(defaultMaxSize);
+		m_Tension_TF.setMinimumSize(defaultMinSize);
+		m_Tension_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		m_Impact_TF.setMaximumSize(defaultMaxSize);
 		m_Impact_TF.setMinimumSize(defaultMinSize);
@@ -163,7 +169,7 @@ public class AddPrinterUI {
 		m_Labels_P.add(new JLabel("Finish"));
 		
 		m_Input_P.add(m_Name_TF);
-		m_Input_P.add(m_Tenstion_TF);
+		m_Input_P.add(m_Tension_TF);
 		m_Input_P.add(m_Compression_TF);
 		m_Input_P.add(m_Impact_TF);
 		m_Input_P.add(m_PartComplexity_TF);
@@ -197,9 +203,12 @@ public class AddPrinterUI {
 				case "Add New Printer":
 					//TODO check all inputs to see if valid or not.
 					//TODO create window or pop-up for invalid inputs...
-						m_Driver.addPrinter(m_Name_TF.getText(), m_Tenstion_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
+						m_Driver.addPrinter(m_Name_TF.getText(), m_Tension_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
 								m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
 						JOptionPane.showMessageDialog(m_Main_F,"Printer Added to DataBase","Message", JOptionPane.PLAIN_MESSAGE);
+						m_OldFrame.dispose(); // Remove old frame window. (-Jake)
+						m_MenuUI = new MenuUI(); // refresh MenuUI with new results. (-Jake)
+						m_OldFrame = m_MenuUI.getM_Menu_F(); // set OldFrame to the current Frame so if user adds another Printer without leaving menu, it still works. 
 					break;
 				default: JOptionPane.showMessageDialog(m_Main_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 					break;
