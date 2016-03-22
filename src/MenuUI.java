@@ -19,9 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
-import javax.swing.JViewport;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.swing.JScrollPane;
 
 /**
@@ -47,8 +44,8 @@ private JScrollPane m_ScrollPane;
 private Driver m_Driver;
 private MenuUI m_MenuUI;
 
-private final int FRAME_WIDTH;
-private final int FRAME_HEIGHT;
+public final int FRAME_WIDTH;
+public final int FRAME_HEIGHT;
 
 private int screenWidth;
 private int screenHeight;
@@ -129,7 +126,7 @@ private void designComponents(int screenWidth, int screenHeight) {
 	
 	m_ScrollPane.setOpaque(false);
 	m_ScrollPane.setVerticalScrollBarPolicy(
-			m_ScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			m_ScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	
 	designSearchParam();
 	
@@ -392,6 +389,11 @@ public JFrame getM_Menu_F(){
 	
 	return  m_Menu_F;
 	
+}
+
+public JPanel getSearchResultsPanel()
+{
+	return m_SearchResult_P;
 }
 
 /**

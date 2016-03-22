@@ -206,9 +206,13 @@ public class AddPrinterUI {
 						m_Driver.addPrinter(m_Name_TF.getText(), m_Tension_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
 								m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
 						JOptionPane.showMessageDialog(m_Main_F,"Printer Added to DataBase","Message", JOptionPane.PLAIN_MESSAGE);
-						m_OldFrame.dispose(); // Remove old frame window. (-Jake)
-						m_MenuUI = new MenuUI(); // refresh MenuUI with new results. (-Jake)
-						m_OldFrame = m_MenuUI.getM_Menu_F(); // set OldFrame to the current Frame so if user adds another Printer without leaving menu, it still works. 
+						m_MenuUI.getSearchResultsPanel().add(new PrinterUI(m_MenuUI.getSearchResultsPanel().getComponentCount()+1, m_MenuUI.FRAME_WIDTH,
+																		   m_MenuUI.FRAME_HEIGHT,m_Name_TF.getText(), m_Tension_TF.getText(), 
+																		   m_Compression_TF.getText(), m_PartComplexity_TF.getText(), 
+																		   (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
+																		   m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), 
+																		   m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem()));
+						m_MenuUI.getSearchResultsPanel().revalidate();
 					break;
 				default: JOptionPane.showMessageDialog(m_Main_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 					break;
