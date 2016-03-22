@@ -7,6 +7,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -20,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.swing.JScrollPane;
 
 /**
@@ -34,11 +36,12 @@ public class MenuUI
 {
 	
 private JFrame m_Menu_F;
-private JPanel m_SearchResult_P, m_SearchParam_P;
-private JLabel m_SearchParam_L;
+private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 private JButton m_FilterResults_B;
-private JTextField m_BroadSearch_TF, m_Tension_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_EOC_TF, m_Tolerance_TF;
-private JComboBox<String>  m_Finish_CB, m_ROM_CB;
+private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
+private JComboBox<String>  m_Finish_CB, m_RangeOfMaterials_CB, m_EaseOfCustomization_CB;
+private RangedTextField m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF;
+private ArrayList<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
 private Driver m_Driver;
@@ -68,6 +71,7 @@ public MenuUI()
 	FRAME_HEIGHT = (int) ((int) screenHeight *0.75);
 
 	m_Driver = new Driver();
+	m_RangeOfMaterials = new ArrayList<String>();
     createComponents();
     designComponents(screenWidth, screenHeight);
     addActionListeners();
@@ -84,19 +88,21 @@ public MenuUI()
  */
 private void createComponents() {
 	m_Menu_F = new JFrame("Menu");
+	m_Menu_P = new JPanel();
 	m_ToolBar = new JToolBar("ToolBar");
 	
 	m_BroadSearch_TF = new JTextField();
-	m_Tension_TF = new JTextField();
-	m_Impact_TF = new JTextField();
+	
 	m_LeadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
-	m_EOC_TF = new JTextField();
 	
-	m_Tolerance_TF = new JTextField();
+	m_Tolerance_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
+	m_Tension_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
+	m_Impact_RTF = new RangedTextField(200, 0, RangedTextField.INTEGER);
 	
-	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these from a file or something...
-	m_ROM_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless"});
+	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these fRangeOfMaterials a file or something...
+	m_RangeOfMaterials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
+	m_EaseOfCustomization_CB = new JComboBox<String>(new String [] {"Search All", "True", "False"});
 	
 	m_ScrollPane = new JScrollPane();
 	m_SearchResult_P = new JPanel();
@@ -111,7 +117,11 @@ private void createComponents() {
 private void designComponents(int screenWidth, int screenHeight) {
     
 	m_Menu_F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	m_Menu_F.setLayout(new BorderLayout(5,5));
+	//m_Menu_F.setLayout(new BorderLayout(5,5));
+	m_Menu_P.setLayout(new BorderLayout(5,5));
+	m_Menu_P.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+	m_Menu_P.setMaximumSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
+	
 	m_Menu_F.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 	m_Menu_F.setLocation((screenWidth/2) - (FRAME_WIDTH /2),(screenHeight/2) - (FRAME_HEIGHT/2));// centering
@@ -141,7 +151,7 @@ private void designSearchResult() {
 	
 	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Part Complex.",
-			"Lead Time","EOC","ROM","Tolerance","Finish"));
+			"Lead Time","Ease Of Customization","Range Of Materials","Tolerance","Finish"));
 	PrinterList printerList = m_Driver.generatePrinterList();
 	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
@@ -204,8 +214,8 @@ private void designToolBar()
  */
 private void designSearchParam()
 {
-	Dimension defaultMaxSize = new Dimension(170, 25),
-			  defaultMinSize = new Dimension(150, 25);
+	Dimension defaultMaxSize = new Dimension(170, 30),
+			  defaultMinSize = new Dimension(150, 30);
 	
 	m_SearchParam_P.setLayout(new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
 	m_SearchParam_P.setPreferredSize(new Dimension(175, FRAME_HEIGHT));
@@ -215,13 +225,13 @@ private void designSearchParam()
 	m_BroadSearch_TF.setMinimumSize(defaultMinSize);
 	m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Tension_TF.setMaximumSize(defaultMaxSize);
-	m_Tension_TF.setMinimumSize(defaultMinSize);
-	m_Tension_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Tension_RTF.setMaximumSize(defaultMaxSize);
+	m_Tension_RTF.setMinimumSize(defaultMinSize);
+	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Impact_TF.setMaximumSize(defaultMaxSize);
-	m_Impact_TF.setMinimumSize(defaultMinSize);
-	m_Impact_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Impact_RTF.setMaximumSize(defaultMaxSize);
+	m_Impact_RTF.setMinimumSize(defaultMinSize);
+	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_LeadTime_TF.setMaximumSize(defaultMaxSize);
 	m_LeadTime_TF.setMinimumSize(defaultMinSize);
@@ -231,17 +241,18 @@ private void designSearchParam()
 	m_PartComplexity_TF.setMinimumSize(defaultMinSize);
 	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_EOC_TF.setMaximumSize(defaultMaxSize);
-	m_EOC_TF.setMinimumSize(defaultMinSize);
-	m_EOC_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_EaseOfCustomization_CB.setMaximumSize(defaultMaxSize);
+	m_EaseOfCustomization_CB.setMinimumSize(defaultMinSize);
+	m_EaseOfCustomization_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_ROM_CB.setMaximumSize(defaultMaxSize);
-	m_ROM_CB.setMinimumSize(defaultMinSize);
-	m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_RangeOfMaterials_CB.setMaximumSize(defaultMaxSize);
+	m_RangeOfMaterials_CB.setMinimumSize(defaultMinSize);
+	m_RangeOfMaterials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_RangeOfMaterials_CB.setActionCommand("RangeOfMaterials");
 
-	m_Tolerance_TF.setMaximumSize(defaultMaxSize);
-	m_Tolerance_TF.setMinimumSize(defaultMinSize);
-	m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Tolerance_RTF.setMaximumSize(defaultMaxSize);
+	m_Tolerance_RTF.setMinimumSize(defaultMinSize);
+	m_Tolerance_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_Finish_CB.setMaximumSize(defaultMaxSize);
 	m_Finish_CB.setMinimumSize(defaultMinSize);
@@ -257,6 +268,7 @@ private void designSearchParam()
 private void addActionListeners()
 {
 	m_FilterResults_B.addActionListener(new ButtonListener());
+	m_RangeOfMaterials_CB.addActionListener(new ComboListener());
 }
 
 /**
@@ -265,10 +277,10 @@ private void addActionListeners()
 private void addComponents() {
 	addSearchParamComponents();
 	
-	m_ScrollPane.add(m_SearchParam_P);
-	m_Menu_F.add(m_ToolBar, BorderLayout.PAGE_START);
-	m_Menu_F.add(m_SearchParam_P, BorderLayout.LINE_START);
-	m_Menu_F.add(m_ScrollPane, BorderLayout.LINE_END);
+	m_Menu_P.add(m_ToolBar, BorderLayout.PAGE_START);
+	m_Menu_P.add(m_SearchParam_P, BorderLayout.LINE_START);
+	m_Menu_P.add(m_ScrollPane, BorderLayout.LINE_END);
+	m_Menu_F.add(m_Menu_P);
 	m_Menu_F.setPreferredSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 	// TODO: Commented out for scroll bar
 	//m_Menu_F.add(m_SearchResult_P, BorderLayout.LINE_END);
@@ -296,7 +308,17 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_Tension_TF);
+	m_SearchParam_P.add(m_Tension_RTF);
+	
+	label = new JLabel("\n");
+	label.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_SearchParam_P.add(label);
+	
+	label = new JLabel("Tolerance:");
+	label.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_SearchParam_P.add(label);
+	
+	m_SearchParam_P.add(m_Tolerance_RTF);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -306,7 +328,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_Impact_TF);
+	m_SearchParam_P.add(m_Impact_RTF);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -332,31 +354,21 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	label = new JLabel("EOC:");
+	label = new JLabel("Ease Of Customization:");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_EOC_TF);
+	m_SearchParam_P.add(m_EaseOfCustomization_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	label = new JLabel("ROM:");
+	label = new JLabel("Range Of Materials:");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_ROM_CB);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Tolerance:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Tolerance_TF);
+	m_SearchParam_P.add(m_RangeOfMaterials_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -382,6 +394,48 @@ public JFrame getM_Menu_F(){
 	
 }
 
+/**
+ * An action listener for a Combo Box.
+ * 
+ * @author Joshua Becker
+ *
+ */
+private class ComboListener implements ActionListener
+{
+
+	@Override
+	public void actionPerformed(ActionEvent action) {
+		String command = action.getActionCommand();
+		switch(command)
+		{
+			case "RangeOfMaterials":
+				String selectedItem = (String) m_RangeOfMaterials_CB.getSelectedItem();// getting selected Item
+				//TODO Dont allow repeats in widnow...
+				if(!selectedItem.equals("Search All") && !selectedItem.equals("Clear All"))
+				{
+					JLabel temp = new JLabel(selectedItem);//creating temp Label
+					temp.setAlignmentX(Component.CENTER_ALIGNMENT);
+					
+					m_RangeOfMaterials.add(selectedItem);//adding item to list.
+				
+					int index = m_SearchParam_P.getComponentZOrder(m_RangeOfMaterials_CB);// getting index of Range Of Materials
+				
+					m_SearchParam_P.add(temp,index);// adding new label
+				}else
+				{
+					m_SearchParam_P.removeAll();//removing all Components
+					addSearchParamComponents(); //adding default Components
+				}
+				m_Menu_P.revalidate();// updating Panel
+				break;
+				
+			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
+				break;
+		}
+		
+	}
+	
+}
 /**
  * An action listener for a button.
  * 

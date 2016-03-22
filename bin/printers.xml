@@ -212,4 +212,28 @@
         <TOLERANCE>5</TOLERANCE>
         <FINISH>Matte</FINISH>
     </printer>
+<printer>
+        <NAME>TestC</NAME>
+        <TENSION>.5</TENSION>
+        <COMPRESSION>.3</COMPRESSION>
+        <IMPACT>.6</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.05</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>TestPostCloseAddNewPrinter</NAME>
+        <TENSION>.05</TENSION>
+        <COMPRESSION>5</COMPRESSION>
+        <IMPACT>5</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>5</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
 </PRINTERS>
