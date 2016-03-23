@@ -143,11 +143,11 @@ public class PrinterUI extends JLabel implements Serializable
     	return partComplexity;
     }
     
-    public JLabel getEOC() {
+    public JLabel getEaseOfCustomization() {
     	return easeOfCustomization;
     }
     
-    public JLabel getROM() {
+    public JLabel getRangeOfMaterials() {
     	return rangeOfMaterials;
     }
 }

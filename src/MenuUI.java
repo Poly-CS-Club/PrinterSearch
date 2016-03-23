@@ -158,8 +158,8 @@ private void designSearchResult() {
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 
     tableHeader.getPartComplexity().setToolTipText("Part Complexity");
-    tableHeader.getEOC().setToolTipText("Ease of Customization");
-    tableHeader.getROM().setToolTipText("Range of Materials");
+    tableHeader.getEaseOfCustomization().setToolTipText("Ease of Customization");
+    tableHeader.getRangeOfMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
 	PrinterList printerList = m_Driver.generatePrinterList();
