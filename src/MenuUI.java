@@ -37,7 +37,8 @@ private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_RangeOfMaterials_CB, m_EaseOfCustomization_CB;
-private RangedTextField m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF;
+private RangedTextField<Double> m_Tension_RTF, m_Tolerance_RTF;
+private RangedTextField<Integer> m_Impact_RTF;
 private ArrayList<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
@@ -93,9 +94,15 @@ private void createComponents() {
 	m_LeadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
 	
+	// TODO Implemented a generic Number class for RangedTextField
+	/*
 	m_Tolerance_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
 	m_Tension_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
 	m_Impact_RTF = new RangedTextField(200, 0, RangedTextField.INTEGER);
+	*/
+	m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
+	m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
+	m_Impact_RTF = new RangedTextField<Integer>(200, 0, 1);
 	
 	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these fRangeOfMaterials a file or something...
 	m_RangeOfMaterials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
@@ -142,13 +149,19 @@ private void designComponents(int screenWidth, int screenHeight) {
  * @param FRAME_HEIGHT the width of the height
  */
 private void designSearchResult() {
+	PrinterUI tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
+			"Name","Tension","Compression","Impact", "Complexity",
+			"Lead Time","Ease","Materials","Tolerance","Finish");
+	
 	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
 	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH  - 190, FRAME_HEIGHT));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
+
+    tableHeader.getPartComplexity().setToolTipText("Part Complexity");
+    tableHeader.getEOC().setToolTipText("Ease of Customization");
+    tableHeader.getROM().setToolTipText("Range of Materials");
+	m_SearchResult_P.add(tableHeader);
 	
-	m_SearchResult_P.add(new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
-			"Name","Tension","Compression","Impact", "Part Complex.",
-			"Lead Time","Ease Of Customization","Range Of Materials","Tolerance","Finish"));
 	PrinterList printerList = m_Driver.generatePrinterList();
 	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
