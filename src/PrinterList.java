@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /** 
  * A list of 3D metal printers being considered for the
  * product (TODO: replace with a brief description of the product).
@@ -81,6 +84,21 @@ public class PrinterList {
 		 *  7 = Tolerance
 		 *  8 = Finish
 		 */
+		/* REFERENCE LIST: (Add Compression)
+		
+		m_BroadSearch_TF = new JTextField();
+		m_LeadTime_TF = new JTextField();
+		m_PartComplexity_TF = new JTextField();
+		
+		m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
+		m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
+		m_Impact_RTF = new RangedTextField<Integer>(200, 0, 1);
+		
+		m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these fRangeOfMaterials a file or something...
+		m_RangeOfMaterials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
+		m_EaseOfCustomization_CB = new JComboBox<String>(new String [] {"Search All", "True", "False"});
+
+		 */ 
 		
 		for(Printer printer : printerList){
 				

@@ -44,6 +44,7 @@ private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
 private Driver m_Driver;
 private MenuUI m_MenuUI;
+private PrinterList printerList;
 
 public final int FRAME_WIDTH;
 public final int FRAME_HEIGHT;
@@ -79,6 +80,8 @@ public MenuUI()
     m_Menu_F.setVisible(true);
     
     m_MenuUI = this;
+    
+	PrinterList printerList = m_Driver.generatePrinterList();
 }
 
 /**
@@ -162,7 +165,7 @@ private void designSearchResult() {
     tableHeader.getRangeOfMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
-	PrinterList printerList = m_Driver.generatePrinterList();
+	printerList = m_Driver.generatePrinterList();
 	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
 	{
@@ -454,7 +457,7 @@ private class ComboListener implements ActionListener
 /**
  * An action listener for a button.
  * 
- * @author Joshua Becker
+ * @author Joshua Becker (and other team members:) Jacob Leonard
  *
  */
 private class ButtonListener implements ActionListener
@@ -466,6 +469,28 @@ private class ButtonListener implements ActionListener
 		switch(command)
 		{
 			case "Filter Results": //TODO implement this.
+				
+				// STEP ONE: CLEAR CURRENT RESULTS
+				
+				clearPanel(m_SearchResult_P); // Empty JPanel of current components (currently-listed printers in table)
+			    clearPanel(m_ToolBar); // JToolBar to overloaded clearPanel. m_SearchResult_P doesn't position correctly without resetting/readding this. 
+
+			    // STEP TWO: GET FIELDS & SET MATCHES FOR EACH PRINTER
+				
+			    	// ---- RE-USE/RECONFIGURE: printerList.setMatches(tension, compression, impact, complexity, leadTime, easeOfChange, storeROM(rom), tolerance, finish);
+			    
+			    
+			    // STEP THREE: SORT & SHOW RESULTS
+			    
+			    	// --- RE-USE/RECONFIGURE: m_Driver.outputSearchedList?
+			    
+				
+			    
+			    designToolBar(); // Reset toolbar once done, otherwise search results layout seems to break.
+
+
+				
+				
 				break;
 			case "Help": //TODO Help Window or Pop-up
 				break;
@@ -477,6 +502,18 @@ private class ButtonListener implements ActionListener
 				break;
 		}
 		
+	}
+	
+	public void clearPanel(JPanel panel){
+		panel.removeAll();
+		panel.revalidate();
+		panel.repaint();
+	}
+
+	public void clearPanel(JToolBar toolbar){
+		toolbar.removeAll();
+		toolbar.revalidate();
+		toolbar.repaint();
 	}
 	
 }
