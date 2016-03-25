@@ -14,12 +14,12 @@ public class Printer {
 	private double impact;
 	private double complexity;
 	private double leadTime;
-	private boolean easeOfChange;
+	private boolean customizable;
 	/*
 	private String rom;
 	private String [] arrayOfROM;			// The actual array obtains values when instantiated in the Driver file.
 	*/
-	private HashSet<String> rangeOfMaterials;
+	private HashSet<String> materials;
 	private double tolerance;
 	private String finish;
 	
@@ -40,12 +40,12 @@ public class Printer {
 		impact = 0;
 		complexity = 0;
 		leadTime = 0;
-		easeOfChange = false;
+		customizable = false;
 		/*
 		rom = "";
 		arrayOfROM = new String[0];			// Will revise at a later point.
 		*/
-		rangeOfMaterials = new HashSet<String>();
+		materials = new HashSet<String>();
 		tolerance = 0;
 		finish = "";
 		
@@ -78,18 +78,18 @@ public class Printer {
 	 * Instantiates a printer with specified values and a boolean list representing
 	 * matches values for all parameters except name.
 	 * 
-	 * @param name              the String with the specified printer name
-	 * @param tension           the double with the specified tension
-	 * @param compression       the double with the specified compression
-	 * @param impact            the double with the specified impact
-	 * @param complexity        the double with the specified complexity
-	 * @param leadTime          the double with the specified lead time
-	 * @param easeOfChange      the boolean representing the ease of change
-	 * @param rangeOfMaterials  the HashSet with the range of materials
-	 * @param tolerance         the double with the specified tolerance
-	 * @param finish            the String representing the finish
+	 * @param name            the String with the specified printer name
+	 * @param tension         the double with the specified tension
+	 * @param compression     the double with the specified compression
+	 * @param impact          the double with the specified impact
+	 * @param complexity      the double with the specified complexity
+	 * @param leadTime        the double with the specified lead time
+	 * @param customizable    the boolean representing the ease of change
+	 * @param materials       the HashSet with the range of materials
+	 * @param tolerance       the double with the specified tolerance
+	 * @param finish          the String representing the finish
 	 */
-	public Printer(String name, double tension, double compression, double impact, double complexity, double leadTime, boolean easeOfChange, HashSet<String> rangeOfMaterials, double tolerance, String finish){
+	public Printer(String name, double tension, double compression, double impact, double complexity, double leadTime, boolean customizable, HashSet<String> materials, double tolerance, String finish){
 
 		this.name = name;
 		this.tension = tension;
@@ -97,8 +97,8 @@ public class Printer {
 		this.impact = impact;
 		this.complexity = complexity;
 		this.leadTime = leadTime;
-		this.easeOfChange = easeOfChange;
-		this.rangeOfMaterials = rangeOfMaterials;
+		this.customizable = customizable;
+		this.materials = materials;
 		this.tolerance = tolerance;
 		this.finish = finish;
 
@@ -170,12 +170,12 @@ public class Printer {
 		this.leadTime = leadTime;
 	}
 
-	public boolean isEaseOfChange() {
-		return easeOfChange;
+	public boolean isCustomizable() {
+		return customizable;
 	}
 
-	public void setEaseOfChange(boolean easeOfChange) {
-		this.easeOfChange = easeOfChange;
+	public void setCustomizable(boolean customizable) {
+		this.customizable = customizable;
 	}
 
 	// TODO: Review possibility of using a set for range of materials
@@ -197,7 +197,7 @@ public class Printer {
 	 * @param  material the material to add to the range of materials
 	 */
 	public void addMaterial(String material) {
-		rangeOfMaterials.add(material);
+		materials.add(material);
 	}
 	
 	/**
@@ -206,32 +206,32 @@ public class Printer {
 	 *  If the range of materials has more than one element, then a
 	 *  multi-line String is returned.
 	 */
-	public String getRangeOfMaterials() {
+	public String getMaterials() {
 		String rawString,
-		       rangeOfMaterialsString = "";
-		String[] rangeOfMaterialsArray;
+		       materialsString = "";
+		String[] materialsArray;
 		
 		// Convert HashSet to String
-		rawString = "" + rangeOfMaterials;
-		rangeOfMaterialsArray = rawString.split(", ");
-		if (rangeOfMaterialsArray.length > 1) {
-		    for (int index = 0; index < rangeOfMaterialsArray.length-1; index++)
-			    rangeOfMaterialsString += (rangeOfMaterialsArray[index] + "<br>");
-		    rangeOfMaterialsString += rangeOfMaterialsArray[rangeOfMaterialsArray.length-1];
+		rawString = "" + materials;
+		materialsArray = rawString.split(", ");
+		if (materialsArray.length > 1) {
+		    for (int index = 0; index < materialsArray.length-1; index++)
+			    materialsString += (materialsArray[index] + "<br>");
+		    materialsString += materialsArray[materialsArray.length-1];
 		}
 		else {
-			rangeOfMaterialsString = rawString;
+			materialsString = rawString;
 		}
 		
 		// Remove brackets
-		rangeOfMaterialsString = String.copyValueOf(
-				rangeOfMaterialsString.toCharArray(),1,
-				rangeOfMaterialsString.length()-2);
+		materialsString = String.copyValueOf(
+				materialsString.toCharArray(),1,
+				materialsString.length()-2);
 		
 		// Add multi-line compatibility with HTML
-		rangeOfMaterialsString = "<html>" + rangeOfMaterialsString + "</html>";
+		materialsString = "<html>" + materialsString + "</html>";
 		
-		return rangeOfMaterialsString;
+		return materialsString;
 	}
 
 	public double getTolerance() {

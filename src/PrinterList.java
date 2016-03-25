@@ -55,19 +55,19 @@ public class PrinterList {
 	 * Searches the printer list for matches based on specified printer attributes and returns
 	 * a list of matches ordered by total number of matches.
 	 * 
-	 * @param tension           the double with the specified tension
-	 * @param compression       the double with the specified compression
-	 * @param impact            the double with the specified impact
-	 * @param complexity        the double with the specified complexity
-	 * @param leadTime          the double with the specified lead time
-	 * @param easeOfChange      the boolean with the specified easeOfChange
-	 * @param rangeOfMaterials  the HashSet with the range of materials list
-	 * @param tolerance         the double with the specified tolerance
-	 * @param finish            the String representing the finish
+	 * @param tension         the double with the specified tension
+	 * @param compression     the double with the specified compression
+	 * @param impact          the double with the specified impact
+	 * @param complexity      the double with the specified complexity
+	 * @param leadTime        the double with the specified lead time
+	 * @param customizable    the boolean with the specified easeOfChange
+	 * @param materials       the HashSet with the range of materials list
+	 * @param tolerance       the double with the specified tolerance
+	 * @param finish          the String representing the finish
 	 */
 	public void setMatches(double tension, double compression, double impact, 
-			               double complexity, double leadTime, boolean easeOfChange,
-			               HashSet<String> rangeOfMaterials, double tolerance, String finish){
+			               double complexity, double leadTime, boolean customizable,
+			               HashSet<String> materials, double tolerance, String finish){
 		
 		
 		//PrinterList newMatch = new PrinterList();
@@ -129,7 +129,7 @@ public class PrinterList {
 			*/
 			
 			// TODO: Check HastSet implementation of range of Materials
-			if(rangeOfMaterials.equals(printer.getRangeOfMaterials()))
+			if(materials.equals(printer.getMaterials()))
 				printer.setMatches(true, 6);
 			
 			if(tolerance <= printer.getTolerance())

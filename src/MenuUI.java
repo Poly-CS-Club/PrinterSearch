@@ -36,7 +36,7 @@ private JFrame m_Menu_F;
 private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
-private JComboBox<String>  m_Finish_CB, m_RangeOfMaterials_CB, m_EaseOfCustomization_CB;
+private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 private RangedTextField<Double> m_Tension_RTF, m_Tolerance_RTF;
 private RangedTextField<Integer> m_Impact_RTF;
 private ArrayList<String> m_RangeOfMaterials;
@@ -108,8 +108,8 @@ private void createComponents() {
 	m_Impact_RTF = new RangedTextField<Integer>(200, 0, 1);
 	
 	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these fRangeOfMaterials a file or something...
-	m_RangeOfMaterials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
-	m_EaseOfCustomization_CB = new JComboBox<String>(new String [] {"Search All", "True", "False"});
+	m_Materials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
+	m_Customizable_CB = new JComboBox<String>(new String [] {"Search All", "True", "False"});
 	
 	m_ScrollPane = new JScrollPane();
 	m_SearchResult_P = new JPanel();
@@ -171,7 +171,7 @@ private void designSearchResult() {
 	{
 		Printer currentPrinter = printerList.getPrinter(i-2);
 		String isEaseOfChange = "True";
-		if(!currentPrinter.isEaseOfChange())
+		if(!currentPrinter.isCustomizable())
 			isEaseOfChange = "False";
 		
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
@@ -182,7 +182,7 @@ private void designSearchResult() {
 				currentPrinter.getComplexity()+ "",
 				currentPrinter.getLeadTime()+ "",
 				isEaseOfChange,
-				currentPrinter.getRangeOfMaterials(),
+				currentPrinter.getMaterials(),
 				currentPrinter.getTolerance()+ "",
 				currentPrinter.getFinish()+ ""));
 	}
@@ -254,14 +254,14 @@ private void designSearchParam()
 	m_PartComplexity_TF.setMinimumSize(defaultMinSize);
 	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_EaseOfCustomization_CB.setMaximumSize(defaultMaxSize);
-	m_EaseOfCustomization_CB.setMinimumSize(defaultMinSize);
-	m_EaseOfCustomization_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Customizable_CB.setMaximumSize(defaultMaxSize);
+	m_Customizable_CB.setMinimumSize(defaultMinSize);
+	m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_RangeOfMaterials_CB.setMaximumSize(defaultMaxSize);
-	m_RangeOfMaterials_CB.setMinimumSize(defaultMinSize);
-	m_RangeOfMaterials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_RangeOfMaterials_CB.setActionCommand("RangeOfMaterials");
+	m_Materials_CB.setMaximumSize(defaultMaxSize);
+	m_Materials_CB.setMinimumSize(defaultMinSize);
+	m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Materials_CB.setActionCommand("RangeOfMaterials");
 
 	m_Tolerance_RTF.setMaximumSize(defaultMaxSize);
 	m_Tolerance_RTF.setMinimumSize(defaultMinSize);
@@ -281,7 +281,7 @@ private void designSearchParam()
 private void addActionListeners()
 {
 	m_FilterResults_B.addActionListener(new ButtonListener());
-	m_RangeOfMaterials_CB.addActionListener(new ComboListener());
+	m_Materials_CB.addActionListener(new ComboListener());
 }
 
 /**
@@ -371,7 +371,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_EaseOfCustomization_CB);
+	m_SearchParam_P.add(m_Customizable_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -381,7 +381,7 @@ private void addSearchParamComponents() {
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_SearchParam_P.add(label);
 	
-	m_SearchParam_P.add(m_RangeOfMaterials_CB);
+	m_SearchParam_P.add(m_Materials_CB);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -427,7 +427,7 @@ private class ComboListener implements ActionListener
 		switch(command)
 		{
 			case "RangeOfMaterials":
-				String selectedItem = (String) m_RangeOfMaterials_CB.getSelectedItem();// getting selected Item
+				String selectedItem = (String) m_Materials_CB.getSelectedItem();// getting selected Item
 				//TODO Dont allow repeats in widnow...
 				if(!selectedItem.equals("Search All") && !selectedItem.equals("Clear All"))
 				{
@@ -436,7 +436,7 @@ private class ComboListener implements ActionListener
 					
 					m_RangeOfMaterials.add(selectedItem);//adding item to list.
 				
-					int index = m_SearchParam_P.getComponentZOrder(m_RangeOfMaterials_CB);// getting index of Range Of Materials
+					int index = m_SearchParam_P.getComponentZOrder(m_Materials_CB);// getting index of Range Of Materials
 				
 					m_SearchParam_P.add(temp,index);// adding new label
 				}else

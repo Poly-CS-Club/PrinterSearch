@@ -26,7 +26,7 @@ public class AddPrinterUI {
 	private JFrame m_Main_F;
 	private JFrame m_OldFrame;
 	private JTextField m_Name_TF, m_Tension_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_Tolerance_TF, m_Compression_TF;
-	private JComboBox<String>  m_Finish_CB, m_ROM_CB, m_EOC_CB;
+	private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
 	private Driver m_Driver;
@@ -73,8 +73,8 @@ public class AddPrinterUI {
 		m_Tolerance_TF = new JTextField();
 		
 		m_Finish_CB = new JComboBox<String>(new String [] {"Matte", "Gloss", "Add New"}); 
-		m_ROM_CB = new JComboBox<String>(new String [] {"Aluminum", "Stainless", "Add New"});
-		m_EOC_CB = new JComboBox<String>(new String [] {"true", "false"});
+		m_Materials_CB = new JComboBox<String>(new String [] {"Aluminum", "Stainless", "Add New"});
+		m_Customizable_CB = new JComboBox<String>(new String [] {"true", "false"});
 		
 		m_AddPrinter_B = new JButton("Add New Printer");
 	}
@@ -124,13 +124,13 @@ public class AddPrinterUI {
 		m_PartComplexity_TF.setMinimumSize(defaultMinSize);
 		m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_EOC_CB.setMaximumSize(defaultMaxSize);
-		m_EOC_CB.setMinimumSize(defaultMinSize);
-		m_EOC_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+		m_Customizable_CB.setMaximumSize(defaultMaxSize);
+		m_Customizable_CB.setMinimumSize(defaultMinSize);
+		m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		m_ROM_CB.setMaximumSize(defaultMaxSize);
-		m_ROM_CB.setMinimumSize(defaultMinSize);
-		m_ROM_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+		m_Materials_CB.setMaximumSize(defaultMaxSize);
+		m_Materials_CB.setMinimumSize(defaultMinSize);
+		m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		m_Tolerance_TF.setMaximumSize(defaultMaxSize);
 		m_Tolerance_TF.setMinimumSize(defaultMinSize);
@@ -174,8 +174,8 @@ public class AddPrinterUI {
 		m_Input_P.add(m_Impact_TF);
 		m_Input_P.add(m_PartComplexity_TF);
 		m_Input_P.add(m_LeadTime_TF);
-		m_Input_P.add(m_EOC_CB);
-		m_Input_P.add(m_ROM_CB);
+		m_Input_P.add(m_Customizable_CB);
+		m_Input_P.add(m_Materials_CB);
 		m_Input_P.add(m_Tolerance_TF);
 		m_Input_P.add(m_Finish_CB);
 		
@@ -203,14 +203,14 @@ public class AddPrinterUI {
 				case "Add New Printer":
 					//TODO check all inputs to see if valid or not.
 					//TODO create window or pop-up for invalid inputs...
-						m_Driver.addPrinter(m_Name_TF.getText(), m_Tension_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
-								m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
+						m_Driver.addPrinter(m_Name_TF.getText(), m_Tension_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_Materials_CB.getSelectedItem(), m_Impact_TF.getText(),
+								m_LeadTime_TF.getText(),(String) m_Customizable_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
 						JOptionPane.showMessageDialog(m_Main_F,"Printer Added to DataBase","Message", JOptionPane.PLAIN_MESSAGE);
 						m_MenuUI.getSearchResultsPanel().add(new PrinterUI(m_MenuUI.getSearchResultsPanel().getComponentCount()+1, m_MenuUI.FRAME_WIDTH,
 																		   m_MenuUI.FRAME_HEIGHT,m_Name_TF.getText(), m_Tension_TF.getText(), 
 																		   m_Compression_TF.getText(), m_PartComplexity_TF.getText(), 
-																		   (String) m_ROM_CB.getSelectedItem(), m_Impact_TF.getText(),
-																		   m_LeadTime_TF.getText(),(String) m_EOC_CB.getSelectedItem(), 
+																		   (String) m_Materials_CB.getSelectedItem(), m_Impact_TF.getText(),
+																		   m_LeadTime_TF.getText(),(String) m_Customizable_CB.getSelectedItem(), 
 																		   m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem()));
 						m_MenuUI.getSearchResultsPanel().revalidate();
 					break;
