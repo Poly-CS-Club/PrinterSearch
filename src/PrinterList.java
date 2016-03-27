@@ -120,7 +120,7 @@ public class PrinterList {
 			if(leadTime <= printer.getLeadTime()) // Made double for now. Not certain this is integer or if this needs to be a range yet. 
 				printer.setMatches(true, 4);
 			
-			if(customizable.equalsIgnoreCase(String.valueOf(printer.getCustomizable()))) // Sort of odd. Assuming EaseOfChange is a parameter that can be desired true or not necessary (false)
+			if(customizable.equalsIgnoreCase(String.valueOf(printer.isCustomizable()))) // Sort of odd. Assuming EaseOfChange is a parameter that can be desired true or not necessary (false)
 				printer.setMatches(true, 5);
 
 			/*
