@@ -109,7 +109,7 @@ public class PrinterUI extends JLabel implements Serializable
     {
     	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
         tension.setAlignmentX(Component.CENTER_ALIGNMENT);
-        comprestion.setAlignmentX(Component.CENTER_ALIGNMENT);
+        comprestion.setAlignmentX(Component.CENTER_ALIGNMENT); // <---- Refactor comprestion --> compression 
         impact.setAlignmentX(Component.CENTER_ALIGNMENT);
         partComplexity.setAlignmentX(Component.CENTER_ALIGNMENT);
         leadTime.setAlignmentX(Component.CENTER_ALIGNMENT);

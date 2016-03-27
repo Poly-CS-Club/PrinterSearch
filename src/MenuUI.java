@@ -38,7 +38,7 @@ private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 private RangedTextField<Double> m_Tension_RTF, m_Tolerance_RTF;
-private RangedTextField<Integer> m_Impact_RTF;
+private RangedTextField<Double> m_Impact_RTF;
 private ArrayList<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
@@ -105,7 +105,7 @@ private void createComponents() {
 	*/
 	m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
-	m_Impact_RTF = new RangedTextField<Integer>(200, 0, 1);
+	m_Impact_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
 	
 	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these fRangeOfMaterials a file or something...
 	m_Materials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
@@ -476,21 +476,16 @@ private class ButtonListener implements ActionListener
 			    clearPanel(m_ToolBar); // JToolBar to overloaded clearPanel. m_SearchResult_P doesn't position correctly without resetting/readding this. 
 
 			    // STEP TWO: GET FIELDS & SET MATCHES FOR EACH PRINTER
-				
-			    	// ---- RE-USE/RECONFIGURE: printerList.setMatches(tension, compression, impact, complexity, leadTime, easeOfChange, storeROM(rom), tolerance, finish);
 			    
+			    printerList.setMatches((Double) m_Tension_RTF.getMin().getValue(), (Double) m_Tension_RTF.getMax().getValue(), (Double) m_Impact_RTF.getMin().getValue(), (Double) m_Impact_RTF.getMax().getValue(), Double.valueOf(m_PartComplexity_TF.getText()),
+			    		Double.valueOf(m_LeadTime_TF.getText()), (String)m_Customizable_CB.getSelectedItem(), (String) m_Materials_CB.getSelectedItem(),(Double) m_Tolerance_RTF.getMin().getValue(), (Double) m_Tolerance_RTF.getMax().getValue(), (String) m_Finish_CB.getSelectedItem());
 			    
 			    // STEP THREE: SORT & SHOW RESULTS
 			    
-			    	// --- RE-USE/RECONFIGURE: m_Driver.outputSearchedList?
+			    Driver.outputSearchedList(printerList); // Console demonstration. Will reuse m_Driver.outputSearchedList perhaps to regenerate search params, not sure.
 			    
-				
+			    designToolBar(); // Reset tool-bar once done, otherwise search results layout seems to break.
 			    
-			    designToolBar(); // Reset toolbar once done, otherwise search results layout seems to break.
-
-
-				
-				
 				break;
 			case "Help": //TODO Help Window or Pop-up
 				break;

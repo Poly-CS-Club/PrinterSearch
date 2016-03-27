@@ -65,13 +65,13 @@ public class PrinterList {
 	 * @param tolerance       the double with the specified tolerance
 	 * @param finish          the String representing the finish
 	 */
-	public void setMatches(double tension, double compression, double impact, 
-			               double complexity, double leadTime, boolean customizable,
-			               HashSet<String> materials, double tolerance, String finish){
-		
-		
-		//PrinterList newMatch = new PrinterList();
-		
+
+	
+
+	 // - ADD COMPRESSION!
+	public void setMatches(double minTension, double maxTension, double minImpact, double maxImpact, double complexity, double leadTime, String customizable, String materials,
+			double minTolerance, double maxTolerance, String finish){
+
 		/* Matches array Index Reference:
 		 * 
 		 *  0 = Tension
@@ -102,23 +102,26 @@ public class PrinterList {
 		
 		for(Printer printer : printerList){
 				
-			if(tension <= printer.getTension())
+			if(minTension <= printer.getTension() && printer.getTension() <= maxTension)
 				printer.setMatches(true, 0);
-
-			if(compression <= printer.getCompression())	// TODO: Should this be <= or >=?
-				printer.setMatches(true, 1);
 			
-			if(impact <= printer.getImpact())
+			/* Not yet implemented since compression isn't searchable
+			if(minCompression <= printer.getCompression() && printer.getCompression <= maxCompression)	// TODO: Should this be <= or >=?
+				printer.setMatches(true, 1);
+			*/ 
+			
+			if(minImpact <= printer.getImpact() & printer.getImpact() <= maxImpact)
 				printer.setMatches(true, 2);
 			
 			if(complexity <= printer.getComplexity())
 				printer.setMatches(true, 3);
 			
-			if(leadTime <= printer.getLeadTime())
+			// Revisit this:
+			if(leadTime <= printer.getLeadTime()) // Made double for now. Not certain this is integer or if this needs to be a range yet. 
 				printer.setMatches(true, 4);
 			
-			//if(easeOfChange == printer.isEaseOfChange()) // Sort of odd. Assuming EaseOfChange is a parameter that can be desired true or not necessary (false)
-			//	printer.setMatches(true, 5);
+			if(customizable.equalsIgnoreCase(String.valueOf(printer.getCustomizable()))) // Sort of odd. Assuming EaseOfChange is a parameter that can be desired true or not necessary (false)
+				printer.setMatches(true, 5);
 
 			/*
 			// TODO: Will need significant String validation, splitting, case, etc. Unless drop-down list?
@@ -132,7 +135,7 @@ public class PrinterList {
 			if(materials.equals(printer.getMaterials()))
 				printer.setMatches(true, 6);
 			
-			if(tolerance <= printer.getTolerance())
+			if(minTolerance <= printer.getTolerance() && printer.getTolerance() <= maxTolerance)
 				printer.setMatches(true, 7);
 			
 			// TODO: Will need significant String validation, splitting, case, etc. Unless drop-down list?

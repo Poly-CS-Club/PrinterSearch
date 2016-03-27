@@ -470,18 +470,20 @@ public class Driver {
 			}
 
 			// Basic Sorting of list
-			int position, scan;
+			int position;
+			boolean keepLooking = true;
 			Printer tempPrinter;
-
-			for(position=list.size()-1;position >=0;position--){
-				for(scan=0;scan<=position-1;scan++){
-					if(list.get(scan).getTotalMatches() > list.get(scan+1).getTotalMatches()){
-
-						tempPrinter = list.get(scan+1);
-						list.set(scan+1, list.get(scan));
-						list.set(scan, tempPrinter);
-
-					}
+			
+			while(keepLooking)
+				keepLooking = false;
+				for(position=0;position < outputList.size()-1;position++){
+					if(outputList.get(position).getTotalMatches() > outputList.get(position+1).getTotalMatches()){
+						System.out.println(outputList.get(position).getTotalMatches() +  " is greater than " + outputList.get(position+1).getTotalMatches());
+						tempPrinter = outputList.get(position+1);
+						System.out.println("Swapping position " + position + ": " + outputList.get(position));
+						outputList.set(position+1, outputList.get(position));
+						outputList.set(position, tempPrinter);
+						keepLooking = true;
 				}
 			}
 		}

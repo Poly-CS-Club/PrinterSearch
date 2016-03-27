@@ -250,6 +250,11 @@ public class Printer {
 		this.finish = finish;
 	}
 	
+	public boolean getCustomizable(){
+		return customizable;
+	}
+	
+	
 	
 
 }
