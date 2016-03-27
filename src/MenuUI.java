@@ -129,10 +129,12 @@ private void designComponents(int screenWidth, int screenHeight) {
 	m_Menu_P.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	m_Menu_P.setMaximumSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 	
-	m_Menu_F.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
-	m_Menu_F.setLocation((screenWidth/2) - (FRAME_WIDTH /2),(screenHeight/2) - (FRAME_HEIGHT/2));// centering
-	m_Menu_F.setResizable(false);
+	m_Menu_F.setSize(FRAME_WIDTH, (FRAME_HEIGHT+50));
+	m_Menu_F.setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));			// Setting the minimum size restrictions so we dont resize it to small.
+	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , (FRAME_HEIGHT+50)));	// Added 50 to height because mac interface will not show filter button elsewise.
+	m_Menu_F.setLocationRelativeTo(null);										// Centering frame.
+	m_Menu_F.setResizable(true);												// Set to resizable to accomodate for filter button at bottom.
+
 	
 	m_ScrollPane.setOpaque(false);
 	m_ScrollPane.setVerticalScrollBarPolicy(
@@ -147,9 +149,7 @@ private void designComponents(int screenWidth, int screenHeight) {
 
 /**
  * Sets values for search result GUI components.
- * 
- * @param FRAME_WIDTH   the width of the frame
- * @param FRAME_HEIGHT the width of the height
+ *
  */
 private void designSearchResult() {
 	String customizable;
@@ -270,9 +270,7 @@ private void designToolBar()
 
 /**
  * Sets values for search parameter GUI components.
- * 
- * @param FRAME_WIDTH   the width of the frame
- * @param FRAME_HEIGHT the height of the frame
+ *
  */
 private void designSearchParam()
 {
@@ -528,11 +526,23 @@ private class ButtonListener implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
+
+		/*m_FilterResults_B.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Initiate a search results window page.
+				SearchResultsWindow filteredResults = new SearchResultsWindow("", (Double) m_Tension_RTF.getMin(), (Double) m_Compression_RTF.getMin(),
+						(Double) m_Impact_RTF.getMin(), Double.valueOf(m_PartComplexity_TF.getText()), Double.valueOf(m_LeadTime_TF.getText()),
+						(boolean)m_Customizable_CB.getSelectedItem(), (String) m_Materials_CB.getSelectedItem(), (Double) m_Tolerance_RTF.getMin(),
+						(String) m_Finish_CB.getSelectedItem());
+			}
+		});*/
+
 		String command = action.getActionCommand();
 		switch(command)
 		{
 			case "Filter Results": //TODO implement this.
-				
+
 				// STEP ONE: CLEAR CURRENT RESULTS
 				
 				clearPanel(m_SearchResult_P); // Empty JPanel of current components (currently-listed printers in table)
@@ -556,8 +566,8 @@ private class ButtonListener implements ActionListener
 			    
 			    displaySearchResults(outputList);
 			    designToolBar(); // Reset tool-bar once done, otherwise search results layout seems to break.
-			    
 				break;
+
 			case "Help": //TODO Help Window or Pop-up
 				break;
 			case "Settings"://TODO Settings Window or pop-up
