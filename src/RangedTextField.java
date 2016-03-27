@@ -116,8 +116,16 @@ public class RangedTextField<N extends Number> extends JPanel{
 		add(m_Max_TF);
 	}
 	
+	public Number getMin() {
+		return (Number)m_Min_TF.getValue();
+	}
+	
+	public Number getMax() {
+		return (Number)m_Max_TF.getValue();
+	}
+	
 
-	public JSpinner getMin() {
+	public JSpinner getMinSpinner() {
 		return m_Min_TF;
 	}
 
@@ -125,7 +133,7 @@ public class RangedTextField<N extends Number> extends JPanel{
 		this.m_Min_TF = m_Min_TF;
 	}
 
-	public JSpinner getMax() {
+	public JSpinner getMaxSpinner() {
 		return m_Max_TF;
 	}
 

@@ -37,8 +37,7 @@ private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
-private RangedTextField<Double> m_Tension_RTF, m_Tolerance_RTF;
-private RangedTextField<Double> m_Impact_RTF;
+private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF;
 private ArrayList<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
@@ -81,7 +80,7 @@ public MenuUI()
     
     m_MenuUI = this;
     
-	PrinterList printerList = m_Driver.generatePrinterList();
+	PrinterList printerList = Driver.generatePrinterList();
 }
 
 /**
@@ -103,6 +102,7 @@ private void createComponents() {
 	m_Tension_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
 	m_Impact_RTF = new RangedTextField(200, 0, RangedTextField.INTEGER);
 	*/
+	m_Compression_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Impact_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
@@ -136,7 +136,7 @@ private void designComponents(int screenWidth, int screenHeight) {
 	
 	m_ScrollPane.setOpaque(false);
 	m_ScrollPane.setVerticalScrollBarPolicy(
-			m_ScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	
 	designSearchParam();
 	
@@ -152,6 +152,8 @@ private void designComponents(int screenWidth, int screenHeight) {
  * @param FRAME_HEIGHT the width of the height
  */
 private void designSearchResult() {
+	String customizable;
+	Printer currentPrinter;
 	PrinterUI tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Complexity",
 			"Lead Time","Ease","Materials","Tolerance","Finish");
@@ -161,18 +163,18 @@ private void designSearchResult() {
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 
     tableHeader.getPartComplexity().setToolTipText("Part Complexity");
-    tableHeader.getEaseOfCustomization().setToolTipText("Ease of Customization");
-    tableHeader.getRangeOfMaterials().setToolTipText("Range of Materials");
+    tableHeader.getCustomizable().setToolTipText("Ease of Customization");
+    tableHeader.getMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
-	printerList = m_Driver.generatePrinterList();
+	printerList = Driver.generatePrinterList();
 	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
 	{
-		Printer currentPrinter = printerList.getPrinter(i-2);
-		String isEaseOfChange = "True";
+		currentPrinter = printerList.getPrinter(i-2);
+		customizable = "True";
 		if(!currentPrinter.isCustomizable())
-			isEaseOfChange = "False";
+			customizable = "False";
 		
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
 				currentPrinter.getName() + "",
@@ -181,7 +183,7 @@ private void designSearchResult() {
 				currentPrinter.getImpact()+ "",
 				currentPrinter.getComplexity()+ "",
 				currentPrinter.getLeadTime()+ "",
-				isEaseOfChange,
+				customizable,
 				currentPrinter.getMaterials(),
 				currentPrinter.getTolerance()+ "",
 				currentPrinter.getFinish()+ ""));
@@ -192,6 +194,9 @@ private void designSearchResult() {
 	//m_ScrollPane.getViewport().setOpaque(false);
 }
 
+/**
+ * Sets components to their default values.
+ */
 public void resetResults(){
 	
     designComponents(screenWidth, screenHeight);
@@ -237,6 +242,10 @@ private void designSearchParam()
 	m_BroadSearch_TF.setMaximumSize(defaultMaxSize);
 	m_BroadSearch_TF.setMinimumSize(defaultMinSize);
 	m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	
+	m_Compression_RTF.setMaximumSize(defaultMaxSize);
+	m_Compression_RTF.setMinimumSize(defaultMinSize);
+	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
 	m_Tension_RTF.setMaximumSize(defaultMaxSize);
 	m_Tension_RTF.setMinimumSize(defaultMinSize);
@@ -312,6 +321,16 @@ private void addSearchParamComponents() {
 	m_SearchParam_P.add(label);
 	
 	m_SearchParam_P.add(m_BroadSearch_TF);
+	
+	label = new JLabel("\n");
+	label.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_SearchParam_P.add(label);
+	
+	label = new JLabel("Compression:");
+	label.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_SearchParam_P.add(label);
+	
+	m_SearchParam_P.add(m_Compression_RTF);
 	
 	label = new JLabel("\n");
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -477,8 +496,15 @@ private class ButtonListener implements ActionListener
 
 			    // STEP TWO: GET FIELDS & SET MATCHES FOR EACH PRINTER
 			    
-			    printerList.setMatches((Double) m_Tension_RTF.getMin().getValue(), (Double) m_Tension_RTF.getMax().getValue(), (Double) m_Impact_RTF.getMin().getValue(), (Double) m_Impact_RTF.getMax().getValue(), Double.valueOf(m_PartComplexity_TF.getText()),
-			    		Double.valueOf(m_LeadTime_TF.getText()), (String)m_Customizable_CB.getSelectedItem(), (String) m_Materials_CB.getSelectedItem(),(Double) m_Tolerance_RTF.getMin().getValue(), (Double) m_Tolerance_RTF.getMax().getValue(), (String) m_Finish_CB.getSelectedItem());
+			    printerList.setMatches(
+			    		(Double) m_Tension_RTF.getMin(), (Double) m_Tension_RTF.getMax(),
+			    		(Double) m_Impact_RTF.getMin(), (Double) m_Impact_RTF.getMax(),
+			    		Double.valueOf(m_PartComplexity_TF.getText()),
+			    		Double.valueOf(m_LeadTime_TF.getText()),
+			    		(String)m_Customizable_CB.getSelectedItem(),
+			    		(String) m_Materials_CB.getSelectedItem(),
+			    		(Double) m_Tolerance_RTF.getMin(), (Double) m_Tolerance_RTF.getMax(),
+			    		(String) m_Finish_CB.getSelectedItem());
 			    
 			    // STEP THREE: SORT & SHOW RESULTS
 			    
