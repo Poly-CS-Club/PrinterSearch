@@ -194,6 +194,50 @@ private void designSearchResult() {
 	//m_ScrollPane.getViewport().setOpaque(false);
 }
 
+/** Display NEW search results.
+
+*/
+
+public void displaySearchResults(ArrayList<Printer> outputList){
+	
+	PrinterUI tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
+			"Name","Tension","Compression","Impact", "Complexity",
+			"Lead Time","Ease","Materials","Tolerance","Finish");
+	
+	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
+	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH  - 190, FRAME_HEIGHT));
+	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
+
+    tableHeader.getPartComplexity().setToolTipText("Part Complexity");
+    tableHeader.getCustomizable().setToolTipText("Ease of Customization");
+    tableHeader.getMaterials().setToolTipText("Range of Materials");
+	m_SearchResult_P.add(tableHeader);
+	
+	for(int i = outputList.size()-1; i >=0;i--)
+	{
+		Printer currentPrinter = outputList.get(i);
+		String isEaseOfChange = "True";
+		if(!currentPrinter.isCustomizable())
+			isEaseOfChange = "False";
+		
+		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
+				currentPrinter.getName() + "",
+				currentPrinter.getTension()+ "",
+				currentPrinter.getCompression()+ "",
+				currentPrinter.getImpact()+ "",
+				currentPrinter.getComplexity()+ "",
+				currentPrinter.getLeadTime()+ "",
+				isEaseOfChange,
+				currentPrinter.getMaterials(),
+				currentPrinter.getTolerance()+ "",
+				currentPrinter.getFinish()+ ""));
+	}
+	m_ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	m_ScrollPane.setViewportView(m_SearchResult_P);
+	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
+	
+}
+
 /**
  * Sets components to their default values.
  */
@@ -507,9 +551,10 @@ private class ButtonListener implements ActionListener
 			    		(String) m_Finish_CB.getSelectedItem());
 			    
 			    // STEP THREE: SORT & SHOW RESULTS
+			   			    ArrayList<Printer> outputList = Driver.outputSearchedList(printerList); // Console demonstration. Will reuse m_Driver.outputSearchedList perhaps to regenerate search params, not sure.
+			    // Change outputSearchedList to return PrinterList with new values. 
 			    
-			    Driver.outputSearchedList(printerList); // Console demonstration. Will reuse m_Driver.outputSearchedList perhaps to regenerate search params, not sure.
-			    
+			    displaySearchResults(outputList);
 			    designToolBar(); // Reset tool-bar once done, otherwise search results layout seems to break.
 			    
 				break;

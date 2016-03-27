@@ -346,6 +346,7 @@ public class Driver {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        scanner.close();
     }
 
 /**
@@ -448,55 +449,52 @@ public class Driver {
 	 * 
 	 * @param printers the ArrayList of printers
 	 */
-	public static void outputSearchedList(PrinterList printers){
-
+	public static ArrayList<Printer> outputSearchedList(PrinterList printers){
+		// To-Do: Handle if no matches exist and is empty.
+		
 		ArrayList<Printer> list = printers.getPrinterList();
-
-		// Handle if no matches exist and is empty.
 		ArrayList<Printer> outputList = new ArrayList<Printer>();
-
-		for(int i=0;i<list.size();i++){
-
+					
+		for(Printer printer : list){
 			int matches = 0;
+			int currentMatches = printer.getTotalMatches();
 
-			for(Printer printer : list){
-
-				int currentMatches = printer.getTotalMatches();
-
-				if(currentMatches > 0 && !(outputList.contains(printer))){
-					matches = printer.getTotalMatches();
-					outputList.add(printer);
-				}
+			if(currentMatches > 0 && !(outputList.contains(printer))){
+				matches = printer.getTotalMatches();
+				outputList.add(printer);
 			}
+		}
 
-			// Basic Sorting of list
-			int position;
-			boolean keepLooking = true;
-			Printer tempPrinter;
-			
-			while(keepLooking)
-				keepLooking = false;
-				for(position=0;position < outputList.size()-1;position++){
-					if(outputList.get(position).getTotalMatches() > outputList.get(position+1).getTotalMatches()){
-						System.out.println(outputList.get(position).getTotalMatches() +  " is greater than " + outputList.get(position+1).getTotalMatches());
-						tempPrinter = outputList.get(position+1);
-						System.out.println("Swapping position " + position + ": " + outputList.get(position));
-						outputList.set(position+1, outputList.get(position));
-						outputList.set(position, tempPrinter);
-						keepLooking = true;
+		// Basic Sorting of list
+		int position;
+		boolean keepLooking = true;
+		Printer tempPrinter;
+		
+		while(keepLooking){
+			keepLooking = false;
+			for(position=0;position < outputList.size()-1;position++){
+				if(outputList.get(position).getTotalMatches() > outputList.get(position+1).getTotalMatches()){
+					System.out.println(outputList.get(position).getTotalMatches() +  " is greater than " + outputList.get(position+1).getTotalMatches());
+					tempPrinter = outputList.get(position+1);
+					System.out.println("Swapping position " + position + ": " + outputList.get(position));
+					outputList.set(position+1, outputList.get(position));
+					outputList.set(position, tempPrinter);
+					keepLooking = true;
 				}
 			}
 		}
 
-		// Output to Console - Sorted by highest matches first.
-		for(int i=list.size()-1;i>=0;i--){
-			System.out.println(
-					"\n\n---------------------------------" +
-			        "     Printer Name: " + outputList.get(i).getName() +
-			        "Number Of Matches: " + outputList.get(i).getTotalMatches() +
-			        "\n----------------------------------");
-		}
+
+	// Output to Console - Sorted by highest matches first.
+	for(int i=list.size()-1;i>=0;i--){
+		System.out.println(
+				"\n\n---------------------------------" +
+		        "     Printer Name: " + outputList.get(i).getName() +
+		        "Number Of Matches: " + outputList.get(i).getTotalMatches() +
+		        "\n----------------------------------");
 	}
+	return outputList;
+}
 
 	/**
 	 * Insert description here.
@@ -517,6 +515,7 @@ public class Driver {
 
 		return null;
 	}
+
 
 	/* TODO: Commented out to try HashSet implementation of rom
 	public static String[] storeROM(String romInput) {
@@ -547,5 +546,6 @@ public class Driver {
 			hashSet.add(element);
 		
 		return hashSet;
-	}
+		}
+	
 }

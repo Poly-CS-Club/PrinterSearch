@@ -44,4 +44,28 @@
         <TOLERANCE>123</TOLERANCE>
         <FINISH>Matte</FINISH>
     </printer>
+<printer>
+        <NAME>Test 3</NAME>
+        <TENSION>.5</TENSION>
+        <COMPRESSION>.5</COMPRESSION>
+        <IMPACT>.3</IMPACT>
+        <PART_COMPLEXITY>.06</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.004</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
+<printer>
+        <NAME>Test C</NAME>
+        <TENSION>.001</TENSION>
+        <COMPRESSION>.125</COMPRESSION>
+        <IMPACT>.125</IMPACT>
+        <PART_COMPLEXITY>5</PART_COMPLEXITY>
+        <LEAD_TIME>5</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>.125</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
 </PRINTERS>
