@@ -71,14 +71,14 @@ public static void main(String args [])
  */
 public MenuUI()
 {
-	GraphicsDevice gd;
+	GraphicsDevice graphicsDevice;
 	PrinterList printerList;
 	
 	// Obtain window dimensions
-	gd = GraphicsEnvironment.getLocalGraphicsEnvironment().
+	graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().
 			getDefaultScreenDevice();
-	screenWidth = gd.getDisplayMode().getWidth();
-	screenHeight = gd.getDisplayMode().getHeight();
+	screenWidth = graphicsDevice.getDisplayMode().getWidth();
+	screenHeight = graphicsDevice.getDisplayMode().getHeight();
 	FRAME_WIDTH = (int) ((int) screenWidth *0.75);
 	FRAME_HEIGHT = (int) ((int) screenHeight *0.75);
 

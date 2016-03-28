@@ -93,14 +93,15 @@ public class AddPrinterUI {
 	 * Sets GUI component values.
 	 */
 	private void designComponents() {
-		GraphicsDevice gd;
+		GraphicsDevice graphicsDevice;
 		Dimension defaultMaxSize, defaultMinSize;
 		int frameWidth, frameHeight, screenWidth, screenHeight;
 		
 		// Determine window dimensions
-		gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
-		screenWidth = gd.getDisplayMode().getWidth();
-		screenHeight = gd.getDisplayMode().getHeight();
+		graphicsDevice = GraphicsEnvironment.getLocalGraphicsEnvironment().
+				getDefaultScreenDevice();
+		screenWidth = graphicsDevice.getDisplayMode().getWidth();
+		screenHeight = graphicsDevice.getDisplayMode().getHeight();
 		frameWidth = screenWidth;
 		frameHeight = (int) (screenHeight * 0.12);
 		
@@ -234,7 +235,9 @@ public class AddPrinterUI {
 					//Refresh search results panel
 					m_MenuUI.getSearchResultsPanel().revalidate();
 					break;
-				default: JOptionPane.showMessageDialog(m_Main_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
+				default: JOptionPane.showMessageDialog(
+						m_Main_F, "Command: " + command,
+						"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 					break;
 			}
 			

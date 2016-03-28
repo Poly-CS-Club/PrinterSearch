@@ -98,7 +98,7 @@ public class Printer {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setPrinterName(String name) {
 		this.name = name;
 	}
 
