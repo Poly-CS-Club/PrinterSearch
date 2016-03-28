@@ -14,8 +14,13 @@ public class Printer {
 	private double impact;
 	private double complexity;
 	private double leadTime;
+<<<<<<< HEAD
 	private boolean customizable;
 	private HashSet<String> materials;
+=======
+	private boolean eoc;
+	private String rom;
+>>>>>>> parent of 2946139... Updated Driver, PrinterList, Printer, and a ExampleFile
 	private double tolerance;
 	private String finish;
 	
@@ -46,6 +51,7 @@ public class Printer {
 		
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Instantiates a printer with specified values and a boolean list representing
 	 * matches values for all parameters except name.
@@ -77,6 +83,8 @@ public class Printer {
 		matches = new boolean[9];
 	}
 
+=======
+>>>>>>> parent of 2946139... Updated Driver, PrinterList, Printer, and a ExampleFile
 	public boolean[] getMatches() {
 		return matches;
 	}
