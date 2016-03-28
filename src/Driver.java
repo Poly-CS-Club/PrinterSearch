@@ -139,65 +139,9 @@ public class Driver {
 			nList = document.getElementsByTagName("printer");
 
 			for(int i=0;i<nList.getLength();i++){
-<<<<<<< HEAD
 				nNode = nList.item(i);
 				System.out.println(nNode.getNodeName());
 				displayPrinterNodes(nNode, printerList);
-=======
-				
-				String name;
-				double tension;
-				double compression;
-				double impact;
-				double complexity;
-				double leadTime;
-				boolean eoc;
-				String rom;
-				double tolerance;
-				String finish;
-				
-				Node nNode = nList.item(i);
-				
-				System.out.println(nNode.getNodeName());
-				
-				if(nNode.getNodeType() == Node.ELEMENT_NODE){
-					
-					Element eElement = (Element)nNode;
-					
-					name = eElement.getElementsByTagName("NAME").item(0).getTextContent();
-					System.out.println(name);
-					
-					tension = Double.parseDouble(eElement.getElementsByTagName("TENSION").item(0).getTextContent());
-					System.out.println(tension);
-					
-					compression = Double.parseDouble(eElement.getElementsByTagName("COMPRESSION").item(0).getTextContent());
-					System.out.println(compression);
-					
-					impact = Double.parseDouble(eElement.getElementsByTagName("IMPACT").item(0).getTextContent());
-					System.out.println(impact);
-					
-					complexity = Double.parseDouble(eElement.getElementsByTagName("PART_COMPLEXITY").item(0).getTextContent());
-					System.out.println(complexity);
-					
-					leadTime = Double.parseDouble(eElement.getElementsByTagName("LEAD_TIME").item(0).getTextContent());
-					System.out.println(leadTime);
-					
-					eoc = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
-					System.out.println(eoc);
-					
-					rom = eElement.getElementsByTagName("ROM").item(0).getTextContent();
-					System.out.println(rom);
-					
-					tolerance = Double.parseDouble(eElement.getElementsByTagName("TOLERANCE").item(0).getTextContent());
-					System.out.println(tolerance);
-					
-					finish = eElement.getElementsByTagName("FINISH").item(0).getTextContent();
-					System.out.println(finish);
-					
-					printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, eoc, rom, tolerance, finish));
-					System.out.println("Added: " + printerList.getPrinter(0).getName());
-				}
->>>>>>> parent of 2946139... Updated Driver, PrinterList, Printer, and a ExampleFile
 			}
 
 			}catch(FileNotFoundException e){
@@ -539,7 +483,6 @@ public class Driver {
 		        "Number Of Matches: " + outputList.get(i).getTotalMatches() +
 		        "\n----------------------------------");
 	}
-<<<<<<< HEAD
 	return outputList;
 }
 
@@ -595,6 +538,4 @@ public class Driver {
 		return hashSet;
 		}
 	
-=======
->>>>>>> parent of 2946139... Updated Driver, PrinterList, Printer, and a ExampleFile
 }

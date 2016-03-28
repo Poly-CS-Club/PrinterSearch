@@ -128,7 +128,6 @@ public class PrinterList {
 			if(leadTime <= printer.getLeadTime())
 				printer.setMatches(true, 4);
 			
-<<<<<<< HEAD
 			// TODO Sort of odd. Assuming EaseOfChange is a parameter that can
 			// be desired true or not necessary (false)
 			if(customizable.equalsIgnoreCase(
@@ -137,25 +136,14 @@ public class PrinterList {
 			
 			if(materials.equals(printer.materialsString()))
 				printer.setMatches(true, 6);
-=======
-			if(eoc == printer.isEoc()) // Sort of odd. Assuming EOC is a parameter that can be desired true or not necessary (false)
-				printer.setMatches(true, 5);
-			
-			if(rom.equals(printer.getRom())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
-				printer.setMatches(true, 6); 
->>>>>>> parent of 2946139... Updated Driver, PrinterList, Printer, and a ExampleFile
 			
 			if(minTolerance <= printer.getTolerance()
 			&& maxTolerance >= printer.getTolerance())
 				printer.setMatches(true, 7);
 			
-<<<<<<< HEAD
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
 			if(finish.equalsIgnoreCase(printer.getFinish()))
-=======
-			if(finish.equals(printer.getFinish())) // Will need significant String validation, splitting, case, etc. Unless drop-down list?
->>>>>>> parent of 2946139... Updated Driver, PrinterList, Printer, and a ExampleFile
 				printer.setMatches(true, 8);
 		} 
 	}
