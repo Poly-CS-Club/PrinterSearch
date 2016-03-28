@@ -306,11 +306,6 @@ private void designSearchParam()
 	m_SearchParam_P.setPreferredSize(new Dimension(175, FRAME_HEIGHT));
 	m_SearchParam_P.setBorder(BorderFactory.createLineBorder(Color.black));
 	
-	// Set up general search field
-	m_BroadSearch_TF.setMaximumSize(defaultMaxSize);
-	m_BroadSearch_TF.setMinimumSize(defaultMinSize);
-	m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
 	// Set up search button
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -322,6 +317,7 @@ private void designSearchParam()
 	}
 	
 	// Align search parameter components
+	m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -344,7 +340,7 @@ private void addActionListeners()
 }
 
 /**
- * Add components to menu frame.
+ * Add components to menu framework.
  */
 private void addComponents()
 {
@@ -371,7 +367,6 @@ private void addSearchParamComponents()
 	// Add button with spacing to GUI
 	addSearchLabel("\n");
 	m_SearchParam_P.add(m_FilterResults_B);
-	
 }
 
 /**

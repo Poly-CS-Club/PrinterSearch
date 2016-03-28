@@ -25,12 +25,18 @@ public class AddPrinterUI {
 
 	private JFrame m_Main_F;
 	private JFrame m_OldFrame;
-	private JTextField m_Name_TF, m_Tension_TF, m_Impact_TF, m_LeadTime_TF, m_PartComplexity_TF, m_Tolerance_TF, m_Compression_TF;
-	private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
+	private JTextField m_Name_TF, m_Tension_TF, m_Impact_TF, m_LeadTime_TF,
+	                   m_PartComplexity_TF, m_Tolerance_TF, m_Compression_TF;
+	private JComboBox<String> m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
 	private Driver m_Driver;
 	private MenuUI m_MenuUI;
+	
+	public final Component[] parameterComponents =
+        {m_Compression_TF, m_Tension_TF, m_Tolerance_TF, m_Impact_TF,
+         m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Materials_CB, m_Finish_CB};
 	
 	/**
 	 * Creates a printer UI with specified frame and driver.
@@ -44,12 +50,11 @@ public class AddPrinterUI {
 		m_MenuUI = menuUI;
 		m_OldFrame = mainFrame;
 		
+		// Create and add window and components
 	    createComponents();
 	    designComponents();
 	    addActionListeners();
 	    addComponents();
-	    
-	    
 	    m_Main_F.pack();
 	    m_Main_F.setVisible(true);
 	}
@@ -57,89 +62,79 @@ public class AddPrinterUI {
 	 * Instantiates GUI components.
 	 */
 	private void createComponents() {
+		// Instantiate window and button
 		m_Main_F = new JFrame("Add New Printers");
+		m_AddPrinter_B = new JButton("Add New Printer");
 		
+		// Instantiate test fields
 		m_Name_TF = new JTextField();
 		m_Compression_TF = new JTextField();
 		m_Tension_TF = new JTextField();
 		m_Impact_TF = new JTextField();
 		m_LeadTime_TF = new JTextField();
 		m_PartComplexity_TF = new JTextField();
+		m_Tolerance_TF = new JTextField();
 		
+		// Instantiate panels
 		m_Labels_P = new JPanel(new GridLayout(1,10,2,2));
 		m_Input_P = new JPanel(new GridLayout(1,10,2,2));
 		m_Button_P = new JPanel(new FlowLayout());
 		
-		m_Tolerance_TF = new JTextField();
-		
-		m_Finish_CB = new JComboBox<String>(new String [] {"Matte", "Gloss", "Add New"}); 
-		m_Materials_CB = new JComboBox<String>(new String [] {"Aluminum", "Stainless", "Add New"});
-		m_Customizable_CB = new JComboBox<String>(new String [] {"true", "false"});
-		
-		m_AddPrinter_B = new JButton("Add New Printer");
+		// Instantiate combo boxes
+		m_Finish_CB = new JComboBox<String>(
+		        new String [] {"Matte", "Gloss", "Add New"}); 
+		m_Materials_CB = new JComboBox<String>(
+				new String [] {"Aluminum", "Stainless", "Add New"});
+		m_Customizable_CB = new JComboBox<String>(
+				new String [] {"true", "false"});
 	}
 
 	/**
 	 * Sets GUI component values.
 	 */
 	private void designComponents() {
-		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
-		int screenWidth = gd.getDisplayMode().getWidth(),
-		    screenHeight = gd.getDisplayMode().getHeight();
+		GraphicsDevice gd;
+		Dimension defaultMaxSize, defaultMinSize;
+		int frameWidth, frameHeight, screenWidth, screenHeight;
 		
-		int frameWidth = screenWidth,
-		    frameHeight = (int) (screenHeight * 0.12);
+		// Determine window dimensions
+		gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
+		screenWidth = gd.getDisplayMode().getWidth();
+		screenHeight = gd.getDisplayMode().getHeight();
+		frameWidth = screenWidth;
+		frameHeight = (int) (screenHeight * 0.12);
 		
-		Dimension defaultMaxSize = new Dimension(170, 25),
-				  defaultMinSize = new Dimension(150, 25);
-		
+		// Set up window
 		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
 		m_Main_F.setMinimumSize(new Dimension(frameWidth, 130));
-		m_Main_F.setLocation((screenWidth/2) - (frameWidth/2),(screenHeight/2) - (frameHeight/2));// centering
+		m_Main_F.setLocation(
+				(screenWidth/2) - (frameWidth/2),
+				(screenHeight/2) - (frameHeight/2));
 		m_Main_F.setResizable(false);
 		m_Main_F.setLayout(new GridLayout(3,1,10,1));
 		
-		m_Compression_TF.setMaximumSize(defaultMaxSize);
-		m_Compression_TF.setMinimumSize(defaultMinSize);
+		// Set up component dimensions
+		defaultMaxSize = new Dimension(170, 25);
+		defaultMinSize = new Dimension(150, 25);
+		for(Component parameter : parameterComponents) {
+			parameter.setMaximumSize(defaultMinSize);
+			parameter.setMinimumSize(defaultMaxSize);
+		}
+		
+		// Align parameter components
 		m_Compression_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Name_TF.setMaximumSize(defaultMaxSize);
-		m_Name_TF.setMinimumSize(defaultMinSize);
 		m_Name_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Tension_TF.setMaximumSize(defaultMaxSize);
-		m_Tension_TF.setMinimumSize(defaultMinSize);
 		m_Tension_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Impact_TF.setMaximumSize(defaultMaxSize);
-		m_Impact_TF.setMinimumSize(defaultMinSize);
 		m_Impact_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_LeadTime_TF.setMaximumSize(defaultMaxSize);
-		m_LeadTime_TF.setMinimumSize(defaultMinSize);
 		m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_PartComplexity_TF.setMaximumSize(defaultMaxSize);
-		m_PartComplexity_TF.setMinimumSize(defaultMinSize);
 		m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Customizable_CB.setMaximumSize(defaultMaxSize);
-		m_Customizable_CB.setMinimumSize(defaultMinSize);
 		m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Materials_CB.setMaximumSize(defaultMaxSize);
-		m_Materials_CB.setMinimumSize(defaultMinSize);
 		m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Tolerance_TF.setMaximumSize(defaultMaxSize);
-		m_Tolerance_TF.setMinimumSize(defaultMinSize);
 		m_Tolerance_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
-		m_Finish_CB.setMaximumSize(defaultMaxSize);
-		m_Finish_CB.setMinimumSize(defaultMinSize);
 		m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
+		// Set up submit button
 		m_AddPrinter_B.setPreferredSize(new Dimension(150,25));
 		m_AddPrinter_B.setAlignmentX(Component.CENTER_ALIGNMENT);
 	}
@@ -157,6 +152,7 @@ public class AddPrinterUI {
 	 */
 	private void addComponents() 
 	{
+		// Add parameter titles to panel
 		m_Labels_P.add(new JLabel("Name"));
 		m_Labels_P.add(new JLabel("Tension"));
 		m_Labels_P.add(new JLabel("Compression"));
@@ -168,6 +164,7 @@ public class AddPrinterUI {
 		m_Labels_P.add(new JLabel("Tolerance"));
 		m_Labels_P.add(new JLabel("Finish"));
 		
+		// Add parameter text fields to panel
 		m_Input_P.add(m_Name_TF);
 		m_Input_P.add(m_Tension_TF);
 		m_Input_P.add(m_Compression_TF);
@@ -179,8 +176,10 @@ public class AddPrinterUI {
 		m_Input_P.add(m_Tolerance_TF);
 		m_Input_P.add(m_Finish_CB);
 		
+		// Add button
 		m_Button_P.add(m_AddPrinter_B);
 		
+		// Add GUI sub-components to window
 		m_Main_F.add(m_Labels_P);
 		m_Main_F.add(m_Input_P);
 		m_Main_F.add(m_Button_P);
@@ -200,19 +199,40 @@ public class AddPrinterUI {
 			String command = action.getActionCommand();
 			switch(command)
 			{
+			    //TODO check all inputs to see if valid or not.
+			    //TODO create window or pop-up for invalid inputs...
 				case "Add New Printer":
-					//TODO check all inputs to see if valid or not.
-					//TODO create window or pop-up for invalid inputs...
-						m_Driver.addPrinter(m_Name_TF.getText(), m_Tension_TF.getText(), m_Compression_TF.getText(), m_PartComplexity_TF.getText(), (String) m_Materials_CB.getSelectedItem(), m_Impact_TF.getText(),
-								m_LeadTime_TF.getText(),(String) m_Customizable_CB.getSelectedItem(), m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem());
-						JOptionPane.showMessageDialog(m_Main_F,"Printer Added to DataBase","Message", JOptionPane.PLAIN_MESSAGE);
-						m_MenuUI.getSearchResultsPanel().add(new PrinterUI(m_MenuUI.getSearchResultsPanel().getComponentCount()+1, m_MenuUI.FRAME_WIDTH,
-																		   m_MenuUI.FRAME_HEIGHT,m_Name_TF.getText(), m_Tension_TF.getText(), 
-																		   m_Compression_TF.getText(), m_PartComplexity_TF.getText(), 
-																		   (String) m_Materials_CB.getSelectedItem(), m_Impact_TF.getText(),
-																		   m_LeadTime_TF.getText(),(String) m_Customizable_CB.getSelectedItem(), 
-																		   m_Tolerance_TF.getText(), (String) m_Finish_CB.getSelectedItem()));
-						m_MenuUI.getSearchResultsPanel().revalidate();
+					// Add printer to master printer database
+					m_Driver.addPrinter(
+							m_Name_TF.getText(), m_Tension_TF.getText(),
+							m_Compression_TF.getText(),
+							m_PartComplexity_TF.getText(),
+							(String) m_Materials_CB.getSelectedItem(),
+							m_Impact_TF.getText(), m_LeadTime_TF.getText(),
+							(String) m_Customizable_CB.getSelectedItem(),
+							m_Tolerance_TF.getText(),
+							(String) m_Finish_CB.getSelectedItem());
+					
+					// Inform user that the printer was successfully added
+					JOptionPane.showMessageDialog(
+							m_Main_F, "Printer Added to DataBase",
+							"Message", JOptionPane.PLAIN_MESSAGE);
+					
+					// Add new printer to search results panel
+					m_MenuUI.getSearchResultsPanel().add(new PrinterUI(
+					        m_MenuUI.getSearchResultsPanel().getComponentCount()+1,
+							m_MenuUI.FRAME_WIDTH, m_MenuUI.FRAME_HEIGHT,
+							m_Name_TF.getText(), m_Tension_TF.getText(), 
+							m_Compression_TF.getText(),
+							m_PartComplexity_TF.getText(), 
+							(String) m_Materials_CB.getSelectedItem(),
+							m_Impact_TF.getText(), m_LeadTime_TF.getText(),
+							(String) m_Customizable_CB.getSelectedItem(), 
+							m_Tolerance_TF.getText(),
+							(String) m_Finish_CB.getSelectedItem()));
+					
+					//Refresh search results panel
+					m_MenuUI.getSearchResultsPanel().revalidate();
 					break;
 				default: JOptionPane.showMessageDialog(m_Main_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 					break;
