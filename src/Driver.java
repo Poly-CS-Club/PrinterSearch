@@ -114,109 +114,34 @@ public class Driver {
 	 * @return the printer list generated from XML file
 	 */
 	public static PrinterList generatePrinterList(){
-
-		PrinterList printerList = new PrinterList();
+		DocumentBuilderFactory documentBuilderFactory;
+		DocumentBuilder documentBuilder;
+		Document document;
+		NodeList nList;
+		Node nNode;
+		Element eElement;
+		PrinterList printerList;
+		
+		
+		printerList = new PrinterList();
 
 		// Build list of Printer objects from XML file;
 		try{
 			File file = new File("src\\printers.xml");
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			Document document = documentBuilder.parse(file);
+			documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			document = documentBuilder.parse(file);
+			
+			// Display listed printers in console
+			System.out.println(
+					"Root element:" +
+			        document.getDocumentElement().getNodeName());
+			nList = document.getElementsByTagName("printer");
 
-			System.out.println("Root element:" + document.getDocumentElement().getNodeName());
-
-			NodeList nList = document.getElementsByTagName("printer");
-
-			/* The following iterates through the child-nodes of "printer" tags,
-			 * retrieving the text within as String, converts, and then printers to console
-			 * for evaluation.
-			 */
 			for(int i=0;i<nList.getLength();i++){
-
-				String name;
-				double tension;
-				double compression;
-				double impact;
-				double complexity;
-				double leadTime;
-				boolean easeOfChange;
-				/* TODO: Commented out to try HashSet implementation of rom
-				String [] romArrayEX;
-				String rom = "";
-				*/
-				String rangeOfMaterialsString = "";
-				String[] rangeOfMaterialsArray;
-				HashSet<String> rangeOfMaterialsSet = new HashSet<String>();
-				double tolerance;
-				String finish = "";
-
-				Node nNode = nList.item(i);
-
+				nNode = nList.item(i);
 				System.out.println(nNode.getNodeName());
-
-				if(nNode.getNodeType() == Node.ELEMENT_NODE){
-
-					Element eElement = (Element)nNode;
-
-					name = getString("NAME", eElement);
-					//name = eElement.getElementsByTagName("NAME").item(0).getTextContent();
-					System.out.println(name);
-
-
-					tension = Double.parseDouble(getString("TENSION", eElement));
-					//tension = Double.parseDouble(eElement.getElementsByTagName("TENSION").item(0).getTextContent());
-					System.out.println(tension);
-
-					compression = Double.parseDouble(getString("COMPRESSION", eElement));
-					//compression = Double.parseDouble(eElement.getElementsByTagName("COMPRESSION").item(0).getTextContent());
-					System.out.println(compression);
-
-					impact = Double.parseDouble(getString("IMPACT", eElement));
-					//impact = Double.parseDouble(eElement.getElementsByTagName("IMPACT").item(0).getTextContent());
-					System.out.println(impact);
-
-					complexity = Double.parseDouble(getString("PART_COMPLEXITY", eElement));
-					//complexity = Double.parseDouble(eElement.getElementsByTagName("PART_COMPLEXITY").item(0).getTextContent());
-					System.out.println(complexity);
-
-					leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
-					//leadTime = Double.parseDouble(eElement.getElementsByTagName("LEAD_TIME").item(0).getTextContent());
-					System.out.println(leadTime);
-
-					easeOfChange = Boolean.valueOf((getString("EOC", eElement)));
-					//easeOfChange = Boolean.valueOf(eElement.getElementsByTagName("EOC").item(0).getTextContent());
-					System.out.println(easeOfChange);
-
-					/* TODO: Commented out to try HashSet implementation of rom
-					// SPECIFICALLY ROM SECTION
-					NodeList listROM = eElement.getElementsByTagName("ROM");  // Now we create a new list specifically for just ROM.
-					String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
-					romArrayEX = storeROM(lineToBeAdded);						// Call our method to update changes to the rom.
-					for (int jojo = 0; jojo < romArrayEX.length; jojo++) {
-						System.out.println(romArrayEX[jojo]);
-					}
-					*/
-					
-					// TODO: Check compatibility of HashSet implementation of range of materials
-					rangeOfMaterialsString = getString("ROM", eElement);
-					System.out.println(rangeOfMaterialsString);
-					rangeOfMaterialsSet = stringToHashSet(rangeOfMaterialsString);
-
-					tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
-					//tolerance = Double.parseDouble(eElement.getElementsByTagName("TOLERANCE").item(0).getTextContent());
-					System.out.println(tolerance);
-
-					finish = getString("FINISH", eElement);
-					//finish = eElement.getElementsByTagName("FINISH").item(0).getTextContent();
-					System.out.println(finish);
-
-					//printerList.addPrinter(new Printer(name, tension, compression, impact, complexity,leadTime, easeOfChange, rom, tolerance, finish));
-					printerList.addPrinter(new Printer(name, tension, compression, impact,
-							                           complexity, leadTime, easeOfChange,
-							                           rangeOfMaterialsSet, tolerance, finish));
-					System.out.println("Added: " + printerList.getPrinter(0).getName());
-				}
+				displayPrinterNodes(nNode, printerList);
 			}
 
 			}catch(FileNotFoundException e){
@@ -233,14 +158,79 @@ public class Driver {
 			}
 		return printerList;
 	}
+	
+    /**
+     * Iterates through the child-nodes of "printer" tag strings,
+     * converts to appropriate data type, and then printer to console
+     * for evaluation.
+     */
+	private static void displayPrinterNodes(
+			Node node, PrinterList printers)
+	{
+		String name;
+		double tension, compression, impact, tolerance, complexity, leadTime;
+		boolean customizable;
+		String finish = "", materialsString = "";
+		String[] materialsArray;
+		HashSet<String> materialsSet = new HashSet<String>();
+		Element eElement;
+			
+		// Retrieve parameter info from listed printers
+		if(node.getNodeType() == Node.ELEMENT_NODE)
+		{
+			eElement = (Element)node;
+			name = getString("NAME", eElement);
+			System.out.println(name);
+			
+			tension = Double.parseDouble(getString("TENSION", eElement));
+			System.out.println(tension);
+
+			compression = Double.parseDouble(
+					getString("COMPRESSION", eElement));
+			System.out.println(compression);
+
+			impact = Double.parseDouble(getString("IMPACT", eElement));
+			System.out.println(impact);
+			
+			complexity = Double.parseDouble(
+					getString("PART_COMPLEXITY", eElement));
+			System.out.println(complexity);
+			
+			leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
+			System.out.println(leadTime);
+			
+			customizable = Boolean.valueOf((getString("EOC", eElement)));
+			System.out.println(customizable);
+
+			materialsString = getString("ROM", eElement);
+			System.out.println(materialsString);
+			materialsSet = stringToHashSet(materialsString);
+
+			tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
+			System.out.println(tolerance);
+
+			finish = getString("FINISH", eElement);
+			System.out.println(finish);
+
+			printers.addPrinter(new Printer(
+					name, tension, compression, impact, complexity,
+					leadTime, customizable, materialsSet, tolerance, finish));
+			System.out.println(
+					"Added: " +
+			        printers.getPrinter(0).getPrinterName());
+		}
+	}
 
 
 	/**
 	 * Adds a printer element to printers.xml based on user input.
      */
     public void addPrinter() {
-    	
-        Scanner scanner = new Scanner(System.in);
+    	Scanner scanner = new Scanner(System.in);
+    	DocumentBuilderFactory documentBuilderFactory;
+    	DocumentBuilder documentBuilder;
+    	Document document;
+    	Element root, newPrinter;
 
         System.out.println("\nYou Are Adding A New Printer\n");
 
@@ -265,7 +255,7 @@ public class Driver {
         System.out.println("Lead Time: ");
         double printerLeadTime = scanner.nextDouble();
 
-        // Will need to better validate this input.
+        // TODO Will need to better validate this input.
         System.out.println("Ease of Customizing (true/false): ");
         boolean printerEaseOfChange = scanner.nextBoolean();
 
@@ -281,15 +271,15 @@ public class Driver {
             /*
              * Creates link to xml file
              */
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse("printers.xml");
-            Element root = document.getDocumentElement();
+            documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            document = documentBuilder.parse("printers.xml");
+            root = document.getDocumentElement();
 
             /*
              * Creates printer root element
              */
-            Element newPrinter = document.createElement("printer");
+            newPrinter = document.createElement("printer");
 
 
             /*
@@ -489,7 +479,7 @@ public class Driver {
 	for(int i=list.size()-1;i>=0;i--){
 		System.out.println(
 				"\n\n---------------------------------" +
-		        "     Printer Name: " + outputList.get(i).getName() +
+		        "     Printer Name: " + outputList.get(i).getPrinterName() +
 		        "Number Of Matches: " + outputList.get(i).getTotalMatches() +
 		        "\n----------------------------------");
 	}

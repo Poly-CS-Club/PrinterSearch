@@ -56,10 +56,6 @@ public final String[] searchParameters =
         {"Search", "Compression", "Tension", "Tolerance", "Impact",
          "Lead Time", "Part Complexity", "Customizable", "Material",
          "Finish"};
-public final Component[] searchComponents =
-        {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
-         m_Materials_CB, m_Finish_CB};
 
 public static void main(String args [])
 {
@@ -299,6 +295,11 @@ private void designSearchParam()
 {
 	Dimension defaultMaxSize = new Dimension(170, 30),
 			  defaultMinSize = new Dimension(150, 30);
+	Component[] searchComponents =
+        {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
+         m_Impact_RTF, m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Materials_CB, m_Finish_CB};
+	
 	
 	// Set up search panel
 	m_SearchParam_P.setLayout(
@@ -312,8 +313,8 @@ private void designSearchParam()
 	
 	// Set up search parameter component dimensions
 	for(Component parameter : searchComponents) {
-		parameter.setMaximumSize(defaultMinSize);
-		parameter.setMinimumSize(defaultMaxSize);
+		parameter.setMaximumSize(defaultMaxSize);
+		parameter.setMinimumSize(defaultMinSize);
 	}
 	
 	// Align search parameter components
@@ -357,6 +358,11 @@ private void addComponents()
  */
 private void addSearchParamComponents()
 {
+	Component[] searchComponents =
+        {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
+         m_Impact_RTF, m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Materials_CB, m_Finish_CB};
+	
 	// Add search parameter titles and spacing to GUI
 	for(int index=0; index<10; index++) {
 		addSearchLabel("\n");
@@ -476,6 +482,7 @@ private class ButtonListener implements ActionListener
 			    
 			    printerList.setMatches(
 			    		(Double) m_Tension_RTF.getMin(), (Double) m_Tension_RTF.getMax(),
+			    		(Double) m_Compression_RTF.getMin(), (Double) m_Compression_RTF.getMax(),
 			    		(Double) m_Impact_RTF.getMin(), (Double) m_Impact_RTF.getMax(),
 			    		Double.valueOf(m_PartComplexity_TF.getText()),
 			    		Double.valueOf(m_LeadTime_TF.getText()),
