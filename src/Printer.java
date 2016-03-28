@@ -15,10 +15,6 @@ public class Printer {
 	private double complexity;
 	private double leadTime;
 	private boolean customizable;
-	/*
-	private String rom;
-	private String [] arrayOfROM;			// The actual array obtains values when instantiated in the Driver file.
-	*/
 	private HashSet<String> materials;
 	private double tolerance;
 	private String finish;
@@ -41,38 +37,14 @@ public class Printer {
 		complexity = 0;
 		leadTime = 0;
 		customizable = false;
-		/*
-		rom = "";
-		arrayOfROM = new String[0];			// Will revise at a later point.
-		*/
 		materials = new HashSet<String>();
 		tolerance = 0;
 		finish = "";
-		
-		// Marci's attempt at false defaulting
 		matches = new boolean[9];
 		for (int index=0; index<9; index++)
 			matches[index] = false;
 		
 	}
-
-	/*Printer(String name, double tension, double compression, double impact,
-			double complexity, double leadTime, boolean easeOfChange,
-			String rom, double tolerance, String finish){
-		
-		this.name = name;
-		this.tension = tension;
-		this.compression = compression;
-		this.impact = impact;
-		this.complexity = complexity;
-		this.leadTime = leadTime;
-		this.easeOfChange = easeOfChange;
-		this.rom = rom;
-		this.tolerance = tolerance;
-		this.finish = finish;
-		
-		matches = new boolean[9];
-	}*/
 
 	/**
 	 * Instantiates a printer with specified values and a boolean list representing
@@ -122,7 +94,7 @@ public class Printer {
 		matches[index] = value;
 	}
 	
-	public String getName() {
+	public String getPrinterName() {
 		return name;
 	}
 
@@ -173,23 +145,23 @@ public class Printer {
 	public boolean isCustomizable() {
 		return customizable;
 	}
+	
+	/**
+	 * Returns a String representation of whether the printer offers
+	 * customization options.
+	 * 
+	 * @return the String describing customizability
+	 */
+	public String customizableString() {
+		if (customizable == true)
+			return "True";
+		else
+			return "False";
+	}
 
 	public void setCustomizable(boolean customizable) {
 		this.customizable = customizable;
 	}
-
-	// TODO: Review possibility of using a set for range of materials
-	/*
-	public String getRom() {
-		return rom;
-	}
-
-	public String[] getArrayRom() { return arrayOfROM; }
-
-	public void setRom(String rom) {
-		this.rom = rom;
-	}
-	*/
 	
 	/**
 	 * Adds specified material to printer's range of materials list.
@@ -206,7 +178,7 @@ public class Printer {
 	 *  If the range of materials has more than one element, then a
 	 *  multi-line String is returned.
 	 */
-	public String getMaterials() {
+	public String materialsString() {
 		String rawString,
 		       materialsString = "";
 		String[] materialsArray;
@@ -232,6 +204,10 @@ public class Printer {
 		materialsString = "<html>" + materialsString + "</html>";
 		
 		return materialsString;
+	}
+	
+	public HashSet<String> getMaterials() {
+		return materials;
 	}
 
 	public double getTolerance() {

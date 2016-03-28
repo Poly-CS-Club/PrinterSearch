@@ -132,7 +132,7 @@ public class PrinterList {
 			*/
 			
 			// TODO: Check HastSet implementation of range of Materials
-			if(materials.equals(printer.getMaterials()))
+			if(materials.equals(printer.materialsString()))
 				printer.setMatches(true, 6);
 			
 			if(minTolerance <= printer.getTolerance() && printer.getTolerance() <= maxTolerance)

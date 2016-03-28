@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -37,8 +38,9 @@ private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 private JButton m_FilterResults_B;
 private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
-private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF;
-private ArrayList<String> m_RangeOfMaterials;
+private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
+                                m_Tolerance_RTF, m_Impact_RTF;
+private HashSet<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
 private Driver m_Driver;
@@ -47,9 +49,17 @@ private PrinterList printerList;
 
 public final int FRAME_WIDTH;
 public final int FRAME_HEIGHT;
-
 private int screenWidth;
 private int screenHeight;
+
+public final String[] searchParameters = 
+        {"Search", "Compression", "Tension", "Tolerance", "Impact",
+         "Lead Time", "Part Complexity", "Customizable", "Material",
+         "Finish"};
+public final Component[] searchComponents =
+        {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
+         m_Impact_RTF, m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Materials_CB, m_Finish_CB};
 
 public static void main(String args [])
 {
@@ -61,60 +71,65 @@ public static void main(String args [])
  */
 public MenuUI()
 {
-	GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();// Getting size of screen
+	GraphicsDevice gd;
+	PrinterList printerList;
+	
+	// Obtain window dimensions
+	gd = GraphicsEnvironment.getLocalGraphicsEnvironment().
+			getDefaultScreenDevice();
 	screenWidth = gd.getDisplayMode().getWidth();
 	screenHeight = gd.getDisplayMode().getHeight();
-	
 	FRAME_WIDTH = (int) ((int) screenWidth *0.75);
 	FRAME_HEIGHT = (int) ((int) screenHeight *0.75);
 
-	m_Driver = new Driver();
-	m_RangeOfMaterials = new ArrayList<String>();
+	// Set up menu UI window
     createComponents();
     designComponents(screenWidth, screenHeight);
     addActionListeners();
     addComponents();
-    
     m_Menu_F.pack();
     m_Menu_F.setVisible(true);
-    
     m_MenuUI = this;
     
-	PrinterList printerList = Driver.generatePrinterList();
+	// Instantiate non-GUI objects
+    m_Driver = new Driver();
+	m_RangeOfMaterials = new HashSet<String>();
+	printerList = Driver.generatePrinterList();
 }
 
 /**
  * Instantiates GUI components.
  */
 private void createComponents() {
+	// Instantiate GUI framework
 	m_Menu_F = new JFrame("Menu");
 	m_Menu_P = new JPanel();
 	m_ToolBar = new JToolBar("ToolBar");
 	
+	// Instantiate text fields
 	m_BroadSearch_TF = new JTextField();
-	
 	m_LeadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
 	
-	// TODO Implemented a generic Number class for RangedTextField
-	/*
-	m_Tolerance_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
-	m_Tension_RTF = new RangedTextField(200, 0, RangedTextField.DOUBLE);
-	m_Impact_RTF = new RangedTextField(200, 0, RangedTextField.INTEGER);
-	*/
+	// Instantiate ranged text fields
 	m_Compression_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Impact_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
 	
-	m_Finish_CB = new JComboBox<String>(new String [] {"Search All", "Matte", "Gloss"});//TODO load these fRangeOfMaterials a file or something...
-	m_Materials_CB = new JComboBox<String>(new String [] {"Search All", "Aluminum", "Stainless", "Clear All"});
-	m_Customizable_CB = new JComboBox<String>(new String [] {"Search All", "True", "False"});
+	// Instantiate combo boxes
+	// TODO load these RangeOfMaterials to a file or something...
+	m_Finish_CB = new JComboBox<String>(new String[] {
+			"Search All", "Matte", "Gloss"});
+	m_Materials_CB = new JComboBox<String>(new String[] {
+			"Search All", "Aluminum", "Stainless", "Clear All"});
+	m_Customizable_CB = new JComboBox<String>(new String[] {
+			"Search All", "True", "False"});
 	
+	// Instantiate GUI layout components and button
 	m_ScrollPane = new JScrollPane();
 	m_SearchResult_P = new JPanel();
 	m_SearchParam_P = new JPanel();
-	
 	m_FilterResults_B = new JButton("Filter Results");
 }
 
@@ -123,116 +138,123 @@ private void createComponents() {
  */
 private void designComponents(int screenWidth, int screenHeight) {
     
-	m_Menu_F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//m_Menu_F.setLayout(new BorderLayout(5,5));
+	// Set panel layout and size
 	m_Menu_P.setLayout(new BorderLayout(5,5));
 	m_Menu_P.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	m_Menu_P.setMaximumSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 	
+	/*
+	 * Finalize window close operation and set window size
+	 * Added 50 to height because mac interface will not show filter button.
+	 * Set to resizable to accommodate for filter button at bottom.
+	 */
+	m_Menu_F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//m_Menu_F.setLayout(new BorderLayout(5,5));
 	m_Menu_F.setSize(FRAME_WIDTH, (FRAME_HEIGHT+50));
-	m_Menu_F.setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));			// Setting the minimum size restrictions so we dont resize it to small.
-	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , (FRAME_HEIGHT+50)));	// Added 50 to height because mac interface will not show filter button elsewise.
-	m_Menu_F.setLocationRelativeTo(null);										// Centering frame.
-	m_Menu_F.setResizable(true);												// Set to resizable to accomodate for filter button at bottom.
+	m_Menu_F.setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , (FRAME_HEIGHT+50)));
+	m_Menu_F.setLocationRelativeTo(null);						
+	m_Menu_F.setResizable(true);
 
-	
+	// Set up scroll pane
 	m_ScrollPane.setOpaque(false);
 	m_ScrollPane.setVerticalScrollBarPolicy(
 			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	
+	// Set up remaining GUI components
 	designSearchParam();
-	
 	designSearchResult();
-	
 	designToolBar();
 }
 
 /**
- * Sets values for search result GUI components.
- *
+ * Displays unfiltered printer list.
  */
 private void designSearchResult() {
-	String customizable;
 	Printer currentPrinter;
-	PrinterUI tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
+	PrinterUI tableHeader;
+	
+	// Create search results' table header
+	tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Complexity",
 			"Lead Time","Ease","Materials","Tolerance","Finish");
-	
-	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
-	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH  - 190, FRAME_HEIGHT));
+	m_SearchResult_P.setLayout(
+			new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
+	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH - 190, FRAME_HEIGHT));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 
+	// Add tool tips for long header categories before adding to GUI
     tableHeader.getPartComplexity().setToolTipText("Part Complexity");
     tableHeader.getCustomizable().setToolTipText("Ease of Customization");
     tableHeader.getMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
+	// Populate search result list with entire printer list
 	printerList = Driver.generatePrinterList();
-	
 	for(int i = 2; i <= printerList.getNumberOfPrinters()+1; i++)
 	{
+		// Convert values to Strings
 		currentPrinter = printerList.getPrinter(i-2);
-		customizable = "True";
-		if(!currentPrinter.isCustomizable())
-			customizable = "False";
-		
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
-				currentPrinter.getName() + "",
+				currentPrinter.getPrinterName() + "",
 				currentPrinter.getTension()+ "",
 				currentPrinter.getCompression()+ "",
 				currentPrinter.getImpact()+ "",
 				currentPrinter.getComplexity()+ "",
 				currentPrinter.getLeadTime()+ "",
-				customizable,
-				currentPrinter.getMaterials(),
+				currentPrinter.customizableString(),
+				currentPrinter.materialsString(),
 				currentPrinter.getTolerance()+ "",
 				currentPrinter.getFinish()+ ""));
 	}
-	m_ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	
+	// Add results to scroll pane
 	m_ScrollPane.setViewportView(m_SearchResult_P);
 	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
-	//m_ScrollPane.getViewport().setOpaque(false);
 }
 
-/** Display NEW search results.
-
-*/
-
+/**
+ * Displays filtered printer list.
+ */
 public void displaySearchResults(ArrayList<Printer> outputList){
+	Printer currentPrinter;
+	PrinterUI tableHeader;
 	
-	PrinterUI tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
+	// Create search results' table header
+	tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Complexity",
 			"Lead Time","Ease","Materials","Tolerance","Finish");
-	
-	m_SearchResult_P.setLayout(new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
-	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH  - 190, FRAME_HEIGHT));
+	m_SearchResult_P.setLayout(
+			new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
+	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH - 190, FRAME_HEIGHT));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 
+	// Add tool tips for long header categories before adding to GUI
     tableHeader.getPartComplexity().setToolTipText("Part Complexity");
     tableHeader.getCustomizable().setToolTipText("Ease of Customization");
     tableHeader.getMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
+	// Populate search results with any printer matches
 	for(int i = outputList.size()-1; i >=0;i--)
 	{
-		Printer currentPrinter = outputList.get(i);
-		String isEaseOfChange = "True";
-		if(!currentPrinter.isCustomizable())
-			isEaseOfChange = "False";
-		
+		currentPrinter = outputList.get(i);
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
-				currentPrinter.getName() + "",
+				currentPrinter.getPrinterName() + "",
 				currentPrinter.getTension()+ "",
 				currentPrinter.getCompression()+ "",
 				currentPrinter.getImpact()+ "",
 				currentPrinter.getComplexity()+ "",
 				currentPrinter.getLeadTime()+ "",
-				isEaseOfChange,
-				currentPrinter.getMaterials(),
+				currentPrinter.customizableString(),
+				currentPrinter.materialsString(),
 				currentPrinter.getTolerance()+ "",
 				currentPrinter.getFinish()+ ""));
 	}
-	m_ScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	
+	// Add results to scroll pane
+	m_ScrollPane.setVerticalScrollBarPolicy(
+			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	m_ScrollPane.setViewportView(m_SearchResult_P);
 	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 	
@@ -241,10 +263,9 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 /**
  * Sets components to their default values.
  */
-public void resetResults(){
-	
+public void resetResults()
+{
     designComponents(screenWidth, screenHeight);
-	
 }
 
 /**
@@ -252,16 +273,19 @@ public void resetResults(){
  */
 private void designToolBar()
 {
+	// Set up settings button
 	JButton button = new JButton("Settings");
 	button.setActionCommand("Settings");
 	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
+	// Set up help button
 	button = new JButton("Help");
 	button.setActionCommand("Help");
 	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
+	// Set up button to add printer
 	button = new JButton("Add Printer");
 	button.setActionCommand("Add Printer");
 	button.addActionListener(new ButtonListener());
@@ -269,61 +293,45 @@ private void designToolBar()
 }
 
 /**
- * Sets values for search parameter GUI components.
- *
+ * Sets size and alignment for search parameter GUI components.
  */
 private void designSearchParam()
 {
 	Dimension defaultMaxSize = new Dimension(170, 30),
 			  defaultMinSize = new Dimension(150, 30);
 	
-	m_SearchParam_P.setLayout(new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
+	// Set up search panel
+	m_SearchParam_P.setLayout(
+			new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
 	m_SearchParam_P.setPreferredSize(new Dimension(175, FRAME_HEIGHT));
 	m_SearchParam_P.setBorder(BorderFactory.createLineBorder(Color.black));
 	
+	// Set up general search field
 	m_BroadSearch_TF.setMaximumSize(defaultMaxSize);
 	m_BroadSearch_TF.setMinimumSize(defaultMinSize);
 	m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
-	m_Compression_RTF.setMaximumSize(defaultMaxSize);
-	m_Compression_RTF.setMinimumSize(defaultMinSize);
-	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_Tension_RTF.setMaximumSize(defaultMaxSize);
-	m_Tension_RTF.setMinimumSize(defaultMinSize);
-	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_Impact_RTF.setMaximumSize(defaultMaxSize);
-	m_Impact_RTF.setMinimumSize(defaultMinSize);
-	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_LeadTime_TF.setMaximumSize(defaultMaxSize);
-	m_LeadTime_TF.setMinimumSize(defaultMinSize);
-	m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_PartComplexity_TF.setMaximumSize(defaultMaxSize);
-	m_PartComplexity_TF.setMinimumSize(defaultMinSize);
-	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_Customizable_CB.setMaximumSize(defaultMaxSize);
-	m_Customizable_CB.setMinimumSize(defaultMinSize);
-	m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_Materials_CB.setMaximumSize(defaultMaxSize);
-	m_Materials_CB.setMinimumSize(defaultMinSize);
-	m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_Materials_CB.setActionCommand("RangeOfMaterials");
-
-	m_Tolerance_RTF.setMaximumSize(defaultMaxSize);
-	m_Tolerance_RTF.setMinimumSize(defaultMinSize);
-	m_Tolerance_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
-	m_Finish_CB.setMaximumSize(defaultMaxSize);
-	m_Finish_CB.setMinimumSize(defaultMinSize);
-	m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
-	
+	// Set up search button
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
+	
+	// Set up search parameter component dimensions
+	for(Component parameter : searchComponents) {
+		parameter.setMaximumSize(defaultMinSize);
+		parameter.setMinimumSize(defaultMaxSize);
+	}
+	
+	// Align search parameter components
+	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Materials_CB.setActionCommand("RangeOfMaterials");
+	m_Tolerance_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_Finish_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 }
 
 /**
@@ -338,128 +346,45 @@ private void addActionListeners()
 /**
  * Add components to menu frame.
  */
-private void addComponents() {
+private void addComponents()
+{
 	addSearchParamComponents();
-	
 	m_Menu_P.add(m_ToolBar, BorderLayout.PAGE_START);
 	m_Menu_P.add(m_SearchParam_P, BorderLayout.LINE_START);
 	m_Menu_P.add(m_ScrollPane, BorderLayout.LINE_END);
 	m_Menu_F.add(m_Menu_P);
 	m_Menu_F.setPreferredSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
-	// TODO: Commented out for scroll bar
-	//m_Menu_F.add(m_SearchResult_P, BorderLayout.LINE_END);
 }
 
 /**
  * Add components to the search panel of the GUI.
  */
-private void addSearchParamComponents() {
-	JLabel label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Search:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_BroadSearch_TF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Compression:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Compression_RTF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Tension:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Tension_RTF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Tolerance:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Tolerance_RTF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Impact");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Impact_RTF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Lead Time:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_LeadTime_TF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Part Complexity:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_PartComplexity_TF);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Ease Of Customization:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Customizable_CB);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Range Of Materials:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Materials_CB);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	label = new JLabel("Finish:");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
-	m_SearchParam_P.add(m_Finish_CB);
-	
-	label = new JLabel("\n");
-	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
-	
+private void addSearchParamComponents()
+{
+	// Add search parameter titles and spacing to GUI
+	for(int index=0; index<10; index++) {
+		addSearchLabel("\n");
+		addSearchLabel(searchParameters[index]);
+		m_SearchParam_P.add(searchComponents[index]);
+	}
+
+	// Add button with spacing to GUI
+	addSearchLabel("\n");
 	m_SearchParam_P.add(m_FilterResults_B);
 	
+}
+
+/**
+ * Creates and adds a label to the search parameter panel
+ * 
+ * @param searchParameter the String contained in the label
+ */
+private void addSearchLabel(String text)
+{
+	JLabel label;
+	label = new JLabel(text);
+	label.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_SearchParam_P.add(label);
 }
 
 public JFrame getM_Menu_F(){
@@ -484,28 +409,32 @@ private class ComboListener implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
-		String command = action.getActionCommand();
+		String command, selectedItem;
+		int index;
+		
+		command = action.getActionCommand();
 		switch(command)
 		{
-			case "RangeOfMaterials":
-				String selectedItem = (String) m_Materials_CB.getSelectedItem();// getting selected Item
-				//TODO Dont allow repeats in widnow...
+		    case "RangeOfMaterials":
+				selectedItem = (String) m_Materials_CB.getSelectedItem();
+				
+				// Add new material to materials combo box if not already included
 				if(!selectedItem.equals("Search All") && !selectedItem.equals("Clear All"))
 				{
-					JLabel temp = new JLabel(selectedItem);//creating temp Label
+					JLabel temp = new JLabel(selectedItem);
 					temp.setAlignmentX(Component.CENTER_ALIGNMENT);
-					
-					m_RangeOfMaterials.add(selectedItem);//adding item to list.
-				
-					int index = m_SearchParam_P.getComponentZOrder(m_Materials_CB);// getting index of Range Of Materials
-				
-					m_SearchParam_P.add(temp,index);// adding new label
-				}else
-				{
-					m_SearchParam_P.removeAll();//removing all Components
-					addSearchParamComponents(); //adding default Components
+					m_RangeOfMaterials.add(selectedItem);
+					index = m_SearchParam_P.getComponentZOrder(m_Materials_CB);
+					m_SearchParam_P.add(temp,index);
 				}
-				m_Menu_P.revalidate();// updating Panel
+				
+				// Refresh search parameters
+				else
+				{
+					m_SearchParam_P.removeAll();
+					addSearchParamComponents();
+				}
+				m_Menu_P.revalidate();
 				break;
 				
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
@@ -545,8 +474,8 @@ private class ButtonListener implements ActionListener
 
 				// STEP ONE: CLEAR CURRENT RESULTS
 				
-				clearPanel(m_SearchResult_P); // Empty JPanel of current components (currently-listed printers in table)
-			    clearPanel(m_ToolBar); // JToolBar to overloaded clearPanel. m_SearchResult_P doesn't position correctly without resetting/readding this. 
+				clearInterface(m_SearchResult_P); // Empty JPanel of current components (currently-listed printers in table)
+			    clearInterface(m_ToolBar); // JToolBar to overloaded clearPanel. m_SearchResult_P doesn't position correctly without resetting/readding this. 
 
 			    // STEP TWO: GET FIELDS & SET MATCHES FOR EACH PRINTER
 			    
@@ -580,13 +509,23 @@ private class ButtonListener implements ActionListener
 		
 	}
 	
-	public void clearPanel(JPanel panel){
+	/**
+	 * Removes components from specified panel.
+	 * 
+	 * @param panel the JPanel whose components will be removed
+	 */
+	public void clearInterface(JPanel panel){
 		panel.removeAll();
 		panel.revalidate();
 		panel.repaint();
 	}
 
-	public void clearPanel(JToolBar toolbar){
+	/**
+	 * Removes components from specified tool bar.
+	 * 
+	 * @param toolbar the JToolBat whose components will be removed
+	 */
+	public void clearInterface(JToolBar toolbar){
 		toolbar.removeAll();
 		toolbar.revalidate();
 		toolbar.repaint();
