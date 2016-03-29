@@ -36,10 +36,10 @@ public class MenuUI
 private JFrame m_Menu_F;
 private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 private JButton m_FilterResults_B;
-private JTextField m_BroadSearch_TF, m_LeadTime_TF, m_PartComplexity_TF;
+private JTextField m_BroadSearch_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
-                                m_Tolerance_RTF, m_Impact_RTF;
+                                m_Tolerance_RTF, m_Impact_RTF, m_LeadTime_RTF;
 private HashSet<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
@@ -104,7 +104,6 @@ private void createComponents() {
 	
 	// Instantiate text fields
 	m_BroadSearch_TF = new JTextField();
-	m_LeadTime_TF = new JTextField();
 	m_PartComplexity_TF = new JTextField();
 	
 	// Instantiate ranged text fields
@@ -112,6 +111,7 @@ private void createComponents() {
 	m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
 	m_Impact_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
+	m_LeadTime_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
 	
 	// Instantiate combo boxes
 	// TODO load these RangeOfMaterials to a file or something...
@@ -297,7 +297,7 @@ private void designSearchParam()
 			  defaultMinSize = new Dimension(150, 30);
 	Component[] searchComponents =
         {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Impact_RTF, m_LeadTime_RTF, m_PartComplexity_TF, m_Customizable_CB,
          m_Materials_CB, m_Finish_CB};
 	
 	
@@ -322,7 +322,7 @@ private void designSearchParam()
 	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_LeadTime_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
+	m_LeadTime_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -360,7 +360,7 @@ private void addSearchParamComponents()
 {
 	Component[] searchComponents =
         {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Impact_RTF, m_LeadTime_RTF, m_PartComplexity_TF, m_Customizable_CB,
          m_Materials_CB, m_Finish_CB};
 	
 	// Add search parameter titles and spacing to GUI
@@ -462,7 +462,7 @@ private class ButtonListener implements ActionListener
 			public void actionPerformed(ActionEvent e) {
 				// Initiate a search results window page.
 				SearchResultsWindow filteredResults = new SearchResultsWindow("", (Double) m_Tension_RTF.getMin(), (Double) m_Compression_RTF.getMin(),
-						(Double) m_Impact_RTF.getMin(), Double.valueOf(m_PartComplexity_TF.getText()), Double.valueOf(m_LeadTime_TF.getText()),
+						(Double) m_Impact_RTF.getMin(), Double.valueOf(m_PartComplexity_TF.getText()), Double.valueOf(m_LeadTime_RTF.getText()),
 						(boolean)m_Customizable_CB.getSelectedItem(), (String) m_Materials_CB.getSelectedItem(), (Double) m_Tolerance_RTF.getMin(),
 						(String) m_Finish_CB.getSelectedItem());
 			}
@@ -485,7 +485,7 @@ private class ButtonListener implements ActionListener
 			    		(Double) m_Compression_RTF.getMin(), (Double) m_Compression_RTF.getMax(),
 			    		(Double) m_Impact_RTF.getMin(), (Double) m_Impact_RTF.getMax(),
 			    		Double.valueOf(m_PartComplexity_TF.getText()),
-			    		Double.valueOf(m_LeadTime_TF.getText()),
+			    		(Double)(m_LeadTime_RTF.getMin()),(Double) (m_LeadTime_RTF.getMax()),
 			    		(String)m_Customizable_CB.getSelectedItem(),
 			    		(String) m_Materials_CB.getSelectedItem(),
 			    		(Double) m_Tolerance_RTF.getMin(), (Double) m_Tolerance_RTF.getMax(),

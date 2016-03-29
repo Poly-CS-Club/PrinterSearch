@@ -64,7 +64,8 @@ public class PrinterList {
 	 * @param minImpact       the specified minimum impact
 	 * @param maxImpact       the specified maximum impact
 	 * @param complexity      the specified part complexity
-	 * @param leadTime        the specified lead time
+	 * @param minLeadTime     the specified minimum lead time
+	 * @param maxLeadTime     the specified maximum lead time
 	 * @param customizable    the specified customizability
 	 * @param materials       the specified materials
 	 * @param minTolerance    the specified minimum tolerance
@@ -75,7 +76,8 @@ public class PrinterList {
 			double minTension, double maxTension,
 			double minCompression, double maxCompression,
 			double minImpact, double maxImpact,
-			double complexity, double leadTime,
+			double complexity,
+			double minLeadTime, double maxLeadTime,
 			String customizable, String materials,
 			double minTolerance, double maxTolerance, String finish){
 
@@ -125,7 +127,8 @@ public class PrinterList {
 			
 			// TODO Made double for now. Not certain this is integer or if
 			// this needs to be a range yet.
-			if(leadTime <= printer.getLeadTime())
+			if(minLeadTime <= printer.getLeadTime()
+			&& maxLeadTime >= printer.getLeadTime())
 				printer.setMatches(true, 4);
 			
 			// TODO Sort of odd. Assuming EaseOfChange is a parameter that can
