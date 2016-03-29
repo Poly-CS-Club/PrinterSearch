@@ -207,6 +207,8 @@ private void designSearchResult() {
 	}
 	
 	// Add results to scroll pane
+	m_ScrollPane.setVerticalScrollBarPolicy(
+			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	m_ScrollPane.setViewportView(m_SearchResult_P);
 	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 }
@@ -481,19 +483,23 @@ private class ButtonListener implements ActionListener
 		switch(command)
 		{
 			case "Filter Results": //TODO implement this.
-
+				double complexity = 0;
 				// STEP ONE: CLEAR CURRENT RESULTS
 				
 				clearInterface(m_SearchResult_P); // Empty JPanel of current components (currently-listed printers in table)
 			    clearInterface(m_ToolBar); // JToolBar to overloaded clearPanel. m_SearchResult_P doesn't position correctly without resetting/readding this. 
 
 			    // STEP TWO: GET FIELDS & SET MATCHES FOR EACH PRINTER
+			    if(!m_PartComplexity_TF.getText().equals(""))
+			    {
+			    	complexity = Double.parseDouble(m_PartComplexity_TF.getText());
+			    }
 			    
 			    printerList.setMatches(
 			    		(Double) m_Tension_RTF.getMin(), (Double) m_Tension_RTF.getMax(),
 			    		(Double) m_Compression_RTF.getMin(), (Double) m_Compression_RTF.getMax(),
 			    		(Double) m_Impact_RTF.getMin(), (Double) m_Impact_RTF.getMax(),
-			    		Double.valueOf(m_PartComplexity_TF.getText()),
+			    		complexity,
 			    		(Double)(m_LeadTime_RTF.getMin()),(Double) (m_LeadTime_RTF.getMax()),
 			    		(String)m_Customizable_CB.getSelectedItem(),
 			    		(String) m_Materials_CB.getSelectedItem(),
