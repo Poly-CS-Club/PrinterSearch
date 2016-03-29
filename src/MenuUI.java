@@ -35,7 +35,7 @@ public class MenuUI
 	
 private JFrame m_Menu_F;
 private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
-private JButton m_FilterResults_B;
+private JButton m_FilterResults_B, m_ClearResults_B;
 private JTextField m_BroadSearch_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
@@ -75,8 +75,8 @@ public MenuUI()
 			getDefaultScreenDevice();
 	screenWidth = graphicsDevice.getDisplayMode().getWidth();
 	screenHeight = graphicsDevice.getDisplayMode().getHeight();
-	FRAME_WIDTH = (int) ((int) screenWidth *0.75);
-	FRAME_HEIGHT = (int) ((int) screenHeight *0.75);
+	FRAME_WIDTH = (int) ((int) screenWidth *0.80);
+	FRAME_HEIGHT = (int) ((int) screenHeight *0.80);
 
 	// Set up menu UI window
     createComponents();
@@ -126,6 +126,8 @@ private void createComponents() {
 	m_ScrollPane = new JScrollPane();
 	m_SearchResult_P = new JPanel();
 	m_SearchParam_P = new JPanel();
+	
+	m_ClearResults_B = new JButton("Clear Results");
 	m_FilterResults_B = new JButton("Filter Results");
 }
 
@@ -311,6 +313,10 @@ private void designSearchParam()
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
 	m_FilterResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
 	
+	// Set up clear results button
+	m_ClearResults_B.setPreferredSize(new Dimension(100,25));
+	m_ClearResults_B.setAlignmentX(Component.CENTER_ALIGNMENT);
+	
 	// Set up search parameter component dimensions
 	for(Component parameter : searchComponents) {
 		parameter.setMaximumSize(defaultMaxSize);
@@ -337,6 +343,7 @@ private void designSearchParam()
 private void addActionListeners()
 {
 	m_FilterResults_B.addActionListener(new ButtonListener());
+	m_ClearResults_B.addActionListener(new ButtonListener());
 	m_Materials_CB.addActionListener(new ComboListener());
 }
 
@@ -373,6 +380,8 @@ private void addSearchParamComponents()
 	// Add button with spacing to GUI
 	addSearchLabel("\n");
 	m_SearchParam_P.add(m_FilterResults_B);
+	addSearchLabel("\n");
+	m_SearchParam_P.add(m_ClearResults_B);
 }
 
 /**
@@ -497,6 +506,11 @@ private class ButtonListener implements ActionListener
 			    
 			    displaySearchResults(outputList);
 			    designToolBar(); // Reset tool-bar once done, otherwise search results layout seems to break.
+				break;
+			case "Clear Results": 	m_SearchResult_P.removeAll();
+									designSearchResult();
+									m_SearchResult_P.revalidate();
+									m_Menu_F.revalidate();
 				break;
 
 			case "Help": //TODO Help Window or Pop-up
