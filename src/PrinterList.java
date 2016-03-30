@@ -148,6 +148,13 @@ public class PrinterList {
 			// splitting, case, etc. Unless drop-down list?
 			if(finish.equalsIgnoreCase(printer.getFinish()))
 				printer.setMatches(true, 8);
-		} 
+		}
+	}
+	public void clearMatches()
+	{
+		for(Printer printer : printerList)
+		{
+			printer.setMatches(true,  0);
+		}
 	}
 }

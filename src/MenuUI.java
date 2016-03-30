@@ -541,7 +541,8 @@ private class ButtonListener implements ActionListener
 			    displaySearchResults(outputList);
 			    designToolBar(); // Reset tool-bar once done, otherwise search results layout seems to break.
 				break;
-			case "Clear Results": 	m_SearchResult_P.removeAll();
+			case "Clear Results": 	printerList.clearMatches();
+									m_SearchResult_P.removeAll();
 									designSearchResult();
 									m_SearchResult_P.revalidate();
 									m_Menu_F.revalidate();
