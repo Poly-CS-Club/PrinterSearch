@@ -123,9 +123,9 @@ private void createComponents() {
 			"Search All", "True", "False"});
 	
 	// Instantiate GUI layout components and button
-	m_ScrollPane = new JScrollPane();
+	setScrollPane(new JScrollPane());
 	m_SearchResult_P = new JPanel();
-	m_SearchParam_P = new JPanel();
+	setSearchParamPanel(new JPanel());
 	
 	m_ClearResults_B = new JButton("Clear Results");
 	m_FilterResults_B = new JButton("Filter Results");
@@ -155,8 +155,8 @@ private void designComponents(int screenWidth, int screenHeight) {
 	m_Menu_F.setResizable(true);
 
 	// Set up scroll pane
-	m_ScrollPane.setOpaque(false);
-	m_ScrollPane.setVerticalScrollBarPolicy(
+	getScrollPane().setOpaque(false);
+	getScrollPane().setVerticalScrollBarPolicy(
 			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	
 	// Set up remaining GUI components
@@ -207,10 +207,10 @@ private void designSearchResult() {
 	}
 	
 	// Add results to scroll pane
-	m_ScrollPane.setVerticalScrollBarPolicy(
+	getScrollPane().setVerticalScrollBarPolicy(
 			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	m_ScrollPane.setViewportView(m_SearchResult_P);
-	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
+	getScrollPane().setViewportView(m_SearchResult_P);
+	getScrollPane().setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 }
 
 /**
@@ -253,10 +253,10 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 	}
 	
 	// Add results to scroll pane
-	m_ScrollPane.setVerticalScrollBarPolicy(
+	getScrollPane().setVerticalScrollBarPolicy(
 			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	m_ScrollPane.setViewportView(m_SearchResult_P);
-	m_ScrollPane.setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
+	getScrollPane().setViewportView(m_SearchResult_P);
+	getScrollPane().setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 	
 }
 
@@ -306,10 +306,10 @@ private void designSearchParam()
 	
 	
 	// Set up search panel
-	m_SearchParam_P.setLayout(
-			new BoxLayout(m_SearchParam_P, BoxLayout.Y_AXIS));
-	m_SearchParam_P.setPreferredSize(new Dimension(175, FRAME_HEIGHT));
-	m_SearchParam_P.setBorder(BorderFactory.createLineBorder(Color.black));
+	getSearchParamPanel().setLayout(
+			new BoxLayout(getSearchParamPanel(), BoxLayout.Y_AXIS));
+	getSearchParamPanel().setPreferredSize(new Dimension(175, FRAME_HEIGHT));
+	getSearchParamPanel().setBorder(BorderFactory.createLineBorder(Color.black));
 	
 	// Set up search button
 	m_FilterResults_B.setPreferredSize(new Dimension(100,25));
@@ -356,8 +356,8 @@ private void addComponents()
 {
 	addSearchParamComponents();
 	m_Menu_P.add(m_ToolBar, BorderLayout.PAGE_START);
-	m_Menu_P.add(m_SearchParam_P, BorderLayout.LINE_START);
-	m_Menu_P.add(m_ScrollPane, BorderLayout.LINE_END);
+	m_Menu_P.add(getSearchParamPanel(), BorderLayout.LINE_START);
+	m_Menu_P.add(getScrollPane(), BorderLayout.LINE_END);
 	m_Menu_F.add(m_Menu_P);
 	m_Menu_F.setPreferredSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 }
@@ -376,14 +376,14 @@ private void addSearchParamComponents()
 	for(int index=0; index<10; index++) {
 		addSearchLabel("\n");
 		addSearchLabel(searchParameters[index]);
-		m_SearchParam_P.add(searchComponents[index]);
+		getSearchParamPanel().add(searchComponents[index]);
 	}
 
 	// Add button with spacing to GUI
 	addSearchLabel("\n");
-	m_SearchParam_P.add(m_FilterResults_B);
+	getSearchParamPanel().add(m_FilterResults_B);
 	addSearchLabel("\n");
-	m_SearchParam_P.add(m_ClearResults_B);
+	getSearchParamPanel().add(m_ClearResults_B);
 }
 
 /**
@@ -396,10 +396,10 @@ private void addSearchLabel(String text)
 	JLabel label;
 	label = new JLabel(text);
 	label.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_SearchParam_P.add(label);
+	getSearchParamPanel().add(label);
 }
 
-public JFrame getM_Menu_F(){
+public JFrame getMenu_F(){
 	
 	return  m_Menu_F;
 	
@@ -408,6 +408,34 @@ public JFrame getM_Menu_F(){
 public JPanel getSearchResultsPanel()
 {
 	return m_SearchResult_P;
+}
+
+/**
+ * @return the m_ScrollPane
+ */
+public JScrollPane getScrollPane() {
+	return m_ScrollPane;
+}
+
+/**
+ * @param m_ScrollPane the m_ScrollPane to set
+ */
+public void setScrollPane(JScrollPane m_ScrollPane) {
+	this.m_ScrollPane = m_ScrollPane;
+}
+
+/**
+ * @return the m_SearchParam_P
+ */
+public JPanel getSearchParamPanel() {
+	return m_SearchParam_P;
+}
+
+/**
+ * @param m_SearchParam_P the m_SearchParam_P to set
+ */
+public void setSearchParamPanel(JPanel m_SearchParam_P) {
+	this.m_SearchParam_P = m_SearchParam_P;
 }
 
 /**
@@ -436,14 +464,14 @@ private class ComboListener implements ActionListener
 					JLabel temp = new JLabel(selectedItem);
 					temp.setAlignmentX(Component.CENTER_ALIGNMENT);
 					m_RangeOfMaterials.add(selectedItem);
-					index = m_SearchParam_P.getComponentZOrder(m_Materials_CB);
-					m_SearchParam_P.add(temp,index);
+					index = getSearchParamPanel().getComponentZOrder(m_Materials_CB);
+					getSearchParamPanel().add(temp,index);
 				}
 				
 				// Refresh search parameters
 				else
 				{
-					m_SearchParam_P.removeAll();
+					getSearchParamPanel().removeAll();
 					addSearchParamComponents();
 				}
 				m_Menu_P.revalidate();

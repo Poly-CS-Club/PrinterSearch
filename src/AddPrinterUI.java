@@ -33,11 +33,6 @@ public class AddPrinterUI {
 	private Driver m_Driver;
 	private MenuUI m_MenuUI;
 	
-	public final Component[] parameterComponents =
-        {m_Compression_TF, m_Tension_TF, m_Tolerance_TF, m_Impact_TF,
-         m_LeadTime_TF, m_PartComplexity_TF, m_Customizable_CB,
-         m_Materials_CB, m_Finish_CB};
-	
 	/**
 	 * Creates a printer UI with specified frame and driver.
 	 * 
@@ -107,8 +102,8 @@ public class AddPrinterUI {
 		
 		// Set up window
 		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
-		m_Main_F.setMinimumSize(new Dimension(frameWidth, 130));
+		m_Main_F.setPreferredSize(new Dimension(frameWidth-m_MenuUI.getSearchParamPanel().getWidth()-5, frameHeight));
+		m_Main_F.setMinimumSize(new Dimension(frameWidth-m_MenuUI.getSearchParamPanel().getWidth()-5, 130));
 		m_Main_F.setLocation(
 				(screenWidth/2) - (frameWidth/2),
 				(screenHeight/2) - (frameHeight/2));
@@ -118,10 +113,26 @@ public class AddPrinterUI {
 		// Set up component dimensions
 		defaultMaxSize = new Dimension(170, 25);
 		defaultMinSize = new Dimension(150, 25);
-		for(Component parameter : parameterComponents) {
-			parameter.setMaximumSize(defaultMinSize);
-			parameter.setMinimumSize(defaultMaxSize);
-		}
+		m_Compression_TF.setMinimumSize(defaultMinSize);
+		m_Compression_TF.setMaximumSize(defaultMaxSize);
+		m_Name_TF.setMinimumSize(defaultMinSize);
+		m_Name_TF.setMaximumSize(defaultMaxSize);
+		m_Tension_TF.setMinimumSize(defaultMinSize);
+		m_Tension_TF.setMaximumSize(defaultMaxSize);
+		m_Impact_TF.setMinimumSize(defaultMinSize);
+		m_Impact_TF.setMaximumSize(defaultMaxSize);
+		m_LeadTime_TF.setMinimumSize(defaultMinSize);
+		m_LeadTime_TF.setMaximumSize(defaultMaxSize);
+		m_PartComplexity_TF.setMinimumSize(defaultMinSize);
+		m_PartComplexity_TF.setMaximumSize(defaultMaxSize);
+		m_Customizable_CB.setMinimumSize(defaultMinSize);
+		m_Customizable_CB.setMaximumSize(defaultMaxSize);
+		m_Materials_CB.setMinimumSize(defaultMinSize);
+		m_Materials_CB.setMaximumSize(defaultMaxSize);
+		m_Tolerance_TF.setMinimumSize(defaultMinSize);
+		m_Tolerance_TF.setMaximumSize(defaultMaxSize);
+		m_Finish_CB.setMinimumSize(defaultMinSize);
+		m_Finish_CB.setMaximumSize(defaultMaxSize);
 		
 		// Align parameter components
 		m_Compression_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -232,8 +243,10 @@ public class AddPrinterUI {
 							m_Tolerance_TF.getText(),
 							(String) m_Finish_CB.getSelectedItem()));
 					
-					//Refresh search results panel
+					//Refresh search results panel and the main frame.
 					m_MenuUI.getSearchResultsPanel().revalidate();
+					m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()-1, m_MenuUI.getMenu_F().getHeight()-1);
+					m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()+1, m_MenuUI.getMenu_F().getHeight()+1);
 					break;
 				default: JOptionPane.showMessageDialog(
 						m_Main_F, "Command: " + command,
