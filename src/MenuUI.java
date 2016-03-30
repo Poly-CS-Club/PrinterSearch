@@ -194,7 +194,7 @@ private void designSearchResult() {
 		// Convert values to Strings
 		currentPrinter = printerList.getPrinter(i-2);
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
-				currentPrinter.getPrinterName() + "",
+				currentPrinter.getPrinterName()+ "",
 				currentPrinter.getTension()+ "",
 				currentPrinter.getCompression()+ "",
 				currentPrinter.getImpact()+ "",

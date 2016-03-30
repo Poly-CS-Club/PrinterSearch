@@ -205,48 +205,67 @@ public class AddPrinterUI {
 	 */
 	private class ButtonListener implements ActionListener
 	{
-
 		@Override
 		public void actionPerformed(ActionEvent action) {
 			String command = action.getActionCommand();
+			boolean errorFlag = false;
 			switch(command)
 			{
-			    //TODO check all inputs to see if valid or not.
 			    //TODO create window or pop-up for invalid inputs...
 				case "Add New Printer":
+				    try
+				    {
+				    	//Checking for valid inputs
+				    	//TODO give a more descriptive error message, with exactly witch one is causeing the error.
+				    	Double.parseDouble(m_Tension_TF.getText());
+				    	Double.parseDouble(m_Compression_TF.getText());
+				    	Double.parseDouble(m_Impact_TF.getText());
+				    	Double.parseDouble(m_Tolerance_TF.getText());
+				    	Integer.parseInt(m_PartComplexity_TF.getText());
+				    	Integer.parseInt(m_LeadTime_TF.getText());
+				    }catch(NumberFormatException e)
+				    {
+				    	errorFlag = true;
+				    }
 					// Add printer to master printer database
-					m_Driver.addPrinter(
-							m_Name_TF.getText(), m_Tension_TF.getText(),
-							m_Compression_TF.getText(),
-							m_PartComplexity_TF.getText(),
-							(String) m_Materials_CB.getSelectedItem(),
-							m_Impact_TF.getText(), m_LeadTime_TF.getText(),
-							(String) m_Customizable_CB.getSelectedItem(),
-							m_Tolerance_TF.getText(),
-							(String) m_Finish_CB.getSelectedItem());
-					
-					// Inform user that the printer was successfully added
-					JOptionPane.showMessageDialog(
-							m_Main_F, "Printer Added to DataBase",
-							"Message", JOptionPane.PLAIN_MESSAGE);
-					
-					// Add new printer to search results panel
-					m_MenuUI.getSearchResultsPanel().add(new PrinterUI(
-					        m_MenuUI.getSearchResultsPanel().getComponentCount()+1,
-							m_MenuUI.FRAME_WIDTH, m_MenuUI.FRAME_HEIGHT,
-							m_Name_TF.getText(), m_Tension_TF.getText(), 
-							m_Compression_TF.getText(),
-							m_PartComplexity_TF.getText(), 
-							(String) m_Materials_CB.getSelectedItem(),
-							m_Impact_TF.getText(), m_LeadTime_TF.getText(),
-							(String) m_Customizable_CB.getSelectedItem(), 
-							m_Tolerance_TF.getText(),
-							(String) m_Finish_CB.getSelectedItem()));
-					
-					//Refresh search results panel and the main frame.
-					m_MenuUI.getSearchResultsPanel().revalidate();
-					m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()-1, m_MenuUI.getMenu_F().getHeight()-1);
-					m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()+1, m_MenuUI.getMenu_F().getHeight()+1);
+				    if(!errorFlag)
+				    {
+				    	m_Driver.addPrinter(
+								m_Name_TF.getText(), m_Tension_TF.getText(),
+								m_Compression_TF.getText(),
+								m_PartComplexity_TF.getText(),
+								(String) m_Materials_CB.getSelectedItem(),
+								m_Impact_TF.getText(), m_LeadTime_TF.getText(),
+								(String) m_Customizable_CB.getSelectedItem(),
+								m_Tolerance_TF.getText(),
+								(String) m_Finish_CB.getSelectedItem());
+						
+						// Inform user that the printer was successfully added
+						JOptionPane.showMessageDialog(
+								m_Main_F, "Printer Added to DataBase",
+								"Message", JOptionPane.PLAIN_MESSAGE);
+						
+						// Add new printer to search results panel
+						m_MenuUI.getSearchResultsPanel().add(new PrinterUI(
+						        m_MenuUI.getSearchResultsPanel().getComponentCount()+1,
+								m_MenuUI.FRAME_WIDTH, m_MenuUI.FRAME_HEIGHT,
+								m_Name_TF.getText(), m_Tension_TF.getText(), 
+								m_Compression_TF.getText(),
+								m_PartComplexity_TF.getText(), 
+								(String) m_Materials_CB.getSelectedItem(),
+								m_Impact_TF.getText(), m_LeadTime_TF.getText(),
+								(String) m_Customizable_CB.getSelectedItem(), 
+								m_Tolerance_TF.getText(),
+								(String) m_Finish_CB.getSelectedItem()));
+						
+						//Refresh search results panel and the main frame.
+						m_MenuUI.getSearchResultsPanel().revalidate();
+						m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()-1, m_MenuUI.getMenu_F().getHeight()-1);
+						m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()+1, m_MenuUI.getMenu_F().getHeight()+1);
+				    }else
+				    {
+				    	JOptionPane.showMessageDialog(m_Main_F, "Error one or more of the inputs are incompatible.", "Warning", JOptionPane.PLAIN_MESSAGE);
+				    }
 					break;
 				default: JOptionPane.showMessageDialog(
 						m_Main_F, "Command: " + command,

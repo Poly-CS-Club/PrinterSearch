@@ -226,6 +226,5 @@ public class Printer {
 		this.finish = finish;
 	}
 	
-	
 
 }
