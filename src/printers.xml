@@ -68,4 +68,16 @@
         <TOLERANCE>.125</TOLERANCE>
         <FINISH>Matte</FINISH>
     </printer>
+<printer>
+        <NAME>asdf</NAME>
+        <TENSION>1234</TENSION>
+        <COMPRESSION>1234</COMPRESSION>
+        <IMPACT>1232341234</IMPACT>
+        <PART_COMPLEXITY>1234</PART_COMPLEXITY>
+        <LEAD_TIME>2342234</LEAD_TIME>
+        <EOC>true</EOC>
+        <ROM>Aluminum</ROM>
+        <TOLERANCE>1234</TOLERANCE>
+        <FINISH>Matte</FINISH>
+    </printer>
 </PRINTERS>

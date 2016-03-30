@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.util.HashSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -99,6 +101,9 @@ public MenuUI()
 private void createComponents() {
 	// Instantiate GUI framework
 	m_Menu_F = new JFrame("Menu");
+	ImageIcon img = new ImageIcon("src\\printer-orange.png");
+	Image image = (img.getImage());
+	m_Menu_F.setIconImage(image);
 	m_Menu_P = new JPanel();
 	m_ToolBar = new JToolBar("ToolBar");
 	

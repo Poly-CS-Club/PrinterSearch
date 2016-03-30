@@ -5,9 +5,11 @@ import java.awt.FlowLayout;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -59,6 +61,9 @@ public class AddPrinterUI {
 	private void createComponents() {
 		// Instantiate window and button
 		m_Main_F = new JFrame("Add New Printers");
+		ImageIcon img = new ImageIcon("src\\printer-orange.png");
+		Image image = (img.getImage());
+		m_Main_F.setIconImage(image);
 		m_AddPrinter_B = new JButton("Add New Printer");
 		
 		// Instantiate test fields
