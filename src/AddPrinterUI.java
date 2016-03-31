@@ -107,7 +107,7 @@ public class AddPrinterUI {
 		
 		// Set up window
 		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		m_Main_F.setPreferredSize(new Dimension(frameWidth-m_MenuUI.getSearchParamPanel().getWidth()-5, frameHeight));
+		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
 		m_Main_F.setMinimumSize(new Dimension(frameWidth-m_MenuUI.getSearchParamPanel().getWidth()-5, 130));
 		m_Main_F.setLocation(
 				(screenWidth/2) - (frameWidth/2),
