@@ -127,7 +127,17 @@ public class Driver {
 
 		// Build list of Printer objects from XML file;
 		try{
+			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
+			String stringSearch = System.getProperty("os.name");
+			String keyword = "Mac";
 			File file = new File("src\\printers.xml");
+			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(found){
+				File fileChange = new File("src/printers.xml");	// Mac image path.
+				file = fileChange;
+			}
+			//File file = new File("src/printers.xml");
+			//File file = new File("src\\printers.xml");
 			documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			document = documentBuilder.parse(file);
@@ -361,7 +371,20 @@ public class Driver {
              */
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse("src\\printers.xml");
+			String stringSearch = System.getProperty("os.name");
+			String keyword = "Mac";
+			Document document = documentBuilder.parse("src\\printers.xml");;
+			StreamResult result = new StreamResult("src\\printers.xml");
+			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(found){
+				Document documentChange = documentBuilder.parse("src/printers.xml");	// Mac image path.
+				StreamResult resultChange = new StreamResult("src/printers.xml");	// Mac image path.
+				document = documentChange;
+				result = resultChange;
+			}
+
+			//Document document = documentBuilder.parse("src/printers.xml");		// Mac directory path.
+			//Document document = documentBuilder.parse("src\\printers.xml");		// Windows directory path.
             Element root = document.getDocumentElement();
 
             /*
@@ -427,7 +450,9 @@ public class Driver {
             Transformer transformer = transformerFactory.newTransformer();
 						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
   					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-            StreamResult result = new StreamResult("src\\printers.xml");
+
+			//StreamResult result = new StreamResult("src/printers.xml");	// Mac directory path.
+			//StreamResult result = new StreamResult("src\\printers.xml");	// Windows directory path.
             transformer.transform(source, result);
         } catch (Exception ex) {
             ex.printStackTrace();

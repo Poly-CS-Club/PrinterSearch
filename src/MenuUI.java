@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 
 import javax.swing.BorderFactory;
@@ -101,7 +102,16 @@ public MenuUI()
 private void createComponents() {
 	// Instantiate GUI framework
 	m_Menu_F = new JFrame("Menu");
-	ImageIcon img = new ImageIcon("src\\printer-orange.png");
+	String stringSearch = System.getProperty("os.name");
+	String keyword = "Mac";
+	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
+	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+	if(found){
+		ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
+		img = imgChange;
+	}
+	//ImageIcon img = new ImageIcon("src/printer-orange.png");	// Mac image path.
+	//ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
 	Image image = (img.getImage());
 	m_Menu_F.setIconImage(image);
 	m_Menu_P = new JPanel();
@@ -394,7 +404,7 @@ private void addSearchParamComponents()
 /**
  * Creates and adds a label to the search parameter panel
  * 
- * @param searchParameter the String contained in the label
+ * @param text the String contained in the label
  */
 private void addSearchLabel(String text)
 {

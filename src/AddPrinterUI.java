@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -61,7 +62,17 @@ public class AddPrinterUI {
 	private void createComponents() {
 		// Instantiate window and button
 		m_Main_F = new JFrame("Add New Printers");
-		ImageIcon img = new ImageIcon("src\\printer-orange.png");
+
+		String stringSearch = System.getProperty("os.name");
+		String keyword = "Mac";
+		ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
+		Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+		if(found){
+			ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
+			img = imgChange;
+		}
+		//ImageIcon img = new ImageIcon("src/printer-orange.png");		// Mac directory image path.
+		//ImageIcon img = new ImageIcon("src\\printer-orange.png");		// Windows directory image path.
 		Image image = (img.getImage());
 		m_Main_F.setIconImage(image);
 		m_AddPrinter_B = new JButton("Add New Printer");
