@@ -284,7 +284,7 @@ public void displaySearchResults(ArrayList<Printer> outputList){
  */
 private String highlightMatch(Printer printer, int matchIndex) {
 	String parameter;
-	String startTags = "<html><i><font color=\"rgb(0, 137, 179)\">";
+	String startTags = "<html><i><font color=\"rgb(0, 204, 0)\">";
 	String endTags = "</font></i></html>";
 	
 	switch (matchIndex) {
@@ -635,6 +635,7 @@ private class ButtonListener implements ActionListener
 		switch(command)
 		{
 			case "Filter Results": //TODO implement this.
+				printerList.clearMatches();
 				double complexity = 0;
 				// STEP ONE: CLEAR CURRENT RESULTS
 				
