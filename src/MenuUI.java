@@ -355,7 +355,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			startTags + printer.materialsString() + endTags;
 		}
 		else {
-			parameter = printer.customizableString() + "";
+			parameter = printer.materialsString() + "";
 		}
 		break;
 	case 7:
