@@ -290,7 +290,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter = 
-			"<html><i><u><font color=\"red\">" + printer.getTension() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getTension() + "</i></html>";
 		}
 		else {
 			parameter = printer.getTension() + "";
@@ -300,7 +300,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.getCompression() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getCompression() + "</i></html>";
 		}
 		else {
 			parameter = printer.getCompression() + "";
@@ -310,7 +310,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.getImpact() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getImpact() + "</i></html>";
 		}
 		else {
 			parameter = printer.getImpact() + "";
@@ -320,7 +320,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.getComplexity() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getComplexity() + "</i></html>";
 		}
 		else {
 			parameter = printer.getComplexity() + "";
@@ -330,7 +330,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.getLeadTime() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getLeadTime() + "</i></html>";
 		}
 		else {
 			parameter = printer.getLeadTime() + "";
@@ -340,7 +340,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.customizableString() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.customizableString() + "</i></html>";
 		}
 		else {
 			parameter = printer.customizableString() + "";
@@ -350,7 +350,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.materialsString() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.materialsString() + "</i></html>";
 		}
 		else {
 			parameter = printer.customizableString() + "";
@@ -360,7 +360,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.getTolerance() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getTolerance() + "</i></html>";
 		}
 		else {
 			parameter = printer.getTolerance() + "";
@@ -370,7 +370,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			"<html><i><u><font color=\"red\">" + printer.getFinish() + "</font></u></i></html>";
+			"<html><i><font color=\"rgb(0, 204, 0)\">" + printer.getFinish() + "</i></html>";
 		}
 		else {
 			parameter = printer.getFinish() + "";
