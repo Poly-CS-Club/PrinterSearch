@@ -23,7 +23,8 @@ public class Printer {
 	/* Add boolean? Could make associative array with hash.
 	 * This is for sorting the final table and maybe adding checkboxes to the table like: "Meets Spec: [X]"
 	 */
-	private boolean[] matches;
+	//private boolean[] matches;
+	private int[] matches;
 	
 	/**
 	 * Instantiates a printer with default values.
@@ -40,9 +41,9 @@ public class Printer {
 		materials = new HashSet<String>();
 		tolerance = 0;
 		finish = "";
-		matches = new boolean[9];
+		matches = new int[9];
 		for (int index=0; index<9; index++)
-			matches[index] = false;
+			matches[index] = 0;
 		
 	}
 
@@ -74,24 +75,30 @@ public class Printer {
 		this.tolerance = tolerance;
 		this.finish = finish;
 
-		matches = new boolean[9];
+		matches = new int[9];
 	}
 
-	public boolean[] getMatches() {
+	public int[] getMatches() {
 		return matches;
 	}
 	
 	public int getTotalMatches(){
 		int numMatches = 0;
-		for(int i=0;i<matches.length;i++)
-			if(matches[i] == true)
+		for(int i=0;i<matches.length;i++)		// If match result is greater than 0, as in it has a weighted match, add that up to the total!
+			if(matches[i] > 0)
 				numMatches++;
+
 		
 		return numMatches;
 	}
 
-	public void setMatches(boolean value, int index) {
-		matches[index] = value;
+	/**
+	 * Set matches takes the int weight value given to set that specified index value weighted result value.
+	 * @param valueWeight	Weighted value to be set for indexed value.
+	 * @param index	Indexed value receiving the weight.
+     */
+	public void setMatches(int valueWeight, int index) {
+		matches[index] = valueWeight;
 	}
 	
 	public String getPrinterName() {
