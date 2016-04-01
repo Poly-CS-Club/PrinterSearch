@@ -224,36 +224,59 @@ public class AddPrinterUI {
 		@Override
 		public void actionPerformed(ActionEvent action) {
 			String command = action.getActionCommand();
-			boolean errorFlag = false;
+			boolean errorFlag = false, emptyField = false;
 			switch(command)
 			{
 			    //TODO create window or pop-up for invalid inputs...
 				case "Add New Printer":
+					String tension = null;
+					String compression = null;
+					String impact = null;
+					String tolerance = null;
+					String partComplexity = null;
+					String leadTime = null;
+					String name = null;
+					
+					tension = m_Tension_TF.getText();
+					compression = m_Compression_TF.getText();
+					impact = m_Impact_TF.getText();
+					tolerance = m_Tolerance_TF.getText();
+					partComplexity = m_PartComplexity_TF.getText();
+					leadTime = m_LeadTime_TF.getText();
+					name = m_Name_TF.getText();
+					
+					if(tension.equals("") || compression.equals("") || impact.equals("") || tolerance.equals("") ||
+							partComplexity.equals("") || leadTime.equals("") || name.equals(""))
+					{
+						emptyField = true;
+					}
+					
 				    try
 				    {
 				    	//Checking for valid inputs
 				    	//TODO give a more descriptive error message, with exactly witch one is causeing the error.
-				    	Double.parseDouble(m_Tension_TF.getText());
-				    	Double.parseDouble(m_Compression_TF.getText());
-				    	Double.parseDouble(m_Impact_TF.getText());
-				    	Double.parseDouble(m_Tolerance_TF.getText());
-				    	Integer.parseInt(m_PartComplexity_TF.getText());
-				    	Integer.parseInt(m_LeadTime_TF.getText());
+				    	Double.parseDouble(tension);
+				    	Double.parseDouble(compression);
+				    	Double.parseDouble(impact);
+				    	Double.parseDouble(tolerance);
+				    	Integer.parseInt(partComplexity);
+				    	Integer.parseInt(leadTime);
 				    }catch(NumberFormatException e)
 				    {
 				    	errorFlag = true;
 				    }
 					// Add printer to master printer database
-				    if(!errorFlag)
+				    if(!errorFlag && !emptyField)
 				    {
 				    	m_Driver.addPrinter(
-								m_Name_TF.getText(), m_Tension_TF.getText(),
-								m_Compression_TF.getText(),
-								m_PartComplexity_TF.getText(),
+								name,
+								tension,
+								compression,
+								partComplexity,
 								(String) m_Materials_CB.getSelectedItem(),
-								m_Impact_TF.getText(), m_LeadTime_TF.getText(),
+								impact, leadTime,
 								(String) m_Customizable_CB.getSelectedItem(),
-								m_Tolerance_TF.getText(),
+								tolerance,
 								(String) m_Finish_CB.getSelectedItem());
 						
 						// Inform user that the printer was successfully added
@@ -265,22 +288,25 @@ public class AddPrinterUI {
 						m_MenuUI.getSearchResultsPanel().add(new PrinterUI(
 						        m_MenuUI.getSearchResultsPanel().getComponentCount()+1,
 								m_MenuUI.FRAME_WIDTH, m_MenuUI.FRAME_HEIGHT,
-								m_Name_TF.getText(), m_Tension_TF.getText(), 
-								m_Compression_TF.getText(),
-								m_PartComplexity_TF.getText(), 
+								name, tension, 
+								compression,
+								partComplexity, 
 								(String) m_Materials_CB.getSelectedItem(),
-								m_Impact_TF.getText(), m_LeadTime_TF.getText(),
+								impact, leadTime,
 								(String) m_Customizable_CB.getSelectedItem(), 
-								m_Tolerance_TF.getText(),
+								tolerance,
 								(String) m_Finish_CB.getSelectedItem()));
 						
 						//Refresh search results panel and the main frame.
 						m_MenuUI.getSearchResultsPanel().revalidate();
 						m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()-1, m_MenuUI.getMenu_F().getHeight()-1);
 						m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()+1, m_MenuUI.getMenu_F().getHeight()+1);
-				    }else
+				    }else if(errorFlag && !emptyField)
 				    {
 				    	JOptionPane.showMessageDialog(m_Main_F, "Error one or more of the inputs are incompatible.", "Warning", JOptionPane.PLAIN_MESSAGE);
+				    }else
+				    {
+				    	JOptionPane.showMessageDialog(m_Main_F, "Warning all data feilds must have parameters.", "Warning", JOptionPane.PLAIN_MESSAGE);			    	
 				    }
 					break;
 				default: JOptionPane.showMessageDialog(
