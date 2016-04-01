@@ -256,15 +256,15 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 		currentPrinter = outputList.get(i);
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
 				currentPrinter.getPrinterName() + "",
-				currentPrinter.getTension()+ "",
-				currentPrinter.getCompression()+ "",
-				currentPrinter.getImpact()+ "",
-				currentPrinter.getComplexity()+ "",
-				currentPrinter.getLeadTime()+ "",
-				currentPrinter.customizableString(),
-				currentPrinter.materialsString(),
-				currentPrinter.getTolerance()+ "",
-				currentPrinter.getFinish()+ ""));
+				highlightMatch(currentPrinter, 0),
+				highlightMatch(currentPrinter, 1),
+				highlightMatch(currentPrinter, 2),
+				highlightMatch(currentPrinter, 3),
+				highlightMatch(currentPrinter, 4),
+				highlightMatch(currentPrinter, 5),
+				highlightMatch(currentPrinter, 6),
+				highlightMatch(currentPrinter, 7),
+				highlightMatch(currentPrinter, 8)));
 	}
 	
 	// Add results to scroll pane
@@ -273,6 +273,104 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 	getScrollPane().setViewportView(m_SearchResult_P);
 	getScrollPane().setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 	
+}
+
+/**
+ * Highlights matches on screen through font differences.
+ * 
+ * @param printer     the printer whose parameters are being checked
+ * @param matchIndex  the index of the parameter in the match array
+ * @return            the String of the parameter
+ */
+private String highlightMatch(Printer printer, int matchIndex) {
+	String parameter;
+	
+	switch (matchIndex) {
+	case 0:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter = 
+			"<html><i><u>" + printer.getTension() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getTension() + "";
+		}
+			break;
+	case 1:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.getCompression() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getCompression() + "";
+		}
+		break;
+	case 2:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.getImpact() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getImpact() + "";
+		}
+		break;
+	case 3:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.getComplexity() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getComplexity() + "";
+		}
+		break;
+	case 4:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.getLeadTime() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getLeadTime() + "";
+		}
+		break;
+	case 5:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.customizableString() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.customizableString() + "";
+		}
+		break;
+	case 6:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.materialsString() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.customizableString() + "";
+		}
+		break;
+	case 7:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.getTolerance() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getTolerance() + "";
+		}
+		break;
+	case 8:
+		if (printer.getMatches()[matchIndex] == true) {
+			parameter =
+			"<html><i><u>" + printer.getFinish() + "</u></i></html>";
+		}
+		else {
+			parameter = printer.getFinish() + "";
+		}
+		break;
+	default: parameter = "";
+	}
+	
+	return parameter;
 }
 
 /**
