@@ -55,8 +55,7 @@ public class MenuUI extends JFrame
 	private int screenHeight;
 
 	public final String[] searchParameters = 
-        {"Search", "Compression", "Tension", "Tolerance", "Impact",
-         "Part Complexity", "Customizable", "Material", "Finish"};
+        {"Search", "Compression", "Tension", "Tolerance", "Impact", "Material", "Finish", ""};
 
 /**
  * Creates window for Printer Search Program
