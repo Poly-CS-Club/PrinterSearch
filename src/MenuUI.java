@@ -122,11 +122,11 @@ private void createComponents() {
 	m_PartComplexity_TF = new JTextField();
 	
 	// Instantiate ranged text fields
-	m_Compression_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
-	m_Tolerance_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
-	m_Tension_RTF = new RangedTextField<Double>(9.999, 0.000, 0.001);
-	m_Impact_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
-	m_LeadTime_RTF = new RangedTextField<Double>(200.0, 0.0, .001);
+	m_Compression_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
+	m_Tolerance_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
+	m_Tension_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
+	m_Impact_RTF = new RangedTextField<Double>(0.000, 0.000, .001);
+	m_LeadTime_RTF = new RangedTextField<Double>(200.0, 0.000, .001);
 	
 	// Instantiate combo boxes
 	// TODO load these RangeOfMaterials to a file or something...
@@ -222,8 +222,6 @@ private void designSearchResult() {
 	}
 	
 	// Add results to scroll pane
-	getScrollPane().setVerticalScrollBarPolicy(
-			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	getScrollPane().setViewportView(m_SearchResult_P);
 	getScrollPane().setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 }
@@ -268,8 +266,6 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 	}
 	
 	// Add results to scroll pane
-	getScrollPane().setVerticalScrollBarPolicy(
-			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	getScrollPane().setViewportView(m_SearchResult_P);
 	getScrollPane().setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
 	

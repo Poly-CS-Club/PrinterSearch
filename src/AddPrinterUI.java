@@ -306,7 +306,7 @@ public class AddPrinterUI {
 				    	JOptionPane.showMessageDialog(m_Main_F, "Error one or more of the inputs are incompatible.", "Warning", JOptionPane.PLAIN_MESSAGE);
 				    }else
 				    {
-				    	JOptionPane.showMessageDialog(m_Main_F, "Warning all data feilds must have parameters.", "Warning", JOptionPane.PLAIN_MESSAGE);			    	
+				    	JOptionPane.showMessageDialog(m_Main_F, "Warning all data fields must have parameters.", "Warning", JOptionPane.PLAIN_MESSAGE);			    	
 				    }
 					break;
 				default: JOptionPane.showMessageDialog(
