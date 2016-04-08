@@ -33,42 +33,37 @@ import javax.swing.JScrollPane;
  * @see     PrinterUI
  * @see     AddPrinterUI
  */
-public class MenuUI
+public class MenuUI extends JFrame
 {
-	
-private JFrame m_Menu_F;
-private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
-private JButton m_FilterResults_B, m_ClearResults_B;
-private JTextField m_BroadSearch_TF, m_PartComplexity_TF;
-private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
-private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
+	private JFrame m_Menu_F;
+	private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
+	private JButton m_FilterResults_B, m_ClearResults_B;
+	private JTextField m_BroadSearch_TF, m_PartComplexity_TF;
+	private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
+	private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
                                 m_Tolerance_RTF, m_Impact_RTF;
-private HashSet<String> m_RangeOfMaterials;
-private JToolBar m_ToolBar;
-private JScrollPane m_ScrollPane;
-private Driver m_Driver;
-private MenuUI m_MenuUI;
-private PrinterList printerList;
+	private HashSet<String> m_RangeOfMaterials;
+	private JToolBar m_ToolBar;
+	private JScrollPane m_ScrollPane;
+	private Driver m_Driver;
+	private MenuUI m_MenuUI;
+	private PrinterList printerList;
 
-public final int FRAME_WIDTH;
-public final int FRAME_HEIGHT;
-private int screenWidth;
-private int screenHeight;
+	public final int FRAME_WIDTH;
+	public final int FRAME_HEIGHT;
+	private int screenWidth;
+	private int screenHeight;
 
-public final String[] searchParameters = 
+	public final String[] searchParameters = 
         {"Search", "Compression", "Tension", "Tolerance", "Impact",
          "Part Complexity", "Customizable", "Material", "Finish"};
-
-public static void main(String args [])
-{
-	new MenuUI();
-}
 
 /**
  * Creates window for Printer Search Program
  */
-public MenuUI()
+public MenuUI(String name)
 {
+	super(name);
 	GraphicsDevice graphicsDevice;
 	PrinterList printerList;
 	
@@ -85,14 +80,13 @@ public MenuUI()
     designComponents(screenWidth, screenHeight);
     addActionListeners();
     addComponents();
-    m_Menu_F.pack();
-    m_Menu_F.setVisible(true);
     m_MenuUI = this;
     
 	// Instantiate non-GUI objects
     m_Driver = new Driver();
 	m_RangeOfMaterials = new HashSet<String>();
 	printerList = Driver.generatePrinterList();
+	m_Menu_F = this;
 }
 
 /**
@@ -100,7 +94,6 @@ public MenuUI()
  */
 private void createComponents() {
 	// Instantiate GUI framework
-	m_Menu_F = new JFrame("Menu");
 	String stringSearch = System.getProperty("os.name");
 	String keyword = "Mac";
 	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
@@ -112,7 +105,7 @@ private void createComponents() {
 	//ImageIcon img = new ImageIcon("src/printer-orange.png");	// Mac image path.
 	//ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
 	Image image = (img.getImage());
-	m_Menu_F.setIconImage(image);
+	setIconImage(image);
 	m_Menu_P = new JPanel();
 	m_ToolBar = new JToolBar("ToolBar");
 	
@@ -159,13 +152,13 @@ private void designComponents(int screenWidth, int screenHeight) {
 	 * Added 50 to height because mac interface will not show filter button.
 	 * Set to resizable to accommodate for filter button at bottom.
 	 */
-	m_Menu_F.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//m_Menu_F.setLayout(new BorderLayout(5,5));
-	m_Menu_F.setSize(FRAME_WIDTH, (FRAME_HEIGHT+50));
-	m_Menu_F.setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
-	m_Menu_F.setMaximumSize(new Dimension(FRAME_WIDTH , (FRAME_HEIGHT+50)));
-	m_Menu_F.setLocationRelativeTo(null);						
-	m_Menu_F.setResizable(true);
+	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//setLayout(new BorderLayout(5,5));
+	setSize(FRAME_WIDTH, (FRAME_HEIGHT+50));
+	setMinimumSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+	setMaximumSize(new Dimension(FRAME_WIDTH , (FRAME_HEIGHT+50)));
+	setLocationRelativeTo(null);						
+	setResizable(true);
 
 	// Set up scroll pane
 	getScrollPane().setOpaque(false);
@@ -276,7 +269,7 @@ public void displaySearchResults(ArrayList<Printer> outputList){
  */
 private String highlightMatch(Printer printer, int matchIndex) {
 	String parameter;
-	String startTags = "<html><i><font color=\"rgb(0, 204, 0)\">";
+	String startTags = "<html><i><font color=\"rgb(0, 120, 0)\">";
 	String endTags = "</font></i></html>";
 	
 	switch (matchIndex) {
@@ -463,8 +456,8 @@ private void addComponents()
 	m_Menu_P.add(m_ToolBar, BorderLayout.PAGE_START);
 	m_Menu_P.add(getSearchParamPanel(), BorderLayout.LINE_START);
 	m_Menu_P.add(getScrollPane(), BorderLayout.LINE_END);
-	m_Menu_F.add(m_Menu_P);
-	m_Menu_F.setPreferredSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
+	add(m_Menu_P);
+	setPreferredSize(new Dimension(FRAME_WIDTH , FRAME_HEIGHT));
 }
 
 /**
@@ -650,7 +643,7 @@ private class ButtonListener implements ActionListener
 									m_SearchResult_P.removeAll();
 									designSearchResult();
 									m_SearchResult_P.revalidate();
-									m_Menu_F.revalidate();
+									revalidate();
 				break;
 
 			case "Help": //TODO Help Window or Pop-up

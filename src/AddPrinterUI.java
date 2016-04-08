@@ -299,8 +299,8 @@ public class AddPrinterUI {
 						
 						//Refresh search results panel and the main frame.
 						m_MenuUI.getSearchResultsPanel().revalidate();
-						m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()-1, m_MenuUI.getMenu_F().getHeight()-1);
-						m_MenuUI.getMenu_F().setSize(m_MenuUI.getMenu_F().getWidth()+1, m_MenuUI.getMenu_F().getHeight()+1);
+						m_MenuUI.setSize(m_MenuUI.getWidth()-1, m_MenuUI.getHeight()-1);
+						m_MenuUI.setSize(m_MenuUI.getWidth()+1, m_MenuUI.getHeight()+1);
 				    }else if(errorFlag && !emptyField)
 				    {
 				    	JOptionPane.showMessageDialog(m_Main_F, "Error one or more of the inputs are incompatible.", "Warning", JOptionPane.PLAIN_MESSAGE);
