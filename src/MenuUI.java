@@ -1,13 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -93,6 +87,18 @@ public MenuUI(String name)
  */
 private void createComponents() {
 	// Instantiate GUI framework
+	String stringSearch = System.getProperty("os.name");
+	String keyword = "Mac";
+	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
+	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+	if(found){
+		ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
+		img = imgChange;
+	}
+	//ImageIcon img = new ImageIcon("src/printer-orange.png");	// Mac image path.
+	//ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
+	Image image = (img.getImage());
+	setIconImage(image);
 	m_Menu_P = new JPanel();
 	m_ToolBar = new JToolBar("ToolBar");
 	
@@ -125,20 +131,7 @@ private void createComponents() {
  * Sets GUI component values.
  */
 private void designComponents(int screenWidth, int screenHeight) {
-
-	String stringSearch = System.getProperty("os.name");
-	String keyword = "Mac";
-	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
-	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-	if(found){
-		ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
-		img = imgChange;
-	}
-	//ImageIcon img = new ImageIcon("src/printer-orange.png");	// Mac image path.
-	//ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
-	Image image = (img.getImage());
-	setIconImage(image);
-	
+    
 	// Set panel layout and size
 	m_Menu_P.setLayout(new BorderLayout(5,5));
 	m_Menu_P.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -567,8 +560,59 @@ private class ComboListener implements ActionListener
  * @author Joshua Becker (and other team members:) Jacob Leonard
  *
  */
-private class ButtonListener implements ActionListener
+private class ButtonListener implements ActionListener, Printable
 {
+
+	PrinterJob job = PrinterJob.getPrinterJob();
+	/**
+	 * Prints the page at the specified index into the specified
+	 * {@link Graphics} context in the specified
+	 * format.  A <code>PrinterJob</code> calls the
+	 * <code>Printable</code> interface to request that a page be
+	 * rendered into the context specified by
+	 * <code>graphics</code>.  The format of the page to be drawn is
+	 * specified by <code>pageFormat</code>.  The zero based index
+	 * of the requested page is specified by <code>pageIndex</code>.
+	 * If the requested page does not exist then this method returns
+	 * NO_SUCH_PAGE; otherwise PAGE_EXISTS is returned.
+	 * The <code>Graphics</code> class or subclass implements the
+	 * {@link PrinterGraphics} interface to provide additional
+	 * information.  If the <code>Printable</code> object
+	 * aborts the print job then it throws a {@link PrinterException}.
+	 *
+	 * @param graphics   the context into which the page is drawn
+	 * @param pageFormat the size and orientation of the page being drawn
+	 * @param pageIndex  the zero based index of the page to be drawn
+	 * @return PAGE_EXISTS if the page is rendered successfully
+	 * or NO_SUCH_PAGE if <code>pageIndex</code> specifies a
+	 * non-existent page.
+	 * @throws PrinterException thrown when the print job is terminated.
+	 */
+	@Override
+	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+		// We have only one page, and 'page'
+		// is zero-based
+		if (pageIndex > 0) {
+			return NO_SUCH_PAGE;
+		}
+
+
+		// User (0,0) is typically outside the
+		// imageable area, so we must translate
+		// by the X and Y values in the PageFormat
+		// to avoid clipping.
+		Graphics2D g2d = (Graphics2D)graphics;
+		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+		// Now we perform our rendering
+		graphics.drawString("I KNOW WHAT YOU DID LAST SUMMER TREVOR", 100, 100);
+		// HERE IS WHERE WE WOULD RETRIEVE XML ATTRIBUTES AND DO HARD-CODED PROPER FORMATTING TO HAVE THE VENDOR INFO PRINTED.
+
+		// tell the caller that this page is part
+		// of the printed document
+		return PAGE_EXISTS;
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
@@ -628,7 +672,17 @@ private class ButtonListener implements ActionListener
 			case "Add Printer": new AddPrinterUI(m_Menu_F, m_Driver, m_MenuUI);
 				break;
 			case "Export": 
-				//TODO add export feature here...
+				// Printing portion for printing the results from the results.
+				PrinterJob job = PrinterJob.getPrinterJob();
+				job.setPrintable(this);
+				boolean ok = job.printDialog();
+				if (ok) {
+					try {
+						job.print();
+					} catch (PrinterException ex) {
+              /* The job did not successfully complete */
+					}
+				}
 				break;
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 				break;
