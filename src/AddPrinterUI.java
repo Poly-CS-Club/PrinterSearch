@@ -288,7 +288,7 @@ public class AddPrinterUI {
 						m_MenuUI.getSearchResultsPanel().add(new PrinterUI(
 						        m_MenuUI.getSearchResultsPanel().getComponentCount()+1,
 								m_MenuUI.FRAME_WIDTH, m_MenuUI.FRAME_HEIGHT,
-								name, tension, 
+								name, 
 								compression,
 								partComplexity, 
 								(String) m_Materials_CB.getSelectedItem(),
