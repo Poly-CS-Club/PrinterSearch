@@ -131,7 +131,9 @@ public class PrinterList {
 				printer.setMatches(1, 4);
 				//System.out.println("Weight of 1 added!");
 			}
-			if(materials.equals(printer.materialsString())) {
+
+			String printerMaterials = printer.materialsString().replaceAll("\\<.*?>","");
+			if(materials.equalsIgnoreCase(printerMaterials)) {
 				printer.setMatches(1, 5);
 				//System.out.println("Weight of 1 added!");
 			}
@@ -150,9 +152,12 @@ public class PrinterList {
 	}
 	public void clearMatches()
 	{
-		for(Printer printer : printerList)
-		{
-			printer.setMatches(0,  0);
+		for(Printer printer : printerList){
+			int[] temp = printer.getMatches();
+			for(int i=0;i<temp.length;i++){
+				temp[i] = 0;
+			}
 		}
+			
 	}
 }
