@@ -290,9 +290,9 @@ public class Driver {
             name.appendChild(document.createTextNode(printerName));
             newPrinter.appendChild(name);
 
-						Element vendor = document.createElement("VENDOR");
-						vendor.appendChild(document.createTextNode(vendor));
-						newPrinter.appendChild(vendor);
+						Element vendors = document.createElement("VENDOR");
+						vendors.appendChild(document.createTextNode(vendor));
+						newPrinter.appendChild(vendors);
 
             Element tension = document.createElement("TENSION");
             tension.appendChild(document.createTextNode(printerTension));

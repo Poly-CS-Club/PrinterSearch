@@ -268,7 +268,7 @@ public class AddPrinterUI {
 					// Add printer to master printer database
 				    if(!errorFlag && !emptyField)
 				    {
-				    	m_Driver.addPrinter(
+				    	/*m_Driver.addPrinter(
 								name,
 								tension,
 								compression,
@@ -277,7 +277,7 @@ public class AddPrinterUI {
 								impact, leadTime,
 								(String) m_Customizable_CB.getSelectedItem(),
 								tolerance,
-								(String) m_Finish_CB.getSelectedItem());
+								(String) m_Finish_CB.getSelectedItem());*/
 						
 						// Inform user that the printer was successfully added
 						JOptionPane.showMessageDialog(
