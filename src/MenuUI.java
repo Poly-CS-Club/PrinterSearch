@@ -93,18 +93,6 @@ public MenuUI(String name)
  */
 private void createComponents() {
 	// Instantiate GUI framework
-	String stringSearch = System.getProperty("os.name");
-	String keyword = "Mac";
-	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
-	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-	if(found){
-		ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
-		img = imgChange;
-	}
-	//ImageIcon img = new ImageIcon("src/printer-orange.png");	// Mac image path.
-	//ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
-	Image image = (img.getImage());
-	setIconImage(image);
 	m_Menu_P = new JPanel();
 	m_ToolBar = new JToolBar("ToolBar");
 	
@@ -137,7 +125,20 @@ private void createComponents() {
  * Sets GUI component values.
  */
 private void designComponents(int screenWidth, int screenHeight) {
-    
+
+	String stringSearch = System.getProperty("os.name");
+	String keyword = "Mac";
+	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
+	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+	if(found){
+		ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
+		img = imgChange;
+	}
+	//ImageIcon img = new ImageIcon("src/printer-orange.png");	// Mac image path.
+	//ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.
+	Image image = (img.getImage());
+	setIconImage(image);
+	
 	// Set panel layout and size
 	m_Menu_P.setLayout(new BorderLayout(5,5));
 	m_Menu_P.setSize(FRAME_WIDTH, FRAME_HEIGHT);
