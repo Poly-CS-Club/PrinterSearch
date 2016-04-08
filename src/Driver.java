@@ -17,11 +17,11 @@ import javax.xml.transform.dom.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 
-/** 
+/**
  * A test of an implementation of the PrinterList class by
  * allowing the user to add printers to the printer list and searching
  * the subsequent list.
- * 
+ *
  * @author  Jake Leonard, Trevor Forrey, (others on team), Marcinina Alvaran
  * @version (TODO: to be included by original programmer)
  * @see PrinterList
@@ -110,7 +110,7 @@ public class Driver {
 
 	/**
 	 * Generates printer list from XML file and returns list to calling method.
-	 * 
+	 *
 	 * @return the printer list generated from XML file
 	 */
 	public static PrinterList generatePrinterList(){
@@ -121,8 +121,8 @@ public class Driver {
 		Node nNode;
 		Element eElement;
 		PrinterList printerList;
-		
-		
+
+
 		printerList = new PrinterList();
 
 		// Build list of Printer objects from XML file;
@@ -141,7 +141,7 @@ public class Driver {
 			documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			document = documentBuilder.parse(file);
-			
+
 			// Display listed printers in console
 			System.out.println(
 					"Root element:" +
@@ -168,7 +168,7 @@ public class Driver {
 			}
 		return printerList;
 	}
-	
+
     /**
      * Iterates through the child-nodes of "printer" tag strings,
      * converts to appropriate data type, and then printer to console
@@ -177,21 +177,24 @@ public class Driver {
 	private static void displayPrinterNodes(
 			Node node, PrinterList printers)
 	{
-		String name;
+		String name, vendor;
 		double tension, compression, impact, tolerance, complexity, leadTime;
 		boolean customizable;
 		String finish = "", materialsString = "";
 		String[] materialsArray;
 		HashSet<String> materialsSet = new HashSet<String>();
 		Element eElement;
-			
+
 		// Retrieve parameter info from listed printers
 		if(node.getNodeType() == Node.ELEMENT_NODE)
 		{
 			eElement = (Element)node;
 			name = getString("NAME", eElement);
 			System.out.println(name);
-			
+
+			vendor = getString("VENDOR", eElement);
+			System.out.println(vendor);
+
 			tension = Double.parseDouble(getString("TENSION", eElement));
 			System.out.println(tension);
 
@@ -201,14 +204,14 @@ public class Driver {
 
 			impact = Double.parseDouble(getString("IMPACT", eElement));
 			System.out.println(impact);
-			
+
 			complexity = Double.parseDouble(
 					getString("PART_COMPLEXITY", eElement));
 			System.out.println(complexity);
-			
+
 			leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
 			System.out.println(leadTime);
-			
+
 			customizable = Boolean.valueOf((getString("EOC", eElement)));
 			System.out.println(customizable);
 
@@ -223,7 +226,7 @@ public class Driver {
 			System.out.println(finish);
 
 			printers.addPrinter(new Printer(
-					name, tension, compression, impact, complexity,
+					name, vendor, tension, compression, impact, complexity,
 					leadTime, customizable, materialsSet, tolerance, finish));
 			System.out.println(
 					"Added: " +
@@ -232,126 +235,9 @@ public class Driver {
 	}
 
 
-	/**
-	 * Adds a printer element to printers.xml based on user input.
-     */
-    public void addPrinter() {
-    	Scanner scanner = new Scanner(System.in);
-    	DocumentBuilderFactory documentBuilderFactory;
-    	DocumentBuilder documentBuilder;
-    	Document document;
-    	Element root, newPrinter;
-
-        System.out.println("\nYou Are Adding A New Printer\n");
-
-        /*
-         * Taking in printer parameters from user
-         */
-        System.out.println("Name of printer: ");
-        String printerName = scanner.nextLine();
-
-        System.out.println("Tension: ");
-        double printerTension = scanner.nextDouble();
-
-        System.out.println("Compression: ");
-        double printerCompression = scanner.nextDouble();
-
-        System.out.println("Impact: ");
-        double printerImpact = scanner.nextDouble();
-
-        System.out.println("Complexity: ");
-        double printerComplexity = scanner.nextDouble();
-
-        System.out.println("Lead Time: ");
-        double printerLeadTime = scanner.nextDouble();
-
-        // TODO Will need to better validate this input.
-        System.out.println("Ease of Customizing (true/false): ");
-        boolean printerEaseOfChange = scanner.nextBoolean();
-
-        System.out.println("Tolerance: ");
-        double printerTolerance = scanner.nextDouble();
-
-        System.out.println("Desired Finish Type: ");
-        scanner.nextLine();
-        String printerFinish = scanner.nextLine();
-
-
-        try {
-            /*
-             * Creates link to xml file
-             */
-            documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            document = documentBuilder.parse("printers.xml");
-            root = document.getDocumentElement();
-
-            /*
-             * Creates printer root element
-             */
-            newPrinter = document.createElement("printer");
-
-
-            /*
-             * Inserts user given parameters into the new printer xml element in the following order:
-             *
-             * Creates element to represent attribute of printer,
-             * appends child element that holds value of the attribute,
-             * appends element to the new printer element
-             */
-            Element name = document.createElement("NAME");
-            name.appendChild(document.createTextNode(printerName));
-            newPrinter.appendChild(name);
-
-            Element tension = document.createElement("TENSION");
-            tension.appendChild(document.createTextNode(Double.toString(printerTension)));
-            newPrinter.appendChild(tension);
-
-            Element compression = document.createElement("COMPRESSION");
-            compression.appendChild(document.createTextNode(Double.toString(printerCompression)));
-            newPrinter.appendChild(compression);
-
-            Element impact = document.createElement("IMPACT");
-            impact.appendChild(document.createTextNode(Double.toString(printerImpact)));
-            newPrinter.appendChild(impact);
-
-            Element leadTime = document.createElement("LEADTIME");
-            leadTime.appendChild(document.createTextNode(Double.toString(printerLeadTime)));
-            newPrinter.appendChild(leadTime);
-
-            Element easeOfChange = document.createElement("EASEOFCHANGE");
-            easeOfChange.appendChild(document.createTextNode(Boolean.toString(printerEaseOfChange)));
-            newPrinter.appendChild(easeOfChange);
-
-            Element tolerance = document.createElement("TOLERANCE");
-            tolerance.appendChild(document.createTextNode(Double.toString(printerTolerance)));
-            newPrinter.appendChild(tolerance);
-
-            Element finish = document.createElement("FINISH");
-            finish.appendChild(document.createTextNode(printerFinish));
-            newPrinter.appendChild(finish);
-
-
-            root.appendChild(newPrinter);
-
-
-            DOMSource source = new DOMSource(document);
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-  					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-            StreamResult result = new StreamResult("printers.xml");
-            transformer.transform(source, result);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        scanner.close();
-    }
-
 /**
  * Adds a printer element to printers.xml based on user input.
- * 
+ *
  * @param printerName
  * @param printerTension
  * @param printerCompression
@@ -363,25 +249,25 @@ public class Driver {
  * @param printerTolerance
  * @param printerFinish
  */
-    public void addPrinter(String printerName, String printerTension, String printerCompression, String printerPartComplexity, String printerROM, String printerImpact, 
-    		String printerLeadTime, String printerEaseOfChange, String printerTolerance, String printerFinish) {
+	public void addPrinter(String printerName, String vendor, String printerTension, String printerCompression, String printerPartComplexity, String printerROM, String printerImpact,
+  		String printerLeadTime, String printerEaseOfChange, String printerTolerance, String printerFinish) {
         try {
             /*
              * Creates link to xml file
              */
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			String stringSearch = System.getProperty("os.name");
-			String keyword = "Mac";
-			Document document = documentBuilder.parse("src\\printers.xml");;
-			StreamResult result = new StreamResult("src\\printers.xml");
-			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-			if(found){
-				Document documentChange = documentBuilder.parse("src/printers.xml");	// Mac image path.
-				StreamResult resultChange = new StreamResult("src/printers.xml");	// Mac image path.
-				document = documentChange;
-				result = resultChange;
-			}
+					  String stringSearch = System.getProperty("os.name");
+						String keyword = "Mac";
+						Document document = documentBuilder.parse("src\\printers.xml");;
+						StreamResult result = new StreamResult("src\\printers.xml");
+						Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+						if(found){
+							Document documentChange = documentBuilder.parse("src/printers.xml");	// Mac image path.
+							StreamResult resultChange = new StreamResult("src/printers.xml");	// Mac image path.
+							document = documentChange;
+							result = resultChange;
+						}
 
 			//Document document = documentBuilder.parse("src/printers.xml");		// Mac directory path.
 			//Document document = documentBuilder.parse("src\\printers.xml");		// Windows directory path.
@@ -404,6 +290,10 @@ public class Driver {
             name.appendChild(document.createTextNode(printerName));
             newPrinter.appendChild(name);
 
+						Element vendor = document.createElement("VENDOR");
+						vendor.appendChild(document.createTextNode(vendor));
+						newPrinter.appendChild(vendor);
+
             Element tension = document.createElement("TENSION");
             tension.appendChild(document.createTextNode(printerTension));
             newPrinter.appendChild(tension);
@@ -415,11 +305,11 @@ public class Driver {
             Element impact = document.createElement("IMPACT");
             impact.appendChild(document.createTextNode(printerImpact));
             newPrinter.appendChild(impact);
-            
+
             Element partComplexity = document.createElement("PART_COMPLEXITY");
             partComplexity.appendChild(document.createTextNode(printerPartComplexity));
             newPrinter.appendChild(partComplexity);
-            
+
             Element leadTime = document.createElement("LEAD_TIME");
             leadTime.appendChild(document.createTextNode(printerLeadTime));
             newPrinter.appendChild(leadTime);
@@ -431,7 +321,7 @@ public class Driver {
             Element ROM = document.createElement("ROM");
             ROM.appendChild(document.createTextNode(printerROM));
             newPrinter.appendChild(ROM);
-            
+
             Element tolerance = document.createElement("TOLERANCE");
             tolerance.appendChild(document.createTextNode(printerTolerance));
             newPrinter.appendChild(tolerance);
@@ -461,15 +351,15 @@ public class Driver {
     /**
 	 * Displays a list of printer matches sorted from highest number of matching
 	 * attributes to lowest on the console.
-	 * 
+	 *
 	 * @param printers the ArrayList of printers
 	 */
 	public static ArrayList<Printer> outputSearchedList(PrinterList printers){
 		// To-Do: Handle if no matches exist and is empty.
-		
+
 		ArrayList<Printer> list = printers.getPrinterList();
 		ArrayList<Printer> outputList = new ArrayList<Printer>();
-					
+
 		for(Printer printer : list){
 			int matches = 0;
 			int currentMatches = printer.getTotalMatches();
@@ -484,7 +374,7 @@ public class Driver {
 		int position;
 		boolean keepLooking = true;
 		Printer tempPrinter;
-		
+
 		while(keepLooking){
 			keepLooking = false;
 			for(position=0;position < outputList.size()-1;position++){
@@ -513,7 +403,7 @@ public class Driver {
 
 	/**
 	 * Insert description here.
-	 * 
+	 *
 	 * @param tagName the String with a printer tag
 	 * @param element the Element
 	 * @return a String with...
@@ -546,7 +436,7 @@ public class Driver {
 		return romArray;
 	}
 	*/
-	
+
 	/**
 	 * Converts a String list delimited by ", " (without quotes) into a HashSet.
 	 * @param list
@@ -555,12 +445,12 @@ public class Driver {
 	public static HashSet<String> stringToHashSet(String list) {
 		String[] listArray;
 		HashSet<String> hashSet = new HashSet<String>();
-		
+
 		listArray = list.split(", ");
 		for (String element : listArray)
 			hashSet.add(element);
-		
+
 		return hashSet;
 		}
-	
+
 }

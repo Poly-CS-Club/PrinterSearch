@@ -2,13 +2,14 @@ import java.util.HashSet;
 
 /**
  * A 3D metal printer.
- * 
+ *
  * @author  Jake Leonard, (others on team), Marcinina Alvaran
  * @version (to be added by original programmer)
  */
 public class Printer {
-	
+
 	private String name;
+	private String vendor;
 	private double tension;
 	private double compression;
 	private double impact;
@@ -18,20 +19,21 @@ public class Printer {
 	private HashSet<String> materials;
 	private double tolerance;
 	private String finish;
-	
+
 
 	/* Add boolean? Could make associative array with hash.
 	 * This is for sorting the final table and maybe adding checkboxes to the table like: "Meets Spec: [X]"
 	 */
 	//private boolean[] matches;
 	private int[] matches;
-	
+
 	/**
 	 * Instantiates a printer with default values.
 	 */
 	public Printer(){
-		
+
 		name = "";
+		vendor = "";
 		tension = 0;
 		compression = 0;
 		impact = 0;
@@ -44,13 +46,13 @@ public class Printer {
 		matches = new int[9];
 		for (int index=0; index<9; index++)
 			matches[index] = 0;
-		
+
 	}
 
 	/**
 	 * Instantiates a printer with specified values and a boolean list representing
 	 * matches values for all parameters except name.
-	 * 
+	 *
 	 * @param name            the String with the specified printer name
 	 * @param tension         the double with the specified tension
 	 * @param compression     the double with the specified compression
@@ -62,9 +64,10 @@ public class Printer {
 	 * @param tolerance       the double with the specified tolerance
 	 * @param finish          the String representing the finish
 	 */
-	public Printer(String name, double tension, double compression, double impact, double complexity, double leadTime, boolean customizable, HashSet<String> materials, double tolerance, String finish){
+	public Printer(String name, String vendor, double tension, double compression, double impact, double complexity, double leadTime, boolean customizable, HashSet<String> materials, double tolerance, String finish){
 
 		this.name = name;
+		this.vendor = vendor;
 		this.tension = tension;
 		this.compression = compression;
 		this.impact = impact;
@@ -81,14 +84,14 @@ public class Printer {
 	public int[] getMatches() {
 		return matches;
 	}
-	
+
 	public int getTotalMatches(){
 		int numMatches = 0;
 		for(int i=0;i<matches.length;i++)		// If match result is greater than 0, as in it has a weighted match, add that up to the total!
 			if(matches[i] > 0)
 				numMatches++;
 
-		
+
 		return numMatches;
 	}
 
@@ -100,13 +103,21 @@ public class Printer {
 	public void setMatches(int valueWeight, int index) {
 		matches[index] = valueWeight;
 	}
-	
+
 	public String getPrinterName() {
 		return name;
 	}
 
 	public void setPrinterName(String name) {
 		this.name = name;
+	}
+
+	public String getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
 	}
 
 	public double getTension() {
@@ -152,11 +163,11 @@ public class Printer {
 	public boolean isCustomizable() {
 		return customizable;
 	}
-	
+
 	/**
 	 * Returns a String representation of whether the printer offers
 	 * customization options.
-	 * 
+	 *
 	 * @return the String describing customizability
 	 */
 	public String customizableString() {
@@ -169,16 +180,16 @@ public class Printer {
 	public void setCustomizable(boolean customizable) {
 		this.customizable = customizable;
 	}
-	
+
 	/**
 	 * Adds specified material to printer's range of materials list.
-	 * 
+	 *
 	 * @param  material the material to add to the range of materials
 	 */
 	public void addMaterial(String material) {
 		materials.add(material);
 	}
-	
+
 	/**
 	 *  Returns a String with the range of materials.
 	 *  <p>
@@ -189,7 +200,7 @@ public class Printer {
 		String rawString,
 		       materialsString = "";
 		String[] materialsArray;
-		
+
 		// Convert HashSet to String
 		rawString = "" + materials;
 		materialsArray = rawString.split(", ");
@@ -201,18 +212,18 @@ public class Printer {
 		else {
 			materialsString = rawString;
 		}
-		
+
 		// Remove brackets
 		materialsString = String.copyValueOf(
 				materialsString.toCharArray(),1,
 				materialsString.length()-2);
-		
+
 		// Add multi-line compatibility with HTML
 		materialsString = "<html>" + materialsString + "</html>";
-		
+
 		return materialsString;
 	}
-	
+
 	public HashSet<String> getMaterials() {
 		return materials;
 	}
@@ -232,6 +243,6 @@ public class Printer {
 	public void setFinish(String finish) {
 		this.finish = finish;
 	}
-	
+
 
 }
