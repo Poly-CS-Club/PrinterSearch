@@ -64,8 +64,6 @@ public class PrinterList {
 	 * @param minImpact       the specified minimum impact
 	 * @param maxImpact       the specified maximum impact
 	 * @param complexity      the specified part complexity
-	 * @param minLeadTime     the specified minimum lead time
-	 * @param maxLeadTime     the specified maximum lead time
 	 * @param customizable    the specified customizability
 	 * @param materials       the specified materials
 	 * @param minTolerance    the specified minimum tolerance
@@ -77,7 +75,6 @@ public class PrinterList {
 			double minCompression, double maxCompression,
 			double minImpact, double maxImpact,
 			double complexity,
-			double minLeadTime, double maxLeadTime,
 			String customizable, String materials,
 			double minTolerance, double maxTolerance, String finish){
 
@@ -87,7 +84,6 @@ public class PrinterList {
 		 *  1 = Compression
 		 *  2 = Impact
 		 *  3 = Part Complexity
-		 *  4 = Lead Time
 		 *  5 = Ease of Customizing
 		 *  6 = Range of Mats.
 		 *  7 = Tolerance
@@ -96,7 +92,6 @@ public class PrinterList {
 		/* REFERENCE LIST:
 		
 		m_BroadSearch_TF
-		m_LeadTime_TF
 		m_PartComplexity_TF
 		m_Compression_RTF
 		m_Tolerance_RTF
@@ -129,33 +124,26 @@ public class PrinterList {
 				printer.setMatches(1, 3);
 				//System.out.println("Weight of 1 added!");
 			}
-			// TODO Made double for now. Not certain this is integer or if
-			// this needs to be a range yet.
-			if(minLeadTime <= printer.getLeadTime()
-			&& maxLeadTime >= printer.getLeadTime()) {
-				printer.setMatches(1, 4);
-				//System.out.println("Weight of 1 added!");
-			}
 			// TODO Sort of odd. Assuming EaseOfChange is a parameter that can
 			// be desired true or not necessary (false)
 			if(customizable.equalsIgnoreCase(
 			String.valueOf(printer.isCustomizable()))) {
-				printer.setMatches(1, 5);
+				printer.setMatches(1, 4);
 				//System.out.println("Weight of 1 added!");
 			}
 			if(materials.equals(printer.materialsString())) {
-				printer.setMatches(1, 6);
+				printer.setMatches(1, 5);
 				//System.out.println("Weight of 1 added!");
 			}
 			if(minTolerance <= printer.getTolerance()
 			&& maxTolerance >= printer.getTolerance()) {
-				printer.setMatches(1, 7);
+				printer.setMatches(1, 6);
 				//System.out.println("Weight of 1 added!");
 			}
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
 			if(finish.equalsIgnoreCase(printer.getFinish())) {
-				printer.setMatches(1, 8);
+				printer.setMatches(1, 7);
 				//System.out.println("Weight of 1 added!");
 			}
 		}

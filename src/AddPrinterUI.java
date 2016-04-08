@@ -292,7 +292,7 @@ public class AddPrinterUI {
 								compression,
 								partComplexity, 
 								(String) m_Materials_CB.getSelectedItem(),
-								impact, leadTime,
+								impact, 
 								(String) m_Customizable_CB.getSelectedItem(), 
 								tolerance,
 								(String) m_Finish_CB.getSelectedItem()));

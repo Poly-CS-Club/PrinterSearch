@@ -42,7 +42,7 @@ private JButton m_FilterResults_B, m_ClearResults_B;
 private JTextField m_BroadSearch_TF, m_PartComplexity_TF;
 private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
-                                m_Tolerance_RTF, m_Impact_RTF, m_LeadTime_RTF;
+                                m_Tolerance_RTF, m_Impact_RTF;
 private HashSet<String> m_RangeOfMaterials;
 private JToolBar m_ToolBar;
 private JScrollPane m_ScrollPane;
@@ -57,8 +57,7 @@ private int screenHeight;
 
 public final String[] searchParameters = 
         {"Search", "Compression", "Tension", "Tolerance", "Impact",
-         "Lead Time", "Part Complexity", "Customizable", "Material",
-         "Finish"};
+         "Part Complexity", "Customizable", "Material", "Finish"};
 
 public static void main(String args [])
 {
@@ -126,7 +125,6 @@ private void createComponents() {
 	m_Tolerance_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
 	m_Tension_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
 	m_Impact_RTF = new RangedTextField<Double>(0.000, 0.000, .001);
-	m_LeadTime_RTF = new RangedTextField<Double>(200.0, 0.000, .001);
 	
 	// Instantiate combo boxes
 	// TODO load these RangeOfMaterials to a file or something...
@@ -190,7 +188,7 @@ private void designSearchResult() {
 	// Create search results' table header
 	tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Complexity",
-			"Lead Time","Ease","Materials","Tolerance","Finish");
+			"Ease","Materials","Tolerance","Finish");
 	m_SearchResult_P.setLayout(
 			new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
 	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH - 190, FRAME_HEIGHT));
@@ -214,7 +212,6 @@ private void designSearchResult() {
 				currentPrinter.getCompression()+ "",
 				currentPrinter.getImpact()+ "",
 				currentPrinter.getComplexity()+ "",
-				currentPrinter.getLeadTime()+ "",
 				currentPrinter.customizableString(),
 				currentPrinter.materialsString(),
 				currentPrinter.getTolerance()+ "",
@@ -236,7 +233,7 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 	// Create search results' table header
 	tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
 			"Name","Tension","Compression","Impact", "Complexity",
-			"Lead Time","Ease","Materials","Tolerance","Finish");
+			"Ease","Materials","Tolerance","Finish");
 	m_SearchResult_P.setLayout(
 			new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
 	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH - 190, FRAME_HEIGHT));
@@ -261,8 +258,7 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 				highlightMatch(currentPrinter, 4),
 				highlightMatch(currentPrinter, 5),
 				highlightMatch(currentPrinter, 6),
-				highlightMatch(currentPrinter, 7),
-				highlightMatch(currentPrinter, 8)));
+				highlightMatch(currentPrinter, 7)));
 	}
 	
 	// Add results to scroll pane
@@ -328,23 +324,13 @@ private String highlightMatch(Printer printer, int matchIndex) {
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
-			startTags + printer.getLeadTime() + endTags;
-		}
-		else {
-			parameter = printer.getLeadTime() + "";
-		}
-		break;
-	case 5:
-		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
-			parameter =
 			startTags + printer.customizableString() + endTags;
 		}
 		else {
 			parameter = printer.customizableString() + "";
 		}
 		break;
-	case 6:
+	case 5:
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
@@ -354,7 +340,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			parameter = printer.materialsString() + "";
 		}
 		break;
-	case 7:
+	case 6:
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
@@ -364,7 +350,7 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			parameter = printer.getTolerance() + "";
 		}
 		break;
-	case 8:
+	case 7:
 		//if (printer.getMatches()[matchIndex] == true) {
 		if (printer.getMatches()[matchIndex] > 0) {
 			parameter =
@@ -421,7 +407,7 @@ private void designSearchParam()
 			  defaultMinSize = new Dimension(150, 30);
 	Component[] searchComponents =
         {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_LeadTime_RTF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Impact_RTF, m_PartComplexity_TF, m_Customizable_CB,
          m_Materials_CB, m_Finish_CB};
 	
 	
@@ -450,7 +436,6 @@ private void designSearchParam()
 	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_LeadTime_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -489,11 +474,11 @@ private void addSearchParamComponents()
 {
 	Component[] searchComponents =
         {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_LeadTime_RTF, m_PartComplexity_TF, m_Customizable_CB,
+         m_Impact_RTF, m_PartComplexity_TF, m_Customizable_CB,
          m_Materials_CB, m_Finish_CB};
 	
 	// Add search parameter titles and spacing to GUI
-	for(int index=0; index<10; index++) {
+	for(int index=0; index<searchComponents.length; index++) {
 		addSearchLabel("\n");
 		addSearchLabel(searchParameters[index]);
 		getSearchParamPanel().add(searchComponents[index]);
@@ -649,7 +634,6 @@ private class ButtonListener implements ActionListener
 			    		(Double) m_Compression_RTF.getMin(), (Double) m_Compression_RTF.getMax(),
 			    		(Double) m_Impact_RTF.getMin(), (Double) m_Impact_RTF.getMax(),
 			    		complexity,
-			    		(Double)(m_LeadTime_RTF.getMin()),(Double) (m_LeadTime_RTF.getMax()),
 			    		(String)m_Customizable_CB.getSelectedItem(),
 			    		(String) m_Materials_CB.getSelectedItem(),
 			    		(Double) m_Tolerance_RTF.getMin(), (Double) m_Tolerance_RTF.getMax(),

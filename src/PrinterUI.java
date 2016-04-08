@@ -11,7 +11,7 @@ import java.io.*;
 public class PrinterUI extends JLabel implements Serializable
 {
 	private JLabel name, tension, compression, impact, partComplexity,
-	               leadTime, customizable, materials, tolerance, finish;
+	               customizable, materials, tolerance, finish;
     private int m_index;
     
     /**
@@ -25,14 +25,13 @@ public class PrinterUI extends JLabel implements Serializable
      * @param compression     the String with the printer's compression value
      * @param impact          the String with the printer's impact value
      * @param partComplexity  the String with the printer's complexity
-     * @param leadTime        the String with the printer's lead time
      * @param customizable    the String with the printer's ease of customization
      * @param materials       the String with the printer's range of materials
      * @param tolerance       the String with the printer's tolerance value
      * @param finish          the String with the printer's finish
      */
     PrinterUI(int index, int frameWidth, int frameHeight, String name, String tension,
-    		String compression, String impact, String partComplexity, String leadTime, 
+    		String compression, String impact, String partComplexity, 
     		String customizable, String materials, String tolerance, String finish)
     {
         m_index = index;
@@ -41,7 +40,6 @@ public class PrinterUI extends JLabel implements Serializable
         this.compression = new JLabel(compression, JTextField.CENTER);
         this.impact = new JLabel(impact, JTextField.CENTER);
         this.partComplexity = new JLabel(partComplexity, JTextField.CENTER);
-        this.leadTime = new JLabel(leadTime, JTextField.CENTER);
         this.customizable = new JLabel(customizable, JTextField.CENTER);
         this.materials = new JLabel(materials, JTextField.CENTER);
         this.tolerance = new JLabel(tolerance, JTextField.CENTER);
@@ -88,7 +86,6 @@ public class PrinterUI extends JLabel implements Serializable
         compression = new JLabel("default", JTextField.CENTER);
         impact = new JLabel("default", JTextField.CENTER);
         partComplexity = new JLabel("default", JTextField.CENTER);
-        leadTime = new JLabel("default", JTextField.CENTER);
         customizable = new JLabel("default", JTextField.CENTER);
         materials = new JLabel("Default", JTextField.CENTER);
         tolerance = new JLabel("default", JTextField.CENTER);
@@ -121,7 +118,6 @@ public class PrinterUI extends JLabel implements Serializable
         compression.setAlignmentX(Component.CENTER_ALIGNMENT); // <---- Refactor comprestion --> compression 
         impact.setAlignmentX(Component.CENTER_ALIGNMENT);
         partComplexity.setAlignmentX(Component.CENTER_ALIGNMENT);
-        leadTime.setAlignmentX(Component.CENTER_ALIGNMENT);
         customizable.setAlignmentX(Component.CENTER_ALIGNMENT);
         materials.setAlignmentX(Component.CENTER_ALIGNMENT);
         tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -140,7 +136,6 @@ public class PrinterUI extends JLabel implements Serializable
         add(compression);
         add(impact);
         add(partComplexity);
-        add(leadTime);
         add(customizable);
         add(materials);
         add(tolerance);
@@ -166,10 +161,6 @@ public class PrinterUI extends JLabel implements Serializable
     
     public JLabel getPartComplexity() {
     	return partComplexity;
-    }
-    
-    public JLabel getLeadTime() {
-    	return leadTime;
     }
     
     public JLabel getCustomizable() {

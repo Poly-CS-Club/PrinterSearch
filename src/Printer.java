@@ -75,7 +75,7 @@ public class Printer {
 		this.tolerance = tolerance;
 		this.finish = finish;
 
-		matches = new int[9];
+		matches = new int[8];
 	}
 
 	public int[] getMatches() {
