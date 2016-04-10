@@ -80,6 +80,7 @@ public class PrinterUI extends JLabel implements Serializable
     {
         m_index = index;
         name = new JLabel("default", JTextField.CENTER);
+        vendor = new JLabel("default", JTextField.CENTER);
         tension = new JLabel("default", JTextField.CENTER);
         compression = new JLabel("default", JTextField.CENTER);
         impact = new JLabel("default", JTextField.CENTER);
@@ -110,6 +111,7 @@ public class PrinterUI extends JLabel implements Serializable
     private void designComponents()
     {
     	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	vendor.setAlignmentX(Component.CENTER_ALIGNMENT);
         tension.setAlignmentX(Component.CENTER_ALIGNMENT);
         compression.setAlignmentX(Component.CENTER_ALIGNMENT); // <---- Refactor comprestion --> compression 
         impact.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -117,6 +119,13 @@ public class PrinterUI extends JLabel implements Serializable
         tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
         finish.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        if(m_index != 1)
+        {
+            vendor.setPreferredSize(new Dimension(100,30));
+            vendor.addMouseListener(new MouseActionListener(vendor));
+            vendor.setToolTipText("Click For More Info");
+        }
+
         name.setToolTipText(name.getText());
     }
     

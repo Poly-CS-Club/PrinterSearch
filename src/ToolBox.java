@@ -27,87 +27,7 @@ import javax.xml.parsers.*;
  * @see PrinterList
  * @see Printer
  */
-public class Driver {
-
-	/**
-	 * Tests search functionality
-	 */
-	/*public static void main(String[] args) {
-
-		PrinterList printerList = generatePrinterList();
-
-		Scanner scanner = new Scanner(System.in);
-		boolean newInput = true;
-		do {
-
-			System.out.println("Enter your specifications: ");
-
-			System.out.println("Enter 'ADD' to add a new printer");
-
-            // Branch of user adding a new printer to the list
-            if (scanner.nextLine().equals("ADD")) {
-                addPrinter();
-                continue;
-            }
-
-			System.out.println("Tension: ");
-			double tension = scanner.nextDouble();
-
-			System.out.println("Compression: ");
-			double compression = scanner.nextDouble();
-
-			System.out.println("Impact: ");
-			double impact = scanner.nextDouble();
-
-			System.out.println("Complexity: ");
-			double complexity = scanner.nextDouble();
-
-			System.out.println("Lead Time: ");
-			double leadTime = scanner.nextDouble();
-
-			// TODO: Will need to better validate this input.
-			System.out.println("Ease of Customization (true/false): ");
-			boolean easeOfChange = scanner.nextBoolean();
-
-			System.out.println("Range of Materials: ");
-			scanner.nextLine(); // Clear buffer
-			String rom = scanner.nextLine();
-
-			System.out.println("Tolerance: ");
-			double tolerance = scanner.nextDouble();
-
-			System.out.println("Desired Finish Type: ");
-			scanner.nextLine();
-			String finish = scanner.nextLine();
-
-			printerList.setMatches(tension, compression, impact, complexity, leadTime,
-					               easeOfChange, storeROM(rom), tolerance, finish);
-
-			outputSearchedList(printerList);
-
-
-			// TODO: Continue entering new input?
-			System.out.println("Perform New Search? (y/n)");
-			String continueSearch = scanner.nextLine();
-			if(continueSearch.equalsIgnoreCase("n")){
-				newInput = false;
-				System.out.println("Program ending...");
-			} else if(continueSearch.equalsIgnoreCase("no")) {
-				newInput = false;
-				System.out.println("Program ending...");
-			} else if ((continueSearch.equalsIgnoreCase("yes"))
-					   || (continueSearch.equalsIgnoreCase("y"))) {
-				newInput = true;
-			} else {
-				newInput = false;
-				System.out.println("Program ending...");
-			}
-
-		} while(newInput == true);
-
-
-	}*/
-
+public class ToolBox {
 	/**
 	 * Generates printer list from XML file and returns list to calling method.
 	 *
@@ -174,8 +94,7 @@ public class Driver {
      * converts to appropriate data type, and then printer to console
      * for evaluation.
      */
-	private static void displayPrinterNodes(
-			Node node, PrinterList printers)
+	private static void displayPrinterNodes(Node node, PrinterList printers)
 	{
 		String name, vendor;
 		double tension, compression, impact, tolerance, complexity, leadTime;
@@ -190,40 +109,40 @@ public class Driver {
 		{
 			eElement = (Element)node;
 			name = getString("NAME", eElement);
-			System.out.println(name);
+			//System.out.println(name);
 
 			vendor = getString("VENDOR", eElement);
-			System.out.println(vendor);
+			//System.out.println(vendor);
 
 			tension = Double.parseDouble(getString("TENSION", eElement));
-			System.out.println(tension);
+			//System.out.println(tension);
 
 			compression = Double.parseDouble(
 					getString("COMPRESSION", eElement));
-			System.out.println(compression);
+			//System.out.println(compression);
 
 			impact = Double.parseDouble(getString("IMPACT", eElement));
-			System.out.println(impact);
+			//System.out.println(impact);
 
 			complexity = Double.parseDouble(
 					getString("PART_COMPLEXITY", eElement));
-			System.out.println(complexity);
+			//System.out.println(complexity);
 
 			leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
-			System.out.println(leadTime);
+			//System.out.println(leadTime);
 
 			customizable = Boolean.valueOf((getString("EOC", eElement)));
-			System.out.println(customizable);
+			//System.out.println(customizable);
 
 			materialsString = getString("ROM", eElement);
-			System.out.println(materialsString);
+			//System.out.println(materialsString);
 			materialsSet = stringToHashSet(materialsString);
 
 			tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
-			System.out.println(tolerance);
+			//System.out.println(tolerance);
 
 			finish = getString("FINISH", eElement);
-			System.out.println(finish);
+			//System.out.println(finish);
 
 			printers.addPrinter(new Printer(
 					name, vendor, tension, compression, impact, complexity,
@@ -290,9 +209,9 @@ public class Driver {
             name.appendChild(document.createTextNode(printerName));
             newPrinter.appendChild(name);
 
-						Element vendors = document.createElement("VENDOR");
-						vendors.appendChild(document.createTextNode(vendor));
-						newPrinter.appendChild(vendors);
+			Element vendors = document.createElement("VENDOR");
+			vendors.appendChild(document.createTextNode(vendor));
+			newPrinter.appendChild(vendors);
 
             Element tension = document.createElement("TENSION");
             tension.appendChild(document.createTextNode(printerTension));
@@ -391,13 +310,13 @@ public class Driver {
 
 
 	// Output to Console - Sorted by highest matches first.
-	for(int i=list.size()-1;i>=0;i--){
+	/*for(int i=list.size()-1;i>=0;i--){
 		System.out.println(
 				"\n\n---------------------------------" +
 		        "     Printer Name: " + outputList.get(i).getPrinterName() +
 		        "Number Of Matches: " + outputList.get(i).getTotalMatches() +
 		        "\n----------------------------------");
-	}
+	}*/
 	return outputList;
 }
 
@@ -452,5 +371,157 @@ public class Driver {
 
 		return hashSet;
 		}
+	/**
+	 * 
+	 */
+	public static Object [] getVendorList()
+	{
+		DocumentBuilderFactory documentBuilderFactory;
+		DocumentBuilder documentBuilder;
+		Document document;
+		Node nNode;
+		ArrayList<String> vendorList = new ArrayList<String>();
+		
 
+		// Build list of Printer objects from XML file;
+		try{
+			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
+			String stringSearch = System.getProperty("os.name");
+			String keyword = "Mac";
+			File file = new File("src\\vendors.xml");
+			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(found){
+				File fileChange = new File("src/vendors.xml");	// Mac image path.
+				file = fileChange;
+			}
+			documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			document = documentBuilder.parse(file);
+
+			// Display listed printers in console
+			Element root = document.getDocumentElement();
+			NodeList nodeList = root.getElementsByTagName("vendor");
+
+			for(int i=0;i<nodeList.getLength();i++){
+				nNode = nodeList.item(i);
+				Element element = (Element) nNode;
+				vendorList.add(element.getAttribute("name"));
+			}
+
+			}catch(FileNotFoundException e){
+				System.out.println("File Not Found" + e);
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return vendorList.toArray();
+	}
+	/**
+	 * getting the material list from xml file
+	 */
+	public static Object [] getMaterialList()
+	{
+		DocumentBuilderFactory documentBuilderFactory;
+		DocumentBuilder documentBuilder;
+		Document document;
+		Node nNode;
+		ArrayList<String> vendorList = new ArrayList<String>();
+		
+
+		// Build list of Printer objects from XML file;
+		try{
+			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
+			String stringSearch = System.getProperty("os.name");
+			String keyword = "Mac";
+			File file = new File("src\\materials.xml");
+			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(found){
+				File fileChange = new File("src/materials.xml");	// Mac image path.
+				file = fileChange;
+			}
+			documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			document = documentBuilder.parse(file);
+
+			// Display listed printers in console
+			Element root = document.getDocumentElement();
+			NodeList nodeList = root.getElementsByTagName("material");
+
+			for(int i=0;i<nodeList.getLength();i++){
+				nNode = nodeList.item(i);
+				Element element = (Element) nNode;
+				vendorList.add(element.getAttribute("name"));
+			}
+
+			}catch(FileNotFoundException e){
+				System.out.println("File Not Found" + e);
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return vendorList.toArray();
+	}
+	/**
+	 * getting the Finish list from xml file
+	 */
+	public static Object [] getFinishList()
+	{
+		DocumentBuilderFactory documentBuilderFactory;
+		DocumentBuilder documentBuilder;
+		Document document;
+		Node nNode;
+		ArrayList<String> vendorList = new ArrayList<String>();
+		
+
+		// Build list of Printer objects from XML file;
+		try{
+			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
+			String stringSearch = System.getProperty("os.name");
+			String keyword = "Mac";
+			File file = new File("src\\finish.xml");
+			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(found){
+				File fileChange = new File("src/finish.xml");	// Mac image path.
+				file = fileChange;
+			}
+			documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			document = documentBuilder.parse(file);
+
+			// Display listed printers in console
+			Element root = document.getDocumentElement();
+			NodeList nodeList = root.getElementsByTagName("finish");
+
+			for(int i=0;i<nodeList.getLength();i++){
+				nNode = nodeList.item(i);
+				Element element = (Element) nNode;
+				vendorList.add(element.getAttribute("name"));
+			}
+
+			}catch(FileNotFoundException e){
+				System.out.println("File Not Found" + e);
+			} catch (ParserConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return vendorList.toArray();
+	}
 }

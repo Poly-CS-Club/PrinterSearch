@@ -74,9 +74,9 @@ public class PrinterList {
 			double minTension, double maxTension,
 			double minCompression, double maxCompression,
 			double minImpact, double maxImpact,
-			double complexity,
-			String customizable, String materials,
-			double minTolerance, double maxTolerance, String finish){
+			String materials,
+			double minTolerance, double maxTolerance,
+			String finish, String vendor){
 
 		/* Matches array Index Reference:
 		 * 
@@ -105,48 +105,56 @@ public class PrinterList {
 		
 		for(Printer printer : printerList)
 		{
-			if(minTension <= printer.getTension()
-			&& maxTension >= printer.getTension()) {
+			if(minTension == 0 && maxTension == 0)
+			{
+				printer.setMatches(2, 0);
+			}else if(minTension <= printer.getTension() && maxTension >= printer.getTension())
+			{
 				printer.setMatches(2, 0);
 				System.out.println("Weight of 2 added!");
 			}
-			if(minCompression <= printer.getCompression()
+			if(minCompression == 0 && maxCompression == 0)
+			{
+				printer.setMatches(2, 1);System.out.println("in");
+			}else if(minCompression <= printer.getCompression()
 			&& maxCompression >= printer.getCompression()) {
 				printer.setMatches(2, 1);
 				System.out.println("Weight of 2 added!");
 			}
-			if(minImpact <= printer.getImpact()
+			if(minImpact == 0 && maxImpact == 0)
+			{
+				printer.setMatches(2, 1);System.out.println("in");
+				printer.setMatches(2, 2);
+			}else if(minImpact <= printer.getImpact()
 			&& printer.getImpact() <= maxImpact) {
 				printer.setMatches(2, 2);
 				System.out.println("Weight of 2 added!");
 			}
-			if(complexity <= printer.getComplexity()) {
-				printer.setMatches(1, 3);
-				//System.out.println("Weight of 1 added!");
-			}
-			// TODO Sort of odd. Assuming EaseOfChange is a parameter that can
-			// be desired true or not necessary (false)
-			if(customizable.equalsIgnoreCase(
-			String.valueOf(printer.isCustomizable()))) {
-				printer.setMatches(1, 4);
-				//System.out.println("Weight of 1 added!");
-			}
 
 			String printerMaterials = printer.materialsString().replaceAll("\\<.*?>","");
-			if(materials.equalsIgnoreCase(printerMaterials)) {
+			if(materials.equalsIgnoreCase("Select All"))
+			{
 				printer.setMatches(1, 5);
-				//System.out.println("Weight of 1 added!");
+			}else if(materials.equalsIgnoreCase(printerMaterials)) {
+				printer.setMatches(1, 5);
+				System.out.println("Weight of 1 added!");
 			}
-			if(minTolerance <= printer.getTolerance()
+			if(minTolerance == 0 && maxTolerance == 0)
+			{
+				printer.setMatches(1, 6);
+			}else if(minTolerance <= printer.getTolerance()
 			&& maxTolerance >= printer.getTolerance()) {
 				printer.setMatches(1, 6);
-				//System.out.println("Weight of 1 added!");
+				System.out.println("Weight of 1 added!");
 			}
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
-			if(finish.equalsIgnoreCase(printer.getFinish())) {
+			if(finish.equalsIgnoreCase("Select All"))
+			{
 				printer.setMatches(1, 7);
-				//System.out.println("Weight of 1 added!");
+			}else if(finish.equalsIgnoreCase(printer.getFinish())) {
+				printer.setMatches(1, 7);
+				System.out.println("Weight of 1 added!");
 			}
 		}
 	}

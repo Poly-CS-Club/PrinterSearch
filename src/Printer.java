@@ -104,66 +104,6 @@ public class Printer {
 		matches[index] = valueWeight;
 	}
 
-	public String getPrinterName() {
-		return name;
-	}
-
-	public void setPrinterName(String name) {
-		this.name = name;
-	}
-
-	public String getVendor() {
-		return vendor;
-	}
-
-	public void setVendor(String vendor) {
-		this.vendor = vendor;
-	}
-
-	public double getTension() {
-		return tension;
-	}
-
-	public void setTension(double tension) {
-		this.tension = tension;
-	}
-
-	public double getCompression() {
-		return compression;
-	}
-
-	public void setCompression(double compression) {
-		this.compression = compression;
-	}
-
-	public double getImpact() {
-		return impact;
-	}
-
-	public void setImpact(double impact) {
-		this.impact = impact;
-	}
-
-	public double getComplexity() {
-		return complexity;
-	}
-
-	public void setComplexity(double complexity) {
-		this.complexity = complexity;
-	}
-
-	public double getLeadTime() {
-		return leadTime;
-	}
-
-	public void setLeadTime(double leadTime) {
-		this.leadTime = leadTime;
-	}
-
-	public boolean isCustomizable() {
-		return customizable;
-	}
-
 	/**
 	 * Returns a String representation of whether the printer offers
 	 * customization options.
@@ -223,7 +163,68 @@ public class Printer {
 
 		return materialsString;
 	}
+	
+//--------------------------------setter/getters---------------------------------------//
+	
+	public String getPrinterName() {
+		return name;
+	}
 
+	public void setPrinterName(String name) {
+		this.name = name;
+	}
+
+	public String getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
+	}
+
+	public double getTension() {
+		return tension;
+	}
+
+	public void setTension(double tension) {
+		this.tension = tension;
+	}
+
+	public double getCompression() {
+		return compression;
+	}
+
+	public void setCompression(double compression) {
+		this.compression = compression;
+	}
+
+	public double getImpact() {
+		return impact;
+	}
+
+	public void setImpact(double impact) {
+		this.impact = impact;
+	}
+
+	public double getComplexity() {
+		return complexity;
+	}
+
+	public void setComplexity(double complexity) {
+		this.complexity = complexity;
+	}
+
+	public double getLeadTime() {
+		return leadTime;
+	}
+
+	public void setLeadTime(double leadTime) {
+		this.leadTime = leadTime;
+	}
+
+	public boolean isCustomizable() {
+		return customizable;
+	}
 	public HashSet<String> getMaterials() {
 		return materials;
 	}

@@ -47,7 +47,7 @@ public class RangedTextField<N extends Number> extends JPanel{
 	}
 	
 	// TODO: Commented out due to making class a generic type for numbers
-	/*
+	
 	public RangedTextField(double max, double min, int type)
 	{
 		setMin(new JSpinner());
@@ -73,7 +73,7 @@ public class RangedTextField<N extends Number> extends JPanel{
 		add(new JLabel("Max"));
 		add(m_Max_TF);
 	}
-	*/
+	
 	
 	/**
 	 * Creates a ranged text field with specified minimum, maximum, and
@@ -83,7 +83,7 @@ public class RangedTextField<N extends Number> extends JPanel{
 	 * @param min       the minimum value of the number range
 	 * @param stepSize  the increment of number within the range
 	 */
-	
+	/*
 	public RangedTextField(Number max, Number min, Number stepSize)
 	{
 		setMin(new JSpinner());
@@ -115,7 +115,7 @@ public class RangedTextField<N extends Number> extends JPanel{
 		add(new JLabel("Max"));
 		add(m_Max_TF);
 	}
-	
+	*/
 	public Number getMin() {
 		return (Number)m_Min_TF.getValue();
 	}

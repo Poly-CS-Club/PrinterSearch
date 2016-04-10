@@ -33,7 +33,7 @@ public class AddPrinterUI {
 	private JComboBox<String> m_Finish_CB, m_Materials_CB, m_Customizable_CB;
 	private JPanel m_Labels_P, m_Input_P, m_Button_P;
 	private JButton m_AddPrinter_B;
-	private Driver m_Driver;
+	private ToolBox m_Driver;
 	private MenuUI m_MenuUI;
 	
 	/**
@@ -42,7 +42,7 @@ public class AddPrinterUI {
 	 * @param mainFrame the specified JFrame
 	 * @param driver    the specified driver
 	 */
-	public AddPrinterUI(JFrame mainFrame, Driver driver, MenuUI menuUI)
+	public AddPrinterUI(JFrame mainFrame, ToolBox driver, MenuUI menuUI)
 	{
 		m_Driver = driver;
 		m_MenuUI = menuUI;
@@ -119,7 +119,7 @@ public class AddPrinterUI {
 		// Set up window
 		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
-		m_Main_F.setMinimumSize(new Dimension(frameWidth-m_MenuUI.getSearchParamPanel().getWidth()-5, 130));
+		m_Main_F.setMinimumSize(new Dimension(frameWidth-m_MenuUI.getSearchFilterPanel().getWidth()-5, 130));
 		m_Main_F.setLocation(
 				(screenWidth/2) - (frameWidth/2),
 				(screenHeight/2) - (frameHeight/2));

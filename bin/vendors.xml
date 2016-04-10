@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="us-ascii" standalone="no"?>
+<VENDORS>
+	<vendor name="vendor one">
+        <printers info = "Printer One?Printer Two?Printer Three">
+        </printers>
+        <webSite info = "@vendorOne.com">
+        </webSite>
+    </vendor>
+    <vendor name="vendor two">
+        <printers info = "Printer One?Printer Two">
+        </printers>
+        <webSite info = "@vendorTwo.com">
+        </webSite>
+    </vendor>
+    <vendor name="vendor three">
+        <printers info = "Printer One">
+        </printers>
+        <webSite info = "@vendorThree.com">
+        </webSite>    
+    </vendor>
+</VENDORS>
