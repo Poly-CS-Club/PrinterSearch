@@ -63,8 +63,6 @@ public class PrinterList {
 	 * @param maxCompression  the specified maximum compression
 	 * @param minImpact       the specified minimum impact
 	 * @param maxImpact       the specified maximum impact
-	 * @param complexity      the specified part complexity
-	 * @param customizable    the specified customizability
 	 * @param materials       the specified materials
 	 * @param minTolerance    the specified minimum tolerance
 	 * @param maxTolerance    the specified maximum tolerance
@@ -115,7 +113,7 @@ public class PrinterList {
 			}
 			if(minCompression == 0 && maxCompression == 0)
 			{
-				printer.setMatches(2, 1);System.out.println("in");
+				printer.setMatches(2, 1);
 			}else if(minCompression <= printer.getCompression()
 			&& maxCompression >= printer.getCompression()) {
 				printer.setMatches(2, 1);
@@ -123,7 +121,7 @@ public class PrinterList {
 			}
 			if(minImpact == 0 && maxImpact == 0)
 			{
-				printer.setMatches(2, 1);System.out.println("in");
+				printer.setMatches(2, 1);
 				printer.setMatches(2, 2);
 			}else if(minImpact <= printer.getImpact()
 			&& printer.getImpact() <= maxImpact) {
