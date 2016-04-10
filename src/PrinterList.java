@@ -81,11 +81,10 @@ public class PrinterList {
 		 *  0 = Tension
 		 *  1 = Compression
 		 *  2 = Impact
-		 *  3 = Part Complexity
-		 *  5 = Ease of Customizing
-		 *  6 = Range of Mats.
-		 *  7 = Tolerance
-		 *  8 = Finish
+		 *  3 = vendor
+		 *  4 = Range of Mats.
+		 *  5 = Tolerance
+		 *  6 = Finish
 		 */
 		/* REFERENCE LIST:
 		
@@ -121,37 +120,42 @@ public class PrinterList {
 			}
 			if(minImpact == 0 && maxImpact == 0)
 			{
-				printer.setMatches(2, 1);
 				printer.setMatches(2, 2);
 			}else if(minImpact <= printer.getImpact()
 			&& printer.getImpact() <= maxImpact) {
 				printer.setMatches(2, 2);
 				System.out.println("Weight of 2 added!");
 			}
-
+			if(vendor.equalsIgnoreCase("Select All"))
+			{
+				printer.setMatches(1, 3);
+			}else if(finish.equalsIgnoreCase(printer.getFinish())) {
+				printer.setMatches(1, 3);
+				System.out.println("Weight of 1 added!");
+			}
 			String printerMaterials = printer.materialsString().replaceAll("\\<.*?>","");
 			if(materials.equalsIgnoreCase("Select All"))
 			{
-				printer.setMatches(1, 5);
+				printer.setMatches(1, 4);
 			}else if(materials.equalsIgnoreCase(printerMaterials)) {
-				printer.setMatches(1, 5);
+				printer.setMatches(1, 4);
 				System.out.println("Weight of 1 added!");
 			}
 			if(minTolerance == 0 && maxTolerance == 0)
 			{
-				printer.setMatches(1, 6);
+				printer.setMatches(1, 5);
 			}else if(minTolerance <= printer.getTolerance()
 			&& maxTolerance >= printer.getTolerance()) {
-				printer.setMatches(1, 6);
+				printer.setMatches(1, 5);
 				System.out.println("Weight of 1 added!");
 			}
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
 			if(finish.equalsIgnoreCase("Select All"))
 			{
-				printer.setMatches(1, 7);
+				printer.setMatches(1, 6);
 			}else if(finish.equalsIgnoreCase(printer.getFinish())) {
-				printer.setMatches(1, 7);
+				printer.setMatches(1, 6);
 				System.out.println("Weight of 1 added!");
 			}
 		}

@@ -147,11 +147,10 @@ public class SearchResultPanel extends JPanel{
 		 *  0 = Tension
 		 *  1 = Compression
 		 *  2 = Impact
-		 *  3 = Part Complexity
-		 *  5 = Ease of Customizing
-		 *  6 = Range of Mats.
-		 *  7 = Tolerance
-		 *  8 = Finish
+		 *  3 = vendor
+		 *  4 = Range of Mats.
+		 *  5 = Tolerance
+		 *  6 = Finish
 		 */
 		
 		switch (matchID) {
@@ -164,16 +163,6 @@ public class SearchResultPanel extends JPanel{
 				parameter = printer.getTension() + "";
 			}
 				break;
-		case "Vendor":
-			if (printer.getMatches()[2] > 0) {
-				parameter =
-				startTags + printer.getVendor() + endTags;
-			}
-			else {
-				parameter = printer.getVendor() + "";
-			}
-			parameter = printer.getVendor();
-			break;
 		case "Compression":
 			if (printer.getMatches()[1] > 0) {
 				parameter =
@@ -192,8 +181,17 @@ public class SearchResultPanel extends JPanel{
 				parameter = printer.getImpact() + "";
 			}
 			break;
+		case "Vendor":
+			if (printer.getMatches()[3] > 0) {
+				parameter =
+				startTags + printer.getVendor() + endTags;
+			}
+			else {
+				parameter = printer.getVendor() + "";
+			}
+			break;
 		case "Materials":
-			if (printer.getMatches()[5] > 0) {
+			if (printer.getMatches()[4] > 0) {
 				parameter =
 				startTags + printer.materialsString() + endTags;
 			}
@@ -202,7 +200,7 @@ public class SearchResultPanel extends JPanel{
 			}
 			break;
 		case "Tolerance":
-			if (printer.getMatches()[6] > 0) {
+			if (printer.getMatches()[5] > 0) {
 				parameter =
 				startTags + printer.getTolerance() + endTags;
 			}
@@ -211,7 +209,7 @@ public class SearchResultPanel extends JPanel{
 			}
 			break;
 		case "Finish":
-			if (printer.getMatches()[7] > 0) {
+			if (printer.getMatches()[6] > 0) {
 				parameter =
 				startTags + printer.getFinish() + endTags;
 			}
