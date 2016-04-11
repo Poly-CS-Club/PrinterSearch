@@ -1,13 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,8 +32,8 @@ public class MenuUI extends JFrame
 	private JFrame m_Menu_F;
 	private JPanel m_SearchResult_P, m_SearchParam_P, m_Menu_P;
 	private JButton m_FilterResults_B, m_ClearResults_B;
-	private JTextField m_BroadSearch_TF, m_PartComplexity_TF;
-	private JComboBox<String>  m_Finish_CB, m_Materials_CB, m_Customizable_CB;
+	private JTextField m_BroadSearch_TF;
+	private JComboBox<String>  m_Finish_CB, m_Materials_CB;
 	private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF,
                                 m_Tolerance_RTF, m_Impact_RTF;
 	private HashSet<String> m_RangeOfMaterials;
@@ -55,8 +49,7 @@ public class MenuUI extends JFrame
 	private int screenHeight;
 
 	public final String[] searchParameters = 
-        {"Search", "Compression", "Tension", "Tolerance", "Impact",
-         "Part Complexity", "Customizable", "Material", "Finish"};
+        {"Search", "Compression", "Tension", "Tolerance", "Impact", "Material", "Finish", ""};
 
 /**
  * Creates window for Printer Search Program
@@ -111,8 +104,7 @@ private void createComponents() {
 	
 	// Instantiate text fields
 	m_BroadSearch_TF = new JTextField();
-	m_PartComplexity_TF = new JTextField();
-	
+
 	// Instantiate ranged text fields
 	m_Compression_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
 	m_Tolerance_RTF = new RangedTextField<Double>(0.000, 0.000, 0.001);
@@ -125,8 +117,6 @@ private void createComponents() {
 			"Search All", "Matte", "Gloss"});
 	m_Materials_CB = new JComboBox<String>(new String[] {
 			"Search All", "Aluminum", "Stainless", "Clear All"});
-	m_Customizable_CB = new JComboBox<String>(new String[] {
-			"Search All", "True", "False"});
 	
 	// Instantiate GUI layout components and button
 	setScrollPane(new JScrollPane());
@@ -180,16 +170,13 @@ private void designSearchResult() {
 	
 	// Create search results' table header
 	tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
-			"Name","Tension","Compression","Impact", "Complexity",
-			"Ease","Materials","Tolerance","Finish");
+			"Name","Vendor","Tension","Compression","Impact","Materials","Tolerance","Finish");
 	m_SearchResult_P.setLayout(
 			new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
 	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH - 190, FRAME_HEIGHT));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 
 	// Add tool tips for long header categories before adding to GUI
-    tableHeader.getPartComplexity().setToolTipText("Part Complexity");
-    tableHeader.getCustomizable().setToolTipText("Ease of Customization");
     tableHeader.getMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
@@ -201,11 +188,10 @@ private void designSearchResult() {
 		currentPrinter = printerList.getPrinter(i-2);
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
 				currentPrinter.getPrinterName()+ "",
+				"This is a Printer",
 				currentPrinter.getTension()+ "",
 				currentPrinter.getCompression()+ "",
 				currentPrinter.getImpact()+ "",
-				currentPrinter.getComplexity()+ "",
-				currentPrinter.customizableString(),
 				currentPrinter.materialsString(),
 				currentPrinter.getTolerance()+ "",
 				currentPrinter.getFinish()+ ""));
@@ -225,16 +211,13 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 	
 	// Create search results' table header
 	tableHeader = new PrinterUI(1,FRAME_WIDTH , FRAME_HEIGHT,
-			"Name","Tension","Compression","Impact", "Complexity",
-			"Ease","Materials","Tolerance","Finish");
+			"Name","Vendor","Tension","Compression","Impact","Materials","Tolerance","Finish");
 	m_SearchResult_P.setLayout(
 			new BoxLayout(m_SearchResult_P, BoxLayout.Y_AXIS));
 	//m_SearchResult_P.setPreferredSize(new Dimension(FRAME_WIDTH - 190, FRAME_HEIGHT));
 	m_SearchResult_P.setBorder(BorderFactory.createLineBorder(Color.gray));
 
 	// Add tool tips for long header categories before adding to GUI
-    tableHeader.getPartComplexity().setToolTipText("Part Complexity");
-    tableHeader.getCustomizable().setToolTipText("Ease of Customization");
     tableHeader.getMaterials().setToolTipText("Range of Materials");
 	m_SearchResult_P.add(tableHeader);
 	
@@ -244,20 +227,18 @@ public void displaySearchResults(ArrayList<Printer> outputList){
 		currentPrinter = outputList.get(i);
 		m_SearchResult_P.add(new PrinterUI(i,FRAME_WIDTH , FRAME_HEIGHT,
 				currentPrinter.getPrinterName() + "",
-				highlightMatch(currentPrinter, 0),
-				highlightMatch(currentPrinter, 1),
-				highlightMatch(currentPrinter, 2),
-				highlightMatch(currentPrinter, 3),
-				highlightMatch(currentPrinter, 4),
-				highlightMatch(currentPrinter, 5),
-				highlightMatch(currentPrinter, 6),
-				highlightMatch(currentPrinter, 7)));
+				highlightMatch(currentPrinter, "Name"),
+				highlightMatch(currentPrinter, "Vendor"),
+				highlightMatch(currentPrinter, "Tension"),
+				highlightMatch(currentPrinter, "Compression"),
+				highlightMatch(currentPrinter, "Impact"),
+				highlightMatch(currentPrinter, "Materials"),
+				highlightMatch(currentPrinter, "Finish")));
 	}
 	
 	// Add results to scroll pane
 	getScrollPane().setViewportView(m_SearchResult_P);
 	getScrollPane().setBounds(new Rectangle(FRAME_WIDTH , FRAME_HEIGHT*2));
-	
 }
 
 /**
@@ -267,15 +248,15 @@ public void displaySearchResults(ArrayList<Printer> outputList){
  * @param matchIndex  the index of the parameter in the match array
  * @return            the String of the parameter
  */
-private String highlightMatch(Printer printer, int matchIndex) {
+private String highlightMatch(Printer printer, String matchIndex) {
 	String parameter;
 	String startTags = "<html><i><font color=\"rgb(0, 120, 0)\">";
 	String endTags = "</font></i></html>";
 	
 	switch (matchIndex) {
-	case 0:
+	case "Tesnsion":
 		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
+		if (printer.getMatches()[0] > 0) {
 			parameter = 
 			startTags + printer.getTension() + endTags;
 		}
@@ -283,29 +264,9 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			parameter = printer.getTension() + "";
 		}
 			break;
-	case 1:
+	case "Vender":
 		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
-			parameter =
-			startTags + printer.getCompression() + endTags;
-		}
-		else {
-			parameter = printer.getCompression() + "";
-		}
-		break;
-	case 2:
-		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
-			parameter =
-			startTags + printer.getImpact() + endTags;
-		}
-		else {
-			parameter = printer.getImpact() + "";
-		}
-		break;
-	case 3:
-		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
+		if (printer.getMatches()[2] > 0) {
 			parameter =
 			startTags + printer.getComplexity() + endTags;
 		}
@@ -313,19 +274,29 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			parameter = printer.getComplexity() + "";
 		}
 		break;
-	case 4:
+	case "Compression":
 		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
+		if (printer.getMatches()[3] > 0) {
 			parameter =
-			startTags + printer.customizableString() + endTags;
+			startTags + printer.getCompression() + endTags;
 		}
 		else {
-			parameter = printer.customizableString() + "";
+			parameter = printer.getCompression() + "";
 		}
 		break;
-	case 5:
+	case "Impact":
 		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
+		if (printer.getMatches()[4] > 0) {
+			parameter =
+			startTags + printer.getImpact() + endTags;
+		}
+		else {
+			parameter = printer.getImpact() + "";
+		}
+		break;
+	case "Materials":
+		//if (printer.getMatches()[matchIndex] == true) {
+		if (printer.getMatches()[5] > 0) {
 			parameter =
 			startTags + printer.materialsString() + endTags;
 		}
@@ -333,9 +304,9 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			parameter = printer.materialsString() + "";
 		}
 		break;
-	case 6:
+	case "Tolerance":
 		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
+		if (printer.getMatches()[6] > 0) {
 			parameter =
 			startTags + printer.getTolerance() + endTags;
 		}
@@ -343,9 +314,9 @@ private String highlightMatch(Printer printer, int matchIndex) {
 			parameter = printer.getTolerance() + "";
 		}
 		break;
-	case 7:
+	case "Finish":
 		//if (printer.getMatches()[matchIndex] == true) {
-		if (printer.getMatches()[matchIndex] > 0) {
+		if (printer.getMatches()[7] > 0) {
 			parameter =
 			startTags + printer.getFinish() + endTags;
 		}
@@ -389,6 +360,11 @@ private void designToolBar()
 	button.setActionCommand("Add Printer");
 	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
+	
+	button = new JButton("Export");
+	button.setActionCommand("Export");
+	button.addActionListener(new ButtonListener());
+	m_ToolBar.add(button);
 }
 
 /**
@@ -400,8 +376,7 @@ private void designSearchParam()
 			  defaultMinSize = new Dimension(150, 30);
 	Component[] searchComponents =
         {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_PartComplexity_TF, m_Customizable_CB,
-         m_Materials_CB, m_Finish_CB};
+         m_Impact_RTF, m_Materials_CB, m_Finish_CB};
 	
 	
 	// Set up search panel
@@ -429,8 +404,6 @@ private void designSearchParam()
 	m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_PartComplexity_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
-	m_Customizable_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Materials_CB.setAlignmentX(Component.CENTER_ALIGNMENT);
 	m_Materials_CB.setActionCommand("RangeOfMaterials");
 	m_Tolerance_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -467,8 +440,7 @@ private void addSearchParamComponents()
 {
 	Component[] searchComponents =
         {m_BroadSearch_TF, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-         m_Impact_RTF, m_PartComplexity_TF, m_Customizable_CB,
-         m_Materials_CB, m_Finish_CB};
+         m_Impact_RTF, m_Materials_CB, m_Finish_CB};
 	
 	// Add search parameter titles and spacing to GUI
 	for(int index=0; index<searchComponents.length; index++) {
@@ -588,8 +560,59 @@ private class ComboListener implements ActionListener
  * @author Joshua Becker (and other team members:) Jacob Leonard
  *
  */
-private class ButtonListener implements ActionListener
+private class ButtonListener implements ActionListener, Printable
 {
+
+	PrinterJob job = PrinterJob.getPrinterJob();
+	/**
+	 * Prints the page at the specified index into the specified
+	 * {@link Graphics} context in the specified
+	 * format.  A <code>PrinterJob</code> calls the
+	 * <code>Printable</code> interface to request that a page be
+	 * rendered into the context specified by
+	 * <code>graphics</code>.  The format of the page to be drawn is
+	 * specified by <code>pageFormat</code>.  The zero based index
+	 * of the requested page is specified by <code>pageIndex</code>.
+	 * If the requested page does not exist then this method returns
+	 * NO_SUCH_PAGE; otherwise PAGE_EXISTS is returned.
+	 * The <code>Graphics</code> class or subclass implements the
+	 * {@link PrinterGraphics} interface to provide additional
+	 * information.  If the <code>Printable</code> object
+	 * aborts the print job then it throws a {@link PrinterException}.
+	 *
+	 * @param graphics   the context into which the page is drawn
+	 * @param pageFormat the size and orientation of the page being drawn
+	 * @param pageIndex  the zero based index of the page to be drawn
+	 * @return PAGE_EXISTS if the page is rendered successfully
+	 * or NO_SUCH_PAGE if <code>pageIndex</code> specifies a
+	 * non-existent page.
+	 * @throws PrinterException thrown when the print job is terminated.
+	 */
+	@Override
+	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+		// We have only one page, and 'page'
+		// is zero-based
+		if (pageIndex > 0) {
+			return NO_SUCH_PAGE;
+		}
+
+
+		// User (0,0) is typically outside the
+		// imageable area, so we must translate
+		// by the X and Y values in the PageFormat
+		// to avoid clipping.
+		Graphics2D g2d = (Graphics2D)graphics;
+		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+		// Now we perform our rendering
+		graphics.drawString("I KNOW WHAT YOU DID LAST SUMMER TREVOR", 100, 100);
+		// HERE IS WHERE WE WOULD RETRIEVE XML ATTRIBUTES AND DO HARD-CODED PROPER FORMATTING TO HAVE THE VENDOR INFO PRINTED.
+
+		// tell the caller that this page is part
+		// of the printed document
+		return PAGE_EXISTS;
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
@@ -617,17 +640,13 @@ private class ButtonListener implements ActionListener
 			    clearInterface(m_ToolBar); // JToolBar to overloaded clearPanel. m_SearchResult_P doesn't position correctly without resetting/readding this. 
 
 			    // STEP TWO: GET FIELDS & SET MATCHES FOR EACH PRINTER
-			    if(!m_PartComplexity_TF.getText().equals(""))
-			    {
-			    	complexity = Double.parseDouble(m_PartComplexity_TF.getText());
-			    }
 			    
 			    printerList.setMatches(
 			    		(Double) m_Tension_RTF.getMin(), (Double) m_Tension_RTF.getMax(),
 			    		(Double) m_Compression_RTF.getMin(), (Double) m_Compression_RTF.getMax(),
 			    		(Double) m_Impact_RTF.getMin(), (Double) m_Impact_RTF.getMax(),
 			    		complexity,
-			    		(String)m_Customizable_CB.getSelectedItem(),
+			    		"True",
 			    		(String) m_Materials_CB.getSelectedItem(),
 			    		(Double) m_Tolerance_RTF.getMin(), (Double) m_Tolerance_RTF.getMax(),
 			    		(String) m_Finish_CB.getSelectedItem());
@@ -651,6 +670,19 @@ private class ButtonListener implements ActionListener
 			case "Settings"://TODO Settings Window or pop-up
 				break;
 			case "Add Printer": new AddPrinterUI(m_Menu_F, m_Driver, m_MenuUI);
+				break;
+			case "Export": 
+				// Printing portion for printing the results from the results.
+				PrinterJob job = PrinterJob.getPrinterJob();
+				job.setPrintable(this);
+				boolean ok = job.printDialog();
+				if (ok) {
+					try {
+						job.print();
+					} catch (PrinterException ex) {
+              /* The job did not successfully complete */
+					}
+				}
 				break;
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 				break;
