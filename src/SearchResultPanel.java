@@ -5,6 +5,12 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+/**
+ * A panel that displays the printer search results.
+ * 
+ * @author Joshua Becker, Jacob Leonard, Marcinina Alvaran, Alireza Bahremand 
+ *
+ */
 public class SearchResultPanel extends JPanel{
 	PrinterLabel m_ResultHeader;
 	private PrinterList m_PrinterList;

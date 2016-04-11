@@ -9,9 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.border.Border;
 /**
+ * A window that shows the vender Info
  * 
  * @author Joshua Becker
- * shows the vender Info
  */
 public class VendorInfoFrame extends JFrame
 {

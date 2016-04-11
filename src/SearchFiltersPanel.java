@@ -10,8 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 /**
- * @author Joshua Becker
  * This is the panel for the search filters seen in the menu
+ * 
+ * @author Joshua Becker
  */
 public class SearchFiltersPanel extends JPanel {
 	
