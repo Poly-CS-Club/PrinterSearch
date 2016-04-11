@@ -15,6 +15,8 @@ import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
 import javax.xml.transform.dom.*;
 import org.w3c.dom.*;
+
+import javax.swing.JComboBox;
 import javax.xml.parsers.*;
 
 /**
@@ -374,7 +376,7 @@ public class ToolBox {
 	/**
 	 * 
 	 */
-	public static Object [] getVendorList()
+	private static Object [] getVendor()
 	{
 		DocumentBuilderFactory documentBuilderFactory;
 		DocumentBuilder documentBuilder;
@@ -422,10 +424,23 @@ public class ToolBox {
 			}
 		return vendorList.toArray();
 	}
+	public static String [] getVendorList()
+	{
+		Object [] vendors= ToolBox.getVendor();
+		String [] vendorList = new String[vendors.length];
+		
+		int i = 0;
+		for(Object name:vendors)
+		{
+			vendorList[i] = (String) name;
+			i++;
+		}
+		return vendorList;
+	}
 	/**
 	 * getting the material list from xml file
 	 */
-	public static Object [] getMaterialList()
+	private static Object [] getMaterial()
 	{
 		DocumentBuilderFactory documentBuilderFactory;
 		DocumentBuilder documentBuilder;
@@ -474,9 +489,25 @@ public class ToolBox {
 		return vendorList.toArray();
 	}
 	/**
+	 * creates a String array from the Object array generated from the xml file
+	 * @return Material List
+	 */
+	public static String [] getMaterialList()
+	{
+		Object [] materials= ToolBox.getMaterial();
+		String [] materialsStr = new String[materials.length];
+		int i = 0;
+		for(Object name:materials)
+		{
+			materialsStr[i] = (String) name;
+			i++;
+		}
+		return materialsStr;
+	}
+	/**
 	 * getting the Finish list from xml file
 	 */
-	public static Object [] getFinishList()
+	private static Object [] getFinish()
 	{
 		DocumentBuilderFactory documentBuilderFactory;
 		DocumentBuilder documentBuilder;
@@ -523,5 +554,19 @@ public class ToolBox {
 				e.printStackTrace();
 			}
 		return vendorList.toArray();
+	}
+	
+	public static String [] getFinishList()
+	{
+		Object [] finish= ToolBox.getFinish();
+		String [] finishList = new String[finish.length];
+		
+		int i = 0;
+		for(Object name:finish)
+		{
+			finishList[i] = (String) name;
+			i++;
+		}
+		return finishList;
 	}
 }

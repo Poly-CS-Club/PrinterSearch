@@ -62,9 +62,9 @@ public class SearchFiltersPanel extends JPanel {
 		m_ClearResults_B = new JButton("Clear Results");
 		
 		// Instantiate combo boxes
-		populateFinish();
-		populateMaterial();
-		populateVender();
+		m_Finish_CB = new JComboBox<String>(ToolBox.getFinishList());
+		m_Materials_CB = new JComboBox<String>(ToolBox.getMaterialList());
+		m_Vendor_CB = new JComboBox<String>(ToolBox.getVendorList());
 
 		
 	}
@@ -139,36 +139,6 @@ public class SearchFiltersPanel extends JPanel {
 		label = new JLabel(text);
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(label);
-	}
-	private void populateFinish()
-	{
-		Object [] materials= ToolBox.getFinishList();
-		m_Finish_CB = new JComboBox<String>();
-		m_Finish_CB.addItem("Select All");
-		for(Object name:materials)
-		{
-			m_Finish_CB.addItem((String)name);
-		}
-	}
-	private void populateMaterial()
-	{
-		Object [] materials= ToolBox.getMaterialList();
-		m_Materials_CB = new JComboBox<String>();
-		m_Materials_CB.addItem("Select All");
-		for(Object name:materials)
-		{
-			m_Materials_CB.addItem((String)name);
-		}
-	}
-	private void populateVender()
-	{
-		Object [] vendors= ToolBox.getVendorList();
-		m_Vendor_CB = new JComboBox<String>();
-		m_Vendor_CB.addItem("Select All");
-		for(Object name:vendors)
-		{
-			m_Vendor_CB.addItem((String)name);
-		}
 	}
 	//--------------------------------Getters/Setters---------------------------------------//
 	/**
