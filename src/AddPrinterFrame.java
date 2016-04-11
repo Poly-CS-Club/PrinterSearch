@@ -124,13 +124,13 @@ public class AddPrinterFrame {
 	private void addComponents() 
 	{
 		
-		// Add parameter titles to panel
+		// Add parameter top row components to panel
 		m_TopRow_P.add(m_Name);
 		m_TopRow_P.add(m_Vendor);
 		m_TopRow_P.add(m_Tension);
 		m_TopRow_P.add(m_Compression);
 		
-		// Add parameter text fields to panel
+		// Add parameter last row components to panel
 		m_LastRow_P.add(m_Impact);
 		m_LastRow_P.add(m_Materials);
 		m_LastRow_P.add(m_Tolerance);
@@ -144,6 +144,9 @@ public class AddPrinterFrame {
 		m_Main_F.add(m_LastRow_P);
 		m_Main_F.add(m_Button_P);
 	}
+	/**
+	 * adds an Icon to the Frame
+	 */
 	private void addIcon()
 	{
 		String stringSearch = System.getProperty("os.name");
@@ -180,15 +183,15 @@ public class AddPrinterFrame {
 					String Vendor = null;
 					String name = null;
 					
-					tension = m_Tension.getText();
-					compression = m_Compression.getText();
-					impact = m_Impact.getText();
-					tolerance = m_Tolerance.getText();
-					Vendor = m_Vendor.getText();
-					name = m_Name.getText();
+					tension = m_Tension.getInput();
+					compression = m_Compression.getInput();
+					impact = m_Impact.getInput();
+					tolerance = m_Tolerance.getInput();
+					Vendor = m_Vendor.getInput();
+					name = m_Name.getInput();
 					
 					if(tension.equals("") || compression.equals("") || impact.equals("") || tolerance.equals("") ||
-							Vendor.equals("") || name.equals(""))
+					   Vendor.equals("") || name.equals(""))
 					{
 						emptyField = true;
 					}
@@ -196,7 +199,7 @@ public class AddPrinterFrame {
 				    try
 				    {
 				    	//Checking for valid inputs
-				    	//TODO give a more descriptive error message, with exactly witch one is causeing the error.
+				    	//TODO give a more descriptive error message, with exactly witch one is causing the error.
 				    	Double.parseDouble(tension);
 				    	Double.parseDouble(compression);
 				    	Double.parseDouble(impact);
@@ -208,17 +211,6 @@ public class AddPrinterFrame {
 					// Add printer to master printer database
 				    if(!errorFlag && !emptyField)
 				    {
-				    	/*m_Driver.addPrinter(
-								name,
-								tension,
-								compression,
-								Vendor,
-								(String) m_Materials_CB.getSelectedItem(),
-								impact, leadTime,
-								(String) m_Customizable_CB.getSelectedItem(),
-								tolerance,
-								(String) m_Finish_CB.getSelectedItem());*/
-						
 						// Inform user that the printer was successfully added
 						JOptionPane.showMessageDialog(
 								m_Main_F, "Printer Added to DataBase",
@@ -230,10 +222,10 @@ public class AddPrinterFrame {
 								MenuWindow.FRAME_WIDTH, MenuWindow.FRAME_HEIGHT,
 								name,
 								Vendor,
+								tension,
 								compression,
-								Vendor, 
+								impact,
 								(String) m_Materials.getSelectedItem(),
-								impact, 
 								tolerance,
 								(String) m_Finish.getSelectedItem()));
 						

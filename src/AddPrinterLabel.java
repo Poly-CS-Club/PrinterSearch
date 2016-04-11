@@ -54,6 +54,14 @@ public class AddPrinterLabel extends JLabel
 	{
 		return (String) ((JComboBox<String>) m_Component).getSelectedItem();
 	}
+	
+	public String getInput()
+	{
+		if(!m_Component.equals(null))
+			return (String) ((JTextField) m_Component).getText();
+		else
+			return "";
+	}
 	/**
 	 * @return the m_Component
 	 */
