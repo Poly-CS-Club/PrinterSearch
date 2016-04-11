@@ -6,9 +6,9 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.JLabel;
 /**
+ * Used for displaying info when vendor is clicked
  * 
  * @author Joshua Becker
- * used for displaying info when vendor is clicked
  */
 public class MouseActionListener extends MouseAdapter{
 	VendorInfoFrame m_VendorInfoUI;
