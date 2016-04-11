@@ -11,12 +11,12 @@ import javax.swing.JLabel;
  * used for displaying info when vendor is clicked
  */
 public class MouseActionListener extends MouseAdapter{
-	VendorInfoUI m_VendorInfoUI;
+	VendorInfoFrame m_VendorInfoUI;
 	JLabel m_Target_L;
 	Color m_OldColor;
 	public MouseActionListener(JLabel target)
 	{
-		m_VendorInfoUI = new VendorInfoUI(target);
+		m_VendorInfoUI = new VendorInfoFrame(target);
 		m_VendorInfoUI.addMouseListener(new MouseListener());
 		m_Target_L = target;
 	}
@@ -25,7 +25,6 @@ public class MouseActionListener extends MouseAdapter{
 	{
 		m_OldColor = m_Target_L.getForeground();
 		m_Target_L.setForeground(Color.blue);
-		//
 	}
 
 	@Override

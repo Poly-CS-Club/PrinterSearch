@@ -86,19 +86,6 @@ public class PrinterList {
 		 *  5 = Tolerance
 		 *  6 = Finish
 		 */
-		/* REFERENCE LIST:
-		
-		m_BroadSearch_TF
-		m_PartComplexity_TF
-		m_Compression_RTF
-		m_Tolerance_RTF
-		m_Tension_RTF
-		m_Impact_RTF
-		m_Finish_CB
-		m_RangeOfMaterials_CB
-		m_EaseOfCustomization_CB
-
-		 */ 
 		
 		for(Printer printer : printerList)
 		{

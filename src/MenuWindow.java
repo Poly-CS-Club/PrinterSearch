@@ -24,10 +24,10 @@ import javax.swing.JScrollPane;
  * 
  * @author  Joshua Becker
  * @version 1.1
- * @see     PrinterUI
- * @see     AddPrinterUI
+ * @see     PrinterLabel
+ * @see     AddPrinterFrame
  */
-public class MenuUI extends JFrame
+public class MenuWindow extends JFrame
 {
 	private JFrame m_Menu_F;
 	private JPanel m_Menu_P;
@@ -37,7 +37,7 @@ public class MenuUI extends JFrame
 	private JToolBar m_ToolBar;
 	private JScrollPane m_ScrollPane;
 	private ToolBox m_Driver;
-	private MenuUI m_MenuUI;
+	private MenuWindow m_MenuUI;
 	private PrinterList printerList;
 
 	public static int FRAME_WIDTH;
@@ -48,7 +48,7 @@ public class MenuUI extends JFrame
 /**
  * Creates window for Printer Search Program
  */
-public MenuUI(String name)
+public MenuWindow(String name)
 {
 	super(name);
 	GraphicsDevice graphicsDevice;
@@ -291,7 +291,7 @@ private class ButtonListener implements ActionListener, Printable
 				break;
 			case "Settings"://TODO Settings Window or pop-up
 				break;
-			case "Add Printer": new AddPrinterUI(m_Menu_F, m_Driver, m_MenuUI);
+			case "Add Printer": new AddPrinterFrame(m_Menu_F, m_Driver, m_MenuUI);
 				break;
 			case "Export": 
 									// Printing portion for printing the results from the results.

@@ -8,7 +8,7 @@ import java.io.*;
  * @author Joshua Becker
  *
  */
-public class PrinterUI extends JLabel implements Serializable
+public class PrinterLabel extends JLabel implements Serializable
 {
 	private JLabel name, vendor, tension, compression, impact,
 	               materials, tolerance, finish;
@@ -30,7 +30,7 @@ public class PrinterUI extends JLabel implements Serializable
      * @param tolerance       the String with the printer's tolerance value
      * @param finish          the String with the printer's finish
      */
-    PrinterUI(int index, int frameWidth, int frameHeight, String name,String vendor, String tension,
+    PrinterLabel(int index, int frameWidth, int frameHeight, String name,String vendor, String tension,
     		String compression, String impact, String materials, String tolerance, String finish)
     {
         m_index = index;
@@ -76,7 +76,7 @@ public class PrinterUI extends JLabel implements Serializable
      * @param frameWidth  the width of the frame
      * @param frameHeight the height of the frame
      */
-    PrinterUI(int index, int frameWidth, int frameHeight)
+    PrinterLabel(int index, int frameWidth, int frameHeight)
     {
         m_index = index;
         name = new JLabel("default", JTextField.CENTER);

@@ -48,10 +48,10 @@ public class SearchFiltersPanel extends JPanel {
 		m_BroadSearch_TF = new JTextField();
 
 		// Instantiate ranged text fields
-		m_Compression_RTF = new RangedTextField<Double>(100.00, 0.000, RangedTextField.DOUBLE);
-		m_Tolerance_RTF = new RangedTextField<Double>(100.00, 0.000, RangedTextField.DOUBLE);
-		m_Tension_RTF = new RangedTextField<Double>(100.00, 0.000, RangedTextField.DOUBLE);
-		m_Impact_RTF = new RangedTextField<Double>(100.00, 0.000, RangedTextField.DOUBLE);
+		m_Compression_RTF = new RangedTextField<Double>(1000.00, 0.000, RangedTextField.DOUBLE);
+		m_Tolerance_RTF = new RangedTextField<Double>(1.000, .000, RangedTextField.DOUBLE);
+		m_Tension_RTF = new RangedTextField<Double>(1000.00, 0.000, RangedTextField.DOUBLE);
+		m_Impact_RTF = new RangedTextField<Double>(400.00, 0.000, RangedTextField.DOUBLE);
 		
 		m_Compression_RTF.getMaxSpinner().setValue(0.000);
 		m_Tolerance_RTF.getMaxSpinner().setValue(0.000);
@@ -81,7 +81,7 @@ public class SearchFiltersPanel extends JPanel {
 		
 		// Set up search panel
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		setPreferredSize(new Dimension(175, MenuUI.FRAME_HEIGHT));
+		setPreferredSize(new Dimension(175, MenuWindow.FRAME_HEIGHT));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		// Set up search parameter component dimensions

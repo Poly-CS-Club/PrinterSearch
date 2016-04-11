@@ -6,7 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 public class SearchResultPanel extends JPanel{
-	PrinterUI m_ResultHeader;
+	PrinterLabel m_ResultHeader;
 	private PrinterList m_PrinterList;
 	/**
 	 * auto generated serial version UID for panel
@@ -29,7 +29,7 @@ public class SearchResultPanel extends JPanel{
 	private void createComponents()
 	{
 		// Create search results' table header
-		m_ResultHeader = new PrinterUI(1,MenuUI.FRAME_WIDTH , MenuUI.FRAME_HEIGHT,
+		m_ResultHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
 				"Name","Vendor","Tension","Compression","Impact","Materials","Tolerance","Finish");
 		// Add tool tips for long header categories before adding to GUI
 		m_ResultHeader.getMaterials().setToolTipText("Range of Materials");
@@ -54,7 +54,7 @@ public class SearchResultPanel extends JPanel{
 		{
 			// Convert values to Strings
 			currentPrinter = m_PrinterList.getPrinter(i-2);
-			add(new PrinterUI(i,MenuUI.FRAME_WIDTH , MenuUI.FRAME_HEIGHT,
+			add(new PrinterLabel(i,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
 					currentPrinter.getPrinterName()+ "",
 					currentPrinter.getVendor(),
 					currentPrinter.getTension()+ "",
@@ -101,10 +101,10 @@ public class SearchResultPanel extends JPanel{
 	public void updateSearchResults(ArrayList<Printer> outputList){
 		//removeAll();
 		Printer currentPrinter;
-		PrinterUI tableHeader;
+		PrinterLabel tableHeader;
 		
 		// Create search results' table header
-		tableHeader = new PrinterUI(1,MenuUI.FRAME_WIDTH , MenuUI.FRAME_HEIGHT,
+		tableHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
 				"Name","Vendor","Tension","Compression","Impact","Materials","Tolerance","Finish");
 
 		// Add tool tips for long header categories before adding to GUI
@@ -118,7 +118,7 @@ public class SearchResultPanel extends JPanel{
 		for(int i = outputList.size()-1; i >=0;i--)
 		{
 			currentPrinter = outputList.get(i);
-			add(new PrinterUI(i+1,MenuUI.FRAME_WIDTH , MenuUI.FRAME_HEIGHT,
+			add(new PrinterLabel(i+1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
 					currentPrinter.getPrinterName() + "",
 					highlightMatch(currentPrinter, "Vendor"),
 					highlightMatch(currentPrinter, "Tension"),
