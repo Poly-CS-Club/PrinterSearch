@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="us-ascii" standalone="no"?>
+<INFO>
+    <PRINTERS>
+        <printer>
+    
+            <NAME>Test Printer Two</NAME>
+            <VENDOR>Vender Two</VENDOR>
+            <TENSION>.37</TENSION>
+            <COMPRESSION>.0001</COMPRESSION>
+            <IMPACT>.3</IMPACT>
+            <PART_COMPLEXITY>11</PART_COMPLEXITY>
+            <LEAD_TIME>1</LEAD_TIME>
+            <EOC>true</EOC>
+            <ROM>Stainless</ROM>
+            <TOLERANCE>.01</TOLERANCE>
+            <FINISH>GLOSS</FINISH>
+        
+    
+        </printer>
+        <printer>
+            <NAME>Test Printer THree</NAME>
+            <VENDOR>Vender Three</VENDOR>
+            <TENSION>123</TENSION>
+            <COMPRESSION>321</COMPRESSION>
+            <IMPACT>213</IMPACT>
+            <PART_COMPLEXITY>123</PART_COMPLEXITY>
+            <LEAD_TIME>123</LEAD_TIME>
+            <EOC>true</EOC>
+            <ROM>Aluminum</ROM>
+            <TOLERANCE>123</TOLERANCE>
+            <FINISH>Matte</FINISH>
+        </printer>
+        <printer>
+            <NAME>Test 3</NAME>
+            <VENDOR>Vender One</VENDOR>
+            <TENSION>.5</TENSION>
+            <COMPRESSION>.5</COMPRESSION>
+            <IMPACT>.3</IMPACT>
+            <PART_COMPLEXITY>.06</PART_COMPLEXITY>
+            <LEAD_TIME>5</LEAD_TIME>
+            <EOC>true</EOC>
+            <ROM>Aluminum</ROM>
+            <TOLERANCE>.004</TOLERANCE>
+            <FINISH>Matte</FINISH>
+        </printer>
+    <printer>
+            <NAME>Test 4</NAME>
+            <VENDOR>124</VENDOR>
+            <TENSION>1234</TENSION>
+            <COMPRESSION>1234</COMPRESSION>
+            <IMPACT>1234</IMPACT>
+            <PART_COMPLEXITY>123</PART_COMPLEXITY>
+            <LEAD_TIME>1123</LEAD_TIME>
+            <EOC>True</EOC>
+            <ROM>Aluminum</ROM>
+            <TOLERANCE>1234</TOLERANCE>
+            <FINISH>Matte</FINISH>
+        </printer>
+        <printer>
+        
+            <NAME>Test Printer One</NAME>
+            <VENDOR>Vender One</VENDOR>
+            <TENSION>.35</TENSION>
+            <COMPRESSION>.05</COMPRESSION>
+            <IMPACT>.001</IMPACT>
+            <PART_COMPLEXITY>8</PART_COMPLEXITY>
+            <LEAD_TIME>5</LEAD_TIME>
+            <EOC>false</EOC> 
+            <ROM>aluminum, stainless</ROM>
+            <TOLERANCE>.0001</TOLERANCE>
+            <FINISH>MATTE</FINISH>
+        
+        </printer>
+    </PRINTERS>
+    
+    <VENDORS>
+        <vendor name="Vendor One">
+            <printers info = "Printer One?Printer Two?Printer Three">
+            </printers>
+            <webSite info = "@vendorOne.com">
+            </webSite>
+            <VendorInfo info = "PRINTER INFO GOES HERE">
+            </VendorInfo>
+        </vendor>
+        <vendor name="Vendor Two">
+            <printers info = "Printer One?Printer Two">
+            </printers>
+            <webSite info = "@vendorTwo.com">
+            </webSite>
+            <VendorInfo info = "PRINTER INFO GOES HERE">
+            </VendorInfo>
+        </vendor>
+        <vendor name="Vendor Three">
+            <printers info = "Printer One">
+            </printers>
+            <webSite info = "@vendorThree.com">
+            </webSite>
+            <VendorInfo info = "PRINTER INFO GOES HERE">
+            </VendorInfo>            
+        </vendor>
+    </VENDORS>
+</INFO>

@@ -36,7 +36,7 @@ public class MenuWindow extends JFrame
 	private HashSet<String> m_RangeOfMaterials;
 	private JToolBar m_ToolBar;
 	private JScrollPane m_ScrollPane;
-	private ToolBox m_Driver;
+	private ToolBox m_ToolBox;
 	private MenuWindow m_MenuUI;
 	private PrinterList printerList;
 
@@ -51,6 +51,7 @@ public class MenuWindow extends JFrame
 public MenuWindow(String name)
 {
 	super(name);
+	m_ToolBox = new ToolBox();
 	GraphicsDevice graphicsDevice;
 	
 	// Obtain window dimensions
@@ -69,7 +70,6 @@ public MenuWindow(String name)
     m_MenuUI = this;
     
 	// Instantiate non-GUI objects
-    m_Driver = new ToolBox();
 	m_RangeOfMaterials = new HashSet<String>();
 	m_Menu_F = this;
 }
@@ -280,7 +280,7 @@ private class ButtonListener implements ActionListener, Printable
 				break;
 			case "Settings"://TODO Settings Window or pop-up
 				break;
-			case "Add Printer": new AddPrinterFrame(m_Menu_F, m_Driver, m_MenuUI);
+			case "Add Printer": new AddPrinterFrame(m_Menu_F, m_ToolBox, m_MenuUI);
 				break;
 			case "Export": 
 									// Printing portion for printing the results from the results.

@@ -14,10 +14,6 @@ import org.xml.sax.SAXException;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
 import javax.xml.transform.dom.*;
-import org.w3c.dom.*;
-
-import javax.swing.JComboBox;
-import javax.xml.parsers.*;
 
 /**
  * A test of an implementation of the PrinterList class by
@@ -30,63 +26,59 @@ import javax.xml.parsers.*;
  * @see Printer
  */
 public class ToolBox {
-	/**
-	 * Generates printer list from XML file and returns list to calling method.
-	 *
-	 * @return the printer list generated from XML file
-	 */
-	public static PrinterList generatePrinterList(){
+	public static Document m_Document;
+	
+	public ToolBox()
+	{
 		DocumentBuilderFactory documentBuilderFactory;
 		DocumentBuilder documentBuilder;
-		Document document;
-		NodeList nList;
-		Node nNode;
-		Element eElement;
-		PrinterList printerList;
-
-
-		printerList = new PrinterList();
 
 		// Build list of Printer objects from XML file;
 		try{
 			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
 			String stringSearch = System.getProperty("os.name");
 			String keyword = "Mac";
-			File file = new File("src\\printers.xml");
+			File file = new File("src\\printerInformation.xml");
 			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 			if(found){
-				File fileChange = new File("src/printers.xml");	// Mac image path.
+				File fileChange = new File("src/printerInformation.xml");	// Mac image path.
 				file = fileChange;
 			}
-			//File file = new File("src/printers.xml");
-			//File file = new File("src\\printers.xml");
 			documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			document = documentBuilder.parse(file);
+			m_Document = documentBuilder.parse(file);
+		} catch(FileNotFoundException e){
+			System.out.println("File Not Found" + e);
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Generates printer list from XML file and returns list to calling method.
+	 *
+	 * @return the printer list generated from XML file
+	 */
+	public static PrinterList generatePrinterList(){
+		NodeList nList;
+		Node nNode;
+		PrinterList printerList = new PrinterList();
+
+		// Build list of Printer objects from XML file;
 
 			// Display listed printers in console
-			System.out.println(
-					"Root element:" +
-			        document.getDocumentElement().getNodeName());
-			nList = document.getElementsByTagName("printer");
+			nList = m_Document.getElementsByTagName("printer");
 
 			for(int i=0;i<nList.getLength();i++){
 				nNode = nList.item(i);
 				System.out.println(nNode.getNodeName());
 				displayPrinterNodes(nNode, printerList);
-			}
-
-			}catch(FileNotFoundException e){
-				System.out.println("File Not Found" + e);
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		return printerList;
 	}
@@ -154,121 +146,6 @@ public class ToolBox {
 			        printers.getPrinter(0).getPrinterName());
 		}
 	}
-
-
-/**
- * Adds a printer element to printers.xml based on user input.
- *
- * @param printerName
- * @param printerTension
- * @param printerCompression
- * @param printerPartComplexity
- * @param printerROM
- * @param printerImpact
- * @param printerLeadTime
- * @param printerEaseOfChange
- * @param printerTolerance
- * @param printerFinish
- */
-	public static void addPrinter(String printerName, String vendor, String printerTension, String printerCompression, String printerPartComplexity, String printerROM, String printerImpact,
-  		String printerLeadTime, String printerEaseOfChange, String printerTolerance, String printerFinish) {
-        try {
-            /*
-             * Creates link to xml file
-             */
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-					  String stringSearch = System.getProperty("os.name");
-						String keyword = "Mac";
-						Document document = documentBuilder.parse("src\\printers.xml");;
-						StreamResult result = new StreamResult("src\\printers.xml");
-						Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-						if(found){
-							Document documentChange = documentBuilder.parse("src/printers.xml");	// Mac image path.
-							StreamResult resultChange = new StreamResult("src/printers.xml");	// Mac image path.
-							document = documentChange;
-							result = resultChange;
-						}
-
-			//Document document = documentBuilder.parse("src/printers.xml");		// Mac directory path.
-			//Document document = documentBuilder.parse("src\\printers.xml");		// Windows directory path.
-            Element root = document.getDocumentElement();
-
-            /*
-             * Creates printer root element
-             */
-            Element newPrinter = document.createElement("printer");
-
-
-            /*
-             * Inserts user given parameters into the new printer xml element in the following order:
-             *
-             * Creates element to represent attribute of printer,
-             * appends child element that holds value of the attribute,
-             * appends element to the new printer element
-             */
-            Element name = document.createElement("NAME");
-            name.appendChild(document.createTextNode(printerName));
-            newPrinter.appendChild(name);
-
-			Element vendors = document.createElement("VENDOR");
-			vendors.appendChild(document.createTextNode(vendor));
-			newPrinter.appendChild(vendors);
-
-            Element tension = document.createElement("TENSION");
-            tension.appendChild(document.createTextNode(printerTension));
-            newPrinter.appendChild(tension);
-
-            Element compression = document.createElement("COMPRESSION");
-            compression.appendChild(document.createTextNode(printerCompression));
-            newPrinter.appendChild(compression);
-
-            Element impact = document.createElement("IMPACT");
-            impact.appendChild(document.createTextNode(printerImpact));
-            newPrinter.appendChild(impact);
-
-            Element partComplexity = document.createElement("PART_COMPLEXITY");
-            partComplexity.appendChild(document.createTextNode(printerPartComplexity));
-            newPrinter.appendChild(partComplexity);
-
-            Element leadTime = document.createElement("LEAD_TIME");
-            leadTime.appendChild(document.createTextNode(printerLeadTime));
-            newPrinter.appendChild(leadTime);
-
-            Element easeOfChange = document.createElement("EOC");
-            easeOfChange.appendChild(document.createTextNode(printerEaseOfChange));
-            newPrinter.appendChild(easeOfChange);
-
-            Element ROM = document.createElement("ROM");
-            ROM.appendChild(document.createTextNode(printerROM));
-            newPrinter.appendChild(ROM);
-
-            Element tolerance = document.createElement("TOLERANCE");
-            tolerance.appendChild(document.createTextNode(printerTolerance));
-            newPrinter.appendChild(tolerance);
-
-            Element finish = document.createElement("FINISH");
-            finish.appendChild(document.createTextNode(printerFinish));
-            newPrinter.appendChild(finish);
-
-
-            root.appendChild(newPrinter);
-
-
-            DOMSource source = new DOMSource(document);
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-						transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-  					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-
-			//StreamResult result = new StreamResult("src/printers.xml");	// Mac directory path.
-			//StreamResult result = new StreamResult("src\\printers.xml");	// Windows directory path.
-            transformer.transform(source, result);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 	/**
 	 * 
 	 * @param printerName
@@ -290,28 +167,22 @@ public class ToolBox {
 	            /*
 	             * Creates link to xml file
 	             */
-	            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-	            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 						  String stringSearch = System.getProperty("os.name");
 							String keyword = "Mac";
-							Document document = documentBuilder.parse("src\\printers.xml");;
-							StreamResult result = new StreamResult("src\\printers.xml");
+							StreamResult result = new StreamResult("src\\printerInformation.xml");
 							Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 							if(found){
-								Document documentChange = documentBuilder.parse("src/printers.xml");	// Mac image path.
-								StreamResult resultChange = new StreamResult("src/printers.xml");	// Mac image path.
-								document = documentChange;
+								StreamResult resultChange = new StreamResult("src/printerInformation.xml");	// Mac image path.
 								result = resultChange;
 							}
 
-				//Document document = documentBuilder.parse("src/printers.xml");		// Mac directory path.
-				//Document document = documentBuilder.parse("src\\printers.xml");		// Windows directory path.
-	            Element root = document.getDocumentElement();
+	            Element root = m_Document.getDocumentElement();
+	            System.out.println(root.getLocalName());
 
 	            /*
 	             * Creates printer root element
 	             */
-	            Element newPrinter = document.createElement("printer");
+	            Element newPrinter = m_Document.createElement("printer");
 
 
 	            /*
@@ -321,63 +192,61 @@ public class ToolBox {
 	             * appends child element that holds value of the attribute,
 	             * appends element to the new printer element
 	             */
-	            Element name = document.createElement("NAME");
-	            name.appendChild(document.createTextNode(printerName));
+	            Element name = m_Document.createElement("NAME");
+	            name.appendChild(m_Document.createTextNode(printerName));
 	            newPrinter.appendChild(name);
 
-				Element vendors = document.createElement("VENDOR");
-				vendors.appendChild(document.createTextNode(vendor));
+				Element vendors = m_Document.createElement("VENDOR");
+				vendors.appendChild(m_Document.createTextNode(vendor));
 				newPrinter.appendChild(vendors);
 
-	            Element tension = document.createElement("TENSION");
-	            tension.appendChild(document.createTextNode(printerTension));
+	            Element tension = m_Document.createElement("TENSION");
+	            tension.appendChild(m_Document.createTextNode(printerTension));
 	            newPrinter.appendChild(tension);
 
-	            Element compression = document.createElement("COMPRESSION");
-	            compression.appendChild(document.createTextNode(printerCompression));
+	            Element compression = m_Document.createElement("COMPRESSION");
+	            compression.appendChild(m_Document.createTextNode(printerCompression));
 	            newPrinter.appendChild(compression);
 
-	            Element impact = document.createElement("IMPACT");
-	            impact.appendChild(document.createTextNode(printerImpact));
+	            Element impact = m_Document.createElement("IMPACT");
+	            impact.appendChild(m_Document.createTextNode(printerImpact));
 	            newPrinter.appendChild(impact);
 
-	            Element partComplexity = document.createElement("PART_COMPLEXITY");
-	            partComplexity.appendChild(document.createTextNode("123"));
+	            Element partComplexity = m_Document.createElement("PART_COMPLEXITY");
+	            partComplexity.appendChild(m_Document.createTextNode("123"));
 	            newPrinter.appendChild(partComplexity);
 
-	            Element leadTime = document.createElement("LEAD_TIME");
-	            leadTime.appendChild(document.createTextNode("1123"));
+	            Element leadTime = m_Document.createElement("LEAD_TIME");
+	            leadTime.appendChild(m_Document.createTextNode("1123"));
 	            newPrinter.appendChild(leadTime);
 
-	            Element easeOfChange = document.createElement("EOC");
-	            easeOfChange.appendChild(document.createTextNode("True"));
+	            Element easeOfChange = m_Document.createElement("EOC");
+	            easeOfChange.appendChild(m_Document.createTextNode("True"));
 	            newPrinter.appendChild(easeOfChange);
 
-	            Element ROM = document.createElement("ROM");
-	            ROM.appendChild(document.createTextNode(printerROM));
+	            Element ROM = m_Document.createElement("ROM");
+	            ROM.appendChild(m_Document.createTextNode(printerROM));
 	            newPrinter.appendChild(ROM);
 
-	            Element tolerance = document.createElement("TOLERANCE");
-	            tolerance.appendChild(document.createTextNode(printerTolerance));
+	            Element tolerance = m_Document.createElement("TOLERANCE");
+	            tolerance.appendChild(m_Document.createTextNode(printerTolerance));
 	            newPrinter.appendChild(tolerance);
 
-	            Element finish = document.createElement("FINISH");
-	            finish.appendChild(document.createTextNode(printerFinish));
+	            Element finish = m_Document.createElement("FINISH");
+	            finish.appendChild(m_Document.createTextNode(printerFinish));
 	            newPrinter.appendChild(finish);
 
 
 	            root.appendChild(newPrinter);
 
 
-	            DOMSource source = new DOMSource(document);
+	            DOMSource source = new DOMSource(m_Document);
 
 	            TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	            Transformer transformer = transformerFactory.newTransformer();
 							transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 	  					transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
-				//StreamResult result = new StreamResult("src/printers.xml");	// Mac directory path.
-				//StreamResult result = new StreamResult("src\\printers.xml");	// Windows directory path.
 	            transformer.transform(source, result);
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
@@ -492,49 +361,18 @@ public class ToolBox {
 	 */
 	private static Object [] getVendor()
 	{
-		DocumentBuilderFactory documentBuilderFactory;
-		DocumentBuilder documentBuilder;
-		Document document;
 		Node nNode;
 		ArrayList<String> vendorList = new ArrayList<String>();
-		
-
-		// Build list of Printer objects from XML file;
-		try{
-			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
-			String stringSearch = System.getProperty("os.name");
-			String keyword = "Mac";
-			File file = new File("src\\vendors.xml");
-			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-			if(found){
-				File fileChange = new File("src/vendors.xml");	// Mac image path.
-				file = fileChange;
-			}
-			documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			document = documentBuilder.parse(file);
 
 			// Display listed printers in console
-			Element root = document.getDocumentElement();
+			Element root = m_Document.getDocumentElement();
 			NodeList nodeList = root.getElementsByTagName("vendor");
 
 			for(int i=0;i<nodeList.getLength();i++){
 				nNode = nodeList.item(i);
 				Element element = (Element) nNode;
-				vendorList.add(element.getAttribute("name"));
-			}
-
-			}catch(FileNotFoundException e){
-				System.out.println("File Not Found" + e);
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				if(!vendorList.contains(element.getTextContent()))
+					vendorList.add(element.getAttribute("name"));
 			}
 		return vendorList.toArray();
 	}
@@ -556,51 +394,19 @@ public class ToolBox {
 	 */
 	private static Object [] getMaterial()
 	{
-		DocumentBuilderFactory documentBuilderFactory;
-		DocumentBuilder documentBuilder;
-		Document document;
 		Node nNode;
-		ArrayList<String> vendorList = new ArrayList<String>();
+		ArrayList<String> materialList = new ArrayList<String>();
 		
-
-		// Build list of Printer objects from XML file;
-		try{
-			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
-			String stringSearch = System.getProperty("os.name");
-			String keyword = "Mac";
-			File file = new File("src\\materials.xml");
-			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-			if(found){
-				File fileChange = new File("src/materials.xml");	// Mac image path.
-				file = fileChange;
-			}
-			documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			document = documentBuilder.parse(file);
-
-			// Display listed printers in console
-			Element root = document.getDocumentElement();
-			NodeList nodeList = root.getElementsByTagName("material");
+			Element root = m_Document.getDocumentElement();
+			NodeList nodeList = root.getElementsByTagName("ROM");
 
 			for(int i=0;i<nodeList.getLength();i++){
 				nNode = nodeList.item(i);
 				Element element = (Element) nNode;
-				vendorList.add(element.getAttribute("name"));
+				if(!materialList.contains(element.getTextContent()))
+					materialList.add(element.getTextContent());
 			}
-
-			}catch(FileNotFoundException e){
-				System.out.println("File Not Found" + e);
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		return vendorList.toArray();
+		return materialList.toArray();
 	}
 	/**
 	 * creates a String array from the Object array generated from the xml file
@@ -623,51 +429,20 @@ public class ToolBox {
 	 */
 	private static Object [] getFinish()
 	{
-		DocumentBuilderFactory documentBuilderFactory;
-		DocumentBuilder documentBuilder;
-		Document document;
+		ArrayList<String> finishList = new ArrayList<String>();
 		Node nNode;
-		ArrayList<String> vendorList = new ArrayList<String>();
-		
-
-		// Build list of Printer objects from XML file;
-		try{
-			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
-			String stringSearch = System.getProperty("os.name");
-			String keyword = "Mac";
-			File file = new File("src\\finish.xml");
-			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-			if(found){
-				File fileChange = new File("src/finish.xml");	// Mac image path.
-				file = fileChange;
-			}
-			documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			document = documentBuilder.parse(file);
 
 			// Display listed printers in console
-			Element root = document.getDocumentElement();
-			NodeList nodeList = root.getElementsByTagName("finish");
+			Element root = m_Document.getDocumentElement();
+			NodeList nodeList = root.getElementsByTagName("FINISH");
 
 			for(int i=0;i<nodeList.getLength();i++){
 				nNode = nodeList.item(i);
 				Element element = (Element) nNode;
-				vendorList.add(element.getAttribute("name"));
+				if(!finishList.contains(element.getTextContent()))
+					finishList.add(element.getTextContent());
 			}
-
-			}catch(FileNotFoundException e){
-				System.out.println("File Not Found" + e);
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SAXException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		return vendorList.toArray();
+		return finishList.toArray();
 	}
 	
 	public static String [] getFinishList()
