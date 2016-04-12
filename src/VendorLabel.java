@@ -18,9 +18,17 @@ public class VendorLabel extends JLabel implements Serializable
  * @param webSite
  * @param otherPrinters
  */
-    VendorLabel(String vendorName, String webSite, String otherPrinters)
+    VendorLabel(String vendorName)
     {
-    	createComponents(vendorName, webSite,otherPrinters);
+    	String [] vendorInfo = ToolBox.getVendorInfo(vendorName);
+    	if(vendorInfo.length == 0)
+    	{
+    		createComponents(vendorName, "No Information","No Information");
+    	}else
+    	{
+    		createComponents(vendorName, vendorInfo[0],vendorInfo[1]);
+    	}
+    	
         designComponents();
         addComponents();
     }

@@ -373,7 +373,7 @@ public class ToolBox {
 		return hashSet;
 		}
 	/**
-	 * 
+	 * gets a vendor object array filled with all vendors from the xml
 	 */
 	private static Object [] getVendor()
 	{
@@ -460,7 +460,10 @@ public class ToolBox {
 			}
 		return finishList.toArray();
 	}
-	
+	/**
+	 * gets a String array from the xml finish list.
+	 * @return finish list
+	 */
 	public static String [] getFinishList()
 	{
 		Object [] finish= ToolBox.getFinish();
@@ -473,5 +476,49 @@ public class ToolBox {
 			i++;
 		}
 		return finishList;
+	}
+	
+	public static String [] getVendorInfo(String vendorName)
+	{
+		ArrayList<String> vendorInfo = new ArrayList<String>();
+
+			// Display listed printers in console
+			Element root = m_Document.getDocumentElement();
+			//get all vendors
+			NodeList nodeList = root.getElementsByTagName("vendor");
+			
+			for(int i = 0; i < nodeList.getLength(); i++)
+			{
+				Element temp = (Element) nodeList.item(i);
+				//if the vendor is found
+				if(temp.getAttribute("name").equalsIgnoreCase(vendorName))
+				{
+					//get information
+					String webSite = ((Element)(temp.getElementsByTagName("webSite")).item(0)).getAttribute("info");
+					String vendorInformation = ((Element)(temp.getElementsByTagName("VendorInfo")).item(0)).getAttribute("info");
+					vendorInfo.add(webSite);
+					vendorInfo.add(vendorInformation);
+					//get all printers from that vendor
+					NodeList printers = temp.getElementsByTagName("printer");
+					
+					//get all names of printers
+					for(int j = 0; j < printers.getLength(); j++)
+					{
+						String name;
+						name = ((Element) printers.item(j)).getElementsByTagName("NAME").item(0).getTextContent();
+						vendorInfo.add(name);
+					}
+				}
+			}
+		String [] vendorList = new String[vendorInfo.size()];
+			
+		int i = 0;
+		for(String contents:vendorInfo)
+		{
+			vendorList[i] = contents;
+			System.out.println(contents);
+			i++;
+		}
+		return vendorList;
 	}
 }

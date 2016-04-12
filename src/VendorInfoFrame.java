@@ -36,7 +36,7 @@ public class VendorInfoFrame extends JFrame
 
 	private void createComponents() {
 		m_Main_P = new JPanel();
-		m_VendorInfo_L = new VendorLabel(m_Vendor_L.getText(),"google.com", "PrinterOne\nPrinterTwo");
+		m_VendorInfo_L = new VendorLabel(m_Vendor_L.getText());
 	}
 
 	private void designComponents() {
