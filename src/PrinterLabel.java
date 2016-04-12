@@ -49,16 +49,6 @@ public class PrinterLabel extends JLabel implements Serializable
         setLayout(new GridLayout(1,10,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         setOpaque(true);
-        // TODO: Commented out to try alternating background colours
-        /*
-        if(m_index % 2 == 0)
-        {
-        	setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        }else
-        {
-        	setBorder(BorderFactory.createLineBorder(Color.black));
-        }
-        */
         
         if (m_index % 2 == 0)
         	setOpaque(false);

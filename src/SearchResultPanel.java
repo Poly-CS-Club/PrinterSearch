@@ -126,15 +126,17 @@ public class SearchResultPanel extends JPanel{
 		for(int i = outputList.size()-1; i >=0;i--)
 		{
 			currentPrinter = outputList.get(i);
-			add(new PrinterLabel(i+1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
+			PrinterLabel temp = new PrinterLabel(i+1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
 					currentPrinter.getPrinterName() + "",
-					highlightMatch(currentPrinter, "Vendor"),
-					highlightMatch(currentPrinter, "Tension"),
-					highlightMatch(currentPrinter, "Compression"),
-					highlightMatch(currentPrinter, "Impact"),
-					highlightMatch(currentPrinter, "Materials"),
-					highlightMatch(currentPrinter, "Tolerance"),
-					highlightMatch(currentPrinter, "Finish")));
+					currentPrinter.getVendor()+ "",
+					currentPrinter.getTension()+ "",
+					currentPrinter.getCompression()+ "",
+					currentPrinter.getImpact()+ "",
+					currentPrinter.materialsString()+ "",
+					currentPrinter.getTolerance()+ "",
+					currentPrinter.getFinish()+ "");
+			temp = highlightMatch(temp, currentPrinter);
+			add(temp);
 		}
 		this.revalidate();
 	}
@@ -145,11 +147,8 @@ public class SearchResultPanel extends JPanel{
 	 * @param matchIndex  the index of the parameter in the match array
 	 * @return            the String of the parameter
 	 */
-	private String highlightMatch(Printer printer, String matchID) {
-		String parameter;
-		String startTags = "<html><i><font color=\"rgb(0, 120, 0)\">";
-		String endTags = "</font></i></html>";
-		
+	private PrinterLabel highlightMatch(PrinterLabel label, Printer printer) {
+		Color highlight = new Color(0,200,0);
 		/* Matches array Index Reference:
 		 * 
 		 *  0 = Tension
@@ -160,75 +159,35 @@ public class SearchResultPanel extends JPanel{
 		 *  5 = Tolerance
 		 *  6 = Finish
 		 */
-		
-		switch (matchID) {
-		case "Tension":
-			if (printer.getMatches()[0] > 0) {
-				parameter = 
-				startTags + printer.getTension() + endTags;
-			}
-			else {
-				parameter = printer.getTension() + "";
-			}
-				break;
-		case "Compression":
-			if (printer.getMatches()[1] > 0) {
-				parameter =
-				startTags + printer.getCompression() + endTags;
-			}
-			else {
-				parameter = printer.getCompression() + "";
-			}
-			break;
-		case "Impact":
-			if (printer.getMatches()[2] > 0) {
-				parameter =
-				startTags + printer.getImpact() + endTags;
-			}
-			else {
-				parameter = printer.getImpact() + "";
-			}
-			break;
-		case "Vendor":
-			if (printer.getMatches()[3] > 0) {
-				parameter =
-				startTags + printer.getVendor() + endTags;
-			}
-			else {
-				parameter = printer.getVendor() + "";
-			}
-			break;
-		case "Materials":
-			if (printer.getMatches()[4] > 0) {
-				parameter =
-				startTags + printer.materialsString() + endTags;
-			}
-			else {
-				parameter = printer.materialsString() + "";
-			}
-			break;
-		case "Tolerance":
-			if (printer.getMatches()[5] > 0) {
-				parameter =
-				startTags + printer.getTolerance() + endTags;
-			}
-			else {
-				parameter = printer.getTolerance() + "";
-			}
-			break;
-		case "Finish":
-			if (printer.getMatches()[6] > 0) {
-				parameter =
-				startTags + printer.getFinish() + endTags;
-			}
-			else {
-				parameter = printer.getFinish() + "";
-			}
-			break;
-		default: parameter = "";
+		if(printer.getMatches()[0] > 0)
+		{
+			label.getTension().setForeground(highlight);
 		}
-		
-		return parameter;
+		if(printer.getMatches()[1] > 0)
+		{
+			label.getCompression().setForeground(highlight);
+		}
+		if(printer.getMatches()[2] > 0)
+		{
+			label.getImpact().setForeground(highlight);
+		}
+		if(printer.getMatches()[3] > 0)
+		{
+			label.getVendor().setForeground(highlight);
+		}
+		if(printer.getMatches()[4] > 0)
+		{
+			label.getMaterials().setForeground(highlight);
+		}
+		if(printer.getMatches()[5] > 0)
+		{
+			label.getTolerance().setForeground(highlight);
+		}
+		if(printer.getMatches()[6] > 0)
+		{
+			label.getFinish().setForeground(highlight);
+		}
+		return label;
 	}
 	/**
 	 * @return the m_PrinterList
