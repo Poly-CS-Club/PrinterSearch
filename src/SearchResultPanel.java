@@ -78,6 +78,7 @@ public class SearchResultPanel extends JPanel{
 	public void updateSearchResults(SearchFiltersPanel filter)
 	{
 		removeAll();
+		m_PrinterList = ToolBox.generatePrinterList();
 		m_PrinterList.clearMatches();
 		
 	    m_PrinterList.setMatches(
@@ -98,6 +99,7 @@ public class SearchResultPanel extends JPanel{
 	public void clearResults()
 	{
 		removeAll();
+		m_PrinterList = ToolBox.generatePrinterList();
 		designComponents();
 		addComponents();
 	}

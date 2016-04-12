@@ -233,6 +233,9 @@ public class AddPrinterFrame {
 						m_MenuUI.getSearchResultsPanel().revalidate();
 						m_MenuUI.setSize(m_MenuUI.getWidth()-1, m_MenuUI.getHeight()-1);
 						m_MenuUI.setSize(m_MenuUI.getWidth()+1, m_MenuUI.getHeight()+1);
+						// adding printer to data base
+						ToolBox.addPrinter(name, Vendor, tension, compression, (String) m_Materials.getSelectedItem(), 
+										   impact, tolerance, (String) m_Finish.getSelectedItem());
 				    }else if(errorFlag && !emptyField)
 				    {
 				    	JOptionPane.showMessageDialog(m_Main_F, "Error one or more of the inputs are incompatible.", "Warning", JOptionPane.PLAIN_MESSAGE);

@@ -66,7 +66,9 @@ public class SearchFiltersPanel extends JPanel {
 		m_Finish_CB = new JComboBox<String>(ToolBox.getFinishList());
 		m_Materials_CB = new JComboBox<String>(ToolBox.getMaterialList());
 		m_Vendor_CB = new JComboBox<String>(ToolBox.getVendorList());
-
+		m_Finish_CB.addItem("Select All");
+		m_Materials_CB.addItem("Select All");
+		m_Vendor_CB.addItem("Select All");
 		
 	}
 	/**

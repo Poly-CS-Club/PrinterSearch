@@ -368,6 +368,7 @@ private class ButtonListener implements ActionListener, Printable
 		createComponents();
 	    designComponents();
 	    addComponents();
+	    
 	    this.revalidate();
 	    this.repaint();
 	}
@@ -407,7 +408,7 @@ private class ButtonListener implements ActionListener, Printable
 	/**
 	 * @param m_SearchParam_P the m_SearchParam_P to set
 	 */
-	public void setSearchParamPanel(SearchFiltersPanel m_SearchFilter_P) {
+	public void setSearchFilterPanel(SearchFiltersPanel m_SearchFilter_P) {
 		this.m_SearchFilter_P = m_SearchFilter_P;
 	}
 }
