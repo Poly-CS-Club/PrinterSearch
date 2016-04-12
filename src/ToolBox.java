@@ -236,8 +236,40 @@ public class ToolBox {
 	            finish.appendChild(m_Document.createTextNode(printerFinish));
 	            newPrinter.appendChild(finish);
 
-
-	            root.appendChild(newPrinter);
+	            System.out.println("root name: " + root.getNodeName());
+	            NodeList nodeList = root.getElementsByTagName("vendor");
+	            boolean hasBeenAdded = false;
+	            for(int i = 0; i < nodeList.getLength();i++)
+	            {
+	            	Element temp = (Element) nodeList.item(i);
+	            	if(temp.getAttribute("name").equalsIgnoreCase(vendor)  && !hasBeenAdded)
+	            	{
+	            		((Element) nodeList.item(i)).appendChild(newPrinter);
+	            		hasBeenAdded = true;
+	            	}
+	            }
+	            
+	            //if printer has not been added create new vendor slot ant add printer to it.
+	            if(!hasBeenAdded)
+	            {
+	            	//TODO get vendor info from user.
+	            	nodeList = root.getElementsByTagName("VENDORS");
+	            	Element newVendor = m_Document.createElement("vendor");
+	            	Element vendorWebSite = m_Document.createElement("webSite");
+	            	Element VendorInfo = m_Document.createElement("VendorInfo");
+	            	
+	            	newVendor.setAttribute("name", vendor);
+	            	vendorWebSite.setAttribute("info", "default");
+	            	VendorInfo.setAttribute("info", "default");
+	            	
+	            	newVendor.appendChild(vendorWebSite);
+	            	newVendor.appendChild(VendorInfo);
+	            	newVendor.appendChild(newPrinter);
+	            	
+	            	Element ven = (Element) nodeList.item(0);
+	            	ven.appendChild(newVendor);
+	            	
+	            }
 
 
 	            DOMSource source = new DOMSource(m_Document);
@@ -325,22 +357,6 @@ public class ToolBox {
 		return null;
 	}
 
-
-	/* TODO: Commented out to try HashSet implementation of rom
-	public static String[] storeROM(String romInput) {
-		//String lineToBeAdded = listROM.item(0).getTextContent();            // Retrieve single string inputted value, because input is considered one element within xml tag.
-
-		String [] romArray = romInput.split("\\s+");                   // Split our storing between whitespace.
-
-		System.out.println("The length of this god damn fucking array is: " + romArray.length);
-
-		for (int jojo = 0; jojo < romArray.length; jojo++) {
-			System.out.println("The ROM attribute in this bitch is: " + romArray[jojo]);
-		}
-		return romArray;
-	}
-	*/
-
 	/**
 	 * Converts a String list delimited by ", " (without quotes) into a HashSet.
 	 * @param list
@@ -371,7 +387,7 @@ public class ToolBox {
 			for(int i=0;i<nodeList.getLength();i++){
 				nNode = nodeList.item(i);
 				Element element = (Element) nNode;
-				if(!vendorList.contains(element.getTextContent()))
+				if(!vendorList.contains(element.getAttribute("name")))
 					vendorList.add(element.getAttribute("name"));
 			}
 		return vendorList.toArray();

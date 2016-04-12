@@ -95,7 +95,7 @@ public class PrinterList {
 			}else if(minTension <= printer.getTension() && maxTension >= printer.getTension())
 			{
 				printer.setMatches(2, 0);
-				System.out.println("Weight of 2 added!");
+				//System.out.println("Weight of 2 added!");
 			}
 			if(minCompression == 0 && maxCompression == 0)
 			{
@@ -103,7 +103,7 @@ public class PrinterList {
 			}else if(minCompression <= printer.getCompression()
 			&& maxCompression >= printer.getCompression()) {
 				printer.setMatches(2, 1);
-				System.out.println("Weight of 2 added!");
+				//System.out.println("Weight of 2 added!");
 			}
 			if(minImpact == 0 && maxImpact == 0)
 			{
@@ -111,14 +111,14 @@ public class PrinterList {
 			}else if(minImpact <= printer.getImpact()
 			&& printer.getImpact() <= maxImpact) {
 				printer.setMatches(2, 2);
-				System.out.println("Weight of 2 added!");
+				//System.out.println("Weight of 2 added!");
 			}
 			if(vendor.equalsIgnoreCase("Select All"))
 			{
 				printer.setMatches(1, 3);
-			}else if(finish.equalsIgnoreCase(printer.getFinish())) {
+			}else if(vendor.equalsIgnoreCase(printer.getVendor())) {
 				printer.setMatches(1, 3);
-				System.out.println("Weight of 1 added!");
+				//System.out.println("Weight of 1 added!");
 			}
 			String printerMaterials = printer.materialsString().replaceAll("\\<.*?>","");
 			if(materials.equalsIgnoreCase("Select All"))
@@ -126,7 +126,7 @@ public class PrinterList {
 				printer.setMatches(1, 4);
 			}else if(materials.equalsIgnoreCase(printerMaterials)) {
 				printer.setMatches(1, 4);
-				System.out.println("Weight of 1 added!");
+				//System.out.println("Weight of 1 added!");
 			}
 			if(minTolerance == 0 && maxTolerance == 0)
 			{
@@ -134,7 +134,7 @@ public class PrinterList {
 			}else if(minTolerance <= printer.getTolerance()
 			&& maxTolerance >= printer.getTolerance()) {
 				printer.setMatches(1, 5);
-				System.out.println("Weight of 1 added!");
+				//System.out.println("Weight of 1 added!");
 			}
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
@@ -143,7 +143,7 @@ public class PrinterList {
 				printer.setMatches(1, 6);
 			}else if(finish.equalsIgnoreCase(printer.getFinish())) {
 				printer.setMatches(1, 6);
-				System.out.println("Weight of 1 added!");
+				//System.out.println("Weight of 1 added!");
 			}
 		}
 	}

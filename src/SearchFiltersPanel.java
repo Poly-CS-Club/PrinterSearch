@@ -143,6 +143,16 @@ public class SearchFiltersPanel extends JPanel {
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(label);
 	}
+	
+	public void updateFilter()
+	{
+		m_Finish_CB = new JComboBox<String>(ToolBox.getFinishList());
+		m_Materials_CB = new JComboBox<String>(ToolBox.getMaterialList());
+		m_Vendor_CB = new JComboBox<String>(ToolBox.getVendorList());
+		m_Finish_CB.revalidate();
+		m_Materials_CB.revalidate();
+		m_Vendor_CB.revalidate();
+	}
 	//--------------------------------Getters/Setters---------------------------------------//
 	/**
 	 * @return the m_BroadSearch_TF

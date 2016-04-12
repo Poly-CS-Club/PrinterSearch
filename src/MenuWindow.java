@@ -210,6 +210,7 @@ private class ComboListener implements ActionListener
 		switch(command)
 		{
 		    case "RangeOfMaterials":
+		    	/*-----------------------TESTING STAGES-------------------
 									selectedItem = (String) m_SearchFilter_P.getMaterials().getSelectedItem();
 				
 									// Add new material to materials combo box if not already included
@@ -228,6 +229,7 @@ private class ComboListener implements ActionListener
 										m_SearchFilter_P.revalidate();
 									}
 									m_Menu_P.revalidate();
+									*/
 				break;
 				
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
@@ -269,9 +271,13 @@ private class ButtonListener implements ActionListener, Printable
 		{
 			case "Filter Results":
 									m_SearchResult_P.updateSearchResults(m_SearchFilter_P);
+									m_SearchFilter_P.updateFilter();
+									m_Menu_P.revalidate();
+									revalidate();
 				break;
 			case "Clear Results":
 									m_SearchResult_P.clearResults();
+									m_SearchFilter_P.updateFilter();
 									m_Menu_P.revalidate();
 									revalidate();
 				break;

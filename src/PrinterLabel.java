@@ -78,9 +78,9 @@ public class PrinterLabel extends JLabel implements Serializable
         tolerance = new JLabel("default", JTextField.CENTER);
         finish = new JLabel("default", JTextField.CENTER);
         
-        setPreferredSize(new Dimension(frameWidth-200, 30));
-        setMinimumSize(new Dimension(frameWidth-220, 30));
-        setMaximumSize(new Dimension(frameWidth-190, 30));
+        setPreferredSize(new Dimension(frameWidth-200, 45));
+        setMinimumSize(new Dimension(frameWidth-220, 40));
+        setMaximumSize(new Dimension(frameWidth-190, 50));
         setLayout(new GridLayout(1,9,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         if(m_index % 2 == 0)

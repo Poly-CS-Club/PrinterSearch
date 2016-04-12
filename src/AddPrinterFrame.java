@@ -231,8 +231,7 @@ public class AddPrinterFrame {
 						
 						//Refresh search results panel and the main frame.
 						m_MenuUI.getSearchResultsPanel().revalidate();
-						m_MenuUI.setSize(m_MenuUI.getWidth()-1, m_MenuUI.getHeight()-1);
-						m_MenuUI.setSize(m_MenuUI.getWidth()+1, m_MenuUI.getHeight()+1);
+						m_MenuUI.getSearchFilterPanel().updateFilter();
 						// adding printer to data base
 						ToolBox.addPrinter(name, Vendor, tension, compression, (String) m_Materials.getSelectedItem(), 
 										   impact, tolerance, (String) m_Finish.getSelectedItem());
