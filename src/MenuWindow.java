@@ -267,7 +267,9 @@ private class ButtonListener implements ActionListener, Printable
 				break;
 			case "Settings"://TODO Settings Window or pop-up
 									
-							new SettingsFrame();
+							SettingsFrame st = new SettingsFrame();
+							st.pack();
+							st.setVisible(true);
 				break;
 			case "Add Printer": new AddPrinterFrame(m_Menu_F, m_ToolBox, m_MenuUI);
 				break;
