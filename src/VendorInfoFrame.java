@@ -23,8 +23,8 @@ public class VendorInfoFrame extends JFrame
 	private JLabel m_Vendor_L;
 	private VendorLabel m_VendorInfo_L;
 	private JPanel m_Main_P;
-	public static int FRAME_HEIGHT = (int) (MenuWindow.FRAME_HEIGHT*.2);
-	public static int FRAME_WIDTH = (int) (MenuWindow.FRAME_WIDTH*.1);
+	public static int FRAME_HEIGHT = (int) (MenuWindow.FRAME_HEIGHT*.25);
+	public static int FRAME_WIDTH = (int) (MenuWindow.FRAME_WIDTH*.3);
 	
 	public VendorInfoFrame(JLabel target)
 	{

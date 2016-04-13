@@ -10,7 +10,8 @@ import java.io.*;
  */
 public class VendorLabel extends JLabel implements Serializable
 {
-	private JLabel header, name, webSite, otherPrinters;
+	private JLabel printerInfo, name, webSite, otherPrinters;
+	private JPanel header_P, body_P;
     
 /**
  * 
@@ -35,10 +36,12 @@ public class VendorLabel extends JLabel implements Serializable
     
     private void createComponents(String vendorName, String webSite, String otherPrinters)
     {
-    	this.header = new JLabel(" Vendor Info ");
+    	this.printerInfo = new JLabel(" Vendor Info ");
         this.name = new JLabel(" "+vendorName+" ");
         this.webSite = new JLabel(" "+webSite+" ");
         this.otherPrinters = new JLabel(" "+otherPrinters+" ");
+        this.body_P = new JPanel();
+        this.header_P = new JPanel();
     }
 /**
  * 
@@ -52,30 +55,47 @@ public class VendorLabel extends JLabel implements Serializable
     	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        this.header.setAlignmentX(Component.LEFT_ALIGNMENT);
-    	this.name.setAlignmentX(Component.LEFT_ALIGNMENT);
-        webSite.setAlignmentX(Component.LEFT_ALIGNMENT);
-        otherPrinters.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.printerInfo.setAlignmentX(CENTER_ALIGNMENT);
+    	this.name.setAlignmentX(CENTER_ALIGNMENT);
+        this.webSite.setAlignmentX(CENTER_ALIGNMENT);
+        this.otherPrinters.setAlignmentX(CENTER_ALIGNMENT);
         
-        this.header.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        this.printerInfo.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
     	this.name.setBorder(BorderFactory.createLineBorder(Color.black));
         this.webSite.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
         this.otherPrinters.setBorder(BorderFactory.createLineBorder(Color.black));
         
-        this.header.setPreferredSize(new Dimension(width,(int)(height*.18)));
-    	this.name.setPreferredSize(new Dimension(width,(int)(height*.18)));
-        this.webSite.setPreferredSize(new Dimension(width,(int)(height*.18)));
-        this.otherPrinters.setPreferredSize(new Dimension(width,(int)(height*.18)));
+        this.printerInfo.setBackground(Color.GRAY);
+        this.name.setBackground(Color.GRAY);
+        this.webSite.setBackground(Color.GRAY);
+        this.otherPrinters.setBackground(Color.GRAY);
         
-        this.header.setMinimumSize(new Dimension(width,(int)(height*.15)));
-    	this.name.setMinimumSize(new Dimension(width,(int)(height*.15)));
-        this.webSite.setMinimumSize(new Dimension(width,(int)(height*.15)));
-        this.otherPrinters.setMinimumSize(new Dimension(width,(int)(height*.15)));
+        this.printerInfo.setPreferredSize(new Dimension((int) (width),(int)(height*.53)));
+    	this.name.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
+        this.webSite.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
+        this.otherPrinters.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
         
-        this.header.setForeground(Color.WHITE);
-    	this.name.setForeground(Color.WHITE);
-        this.webSite.setForeground(Color.WHITE);
-        this.otherPrinters.setForeground(Color.WHITE);
+        this.printerInfo.setMinimumSize(new Dimension((int) (width),(int)(height*.53)));
+    	this.name.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
+        this.webSite.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
+        this.otherPrinters.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
+        
+        //this.header.setForeground(Color.WHITE);
+    	//this.name.setForeground(Color.WHITE);
+        //this.webSite.setForeground(Color.WHITE);
+        //this.otherPrinters.setForeground(Color.WHITE);
+        
+        //this.header.setLayout(new FlowLayout());
+        this.header_P.setPreferredSize(new Dimension(width,(int) ( height*.40)));   
+        this.body_P.setPreferredSize(new Dimension(width, (int) (height*.55)));
+        this.body_P.setMaximumSize(new Dimension(width, (int) (height*.60)));
+        this.header_P.setMaximumSize(new Dimension(width, (int) (height*.45)));
+        
+        this.header_P.setAlignmentX(CENTER_ALIGNMENT);
+        this.body_P.setAlignmentX(CENTER_ALIGNMENT);
+        
+        this.header_P.setBackground(Color.GRAY);
+        this.body_P.setBackground(Color.GRAY);
     }
     
     /**
@@ -83,13 +103,15 @@ public class VendorLabel extends JLabel implements Serializable
      */
     private void addComponents()
     {
-    	add(header);
-    	add(new JLabel("\n"));
-        add(name);
-        add(new JLabel("\n"));
-        add(webSite);
-        add(new JLabel("\n"));
-        add(otherPrinters);
+    	this.header_P.add(name);
+    	this.header_P. add(new JLabel("\n"));
+    	this.header_P.add(webSite);
+    	this.header_P.add(new JLabel("\n"));
+    	this.header_P.add(otherPrinters);
+    	this.header_P.add(new JLabel("\n"));
+    	this.body_P.add(printerInfo);
+    	add(header_P);
+    	add(body_P);
     }
     
     public JLabel getPrinterName() {
