@@ -117,7 +117,7 @@ public class Printer {
 
 		// Convert HashSet to String
 		rawString = "" + materials;
-		materialsArray = rawString.split(", ");
+		materialsArray = rawString.split(",");
 		if (materialsArray.length > 1) {
 		    for (int index = 0; index < materialsArray.length-1; index++)
 			    materialsString += (materialsArray[index] + "<br>");

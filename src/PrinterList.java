@@ -116,10 +116,17 @@ public class PrinterList {
 				//System.out.println("Weight of 1 added!");
 			}
 			String printerMaterials = printer.materialsString().replaceAll("\\<.*?>","");
+			System.out.println(printerMaterials);
 			if(materials.equalsIgnoreCase("Select All"))
 			{
 				printer.setMatches(1, 4);
-			}else if(materials.equalsIgnoreCase(printerMaterials)) {
+			}else if(printerMaterials.contains(" ")){ // If there is whitespace in the String, then there is a second entry
+				String[] StringArray = printerMaterials.split(" ");
+				for(int i=0;i<StringArray.length;i++)
+					if(materials.equalsIgnoreCase(StringArray[i]))
+						printer.setMatches(1, 4);
+			}
+			else if(materials.equalsIgnoreCase(printerMaterials)) {
 				printer.setMatches(1, 4);
 				//System.out.println("Weight of 1 added!");
 			}

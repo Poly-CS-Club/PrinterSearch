@@ -36,7 +36,8 @@ public class SearchResultPanel extends JPanel{
 	{
 		// Create search results' table header
 		m_ResultHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
-				"Name","Vendor","Tension","Compression","Impact","Materials","Tolerance","Finish");
+				"NAME","VENDOR","TENSION","COMPRESSION","IMPACT","MATERIALS","TOLERANCE","FINISH");
+		m_ResultHeader.setBackground(Color.lightGray);
 		// Add tool tips for long header categories before adding to GUI
 		m_ResultHeader.getMaterials().setToolTipText("Range of Materials");
 		m_PrinterList = ToolBox.generatePrinterList();
@@ -114,7 +115,7 @@ public class SearchResultPanel extends JPanel{
 		
 		// Create search results' table header
 		tableHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
-				"Name","Vendor","Tension","Compression","Impact","Materials","Tolerance","Finish");
+				"NAME","VENDOR","TENSION","COMPRESSION","IMPACT","MATERIALS","TOLERANCE","FINISH");
 
 		// Add tool tips for long header categories before adding to GUI
 	    tableHeader.getMaterials().setToolTipText("Range of Materials");
@@ -122,7 +123,8 @@ public class SearchResultPanel extends JPanel{
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBorder(BorderFactory.createLineBorder(Color.gray));
 		add(tableHeader);
-		
+		tableHeader.setBackground(Color.lightGray);
+
 		// Populate search results with any printer matches
 		for(int i = outputList.size()-1; i >=0;i--)
 		{
