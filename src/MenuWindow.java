@@ -134,12 +134,6 @@ private void designToolBar()
 	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
 	
-	// Set up help button
-	button = new JButton("Help");
-	button.setActionCommand("Help");
-	button.addActionListener(new ButtonListener());
-	m_ToolBar.add(button);
-	
 	// Set up button to add printer
 	button = new JButton("Add Printer");
 	button.setActionCommand("Add Printer");
