@@ -24,16 +24,14 @@ import javax.swing.JTextField;
  * @author Joshua Becker
  *
  */
-public class AddPrinterFrame {
+public class AddPrinterFrame extends JFrame{
 
 	private JFrame m_Main_F;
-	private JFrame m_OldFrame;
 	private AddPrinterLabel m_Name, m_Tension, m_Impact,
 	                        m_Vendor, m_Tolerance, m_Compression,
 	                        m_Finish, m_Materials;
 	private JPanel m_TopRow_P, m_LastRow_P, m_Button_P;
 	private JButton m_AddPrinter_B;
-	private ToolBox m_Driver;
 	private MenuWindow m_MenuUI;
 	
 	/**
@@ -42,26 +40,22 @@ public class AddPrinterFrame {
 	 * @param mainFrame the specified JFrame
 	 * @param driver    the specified driver
 	 */
-	public AddPrinterFrame(JFrame mainFrame, ToolBox driver, MenuWindow menuUI)
+	public AddPrinterFrame(MenuWindow menuUI)
 	{
-		m_Driver = driver;
 		m_MenuUI = menuUI;
-		m_OldFrame = mainFrame;
 		
 		// Create and add window and components
 	    createComponents();
 	    designComponents();
 	    addActionListeners();
 	    addComponents();
-	    m_Main_F.pack();
-	    m_Main_F.setVisible(true);
+	    pack();
+	    setVisible(true);
 	}
 	/**
 	 * Instantiates GUI components.
 	 */
 	private void createComponents() {
-		// Instantiate window and button
-		m_Main_F = new JFrame("Add New Printers");
 		
 		m_AddPrinter_B = new JButton("Add New Printer");
 		
@@ -96,14 +90,14 @@ public class AddPrinterFrame {
 		frameHeight = MenuWindow.FRAME_HEIGHT/4;
 		
 		// Set up window
-		m_Main_F.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		m_Main_F.setPreferredSize(new Dimension(frameWidth, frameHeight));
-		m_Main_F.setMinimumSize(new Dimension(frameWidth-m_MenuUI.getSearchFilterPanel().getWidth()-5, 130));
-		m_Main_F.setLocation(
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setPreferredSize(new Dimension(frameWidth, frameHeight));
+		setMinimumSize(new Dimension(frameWidth-m_MenuUI.getSearchFilterPanel().getWidth()-5, 130));
+		setLocation(
 				(screenWidth/2) - (frameWidth/2),
 				(screenHeight/2) - (frameHeight/2));
-		m_Main_F.setResizable(true);
-		m_Main_F.setLayout(new GridLayout(3,1,1,1));
+		setResizable(true);
+		setLayout(new GridLayout(3,1,1,1));
 		
 		// Set up submit button
 		m_AddPrinter_B.setPreferredSize(new Dimension(150,25));
@@ -140,9 +134,10 @@ public class AddPrinterFrame {
 		m_Button_P.add(m_AddPrinter_B);
 		
 		// Add GUI sub-components to window
-		m_Main_F.add(m_TopRow_P);
-		m_Main_F.add(m_LastRow_P);
-		m_Main_F.add(m_Button_P);
+		add(m_TopRow_P);
+		add(m_LastRow_P);
+		add(m_Button_P);
+		m_Main_F = this;
 	}
 	/**
 	 * adds an Icon to the Frame
@@ -158,7 +153,7 @@ public class AddPrinterFrame {
 			img = imgChange;
 		}
 		Image image = (img.getImage());
-		m_Main_F.setIconImage(image);
+		setIconImage(image);
 	}
 	/**
 	 * An action listener for a button.

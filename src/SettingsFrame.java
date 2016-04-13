@@ -13,13 +13,13 @@ import javax.swing.WindowConstants;
 public class SettingsFrame extends JFrame
 {
 	// Frame building
-	JFrame settingsFrame = new JFrame();
+	JFrame settingsFrame;
 	// Panel Building
-	JPanel overAllSettingsPanel = new JPanel();			// Overall panel for adding all other panels with a layout.
-	JPanel settingsPanelTopRow = new JPanel();			// Top row panel
-	JPanel settingsPanelBottomRow = new JPanel();		// Bottom row panel
-	JPanel updateButtonPanel = new JPanel();			// Panel for adding button so we can follow overall panel grid layout
-	JButton updateWeightButton = new JButton();			// Actual button to be added to updateButtonPanel.
+	JPanel overAllSettingsPanel;			// Overall panel for adding all other panels with a layout.
+	JPanel settingsPanelTopRow;			// Top row panel
+	JPanel settingsPanelBottomRow;		// Bottom row panel
+	JPanel updateButtonPanel;			// Panel for adding button so we can follow overall panel grid layout
+	JButton updateWeightButton;			// Actual button to be added to updateButtonPanel.
 
 	// Creation of our labels/textfields/combo-boxes
 	AddPrinterLabel m_Name, m_Tension, m_Impact,
@@ -32,6 +32,13 @@ public class SettingsFrame extends JFrame
 		addComponents();
 	}
 	private void createComponents() {
+		settingsFrame = new JFrame();
+		// Panel Building
+		overAllSettingsPanel = new JPanel();			// Overall panel for adding all other panels with a layout.
+		settingsPanelTopRow = new JPanel();			// Top row panel
+		settingsPanelBottomRow = new JPanel();		// Bottom row panel
+		updateButtonPanel = new JPanel();			// Panel for adding button so we can follow overall panel grid layout
+		updateWeightButton = new JButton();	
 		// Instantiating the labels/textfields/combo-boxes
 		m_Name = new AddPrinterLabel("Name", new JTextField());
 		m_Compression = new AddPrinterLabel("Compression", new JTextField());
@@ -45,14 +52,22 @@ public class SettingsFrame extends JFrame
 	}
 	private void desingComponents() {
 		// Button building
+		int frameWidth = (int) (MenuWindow.s_SCREEN_WIDTH*.3);
+		int frameHeight = (int) (MenuWindow.s_SCREEN_HEIGHT*.25);
+		
+		
 		updateWeightButton.setText("Update Weighting");
-		updateWeightButton.setPreferredSize(new Dimension(150, 25));
+		updateWeightButton.setPreferredSize(new Dimension(145, 25));
+		updateWeightButton.setMaximumSize(new Dimension(150, 30));
 		updateWeightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		updateButtonPanel.add(updateWeightButton);
 		
 		setTitle("Welcome To Settings");
-		this.setLocationRelativeTo(null);			// Center it.
+		setLocation(
+				(MenuWindow.s_SCREEN_WIDTH/2) - (frameWidth/2),
+				(MenuWindow.s_SCREEN_HEIGHT/2) - (frameHeight/2));
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setPreferredSize(new Dimension(frameWidth,frameHeight));
 		
 	}
 	private void addActionListeners()
