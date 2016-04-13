@@ -31,7 +31,13 @@ public class VendorLabel extends JLabel implements Serializable
     		String printerList = "Printer List: ";
     		for(int i = 2; i < vendorInfo.length; i++)
     		{
-    			printerList += vendorInfo[i];
+    			if(i == 2)
+    			{
+    				printerList += vendorInfo[i];
+    			}else
+    			{
+    				printerList += ", " + vendorInfo[i];
+    			}	
     		}
     		createComponents(vendorName, vendorInfo[0],vendorInfo[1], printerList);
     	}
@@ -42,10 +48,11 @@ public class VendorLabel extends JLabel implements Serializable
     
     private void createComponents(String vendorName, String webSite, String vendorInfo, String printerList)
     {
-    	this.printerInfo = new JLabel(vendorInfo);
-        this.name = new JLabel(" "+vendorName+" ");
-        this.webSite = new JLabel(" "+webSite+" ");
-        this.otherPrinters = new JLabel(" "+ printerList +" ");
+    	String tag = "<html><h2>  ", endTag = "  </h2></html>";
+    	this.printerInfo = new JLabel(tag + vendorInfo + endTag, JLabel.CENTER);
+        this.name = new JLabel(tag+vendorName+ endTag, JLabel.CENTER);
+        this.webSite = new JLabel(tag + webSite+ endTag, JLabel.CENTER);
+        this.otherPrinters = new JLabel(tag + printerList + endTag, JLabel.CENTER);
         this.body_P = new JPanel();
         this.header_P = new JPanel();
     }
@@ -61,10 +68,10 @@ public class VendorLabel extends JLabel implements Serializable
     	setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setAlignmentX(Component.LEFT_ALIGNMENT);
         
-        this.printerInfo.setAlignmentX(CENTER_ALIGNMENT);
-    	this.name.setAlignmentX(CENTER_ALIGNMENT);
-        this.webSite.setAlignmentX(CENTER_ALIGNMENT);
-        this.otherPrinters.setAlignmentX(CENTER_ALIGNMENT);
+        this.printerInfo.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.webSite.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.otherPrinters.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         this.printerInfo.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
     	this.name.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -79,23 +86,24 @@ public class VendorLabel extends JLabel implements Serializable
         this.printerInfo.setPreferredSize(new Dimension((int) (width),(int)(height*.53)));
     	this.name.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
         this.webSite.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
-        this.otherPrinters.setPreferredSize(new Dimension((int) width,(int)(height*.18)));
+        this.otherPrinters.setPreferredSize(new Dimension((int) width-10,(int)(height*.18)));
         
         this.printerInfo.setMinimumSize(new Dimension((int) (width),(int)(height*.53)));
     	this.name.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
         this.webSite.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
-        this.otherPrinters.setMinimumSize(new Dimension((int) width,(int)(height*.05)));
+        this.otherPrinters.setMinimumSize(new Dimension((int) width-10,(int)(height*.05)));
         
-        //this.header.setForeground(Color.WHITE);
-    	//this.name.setForeground(Color.WHITE);
-        //this.webSite.setForeground(Color.WHITE);
-        //this.otherPrinters.setForeground(Color.WHITE);
+        this.otherPrinters.setForeground(Color.WHITE);
+    	this.name.setForeground(Color.WHITE);
+        this.webSite.setForeground(Color.WHITE);
+        this.otherPrinters.setForeground(Color.WHITE);
+        this.printerInfo.setForeground(Color.WHITE);
         
         //this.header.setLayout(new FlowLayout());
-        this.header_P.setPreferredSize(new Dimension(width,(int) ( height*.40)));   
-        this.body_P.setPreferredSize(new Dimension(width, (int) (height*.55)));
-        this.body_P.setMaximumSize(new Dimension(width, (int) (height*.60)));
-        this.header_P.setMaximumSize(new Dimension(width, (int) (height*.45)));
+        this.header_P.setPreferredSize(new Dimension(width-5,(int) ( height*.40)));   
+        this.body_P.setPreferredSize(new Dimension(width-5, (int) (height*.55)));
+        this.body_P.setMaximumSize(new Dimension(width-5, (int) (height*.60)));
+        this.header_P.setMaximumSize(new Dimension(width-5, (int) (height*.45)));
         
         this.header_P.setAlignmentX(CENTER_ALIGNMENT);
         this.body_P.setAlignmentX(CENTER_ALIGNMENT);
