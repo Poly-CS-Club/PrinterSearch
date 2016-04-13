@@ -12,6 +12,7 @@ public class VendorLabel extends JLabel implements Serializable
 {
 	private JLabel printerInfo, name, webSite, otherPrinters;
 	private JPanel header_P, body_P;
+	private String [] vendorInfo;
     
 /**
  * 
@@ -21,26 +22,30 @@ public class VendorLabel extends JLabel implements Serializable
  */
     VendorLabel(String vendorName)
     {
-    	String [] vendorInfo = ToolBox.getVendorInfo(vendorName);
+    	vendorInfo = ToolBox.getVendorInfo(vendorName);
     	if(vendorInfo.length == 0)
     	{
-    		createComponents(vendorName, "No Information","No Information");
+    		createComponents(vendorName, "No Information","No Information", "No Information");
     	}else
     	{
-    		System.out.println(vendorInfo.length);
-    		createComponents(vendorName, vendorInfo[0],vendorInfo[1]);
+    		String printerList = "Printer List: ";
+    		for(int i = 2; i < vendorInfo.length; i++)
+    		{
+    			printerList += vendorInfo[i];
+    		}
+    		createComponents(vendorName, vendorInfo[0],vendorInfo[1], printerList);
     	}
     	
         designComponents();
         addComponents();
     }
     
-    private void createComponents(String vendorName, String webSite, String vendorInfo)
+    private void createComponents(String vendorName, String webSite, String vendorInfo, String printerList)
     {
     	this.printerInfo = new JLabel(vendorInfo);
         this.name = new JLabel(" "+vendorName+" ");
         this.webSite = new JLabel(" "+webSite+" ");
-        this.otherPrinters = new JLabel(" "+"No Information"+" ");
+        this.otherPrinters = new JLabel(" "+ printerList +" ");
         this.body_P = new JPanel();
         this.header_P = new JPanel();
     }
@@ -74,12 +79,12 @@ public class VendorLabel extends JLabel implements Serializable
         this.printerInfo.setPreferredSize(new Dimension((int) (width),(int)(height*.53)));
     	this.name.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
         this.webSite.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
-        this.otherPrinters.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
+        this.otherPrinters.setPreferredSize(new Dimension((int) width,(int)(height*.18)));
         
         this.printerInfo.setMinimumSize(new Dimension((int) (width),(int)(height*.53)));
     	this.name.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
         this.webSite.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
-        this.otherPrinters.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));
+        this.otherPrinters.setMinimumSize(new Dimension((int) width,(int)(height*.05)));
         
         //this.header.setForeground(Color.WHITE);
     	//this.name.setForeground(Color.WHITE);
