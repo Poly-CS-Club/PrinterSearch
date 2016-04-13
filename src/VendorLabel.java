@@ -34,12 +34,12 @@ public class VendorLabel extends JLabel implements Serializable
         addComponents();
     }
     
-    private void createComponents(String vendorName, String webSite, String otherPrinters)
+    private void createComponents(String vendorName, String webSite, String vendorInfo)
     {
-    	this.printerInfo = new JLabel(" Vendor Info ");
+    	this.printerInfo = new JLabel(vendorInfo);
         this.name = new JLabel(" "+vendorName+" ");
         this.webSite = new JLabel(" "+webSite+" ");
-        this.otherPrinters = new JLabel(" "+otherPrinters+" ");
+        this.otherPrinters = new JLabel(" "+"No Information"+" ");
         this.body_P = new JPanel();
         this.header_P = new JPanel();
     }

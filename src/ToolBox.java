@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 
+import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -241,14 +242,16 @@ public class ToolBox {
 	            if(!hasBeenAdded)
 	            {
 	            	//TODO get vendor info from user.
+	            	String webSite = JOptionPane.showInputDialog(vendor +": webSite:");
+	            	String info = JOptionPane.showInputDialog(vendor +": Information:");
 	            	nodeList = root.getElementsByTagName("VENDORS");
 	            	Element newVendor = m_Document.createElement("vendor");
 	            	Element vendorWebSite = m_Document.createElement("webSite");
 	            	Element VendorInfo = m_Document.createElement("VendorInfo");
 	            	
 	            	newVendor.setAttribute("name", vendor);
-	            	vendorWebSite.setAttribute("info", "default");
-	            	VendorInfo.setAttribute("info", "default");
+	            	vendorWebSite.setAttribute("info", webSite);
+	            	VendorInfo.setAttribute("info", info);
 	            	
 	            	newVendor.appendChild(vendorWebSite);
 	            	newVendor.appendChild(VendorInfo);
