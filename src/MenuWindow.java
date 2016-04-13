@@ -6,18 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 /**
  * GUI for the Printer Search Program.
@@ -277,6 +266,72 @@ private class ButtonListener implements ActionListener, Printable
 			case "Help": //TODO Help Window or Pop-up
 				break;
 			case "Settings"://TODO Settings Window or pop-up
+				/**
+				 * Will call method in printer.setMatches to allow user to change weighting of values.
+				 * However, must determine which index the user is trying to change. To do so,
+				 * I will label each of the text fields that the user receives the option for entering in values,
+				 * and have the index determined by whichever text-field isn't empty, based on this match the correspondence
+				 * and update the weighting value like so.
+				 */
+
+				// Frame building
+				JFrame settingsFrame = new JFrame();
+				settingsFrame.getContentPane().setSize(600, 480);
+				// Panel Building
+				JPanel overAllSettingsPanel = new JPanel();			// Overall panel for adding all other panels with a layout.
+				JPanel settingsPanelTopRow = new JPanel();			// Top row panel
+				JPanel settingsPanelBottomRow = new JPanel();		// Bottom row panel
+				JPanel updateButtonPanel = new JPanel();			// Panel for adding button so we can follow overall panel grid layout
+				JButton updateWeightButton = new JButton();			// Actual button to be added to updateButtonPanel.
+
+				// Creation of our labels/textfields/combo-boxes
+				AddPrinterLabel m_Name, m_Tension, m_Impact,
+						m_Vendor, m_Tolerance, m_Compression,
+						m_Finish, m_Materials;
+
+				// Instantiating the labels/textfields/combo-boxes
+				m_Name = new AddPrinterLabel("Name", new JTextField());
+				m_Compression = new AddPrinterLabel("Compression", new JTextField());
+				m_Tension = new AddPrinterLabel("Tension", new JTextField());
+				m_Impact = new AddPrinterLabel("Impact", new JTextField());
+				m_Vendor = new AddPrinterLabel("Vendor", new JTextField());
+				m_Tolerance = new AddPrinterLabel("Tolerance", new JTextField());
+				m_Finish = new AddPrinterLabel("Finish", new JComboBox<String>(ToolBox.getFinishList()));
+				m_Materials = new AddPrinterLabel("Materials", new JComboBox<String>(ToolBox.getMaterialList()));
+
+				// Panel Building for top row panel
+				settingsPanelTopRow.add(m_Name);
+				settingsPanelTopRow.add(m_Vendor);
+				settingsPanelTopRow.add(m_Tension);
+				settingsPanelTopRow.add(m_Compression);
+
+				// Add parameter last row components to panel
+				settingsPanelBottomRow.add(m_Impact);
+				settingsPanelBottomRow.add(m_Materials);
+				settingsPanelBottomRow.add(m_Tolerance);
+				settingsPanelBottomRow.add(m_Finish);
+
+				// Button building
+				updateWeightButton.setText("Update Weighting");
+				updateWeightButton.setPreferredSize(new Dimension(150, 25));
+				updateWeightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+				updateButtonPanel.add(updateWeightButton);
+
+				// Overall Panel Building
+				overAllSettingsPanel.add(settingsPanelTopRow);
+				overAllSettingsPanel.add(settingsPanelBottomRow);
+				overAllSettingsPanel.add(updateButtonPanel);
+				overAllSettingsPanel.setLayout(new GridLayout(3,1,1,1));
+
+				// Frame building.
+				settingsFrame.setTitle("Welcome To Settings");
+				settingsFrame.setLocation(s_SCREEN_WIDTH/2, s_SCREEN_HEIGHT/2);			// Center it.
+				settingsFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+				settingsFrame.add(overAllSettingsPanel);
+				settingsFrame.setResizable(true);										// May change this to false!
+				settingsFrame.pack();
+				settingsFrame.setVisible(true);
+
 				break;
 			case "Add Printer": new AddPrinterFrame(m_Menu_F, m_ToolBox, m_MenuUI);
 				break;
