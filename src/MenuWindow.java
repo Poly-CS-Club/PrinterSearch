@@ -164,11 +164,11 @@ private void addIcon()
 {
 	String stringSearch = System.getProperty("os.name");
 	String keyword = "Mac";
-	ImageIcon img = new ImageIcon("src\\printer-orange.png");	// Windows image path.;
+	ImageIcon img = new ImageIcon("src\\sift-logo-128x128.png");	// Windows image path.;
 	
 	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 	if(found){
-		ImageIcon imgChange = new ImageIcon("printer-orange.png");	// Mac image path.
+		ImageIcon imgChange = new ImageIcon("sift-logo-128x128.png");	// Mac image path.
 		img = imgChange;
 	}
 	Image image = (img.getImage());
