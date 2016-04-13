@@ -37,7 +37,7 @@
         <vendor name="Vendor Two">
             <webSite info="@vendorTwo.com">
             </webSite>
-            <VendorInfo info="PRINTER INFO GOES HERE">
+            <VendorInfo info="Vendor Info">
             </VendorInfo>
             <printer>
                 <NAME>Test 5</NAME>
@@ -98,7 +98,7 @@
         <vendor name="Vendor Three">
             <webSite info="@vendorThree.com">
             </webSite>
-            <VendorInfo info="PRINTER INFO GOES HERE">
+            <VendorInfo info="Vendor Info">
             </VendorInfo>            
             <printer>
                 <NAME>Test 6</NAME>
@@ -186,6 +186,100 @@
                 <TENSION>12</TENSION>
                 <COMPRESSION>23</COMPRESSION>
                 <IMPACT>23</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>aluminum, stainless</ROM>
+                <TOLERANCE>12</TOLERANCE>
+                <FINISH>Matte</FINISH>
+            </printer>
+        </vendor>
+    <vendor name="Vendor Ten">
+            <webSite info="default"/>
+            <VendorInfo info="default"/>
+            <printer>
+                <NAME>Test 9</NAME>
+                <VENDOR>Vendor Ten</VENDOR>
+                <TENSION>1</TENSION>
+                <COMPRESSION>1</COMPRESSION>
+                <IMPACT>1</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>Aluminum</ROM>
+                <TOLERANCE>1</TOLERANCE>
+                <FINISH>GLOSS</FINISH>
+            </printer>
+        <printer>
+                <NAME>Test 12</NAME>
+                <VENDOR>Vendor Ten</VENDOR>
+                <TENSION>12</TENSION>
+                <COMPRESSION>21</COMPRESSION>
+                <IMPACT>231</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>Aluminum</ROM>
+                <TOLERANCE>32</TOLERANCE>
+                <FINISH>GLOSS</FINISH>
+            </printer>
+        <printer>
+                <NAME>Test 14</NAME>
+                <VENDOR>Vendor Ten</VENDOR>
+                <TENSION>21</TENSION>
+                <COMPRESSION>21</COMPRESSION>
+                <IMPACT>21</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>aluminum, stainless</ROM>
+                <TOLERANCE>21</TOLERANCE>
+                <FINISH>Matte</FINISH>
+            </printer>
+        </vendor>
+    <vendor name="1">
+            <webSite info="default"/>
+            <VendorInfo info="default"/>
+            <printer>
+                <NAME>Test 10</NAME>
+                <VENDOR>1</VENDOR>
+                <TENSION>1</TENSION>
+                <COMPRESSION>1</COMPRESSION>
+                <IMPACT>1</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>Stainless</ROM>
+                <TOLERANCE>1</TOLERANCE>
+                <FINISH>GLOSS</FINISH>
+            </printer>
+        </vendor>
+    <vendor name="Vednor 1">
+            <webSite info="default"/>
+            <VendorInfo info="default"/>
+            <printer>
+                <NAME>Test 11</NAME>
+                <VENDOR>Vednor 1</VENDOR>
+                <TENSION>23</TENSION>
+                <COMPRESSION>21</COMPRESSION>
+                <IMPACT>32</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>Aluminum</ROM>
+                <TOLERANCE>23</TOLERANCE>
+                <FINISH>Matte</FINISH>
+            </printer>
+        </vendor>
+    <vendor name="12">
+            <webSite info="default"/>
+            <VendorInfo info="default"/>
+            <printer>
+                <NAME>Test 13</NAME>
+                <VENDOR>12</VENDOR>
+                <TENSION>12</TENSION>
+                <COMPRESSION>12</COMPRESSION>
+                <IMPACT>12</IMPACT>
                 <PART_COMPLEXITY>123</PART_COMPLEXITY>
                 <LEAD_TIME>1123</LEAD_TIME>
                 <EOC>True</EOC>

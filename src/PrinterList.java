@@ -89,30 +89,25 @@ public class PrinterList {
 		
 		for(Printer printer : printerList)
 		{
-			if(minTension == 0 && maxTension == 0)
-			{
-				printer.setMatches(2, 0);
-			}else if(minTension <= printer.getTension() && maxTension >= printer.getTension())
+			//System.out.println(minTension + "<=" + printer.getTension() + "   " + maxTension + ">=" + printer.getTension());
+			if(minTension <= printer.getTension() && maxTension >= printer.getTension())
 			{
 				printer.setMatches(2, 0);
 				//System.out.println("Weight of 2 added!");
 			}
-			if(minCompression == 0 && maxCompression == 0)
-			{
-				printer.setMatches(2, 1);
-			}else if(minCompression <= printer.getCompression()
+
+			if(minCompression <= printer.getCompression()
 			&& maxCompression >= printer.getCompression()) {
 				printer.setMatches(2, 1);
 				//System.out.println("Weight of 2 added!");
 			}
-			if(minImpact == 0 && maxImpact == 0)
-			{
-				printer.setMatches(2, 2);
-			}else if(minImpact <= printer.getImpact()
+
+			if(minImpact <= printer.getImpact()
 			&& printer.getImpact() <= maxImpact) {
 				printer.setMatches(2, 2);
 				//System.out.println("Weight of 2 added!");
 			}
+			System.out.println("Vendor: " + vendor + " VENDOR: " + printer.getVendor());
 			if(vendor.equalsIgnoreCase("Select All"))
 			{
 				printer.setMatches(1, 3);
@@ -128,10 +123,8 @@ public class PrinterList {
 				printer.setMatches(1, 4);
 				//System.out.println("Weight of 1 added!");
 			}
-			if(minTolerance == 0 && maxTolerance == 0)
-			{
-				printer.setMatches(1, 5);
-			}else if(minTolerance <= printer.getTolerance()
+			
+			if(minTolerance <= printer.getTolerance()
 			&& maxTolerance >= printer.getTolerance()) {
 				printer.setMatches(1, 5);
 				//System.out.println("Weight of 1 added!");
@@ -147,11 +140,12 @@ public class PrinterList {
 			}
 		}
 	}
-	public void clearMatches()
+	public void clearMatches(ArrayList<Printer> list)
 	{
-		for(Printer printer : printerList){
+		for(Printer printer : list){
 			int[] temp = printer.getMatches();
 			for(int i=0;i<temp.length;i++){
+				//System.out.println(i + "::" + temp[i]);
 				temp[i] = 0;
 			}
 		}

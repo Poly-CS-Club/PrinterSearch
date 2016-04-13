@@ -38,7 +38,6 @@ public class MenuWindow extends JFrame
 	private JScrollPane m_ScrollPane;
 	private ToolBox m_ToolBox;
 	private MenuWindow m_MenuUI;
-	private PrinterList printerList;
 
 	public static int FRAME_WIDTH;
 	public static int FRAME_HEIGHT;
@@ -270,14 +269,13 @@ private class ButtonListener implements ActionListener, Printable
 		switch(command)
 		{
 			case "Filter Results":
+									m_SearchFilter_P.revalidate();
 									m_SearchResult_P.updateSearchResults(m_SearchFilter_P);
-									m_SearchFilter_P.updateFilter();
 									m_Menu_P.revalidate();
 									revalidate();
 				break;
 			case "Clear Results":
 									m_SearchResult_P.clearResults();
-									m_SearchFilter_P.updateFilter();
 									m_Menu_P.revalidate();
 									revalidate();
 				break;
@@ -385,7 +383,7 @@ private class ButtonListener implements ActionListener, Printable
 		
 	}
 
-	public JPanel getSearchResultsPanel()
+	public SearchResultPanel getSearchResultsPanel()
 	{
 		return m_SearchResult_P;
 	}

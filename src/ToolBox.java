@@ -91,8 +91,7 @@ public class ToolBox {
 	private static void displayPrinterNodes(Node node, PrinterList printers)
 	{
 		String name, vendor;
-		double tension, compression, impact, tolerance, complexity, leadTime;
-		boolean customizable;
+		double tension, compression, impact, tolerance;
 		String finish = "", materialsString = "";
 		String[] materialsArray;
 		HashSet<String> materialsSet = new HashSet<String>();
@@ -118,16 +117,6 @@ public class ToolBox {
 			impact = Double.parseDouble(getString("IMPACT", eElement));
 			//System.out.println(impact);
 
-			complexity = Double.parseDouble(
-					getString("PART_COMPLEXITY", eElement));
-			//System.out.println(complexity);
-
-			leadTime = Double.parseDouble(getString("LEAD_TIME", eElement));
-			//System.out.println(leadTime);
-
-			customizable = Boolean.valueOf((getString("EOC", eElement)));
-			//System.out.println(customizable);
-
 			materialsString = getString("ROM", eElement);
 			//System.out.println(materialsString);
 			materialsSet = stringToHashSet(materialsString);
@@ -139,11 +128,10 @@ public class ToolBox {
 			//System.out.println(finish);
 
 			printers.addPrinter(new Printer(
-					name, vendor, tension, compression, impact, complexity,
-					leadTime, customizable, materialsSet, tolerance, finish));
-			System.out.println(
+					name, vendor, tension, compression, impact, materialsSet, tolerance, finish));
+			/*System.out.println(
 					"Added: " +
-			        printers.getPrinter(0).getPrinterName());
+			        printers.getPrinter(0).getPrinterName());*/
 		}
 	}
 	/**
@@ -236,7 +224,7 @@ public class ToolBox {
 	            finish.appendChild(m_Document.createTextNode(printerFinish));
 	            newPrinter.appendChild(finish);
 
-	            System.out.println("root name: " + root.getNodeName());
+	            //System.out.println("root name: " + root.getNodeName());
 	            NodeList nodeList = root.getElementsByTagName("vendor");
 	            boolean hasBeenAdded = false;
 	            for(int i = 0; i < nodeList.getLength();i++)
@@ -315,9 +303,9 @@ public class ToolBox {
 			keepLooking = false;
 			for(position=0;position < outputList.size()-1;position++){
 				if(outputList.get(position).getTotalMatches() > outputList.get(position+1).getTotalMatches()){
-					System.out.println(outputList.get(position).getTotalMatches() +  " is greater than " + outputList.get(position+1).getTotalMatches());
+					//System.out.println(outputList.get(position).getTotalMatches() +  " is greater than " + outputList.get(position+1).getTotalMatches());
 					tempPrinter = outputList.get(position+1);
-					System.out.println("Swapping position " + position + ": " + outputList.get(position));
+					//System.out.println("Swapping position " + position + ": " + outputList.get(position));
 					outputList.set(position+1, outputList.get(position));
 					outputList.set(position, tempPrinter);
 					keepLooking = true;
@@ -516,7 +504,6 @@ public class ToolBox {
 		for(String contents:vendorInfo)
 		{
 			vendorList[i] = contents;
-			System.out.println(contents);
 			i++;
 		}
 		return vendorList;

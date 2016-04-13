@@ -217,21 +217,8 @@ public class AddPrinterFrame {
 								"Message", JOptionPane.PLAIN_MESSAGE);
 						
 						// Add new printer to search results panel
-						m_MenuUI.getSearchResultsPanel().add(new PrinterLabel(
-						        m_MenuUI.getSearchResultsPanel().getComponentCount()+1,
-								MenuWindow.FRAME_WIDTH, MenuWindow.FRAME_HEIGHT,
-								name,
-								Vendor,
-								tension,
-								compression,
-								impact,
-								(String) m_Materials.getSelectedItem(),
-								tolerance,
-								(String) m_Finish.getSelectedItem()));
+						m_MenuUI.getSearchResultsPanel().reload();
 						
-						//Refresh search results panel and the main frame.
-						m_MenuUI.getSearchResultsPanel().revalidate();
-						m_MenuUI.getSearchFilterPanel().updateFilter();
 						// adding printer to data base
 						ToolBox.addPrinter(name, Vendor, tension, compression, (String) m_Materials.getSelectedItem(), 
 										   impact, tolerance, (String) m_Finish.getSelectedItem());

@@ -78,8 +78,8 @@ public class SearchResultPanel extends JPanel{
 	public void updateSearchResults(SearchFiltersPanel filter)
 	{
 		removeAll();
-		m_PrinterList = ToolBox.generatePrinterList();
-		m_PrinterList.clearMatches();
+		m_PrinterList.setPrinterList(ToolBox.generatePrinterList().getPrinterList());
+		m_PrinterList.clearMatches(m_PrinterList.getPrinterList());
 		
 	    m_PrinterList.setMatches(
 	    		(Double) filter.getTension().getMin(), (Double) filter.getTension().getMax(),
@@ -99,7 +99,8 @@ public class SearchResultPanel extends JPanel{
 	public void clearResults()
 	{
 		removeAll();
-		m_PrinterList = ToolBox.generatePrinterList();
+		m_PrinterList.setPrinterList(ToolBox.generatePrinterList().getPrinterList());
+		m_PrinterList.clearMatches(m_PrinterList.getPrinterList());
 		designComponents();
 		addComponents();
 	}
@@ -188,6 +189,15 @@ public class SearchResultPanel extends JPanel{
 			label.getFinish().setForeground(highlight);
 		}
 		return label;
+	}
+	/**
+	 * reloads the printers from the xml
+	 */
+	public void reload()
+	{
+		m_PrinterList = ToolBox.generatePrinterList();
+		removeAll();
+		addComponents();
 	}
 	/**
 	 * @return the m_PrinterList

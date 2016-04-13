@@ -67,8 +67,11 @@ public class SearchFiltersPanel extends JPanel {
 		m_Materials_CB = new JComboBox<String>(ToolBox.getMaterialList());
 		m_Vendor_CB = new JComboBox<String>(ToolBox.getVendorList());
 		m_Finish_CB.addItem("Select All");
+		m_Finish_CB.setSelectedIndex(m_Finish_CB.getItemCount()-1);
 		m_Materials_CB.addItem("Select All");
+		m_Materials_CB.setSelectedIndex(m_Materials_CB.getItemCount()-1);
 		m_Vendor_CB.addItem("Select All");
+		m_Vendor_CB.setSelectedIndex(m_Vendor_CB.getItemCount()-1);
 		
 	}
 	/**
@@ -142,16 +145,6 @@ public class SearchFiltersPanel extends JPanel {
 		label = new JLabel(text);
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(label);
-	}
-	
-	public void updateFilter()
-	{
-		m_Finish_CB = new JComboBox<String>(ToolBox.getFinishList());
-		m_Materials_CB = new JComboBox<String>(ToolBox.getMaterialList());
-		m_Vendor_CB = new JComboBox<String>(ToolBox.getVendorList());
-		m_Finish_CB.revalidate();
-		m_Materials_CB.revalidate();
-		m_Vendor_CB.revalidate();
 	}
 	//--------------------------------Getters/Setters---------------------------------------//
 	/**
