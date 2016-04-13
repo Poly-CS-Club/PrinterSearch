@@ -31,6 +31,18 @@ public class SettingsFrame extends JFrame
 		desingComponents();
 		addComponents();
 	}
+	private void createComponents() {
+		// Instantiating the labels/textfields/combo-boxes
+		m_Name = new AddPrinterLabel("Name", new JTextField());
+		m_Compression = new AddPrinterLabel("Compression", new JTextField());
+		m_Tension = new AddPrinterLabel("Tension", new JTextField());
+		m_Impact = new AddPrinterLabel("Impact", new JTextField());
+		m_Vendor = new AddPrinterLabel("Vendor", new JTextField());
+		m_Tolerance = new AddPrinterLabel("Tolerance", new JTextField());
+		m_Finish = new AddPrinterLabel("Finish", new JComboBox<String>(ToolBox.getFinishList()));
+		m_Materials = new AddPrinterLabel("Materials", new JComboBox<String>(ToolBox.getMaterialList()));
+		
+	}
 	private void desingComponents() {
 		// Button building
 		updateWeightButton.setText("Update Weighting");
@@ -43,16 +55,8 @@ public class SettingsFrame extends JFrame
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		
 	}
-	private void createComponents() {
-		// Instantiating the labels/textfields/combo-boxes
-		m_Name = new AddPrinterLabel("Name", new JTextField());
-		m_Compression = new AddPrinterLabel("Compression", new JTextField());
-		m_Tension = new AddPrinterLabel("Tension", new JTextField());
-		m_Impact = new AddPrinterLabel("Impact", new JTextField());
-		m_Vendor = new AddPrinterLabel("Vendor", new JTextField());
-		m_Tolerance = new AddPrinterLabel("Tolerance", new JTextField());
-		m_Finish = new AddPrinterLabel("Finish", new JComboBox<String>(ToolBox.getFinishList()));
-		m_Materials = new AddPrinterLabel("Materials", new JComboBox<String>(ToolBox.getMaterialList()));
+	private void addActionListeners()
+	{
 		
 	}
 	private void addComponents() {
