@@ -216,12 +216,10 @@ public class AddPrinterFrame {
 								m_Main_F, "Printer Added to DataBase",
 								"Message", JOptionPane.PLAIN_MESSAGE);
 						
-						// Add new printer to search results panel
-						m_MenuUI.getSearchResultsPanel().reload();
-						
 						// adding printer to data base
 						ToolBox.addPrinter(name, Vendor, tension, compression, (String) m_Materials.getSelectedItem(), 
 										   impact, tolerance, (String) m_Finish.getSelectedItem());
+						m_MenuUI.getSearchResultsPanel().reload();
 				    }else if(errorFlag && !emptyField)
 				    {
 				    	JOptionPane.showMessageDialog(m_Main_F, "Error one or more of the inputs are incompatible.", "Warning", JOptionPane.PLAIN_MESSAGE);

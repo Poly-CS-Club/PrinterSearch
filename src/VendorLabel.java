@@ -27,6 +27,7 @@ public class VendorLabel extends JLabel implements Serializable
     		createComponents(vendorName, "No Information","No Information");
     	}else
     	{
+    		System.out.println(vendorInfo.length);
     		createComponents(vendorName, vendorInfo[0],vendorInfo[1]);
     	}
     	
@@ -104,7 +105,7 @@ public class VendorLabel extends JLabel implements Serializable
     private void addComponents()
     {
     	this.header_P.add(name);
-    	this.header_P. add(new JLabel("\n"));
+    	this.header_P.add(new JLabel("\n"));
     	this.header_P.add(webSite);
     	this.header_P.add(new JLabel("\n"));
     	this.header_P.add(otherPrinters);

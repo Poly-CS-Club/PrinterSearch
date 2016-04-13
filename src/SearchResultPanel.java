@@ -197,7 +197,9 @@ public class SearchResultPanel extends JPanel{
 	{
 		m_PrinterList = ToolBox.generatePrinterList();
 		removeAll();
+		designComponents();
 		addComponents();
+		this.revalidate();
 	}
 	/**
 	 * @return the m_PrinterList
