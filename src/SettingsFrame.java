@@ -31,7 +31,30 @@ public class SettingsFrame extends JFrame
 		desingComponents();
 		addComponents();
 	}
-	
+	private void desingComponents() {
+		// Button building
+		updateWeightButton.setText("Update Weighting");
+		updateWeightButton.setPreferredSize(new Dimension(150, 25));
+		updateWeightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		updateButtonPanel.add(updateWeightButton);
+		
+		setTitle("Welcome To Settings");
+		this.setLocationRelativeTo(null);			// Center it.
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		
+	}
+	private void createComponents() {
+		// Instantiating the labels/textfields/combo-boxes
+		m_Name = new AddPrinterLabel("Name", new JTextField());
+		m_Compression = new AddPrinterLabel("Compression", new JTextField());
+		m_Tension = new AddPrinterLabel("Tension", new JTextField());
+		m_Impact = new AddPrinterLabel("Impact", new JTextField());
+		m_Vendor = new AddPrinterLabel("Vendor", new JTextField());
+		m_Tolerance = new AddPrinterLabel("Tolerance", new JTextField());
+		m_Finish = new AddPrinterLabel("Finish", new JComboBox<String>(ToolBox.getFinishList()));
+		m_Materials = new AddPrinterLabel("Materials", new JComboBox<String>(ToolBox.getMaterialList()));
+		
+	}
 	private void addComponents() {
 		// Panel Building for top row panel
 		settingsPanelTopRow.add(m_Name);
@@ -51,32 +74,6 @@ public class SettingsFrame extends JFrame
 		overAllSettingsPanel.setLayout(new GridLayout(3,1,1,1));
 		// Frame building.
 		add(overAllSettingsPanel);
-		
-	}
-
-	private void desingComponents() {
-		// Button building
-		updateWeightButton.setText("Update Weighting");
-		updateWeightButton.setPreferredSize(new Dimension(150, 25));
-		updateWeightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		updateButtonPanel.add(updateWeightButton);
-		
-		setTitle("Welcome To Settings");
-		this.setLocationRelativeTo(null);			// Center it.
-		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		
-	}
-
-	private void createComponents() {
-		// Instantiating the labels/textfields/combo-boxes
-		m_Name = new AddPrinterLabel("Name", new JTextField());
-		m_Compression = new AddPrinterLabel("Compression", new JTextField());
-		m_Tension = new AddPrinterLabel("Tension", new JTextField());
-		m_Impact = new AddPrinterLabel("Impact", new JTextField());
-		m_Vendor = new AddPrinterLabel("Vendor", new JTextField());
-		m_Tolerance = new AddPrinterLabel("Tolerance", new JTextField());
-		m_Finish = new AddPrinterLabel("Finish", new JComboBox<String>(ToolBox.getFinishList()));
-		m_Materials = new AddPrinterLabel("Materials", new JComboBox<String>(ToolBox.getMaterialList()));
 		
 	}
 }
