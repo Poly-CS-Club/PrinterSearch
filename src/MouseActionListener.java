@@ -38,7 +38,7 @@ public class MouseActionListener extends MouseAdapter{
 	{
 		PointerInfo mousePointer = MouseInfo.getPointerInfo();
 		Point location = mousePointer.getLocation();
-		m_VendorInfoUI.setLocation((int)location.getX(),(int)location.getY());
+		m_VendorInfoUI.setLocation((int)location.getX()-5,(int)location.getY()-5);
 		m_VendorInfoUI.setVisible(true);
 		m_Target_L.setForeground(m_OldColor);
 	}
