@@ -8,6 +8,10 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 
 import javax.swing.ImageIcon;
@@ -20,12 +24,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * window for adding printers to xml
- * @author Joshua Becker
- *
+ * Pop-up window for adding printers to XML.  This frame is able to highlight
+ * empty inputs.
+ * 
+ * @author Joshua Becker, Marcinina Alvaran
  */
 public class AddPrinterFrame extends JFrame{
 
+
+	private static final Color
+	        EMPTY_TEXT_HIGHLIGHT = new Color(74, 239, 202),
+	        DEFAULT_BG_COLOR = new Color(250, 250, 250);
+	
 	private JFrame m_Main_F;
 	private AddPrinterLabel m_Name, m_Tension, m_Impact,
 	                        m_Vendor, m_Tolerance, m_Compression,
@@ -110,6 +120,15 @@ public class AddPrinterFrame extends JFrame{
 	private void addActionListeners()
 	{
 		m_AddPrinter_B.addActionListener(new ButtonListener());
+		
+		// AddPrinterLabel action listeners
+		Component[] textFieldArray = {
+				m_Name.getComponent(), m_Tension.getComponent(), m_Impact.getComponent(),
+                m_Vendor.getComponent(), m_Tolerance.getComponent(), m_Compression.getComponent(),
+                m_Finish.getComponent(), m_Materials.getComponent()};
+		
+		for (Component textField : textFieldArray)
+			textField.addMouseListener(new PrinterMouseListener());
 	}
 
 	/**
@@ -155,6 +174,25 @@ public class AddPrinterFrame extends JFrame{
 		Image image = (img.getImage());
 		setIconImage(image);
 	}
+	
+	/**
+	 * Changes component's background color to specified color
+	 * 
+	 * @param component  the component whose background color will be changed
+	 * @param color      the new background color to highlight with
+	 */
+	private void addHighlight(AddPrinterLabel printerLabel, Color color) {
+		printerLabel.getComponent().setBackground(color);
+	}
+	
+	/**
+	 * Changes any highlighted components' background color to the default
+	 * background color.
+	 */
+	private void removeHighlight(Component component) {
+		if (component.getBackground() == EMPTY_TEXT_HIGHLIGHT)
+			component.setBackground(DEFAULT_BG_COLOR);
+	}
 	/**
 	 * An action listener for a button.
 	 * 
@@ -177,6 +215,7 @@ public class AddPrinterFrame extends JFrame{
 					String tolerance = null;
 					String Vendor = null;
 					String name = null;
+					String parameter = null;
 					
 					tension = m_Tension.getInput();
 					compression = m_Compression.getInput();
@@ -189,6 +228,20 @@ public class AddPrinterFrame extends JFrame{
 					   Vendor.equals("") || name.equals(""))
 					{
 						emptyField = true;
+						
+						// Highlight empty fields
+						if (tension.equals(""))
+							addHighlight(m_Tension, EMPTY_TEXT_HIGHLIGHT);
+						if (compression.equals(""))
+							addHighlight(m_Compression, EMPTY_TEXT_HIGHLIGHT);
+						if (impact.equals(""))
+							addHighlight(m_Impact, EMPTY_TEXT_HIGHLIGHT);
+						if (tolerance.equals(""))
+							addHighlight(m_Tolerance, EMPTY_TEXT_HIGHLIGHT);
+						if (Vendor.equals(""))
+							addHighlight(m_Vendor, EMPTY_TEXT_HIGHLIGHT);
+						if (name.equals(""))
+							addHighlight(m_Name, EMPTY_TEXT_HIGHLIGHT);
 					}
 					
 				    try
@@ -231,5 +284,37 @@ public class AddPrinterFrame extends JFrame{
 			
 		}
 		
+	}
+	
+	/**
+	 * An action listener for a mouse to be used with an AddPrinterLabel
+	 * component.
+	 * 
+	 * @author Marcinina Alvaran
+	 * @see    AddPrinterLabel
+	 */
+	private class PrinterMouseListener implements MouseListener
+	{
+		@Override
+		public void mouseClicked(MouseEvent e){
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e)
+		{
+			removeHighlight((Component)e.getSource());
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
 	}
 }

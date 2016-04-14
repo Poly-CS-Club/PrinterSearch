@@ -117,10 +117,15 @@ public class SearchFiltersPanel extends JPanel {
 	 */
 	private void addComponents()
 	{
-		Component[] searchComponents = {m_BroadSearch_TF, m_Vendor_CB, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
-			    m_Impact_RTF, m_Materials_CB, m_Finish_CB};
+		Component[] searchComponents = {
+				m_BroadSearch_TF, m_Vendor_CB, m_Compression_RTF,
+				m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF,
+				m_Materials_CB, m_Finish_CB};
 		
-		String[] filterHeaders = {"Search", "Vendor", "Compression", "Tension", "Tolerance", "Impact", "Material", "Finish", ""};
+		String[] filterHeaders = {
+				"Search", "Vendor", "Compression (ksi)", "Tension (ksi)",
+				"Tolerance (in)", "Impact (lb-ft)", "Material",
+				"Finish (\u00B5in)", ""};
 		
 		// Add search parameter titles and spacing to GUI
 		for(int index=0; index<searchComponents.length; index++) {

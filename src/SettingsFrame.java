@@ -9,7 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-
+/**
+ * Settings pop-up window for setting filter weights
+ * 
+ * @author Alireza Bahremand, Joshua Becker
+ *
+ */
 public class SettingsFrame extends JFrame
 {
 	// Frame building
