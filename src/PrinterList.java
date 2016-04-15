@@ -74,7 +74,8 @@ public class PrinterList {
 			double minImpact, double maxImpact,
 			String materials,
 			double minTolerance, double maxTolerance,
-			String finish, String vendor){
+			double minFinish,double maxFinish,
+			String vendor){
 
 		/* Matches array Index Reference:
 		 * 
@@ -138,10 +139,9 @@ public class PrinterList {
 			}
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
-			if(finish.equalsIgnoreCase("Select All"))
+			if(minFinish <= printer.getFinish()
+			&& maxFinish >= printer.getFinish()) 
 			{
-				printer.setMatches(1, 6);
-			}else if(finish.equalsIgnoreCase(printer.getFinish())) {
 				printer.setMatches(1, 6);
 				//System.out.println("Weight of 1 added!");
 			}

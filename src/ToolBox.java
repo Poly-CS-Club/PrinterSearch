@@ -92,8 +92,8 @@ public class ToolBox {
 	private static void displayPrinterNodes(Node node, PrinterList printers)
 	{
 		String name, vendor;
-		double tension, compression, impact, tolerance;
-		String finish = "", materialsString = "";
+		double tension, compression, impact, tolerance, finish;
+		String materialsString = "";
 		String[] materialsArray;
 		HashSet<String> materialsSet = new HashSet<String>();
 		Element eElement;
@@ -125,7 +125,7 @@ public class ToolBox {
 			tolerance = Double.parseDouble(getString("TOLERANCE", eElement));
 			//System.out.println(tolerance);
 
-			finish = getString("FINISH", eElement);
+			finish = Double.parseDouble(getString("FINISH", eElement));
 			//System.out.println(finish);
 
 			printers.addPrinter(new Printer(
@@ -433,43 +433,6 @@ public class ToolBox {
 			i++;
 		}
 		return materialsStr;
-	}
-	/**
-	 * getting the Finish list from xml file
-	 */
-	private static Object [] getFinish()
-	{
-		ArrayList<String> finishList = new ArrayList<String>();
-		Node nNode;
-
-			// Display listed printers in console
-			Element root = m_Document.getDocumentElement();
-			NodeList nodeList = root.getElementsByTagName("FINISH");
-
-			for(int i=0;i<nodeList.getLength();i++){
-				nNode = nodeList.item(i);
-				Element element = (Element) nNode;
-				if(!finishList.contains(element.getTextContent()))
-					finishList.add(element.getTextContent());
-			}
-		return finishList.toArray();
-	}
-	/**
-	 * gets a String array from the xml finish list.
-	 * @return finish list
-	 */
-	public static String [] getFinishList()
-	{
-		Object [] finish= ToolBox.getFinish();
-		String [] finishList = new String[finish.length];
-		
-		int i = 0;
-		for(Object name:finish)
-		{
-			finishList[i] = (String) name;
-			i++;
-		}
-		return finishList;
 	}
 	
 	public static String [] getVendorInfo(String vendorName)

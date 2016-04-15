@@ -15,7 +15,7 @@ public class Printer {
 	private double impact;
 	private HashSet<String> materials;
 	private double tolerance;
-	private String finish;
+	private double finish;
 
 
 	/* Add boolean? Could make associative array with hash.
@@ -36,7 +36,7 @@ public class Printer {
 		impact = 0;
 		materials = new HashSet<String>();
 		tolerance = 0;
-		finish = "";
+		finish = 0;
 		matches = new int[7];
 		for (int index=0; index<9; index++)
 			matches[index] = 0;
@@ -58,7 +58,7 @@ public class Printer {
 	 * @param tolerance       the double with the specified tolerance
 	 * @param finish          the String representing the finish
 	 */
-	public Printer(String name, String vendor, double tension, double compression, double impact, HashSet<String> materials, double tolerance, String finish){
+	public Printer(String name, String vendor, double tension, double compression, double impact, HashSet<String> materials, double tolerance, double finish){
 
 		this.name = name;
 		this.vendor = vendor;
@@ -191,11 +191,11 @@ public class Printer {
 		this.tolerance = tolerance;
 	}
 
-	public String getFinish() {
+	public double getFinish() {
 		return finish;
 	}
 
-	public void setFinish(String finish) {
+	public void setFinish(double finish) {
 		this.finish = finish;
 	}
 

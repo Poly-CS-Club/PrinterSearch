@@ -51,7 +51,7 @@ public class SettingsFrame extends JFrame
 		m_Impact = new AddPrinterLabel("Impact", new JTextField());
 		m_Vendor = new AddPrinterLabel("Vendor", new JTextField());
 		m_Tolerance = new AddPrinterLabel("Tolerance", new JTextField());
-		m_Finish = new AddPrinterLabel("Finish", new JComboBox<String>(ToolBox.getFinishList()));
+		m_Finish = new AddPrinterLabel("Finish", new JTextField());
 		m_Materials = new AddPrinterLabel("Materials", new JComboBox<String>(ToolBox.getMaterialList()));
 		
 	}

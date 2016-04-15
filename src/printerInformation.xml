@@ -18,7 +18,7 @@
                 <EOC>false</EOC> 
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>.0001</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
             <printer>
                 <NAME>Test 4</NAME>
@@ -31,7 +31,7 @@
                 <EOC>True</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>1234</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         </vendor>
         <vendor name="Vendor Two">
@@ -50,7 +50,7 @@
                 <EOC>True</EOC>
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>1223</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
             <printer>
                 <NAME>Test 3</NAME>
@@ -63,7 +63,7 @@
                 <EOC>true</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>.004</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
             <printer>
                 <NAME>Test 4</NAME>
@@ -76,7 +76,7 @@
                 <EOC>True</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>1234</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
             <printer>
             
@@ -90,7 +90,7 @@
                 <EOC>false</EOC> 
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>.0001</TOLERANCE>
-                <FINISH>MATTE</FINISH>
+                <FINISH>1</FINISH>
             
             </printer>
         <printer>
@@ -104,7 +104,7 @@
                 <EOC>True</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>123</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         <printer>
                 <NAME>Name 2</NAME>
@@ -117,7 +117,7 @@
                 <EOC>True</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>123</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         </vendor>
         
@@ -137,7 +137,7 @@
                 <EOC>True</EOC>
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>234</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
             <printer>
         
@@ -151,7 +151,7 @@
                 <EOC>true</EOC>
                 <ROM>Stainless</ROM>
                 <TOLERANCE>.01</TOLERANCE>
-                <FINISH>GLOSS</FINISH>
+                <FINISH>1500</FINISH>
             
         
             </printer>
@@ -166,7 +166,7 @@
                 <EOC>true</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>123</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         </vendor>
     <vendor name="Vendor Six">
@@ -183,7 +183,7 @@
                 <EOC>True</EOC>
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>12</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         <printer>
                 <NAME>Test 13</NAME>
@@ -196,7 +196,7 @@
                 <EOC>True</EOC>
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>1231</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         <printer>
                 <NAME>asd</NAME>
@@ -209,7 +209,7 @@
                 <EOC>True</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>1234</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         </vendor>
     <vendor name="Vendor How">
@@ -226,7 +226,7 @@
                 <EOC>True</EOC>
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>12</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         </vendor>
     <vendor name="Vendor">
@@ -243,7 +243,7 @@
                 <EOC>True</EOC>
                 <ROM>Aluminum</ROM>
                 <TOLERANCE>1234</TOLERANCE>
-                <FINISH>Matte</FINISH>
+                <FINISH>1</FINISH>
             </printer>
         </vendor>
     </VENDORS>

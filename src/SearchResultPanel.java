@@ -36,7 +36,7 @@ public class SearchResultPanel extends JPanel{
 	{
 		// Create search results' table header
 		m_ResultHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
-				"NAME","VENDOR","TENSION","COMPRESSION","IMPACT","MATERIALS","TOLERANCE","FINISH");
+				"NAME","VENDOR","TENSION (ksi)","COMPRESSION (ksi)","IMPACT (lb-ft)","MATERIALS","TOLERANCE (in)","FINISH (\u00B5in)");
 		m_ResultHeader.setBackground(Color.lightGray);
 		// Add tool tips for long header categories before adding to GUI
 		m_ResultHeader.getMaterials().setToolTipText("Range of Materials");
@@ -88,7 +88,7 @@ public class SearchResultPanel extends JPanel{
 	    		(Double) filter.getImpact().getMin(), (Double) filter.getImpact().getMax(),
 	    		(String) filter.getMaterials().getSelectedItem(),
 	    		(Double) filter.getTolerance().getMin(), (Double) filter.getTolerance().getMax(),
-	    		(String) filter.getFinish().getSelectedItem(),
+	    		(double) filter.getFinish().getMin(),(double) filter.getFinish().getMax(),
 	    		(String) filter.getVendor().getSelectedItem());
 	    
 	    ArrayList<Printer> outputList = ToolBox.outputSearchedList(m_PrinterList);
@@ -115,7 +115,7 @@ public class SearchResultPanel extends JPanel{
 		
 		// Create search results' table header
 		tableHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
-				"NAME","VENDOR","TENSION","COMPRESSION","IMPACT","MATERIALS","TOLERANCE","FINISH");
+				"NAME","VENDOR","TENSION (ksi)","COMPRESSION (ksi)","IMPACT (lb-ft)","MATERIALS","TOLERANCE (in)","FINISH (\u00B5in)");
 
 		// Add tool tips for long header categories before adding to GUI
 	    tableHeader.getMaterials().setToolTipText("Range of Materials");
