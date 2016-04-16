@@ -80,7 +80,7 @@ public class Printer {
 		int numMatches = 0;
 		for(int i=0;i<matches.length;i++)		// If match result is greater than 0, as in it has a weighted match, add that up to the total!
 			if(matches[i] > 0)
-				numMatches++;
+				numMatches += matches[i];
 
 
 		return numMatches;

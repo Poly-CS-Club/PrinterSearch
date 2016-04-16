@@ -15,14 +15,18 @@ import javax.swing.JTextField;
 public class PrinterList {
 
 	private ArrayList<Printer> printerList;
-	public static int tensionWeighting = 0;
-	public static int compressionWeighting = 0;
-	public static int impactWeighting = 0;
-	public static int materialsWeighting = 0;
-	public static int toleranceWeighting = 0;
-	public static int finishWeighting = 0;
-	public static int weightToChange = 0;
-	public int DEFAULT_WEIGHTING = 0;
+	
+	// Set from the beginning to default values. 
+
+	public static int tensionWeighting = 2;
+	public static int compressionWeighting = 2;
+	public static int impactWeighting = 2;
+	public static int vendorWeighting = 1;
+	public static int materialsWeighting = 1;
+	public static int toleranceWeighting = 1;
+	public static int finishWeighting = 1;
+	public static int weightToChange = 1;
+	//public int DEFAULT_WEIGHTING = 1;
 
 	/**
 	 * Instantiate an empty printer list.
@@ -30,6 +34,7 @@ public class PrinterList {
 	public PrinterList(){
 
 		printerList = new ArrayList<Printer>();
+		
 	}
 
 	public ArrayList<Printer> getPrinterList() {
@@ -103,41 +108,26 @@ public class PrinterList {
 		for(Printer printer : printerList)
 		{
 			// Tension Section
-			// If we have altered our value, lets put proper weighting in.
-			if (tensionWeighting != 0) {
-				printer.setMatches(tensionWeighting, 0);
-				System.out.println("Weighting for Tension is now: " + tensionWeighting);
-			} else {
-				//System.out.println(minTension + "<=" + printer.getTension() + "   " + maxTension + ">=" + printer.getTension());
+			// If we have altered our value, let's put proper weighting in.
+
 				if (minTension <= printer.getTension() && maxTension >= printer.getTension()) {
-					DEFAULT_WEIGHTING = 2;
-					printer.setMatches(DEFAULT_WEIGHTING, 0);
+					printer.setMatches(tensionWeighting, 0);
 				}
-			}
 
 			// Compression Section
-			if (compressionWeighting != 0) {
-				printer.setMatches(compressionWeighting, 1);
-				System.out.println("Weighting for Compression is now: " + compressionWeighting);
-			} else {
 				if(minCompression <= printer.getCompression()
 						&& maxCompression >= printer.getCompression()) {
-					DEFAULT_WEIGHTING = 2;
-					printer.setMatches(DEFAULT_WEIGHTING, 1);
+					printer.setMatches(compressionWeighting, 1);
 				}
-			}
+
 
 			// Impact Section
-			if (impactWeighting != 0) {
-				printer.setMatches(impactWeighting, 2);
-				System.out.println("Weighting for Impact is now: " + impactWeighting);
-			} else {
+
 				if (minImpact <= printer.getImpact()
 						&& printer.getImpact() <= maxImpact) {
-					DEFAULT_WEIGHTING = 2;
-					printer.setMatches(DEFAULT_WEIGHTING, 2);
+					printer.setMatches(impactWeighting, 2);
 				}
-			}
+
 
 			/**
 			 * Vendor Section
@@ -146,60 +136,41 @@ public class PrinterList {
 			System.out.println("Vendor: " + vendor + " VENDOR: " + printer.getVendor());
 			if(vendor.equalsIgnoreCase("Select All"))
 			{
-				DEFAULT_WEIGHTING = 1;
-				printer.setMatches(DEFAULT_WEIGHTING, 3);
+				printer.setMatches(vendorWeighting, 3);
 			}else if(vendor.equalsIgnoreCase(printer.getVendor())) {
-				DEFAULT_WEIGHTING = 1;
-				printer.setMatches(DEFAULT_WEIGHTING, 3);
+				printer.setMatches(vendorWeighting, 3);
 			}
 
 			// Printer Materials Section
 			String printerMaterials = printer.materialsString().replaceAll("\\<.*?>","");
 			System.out.println(printerMaterials);
 
-			if (materialsWeighting != 0) {
+			if (materials.equalsIgnoreCase("Select All")) {
 				printer.setMatches(materialsWeighting, 4);
-				System.out.println("Weighting for Printer Materials is now: " + materialsWeighting);
-			} else {
-				if (materials.equalsIgnoreCase("Select All")) {
-					DEFAULT_WEIGHTING = 1;
-					printer.setMatches(DEFAULT_WEIGHTING, 4);
-				} else if (printerMaterials.contains(" ")) { // If there is whitespace in the String, then there is a second entry
-					String[] StringArray = printerMaterials.split(" ");
-					for (int i = 0; i < StringArray.length; i++)
-						if (materials.equalsIgnoreCase(StringArray[i]))
-							DEFAULT_WEIGHTING = 1;
-					printer.setMatches(DEFAULT_WEIGHTING, 4);
-				} else if (materials.equalsIgnoreCase(printerMaterials)) {
-					DEFAULT_WEIGHTING = 1;
-					printer.setMatches(DEFAULT_WEIGHTING, 4);
-				}
+			} else if (printerMaterials.contains(" ")) { // If there is whitespace in the String, then there is a second entry
+				String[] StringArray = printerMaterials.split(" ");
+				for (int i = 0; i < StringArray.length; i++)
+					if (materials.equalsIgnoreCase(StringArray[i]))
+						printer.setMatches(materialsWeighting, 4);
+			} else if (materials.equalsIgnoreCase(printerMaterials)) {
+				printer.setMatches(materialsWeighting, 4);
 			}
+			
 
 			// Tolerance Section
-			if (toleranceWeighting != 0) {
+			if (minTolerance <= printer.getTolerance()
+					&& maxTolerance >= printer.getTolerance()) {
 				printer.setMatches(toleranceWeighting, 5);
-				System.out.println("Weighting for Tolerance is now: " + toleranceWeighting);
-			} else {
-				if (minTolerance <= printer.getTolerance()
-						&& maxTolerance >= printer.getTolerance()) {
-					DEFAULT_WEIGHTING = 1;
-					printer.setMatches(DEFAULT_WEIGHTING, 5);
-				}
 			}
+
 
 			// Finish Section
 			// TODO: Will need significant String validation,
 			// splitting, case, etc. Unless drop-down list?
-			if (finishWeighting != 0) {
+
+			if(minFinish <= printer.getFinish()
+					&& maxFinish >= printer.getFinish())  {
 				printer.setMatches(finishWeighting, 6);
-				System.out.println("Weighting for Finish is now: " + finishWeighting);
-			} else {
-				if(minFinish <= printer.getFinish()
-						&& maxFinish >= printer.getFinish())  {
-					DEFAULT_WEIGHTING = 1;
-					printer.setMatches(DEFAULT_WEIGHTING, 6);
-				}
 			}
 		}
 	}
