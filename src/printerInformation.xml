@@ -4,7 +4,7 @@
         <vendor name="Vendor One">
             <webSite info="@vendorOne.com">
             </webSite>
-            <VendorInfo info="Vendor Info">
+            <VendorInfo info="Vendor Info Goes Here">
             </VendorInfo>
             <printer>
             
@@ -37,7 +37,7 @@
         <vendor name="Vendor Two">
             <webSite info="@vendorTwo.com">
             </webSite>
-            <VendorInfo info="Vendor Info">
+            <VendorInfo info="Vendor Info Goes Here">
             </VendorInfo>
             <printer>
                 <NAME>Test 5</NAME>
@@ -124,7 +124,7 @@
         <vendor name="Vendor Three">
             <webSite info="@vendorThree.com">
             </webSite>
-            <VendorInfo info="Vendor Info">
+            <VendorInfo info="Vendor Info Goes Here">
             </VendorInfo>            
             <printer>
                 <NAME>Test 6</NAME>
