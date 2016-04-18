@@ -94,7 +94,6 @@ public class ToolBox {
 		String name, vendor;
 		double tension, compression, impact, tolerance, finish;
 		String materialsString = "";
-		String[] materialsArray;
 		HashSet<String> materialsSet = new HashSet<String>();
 		Element eElement;
 
@@ -288,6 +287,7 @@ public class ToolBox {
 		ArrayList<Printer> outputList = new ArrayList<Printer>();
 
 		for(Printer printer : list){
+			@SuppressWarnings("unused")
 			int matches = 0;
 			int currentMatches = printer.getTotalMatches();
 

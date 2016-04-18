@@ -2,9 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 import javax.swing.*;
 
@@ -22,9 +20,9 @@ public class MenuWindow extends JFrame
 	private JPanel m_Menu_P;
 	private SearchResultPanel m_SearchResult_P;
 	private SearchFiltersPanel m_SearchFilter_P;
-	private HashSet<String> m_RangeOfMaterials;
 	private JToolBar m_ToolBar;
 	private JScrollPane m_ScrollPane;
+	@SuppressWarnings("unused")
 	private ToolBox m_ToolBox;
 	private MenuWindow m_MenuUI;
 
@@ -58,7 +56,6 @@ public MenuWindow(String name)
     m_MenuUI = this;
     
 	// Instantiate non-GUI objects
-	m_RangeOfMaterials = new HashSet<String>();
 	m_Menu_F = this;
 }
 
@@ -185,8 +182,7 @@ private class ComboListener implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent action) {
-		String command, selectedItem;
-		int index;
+		String command;
 		
 		command = action.getActionCommand();
 		switch(command)
@@ -243,8 +239,6 @@ private class ComboListener implements ActionListener
  */
 private class ButtonListener implements ActionListener, Printable
 {
-
-	PrinterJob job = PrinterJob.getPrinterJob();
 	@Override
 	public void actionPerformed(ActionEvent action) {
 

@@ -1,8 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashSet;
-
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
 /**
  * A list of 3D metal printers being considered for the
