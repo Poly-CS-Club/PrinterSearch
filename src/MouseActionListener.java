@@ -38,7 +38,16 @@ public class MouseActionListener extends MouseAdapter{
 	{
 		PointerInfo mousePointer = MouseInfo.getPointerInfo();
 		Point location = mousePointer.getLocation();
-		m_VendorInfoUI.setLocation((int)location.getX()-5,(int)location.getY()-5);
+		int mouseX = (int)location.getX();
+		int mouseY = (int)location.getY();
+		if((mouseY + m_VendorInfoUI.getHeight()) > MenuWindow.s_SCREEN_HEIGHT) // make sure that the window is on screen.
+		{
+			m_VendorInfoUI.setLocation(mouseX-5,MenuWindow.s_SCREEN_HEIGHT - m_VendorInfoUI.getHeight() - 15); // set window at the bottom of the screen.
+		}else
+		{
+			m_VendorInfoUI.setLocation(mouseX-5,mouseY-5);
+		}
+		
 		m_VendorInfoUI.setVisible(true);
 		m_Target_L.setForeground(m_OldColor);
 	}

@@ -12,6 +12,7 @@ public class PrinterLabel extends JLabel implements Serializable
 {
 	private JLabel name, vendor, tension, compression, impact,
 	               materials, tolerance, finish;
+	private boolean needsLink;
     private int m_index;
     
     /**
@@ -31,7 +32,7 @@ public class PrinterLabel extends JLabel implements Serializable
      * @param finish          the String with the printer's finish
      */
     PrinterLabel(int index, int frameWidth, int frameHeight, String name,String vendor, String tension,
-    		String compression, String impact, String materials, String tolerance, String finish)
+    		String compression, String impact, String materials, String tolerance, String finish, boolean needsLink)
     {
         m_index = index;
         this.name = new JLabel(name, JTextField.CENTER);
@@ -42,6 +43,7 @@ public class PrinterLabel extends JLabel implements Serializable
         this.materials = new JLabel(materials, JTextField.CENTER);
         this.tolerance = new JLabel(tolerance, JTextField.CENTER);
         this.finish = new JLabel(finish, JTextField.CENTER);
+        this.needsLink = needsLink;
         
         setPreferredSize(new Dimension(frameWidth-200, 40));
         setMinimumSize(new Dimension(frameWidth-220, 40));
@@ -109,13 +111,12 @@ public class PrinterLabel extends JLabel implements Serializable
         tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
         finish.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        if(m_index != 1)
+        if(needsLink)
         {
-            vendor.setPreferredSize(new Dimension(100,30));
-            vendor.addMouseListener(new MouseActionListener(vendor));
-            vendor.setToolTipText("Click For More Info");
+        	vendor.setPreferredSize(new Dimension(100,30));
+        	vendor.addMouseListener(new MouseActionListener(vendor));
+        	vendor.setToolTipText("Click For More Info");
         }
-
         name.setToolTipText(name.getText());
     }
     
