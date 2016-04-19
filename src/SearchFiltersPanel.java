@@ -16,7 +16,6 @@ import javax.swing.JTextField;
  */
 public class SearchFiltersPanel extends JPanel {
 	
-	private JTextField m_BroadSearch_TF;
 	private JComboBox<String> m_Materials_CB, m_Vendor_CB;
 	private RangedTextField<Double> m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF, m_Finish_RTF;
 	private JButton m_FilterResults_B, m_ClearResults_B;
@@ -45,8 +44,6 @@ public class SearchFiltersPanel extends JPanel {
 	 */
 	private void createComponents()
 	{
-		// Instantiate text fields
-		m_BroadSearch_TF = new JTextField();
 
 		// Instantiate ranged text fields
 		m_Compression_RTF = new RangedTextField<Double>(500.00, 0.000, RangedTextField.DOUBLE);
@@ -79,7 +76,7 @@ public class SearchFiltersPanel extends JPanel {
 	{
 		Dimension defaultMaxSize = new Dimension(170, 30),
 				  defaultMinSize = new Dimension(150, 30);
-		Component[] searchComponents = {m_BroadSearch_TF, m_Vendor_CB, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
+		Component[] searchComponents = {m_Vendor_CB, m_Compression_RTF, m_Tension_RTF, m_Tolerance_RTF,
 									    m_Impact_RTF, m_Materials_CB, m_Finish_RTF};
 		
 		
@@ -97,7 +94,6 @@ public class SearchFiltersPanel extends JPanel {
 		m_ClearResults_B.setPreferredSize(new Dimension(160,30));
 		
 		// Align search parameter components
-		m_BroadSearch_TF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		m_Compression_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		m_Tension_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
 		m_Impact_RTF.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -116,19 +112,20 @@ public class SearchFiltersPanel extends JPanel {
 	private void addComponents()
 	{
 		Component[] searchComponents = {
-				m_BroadSearch_TF, m_Vendor_CB, m_Compression_RTF,
+				m_Vendor_CB, m_Compression_RTF,
 				m_Tension_RTF, m_Tolerance_RTF, m_Impact_RTF,
 				m_Finish_RTF,m_Materials_CB};
 		
 		String[] filterHeaders = {
-				"Search", "Vendor", "Compression (ksi)", "Tension (ksi)",
+				"Filter Printers", "Vendor", "Compression (ksi)", "Tension (ksi)",
 				"Tolerance (in)", "Impact (lb-ft)", "Finish (\u00B5in)","Material",
-				 ""};
+				 };
 		
 		// Add search parameter titles and spacing to GUI
+		addSearchLabel(filterHeaders[0]);
 		for(int index=0; index<searchComponents.length; index++) {
 			addSearchLabel("\n");
-			addSearchLabel(filterHeaders[index]);
+			addSearchLabel(filterHeaders[index+1]);
 			add(searchComponents[index]);
 		}
 		
@@ -150,18 +147,7 @@ public class SearchFiltersPanel extends JPanel {
 		add(label);
 	}
 	//--------------------------------Getters/Setters---------------------------------------//
-	/**
-	 * @return the m_BroadSearch_TF
-	 */
-	public JTextField getBroadSearch() {
-		return m_BroadSearch_TF;
-	}
-	/**
-	 * @param m_BroadSearch_TF the m_BroadSearch_TF to set
-	 */
-	public void setBroadSearch(JTextField m_BroadSearch_TF) {
-		this.m_BroadSearch_TF = m_BroadSearch_TF;
-	}
+
 	/**
 	 * @return the m_Materials_CB
 	 */
