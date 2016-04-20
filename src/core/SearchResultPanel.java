@@ -37,7 +37,7 @@ public class SearchResultPanel extends JPanel{
 	{
 		// Create search results' table header
 		m_ResultHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
-				"NAME","VENDOR","TENSION (ksi)","COMPRESSION (ksi)","IMPACT (lb-ft)","MATERIALS","TOLERANCE (in)","FINISH (\u00B5in)", false);
+				"PRINTER","VENDOR","TENSION (ksi)","COMPRESSION (ksi)","IMPACT (lb-ft)","MATERIALS","TOLERANCE (in)","FINISH (\u00B5in)", false);
 		m_ResultHeader.setBackground(Color.lightGray);
 		// Add tool tips for long header categories before adding to GUI
 		m_ResultHeader.getMaterials().setToolTipText("Range of Materials");
@@ -116,7 +116,7 @@ public class SearchResultPanel extends JPanel{
 		
 		// Create search results' table header
 		tableHeader = new PrinterLabel(1,MenuWindow.FRAME_WIDTH , MenuWindow.FRAME_HEIGHT,
-				"NAME","VENDOR","TENSION (ksi)","COMPRESSION (ksi)","IMPACT (lb-ft)","MATERIALS","TOLERANCE (in)","FINISH (\u00B5in)", false);
+				"PRINTER","VENDOR","TENSION (ksi)","COMPRESSION (ksi)","IMPACT (lb-ft)","MATERIALS","TOLERANCE (in)","FINISH (\u00B5in)", false);
 
 		// Add tool tips for long header categories before adding to GUI
 	    tableHeader.getMaterials().setToolTipText("Range of Materials");
