@@ -1,3 +1,4 @@
+package core;
 import javax.swing.JFrame;
 
 

@@ -1,8 +1,11 @@
+package core;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.*;
 import java.util.Arrays;
+
+import core.help.HelpFrame;
 
 import javax.swing.*;
 
@@ -119,6 +122,12 @@ private void designToolBar()
 	button.setActionCommand("Settings");
 	button.addActionListener(new ButtonListener());
 	m_ToolBar.add(button);
+	
+	// Set up help button
+	button = new JButton("Help");
+	button.setActionCommand("Help");
+    button.addActionListener(new ButtonListener());
+    m_ToolBar.add(button);
 	
 	// Set up button to add printer
 	button = new JButton("Add Printer");
@@ -257,7 +266,10 @@ private class ButtonListener implements ActionListener, Printable
 									revalidate();
 				break;
 
-			case "Help": //TODO Help Window or Pop-up
+			case "Help": 
+			                HelpFrame help = new HelpFrame();
+			                help.pack();
+			                help.setVisible(true);
 				break;
 			case "Settings"://TODO Settings Window or pop-up
 									

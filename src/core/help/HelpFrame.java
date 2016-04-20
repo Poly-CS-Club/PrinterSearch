@@ -1,0 +1,75 @@
+package core.help;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+
+import core.MenuWindow;
+
+/**
+ * Creates a pop-up window containing help information for the printer search
+ * program.
+ * 
+ * @author Marcinina Alvaran
+ * @version 1.0
+ */
+public class HelpFrame extends JFrame
+{
+    private static final long serialVersionUID = -2836575744299552995L;
+    
+    private JTabbedPane helpLibrary;
+
+    /**
+     * Creates a default help frame
+     */
+    public HelpFrame()
+    {
+        designHelpFrame();
+        createHelpLibrary();
+        add(helpLibrary);
+        helpLibrary.setVisible(true);
+        pack();
+    }
+
+    /**
+     * Initializes the help window.
+     */
+    private void designHelpFrame()
+    {
+        int frameWidth, frameHeight;
+
+        // Determine window dimensions
+        frameWidth = (int) (MenuWindow.FRAME_WIDTH*0.65);
+        frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.8);
+
+        // Set up window
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setPreferredSize(new Dimension(frameWidth, frameHeight));
+        pack();
+        setResizable(true);
+        setVisible(true);
+        setLocationRelativeTo(null);
+    }
+    
+    /**
+     * Fills library with help information panels.
+     */
+    private void createHelpLibrary()
+    {
+        helpLibrary = new JTabbedPane();
+        
+        // Add tab for "Add Printer" tutorial
+        helpLibrary.addTab("Add Printer", new JScrollPane(new AddPrinterHelp()));
+        
+        // TODO: Add tab for "Search" tutorial
+        //helpLibrary.add("Searching", new SearchHelp());
+        
+        // Add tab for "Printing" tutorial
+        helpLibrary.add("Printing", new JScrollPane(new PrintResultsHelp()));
+        
+        // TODO: Add tab for "Search Weights" tutorial
+        //helpLibrary.add("Search Weights", new SearchWeightsHelp());
+    }
+}
