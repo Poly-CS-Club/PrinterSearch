@@ -12,6 +12,8 @@ import javax.swing.ImageIcon;
  */
 public class SearchHelp extends HelpPanel
 {
+    private static final long serialVersionUID = 982727533936225308L;
+
     /**
      * Creates a "Search" help panel.
      */
@@ -28,7 +30,7 @@ public class SearchHelp extends HelpPanel
     protected void setTutorialText()
     {
         String filterIconPath, reviewIconPath,
-               filterStep, reviewStep;
+               filterStep, reviewStep1, reviewStep2;
         
         ImageIcon filterIcon, reviewIcon;
         
@@ -36,14 +38,19 @@ public class SearchHelp extends HelpPanel
         filterStep = "Filter currently databased printers.";
         filterIconPath = getIconPath("Search-S1.png");
         filterIcon = new ImageIcon(filterIconPath);
-        addStep(filterStep, filterIcon);
+        addStep(filterStep);
+        addStep(filterIcon);
+        addSpacing();
         
         // Add review results step
-        reviewStep = "Review results\n" +
-                "(Best matches on top of the list, Filter matches denoted in green)";
+        reviewStep1 = "Review results";
+        reviewStep2 = "(Best matches on top of the list, Filter matches denoted in green)";
         reviewIconPath = getIconPath("Search-S2.png");
         reviewIcon = new ImageIcon(reviewIconPath);
-        addStep(reviewStep, reviewIcon);
+        addStep(reviewStep1);
+        addStep(reviewStep2);
+        addStep(reviewIcon);
+        addSpacing();
     }
 
 }

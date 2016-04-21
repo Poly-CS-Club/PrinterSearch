@@ -37,11 +37,15 @@ public abstract class HelpPanel extends JPanel
         title.setAlignmentX(CENTER_ALIGNMENT);
         title.setVisible(true);
         
-        // Initialize tutorial text
+        // Initialize panel
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setAlignmentX(SwingConstants.CENTER);
+        
+        // Add spacing to accentuate header
+        addSpacing();
         add(title);
-        add(new JLabel("\n"));
+        addSpacing();
+        addSpacing();
         setVisible(true);
     }
     
@@ -49,6 +53,22 @@ public abstract class HelpPanel extends JPanel
      * Adds step-by-step tutorial to help panel.
      */
     protected abstract void setTutorialText();
+    
+    /**
+     * Adds step spacing (i.e. an empty line).
+     */
+    protected void addSpacing()
+    {
+        JPanel spacing = new JPanel();
+        
+        // Create spacing component
+        spacing.setLayout(new BoxLayout(spacing, BoxLayout.Y_AXIS));
+        spacing.setAlignmentX(CENTER_ALIGNMENT);
+        spacing.add(new JLabel("\n"));
+        spacing.setVisible(true);
+        
+        add(spacing);
+    }
     
     /**
      * Adds an image tutorial step to the tutorial panel.
@@ -84,30 +104,6 @@ public abstract class HelpPanel extends JPanel
         tutorialStep.setAlignmentX(CENTER_ALIGNMENT);
         stepLabel.setFont(DEFAULT_STEP_FONT);
         tutorialStep.add(stepLabel, SwingConstants.CENTER);
-        tutorialStep.add(new JLabel("\n"));
-        tutorialStep.setVisible(true);
-        
-        add(tutorialStep);
-    }
-    
-    /**
-     * Adds a tutorial step where text is followed by image
-     * to the tutorial panel.
-     * 
-     * @param text the String with the tutorial step text
-     * @param icon the ImageIcon with the tutorial image
-     */
-    protected void addStep(String text, ImageIcon icon)
-    {
-        JLabel stepLabel = new JLabel(text, SwingConstants.CENTER);
-        JPanel tutorialStep = new JPanel();
-        
-        // Create tutorial step component
-        tutorialStep.setLayout(new BoxLayout(tutorialStep, BoxLayout.Y_AXIS));
-        tutorialStep.setAlignmentX(CENTER_ALIGNMENT);
-        stepLabel.setFont(DEFAULT_STEP_FONT);
-        tutorialStep.add(stepLabel, SwingConstants.CENTER);
-        tutorialStep.add(new JLabel(icon));
         tutorialStep.add(new JLabel("\n"));
         tutorialStep.setVisible(true);
         

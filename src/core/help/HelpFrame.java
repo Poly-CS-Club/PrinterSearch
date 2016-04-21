@@ -1,7 +1,9 @@
 package core.help;
 
 import java.awt.Dimension;
+import java.util.Arrays;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -20,6 +22,7 @@ public class HelpFrame extends JFrame
     private static final long serialVersionUID = -2836575744299552995L;
     
     private JTabbedPane helpLibrary;
+    private ImageIcon logo;
 
     /**
      * Creates a default help frame
@@ -28,6 +31,8 @@ public class HelpFrame extends JFrame
     {
         designHelpFrame();
         createHelpLibrary();
+        logo = new ImageIcon(getLogoPath("sift-logo-color.png"));
+        setIconImage(logo.getImage());
         add(helpLibrary);
         helpLibrary.setVisible(true);
         pack();
@@ -63,13 +68,34 @@ public class HelpFrame extends JFrame
         // Add tab for "Add Printer" tutorial
         helpLibrary.addTab("Add Printer", new JScrollPane(new AddPrinterHelp()));
         
-        // TODO: Add tab for "Search" tutorial
-        //helpLibrary.add("Searching", new SearchHelp());
+        // Add tab for "Search" tutorial
+        helpLibrary.add("Searching", new JScrollPane(new SearchHelp()));
         
         // Add tab for "Printing" tutorial
         helpLibrary.add("Printing", new JScrollPane(new PrintResultsHelp()));
         
         // TODO: Add tab for "Search Weights" tutorial
         //helpLibrary.add("Search Weights", new SearchWeightsHelp());
+    }
+    
+    /**
+     * Returns the appropriate logo icon path depending on the user's
+     * operating system
+     * 
+     * @param fileName the String with the logo's file name
+     * @return the String containing the logo's path
+     */
+    public String getLogoPath(String fileName)
+    {
+        String operatingSystem = System.getProperty("os.name"),
+               keyword = "Mac";
+        boolean checkMac;
+        
+        // Check if user's operating system contains "Mac"
+        checkMac = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        if (checkMac)
+            return "src\\" + fileName;
+        else
+            return "src/" + fileName;
     }
 }

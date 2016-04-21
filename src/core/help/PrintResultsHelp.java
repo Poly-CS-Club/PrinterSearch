@@ -31,10 +31,12 @@ public class PrintResultsHelp extends HelpPanel
         ImageIcon stepIcon1;
         
         // Add step 1
-        step1 = "Open the print menu by pressing “Export” on the top tool bar.";
+        step1 = "Open the print menu by pressing “Export” on the upper toolbar.";
         iconPath1 = getIconPath("PrintResults-S1.png");
         stepIcon1 = new ImageIcon(iconPath1);
-        addStep(step1, stepIcon1);
+        addStep(step1);
+        addStep(stepIcon1);
+        addSpacing();
     }
 
 }

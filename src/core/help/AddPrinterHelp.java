@@ -39,24 +39,32 @@ public class AddPrinterHelp extends HelpPanel
         step1 = "Step 1: Press the \"Add Printer\" button on the upper toolbar.";
         iconPath1 = getIconPath("AddPrinter-S1.png");
         stepIcon1 = new ImageIcon(iconPath1);
-        addStep(step1, stepIcon1);
+        addStep(step1);
+        addStep(stepIcon1);
+        addSpacing();
         
         // Add step 2
         step2 = "Step 2: Enter information into the fields.";
         iconPath2 = getIconPath("AddPrinter-S2.png");
         stepIcon2 = new ImageIcon(iconPath2);
-        addStep(step2, stepIcon2);
+        addStep(step2);
+        addStep(stepIcon2);
+        addSpacing();
         
         // Add error reference
         errorReference = "Solutions to Error Messages";
         errorIconPath = getIconPath("AddPrinter-Errors.png");
         errorIcon = new ImageIcon(errorIconPath);
-        addStep(errorReference, errorIcon);
+        addStep(errorReference);
+        addStep(errorIcon);
+        addSpacing();
         
         // Add step 3
         step3 = "Step 3: Ensure printer was successfully added by viewing the list.";
         iconPath3 = getIconPath("AddPrinter-S3.png");
         stepIcon3 = new ImageIcon(iconPath3);
-        addStep(step3, stepIcon3);
+        addStep(step3);
+        addStep(stepIcon3);
+        addSpacing();
     }
 }

@@ -12,7 +12,9 @@ public class SearchWeightsHelp extends HelpPanel
 {
     public SearchWeightsHelp()
     {
-        // TODO
+        setTitle("Setting Search Filter Weights");
+        setTutorialText();
+        setVisible(true);
     }
     
     /**
@@ -20,6 +22,10 @@ public class SearchWeightsHelp extends HelpPanel
      */
     protected void setTutorialText()
     {
-        // TODO
+        // TODO: Add step 1 (click toolbar button)
+        
+        // TODO: Add step 2 (add weight numbers)
+        
+        // TODO: Add error references
     }
 }
