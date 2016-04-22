@@ -47,7 +47,7 @@ public class PrinterLabel extends JLabel implements Serializable
         this.needsLink = needsLink;
         
         setPreferredSize(new Dimension(frameWidth-200, 40));
-        setMinimumSize(new Dimension(frameWidth-220, 40));
+        setMinimumSize(new Dimension(frameWidth-300, 40));
         setMaximumSize(new Dimension(frameWidth-190, 60));
         setLayout(new GridLayout(1,10,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -114,7 +114,7 @@ public class PrinterLabel extends JLabel implements Serializable
         
         if(needsLink)
         {
-        	vendor.setPreferredSize(new Dimension(100,30));
+        	vendor.setPreferredSize(new Dimension(90,30));
         	vendor.addMouseListener(new MouseActionListener(vendor));
         	vendor.setToolTipText("Click For More Info");
         }

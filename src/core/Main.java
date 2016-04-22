@@ -10,5 +10,4 @@ public class Main {
 		menuFrame.pack();
 	    menuFrame.setVisible(true);
 	}
-
 }
