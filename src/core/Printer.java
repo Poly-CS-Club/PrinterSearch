@@ -1,3 +1,4 @@
+package core;
 import java.util.HashSet;
 
 /**
@@ -13,12 +14,9 @@ public class Printer {
 	private double tension;
 	private double compression;
 	private double impact;
-	private double complexity;
-	private double leadTime;
-	private boolean customizable;
 	private HashSet<String> materials;
 	private double tolerance;
-	private String finish;
+	private double finish;
 
 
 	/* Add boolean? Could make associative array with hash.
@@ -37,13 +35,10 @@ public class Printer {
 		tension = 0;
 		compression = 0;
 		impact = 0;
-		complexity = 0;
-		leadTime = 0;
-		customizable = false;
 		materials = new HashSet<String>();
 		tolerance = 0;
-		finish = "";
-		matches = new int[9];
+		finish = 0;
+		matches = new int[7];
 		for (int index=0; index<9; index++)
 			matches[index] = 0;
 
@@ -64,21 +59,18 @@ public class Printer {
 	 * @param tolerance       the double with the specified tolerance
 	 * @param finish          the String representing the finish
 	 */
-	public Printer(String name, String vendor, double tension, double compression, double impact, double complexity, double leadTime, boolean customizable, HashSet<String> materials, double tolerance, String finish){
+	public Printer(String name, String vendor, double tension, double compression, double impact, HashSet<String> materials, double tolerance, double finish){
 
 		this.name = name;
 		this.vendor = vendor;
 		this.tension = tension;
 		this.compression = compression;
 		this.impact = impact;
-		this.complexity = complexity;
-		this.leadTime = leadTime;
-		this.customizable = customizable;
 		this.materials = materials;
 		this.tolerance = tolerance;
 		this.finish = finish;
 
-		matches = new int[8];
+		matches = new int[7];
 	}
 
 	public int[] getMatches() {
@@ -89,7 +81,7 @@ public class Printer {
 		int numMatches = 0;
 		for(int i=0;i<matches.length;i++)		// If match result is greater than 0, as in it has a weighted match, add that up to the total!
 			if(matches[i] > 0)
-				numMatches++;
+				numMatches += matches[i];
 
 
 		return numMatches;
@@ -104,6 +96,51 @@ public class Printer {
 		matches[index] = valueWeight;
 	}
 
+	/**
+	 * Adds specified material to printer's range of materials list.
+	 *
+	 * @param  material the material to add to the range of materials
+	 */
+	public void addMaterial(String material) {
+		materials.add(material);
+	}
+
+	/**
+	 *  Returns a String with the range of materials.
+	 *  <p>
+	 *  If the range of materials has more than one element, then a
+	 *  multi-line String is returned.
+	 */
+	public String materialsString() {
+		String rawString,
+		       materialsString = "";
+		String[] materialsArray;
+
+		// Convert HashSet to String
+		rawString = "" + materials;
+		materialsArray = rawString.split(",");
+		if (materialsArray.length > 1) {
+		    for (int index = 0; index < materialsArray.length-1; index++)
+			    materialsString += (materialsArray[index] + "<br>");
+		    materialsString += materialsArray[materialsArray.length-1];
+		}
+		else {
+			materialsString = rawString;
+		}
+
+		// Remove brackets
+		materialsString = String.copyValueOf(
+				materialsString.toCharArray(),1,
+				materialsString.length()-2);
+
+		// Add multi-line compatibility with HTML
+		materialsString = "<html>" + materialsString + "</html>";
+
+		return materialsString;
+	}
+	
+//--------------------------------setter/getters---------------------------------------//
+	
 	public String getPrinterName() {
 		return name;
 	}
@@ -143,87 +180,6 @@ public class Printer {
 	public void setImpact(double impact) {
 		this.impact = impact;
 	}
-
-	public double getComplexity() {
-		return complexity;
-	}
-
-	public void setComplexity(double complexity) {
-		this.complexity = complexity;
-	}
-
-	public double getLeadTime() {
-		return leadTime;
-	}
-
-	public void setLeadTime(double leadTime) {
-		this.leadTime = leadTime;
-	}
-
-	public boolean isCustomizable() {
-		return customizable;
-	}
-
-	/**
-	 * Returns a String representation of whether the printer offers
-	 * customization options.
-	 *
-	 * @return the String describing customizability
-	 */
-	public String customizableString() {
-		if (customizable == true)
-			return "True";
-		else
-			return "False";
-	}
-
-	public void setCustomizable(boolean customizable) {
-		this.customizable = customizable;
-	}
-
-	/**
-	 * Adds specified material to printer's range of materials list.
-	 *
-	 * @param  material the material to add to the range of materials
-	 */
-	public void addMaterial(String material) {
-		materials.add(material);
-	}
-
-	/**
-	 *  Returns a String with the range of materials.
-	 *  <p>
-	 *  If the range of materials has more than one element, then a
-	 *  multi-line String is returned.
-	 */
-	public String materialsString() {
-		String rawString,
-		       materialsString = "";
-		String[] materialsArray;
-
-		// Convert HashSet to String
-		rawString = "" + materials;
-		materialsArray = rawString.split(", ");
-		if (materialsArray.length > 1) {
-		    for (int index = 0; index < materialsArray.length-1; index++)
-			    materialsString += (materialsArray[index] + "<br>");
-		    materialsString += materialsArray[materialsArray.length-1];
-		}
-		else {
-			materialsString = rawString;
-		}
-
-		// Remove brackets
-		materialsString = String.copyValueOf(
-				materialsString.toCharArray(),1,
-				materialsString.length()-2);
-
-		// Add multi-line compatibility with HTML
-		materialsString = "<html>" + materialsString + "</html>";
-
-		return materialsString;
-	}
-
 	public HashSet<String> getMaterials() {
 		return materials;
 	}
@@ -236,11 +192,11 @@ public class Printer {
 		this.tolerance = tolerance;
 	}
 
-	public String getFinish() {
+	public double getFinish() {
 		return finish;
 	}
 
-	public void setFinish(String finish) {
+	public void setFinish(double finish) {
 		this.finish = finish;
 	}
 

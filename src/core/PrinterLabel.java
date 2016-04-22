@@ -1,3 +1,4 @@
+package core;
 import java.awt.*;
 import javax.swing.*;
 import java.io.*;
@@ -8,10 +9,11 @@ import java.io.*;
  * @author Joshua Becker
  *
  */
-public class PrinterUI extends JLabel implements Serializable
+public class PrinterLabel extends JLabel implements Serializable
 {
 	private JLabel name, vendor, tension, compression, impact,
 	               materials, tolerance, finish;
+	private boolean needsLink;
     private int m_index;
     
     /**
@@ -30,8 +32,8 @@ public class PrinterUI extends JLabel implements Serializable
      * @param tolerance       the String with the printer's tolerance value
      * @param finish          the String with the printer's finish
      */
-    PrinterUI(int index, int frameWidth, int frameHeight, String name,String vendor, String tension,
-    		String compression, String impact, String materials, String tolerance, String finish)
+    PrinterLabel(int index, int frameWidth, int frameHeight, String name,String vendor, String tension,
+    		String compression, String impact, String materials, String tolerance, String finish, boolean needsLink)
     {
         m_index = index;
         this.name = new JLabel(name, JTextField.CENTER);
@@ -42,6 +44,7 @@ public class PrinterUI extends JLabel implements Serializable
         this.materials = new JLabel(materials, JTextField.CENTER);
         this.tolerance = new JLabel(tolerance, JTextField.CENTER);
         this.finish = new JLabel(finish, JTextField.CENTER);
+        this.needsLink = needsLink;
         
         setPreferredSize(new Dimension(frameWidth-200, 40));
         setMinimumSize(new Dimension(frameWidth-220, 40));
@@ -49,16 +52,6 @@ public class PrinterUI extends JLabel implements Serializable
         setLayout(new GridLayout(1,10,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         setOpaque(true);
-        // TODO: Commented out to try alternating background colours
-        /*
-        if(m_index % 2 == 0)
-        {
-        	setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        }else
-        {
-        	setBorder(BorderFactory.createLineBorder(Color.black));
-        }
-        */
         
         if (m_index % 2 == 0)
         	setOpaque(false);
@@ -76,10 +69,11 @@ public class PrinterUI extends JLabel implements Serializable
      * @param frameWidth  the width of the frame
      * @param frameHeight the height of the frame
      */
-    PrinterUI(int index, int frameWidth, int frameHeight)
+    PrinterLabel(int index, int frameWidth, int frameHeight)
     {
         m_index = index;
         name = new JLabel("default", JTextField.CENTER);
+        vendor = new JLabel("default", JTextField.CENTER);
         tension = new JLabel("default", JTextField.CENTER);
         compression = new JLabel("default", JTextField.CENTER);
         impact = new JLabel("default", JTextField.CENTER);
@@ -87,9 +81,9 @@ public class PrinterUI extends JLabel implements Serializable
         tolerance = new JLabel("default", JTextField.CENTER);
         finish = new JLabel("default", JTextField.CENTER);
         
-        setPreferredSize(new Dimension(frameWidth-200, 30));
-        setMinimumSize(new Dimension(frameWidth-220, 30));
-        setMaximumSize(new Dimension(frameWidth-190, 30));
+        setPreferredSize(new Dimension(frameWidth-200, 45));
+        setMinimumSize(new Dimension(frameWidth-220, 40));
+        setMaximumSize(new Dimension(frameWidth-190, 50));
         setLayout(new GridLayout(1,9,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
         if(m_index % 2 == 0)
@@ -110,6 +104,7 @@ public class PrinterUI extends JLabel implements Serializable
     private void designComponents()
     {
     	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	vendor.setAlignmentX(Component.CENTER_ALIGNMENT);
         tension.setAlignmentX(Component.CENTER_ALIGNMENT);
         compression.setAlignmentX(Component.CENTER_ALIGNMENT); // <---- Refactor comprestion --> compression 
         impact.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -117,6 +112,12 @@ public class PrinterUI extends JLabel implements Serializable
         tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
         finish.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        if(needsLink)
+        {
+        	vendor.setPreferredSize(new Dimension(100,30));
+        	vendor.addMouseListener(new MouseActionListener(vendor));
+        	vendor.setToolTipText("Click For More Info");
+        }
         name.setToolTipText(name.getText());
     }
     
