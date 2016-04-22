@@ -297,6 +297,7 @@ private class ButtonListener implements ActionListener, Printable
 			case "Export": 
 									// Printing portion for printing the results from the results.
 									PrinterJob job = PrinterJob.getPrinterJob();
+									job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
 									job.setPrintable(this);
 									boolean ok = job.printDialog();
 									if (ok) {
@@ -366,11 +367,12 @@ private class ButtonListener implements ActionListener, Printable
 			int y_axis = (int) pageFormat.getHeight();
 
 			BufferedImage panelImage = createImage(m_SearchResult_P);
-			panelImage.getScaledInstance(300, 300,Image.SCALE_SMOOTH);
-
-			pageFormat.setOrientation(PageFormat.LANDSCAPE);
-
-			((Graphics2D) graphics).drawImage(panelImage,0,0, x_axis-60, y_axis-100, null);
+			//Image img = panelImage.getScaledInstance(792, 600,Image.SCALE_SMOOTH);
+			
+			pageFormat.setOrientation(PageFormat.REVERSE_LANDSCAPE);
+			
+			
+			((Graphics2D) graphics).drawImage(panelImage,0,0, x_axis, y_axis, null);
 
 		} else {
 			return NO_SUCH_PAGE;
