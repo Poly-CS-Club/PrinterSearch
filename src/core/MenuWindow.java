@@ -2,7 +2,9 @@ package core;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.print.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import core.help.HelpFrame;
@@ -34,6 +36,7 @@ public class MenuWindow extends JFrame
 	public static int FRAME_HEIGHT;
 	public static int s_SCREEN_WIDTH;
 	public static int s_SCREEN_HEIGHT;
+	public static boolean haveWeUpdated = false;
 
 /**
  * Creates window for Printer Search Program
@@ -263,12 +266,14 @@ private class ButtonListener implements ActionListener, Printable
 		switch(command)
 		{
 			case "Filter Results":
+									haveWeUpdated = true;
 									m_SearchFilter_P.revalidate();
 									m_SearchResult_P.updateSearchResults(m_SearchFilter_P);
 									m_Menu_P.revalidate();
 									revalidate();
 				break;
 			case "Clear Results":
+									haveWeUpdated = false;
 									m_SearchResult_P.clearResults();
 									m_Menu_P.revalidate();
 									revalidate();
@@ -308,6 +313,16 @@ private class ButtonListener implements ActionListener, Printable
 		}
 		
 	}
+
+	public BufferedImage createImage(JPanel panel) {
+
+		int w = panel.getWidth();
+		int h = panel.getHeight();
+		BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = bi.createGraphics();
+		panel.paint(g);
+		return bi;
+	}
 	
 	/**
 	 * Prints the page at the specified index into the specified
@@ -329,16 +344,37 @@ private class ButtonListener implements ActionListener, Printable
 		if (pageIndex > 0) {
 			return NO_SUCH_PAGE;
 		}
-		// User (0,0) is typically outside the
-		// imageable area, so we must translate
-		// by the X and Y values in the PageFormat
-		// to avoid clipping.
-		Graphics2D g2d = (Graphics2D)graphics;
-		g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
-		// Now we perform our rendering
-		graphics.drawString("I KNOW WHAT YOU DID LAST SUMMER TREVOR", 100, 100);
-		// HERE IS WHERE WE WOULD RETRIEVE XML ATTRIBUTES AND DO HARD-CODED PROPER FORMATTING TO HAVE THE VENDOR INFO PRINTED.
+		if (haveWeUpdated) {        // If we have clicked search thus updating the panel of printer list results/
+			ArrayList<Printer> printingResults = new ArrayList<Printer>();        // Create a array list that will store all results of printer.
+			// At this point we have updated the arraylist for printer results based on query, so we can safely call accessor
+			// method for retrieval of printer list.
+			printingResults = m_SearchResult_P.getPrinterList().getPrinterList();
+
+
+			// User (0,0) is typically outside the
+			// imageable area, so we must translate
+			// by the X and Y values in the PageFormat
+			// to avoid clipping.
+			Graphics2D g2d = (Graphics2D) graphics;
+			g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+			// Now we perform our rendering
+			//int widthPanel = m_SearchResult_P.getWidth();
+			//int heightPanel = m_SearchResult_P.getHeight();
+			int x_axis = (int) pageFormat.getWidth();
+			int y_axis = (int) pageFormat.getHeight();
+
+			BufferedImage panelImage = createImage(m_SearchResult_P);
+			panelImage.getScaledInstance(300, 300,Image.SCALE_SMOOTH);
+
+			pageFormat.setOrientation(PageFormat.LANDSCAPE);
+
+			((Graphics2D) graphics).drawImage(panelImage,0,0, x_axis-60, y_axis-100, null);
+
+		} else {
+			return NO_SUCH_PAGE;
+		}
 
 		// tell the caller that this page is part
 		// of the printed document
