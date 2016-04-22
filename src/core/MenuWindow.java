@@ -49,8 +49,16 @@ public MenuWindow(String name)
 			getDefaultScreenDevice();
 	s_SCREEN_WIDTH = graphicsDevice.getDisplayMode().getWidth();
 	s_SCREEN_HEIGHT = graphicsDevice.getDisplayMode().getHeight();
-	FRAME_WIDTH = (int) ((int) s_SCREEN_WIDTH *0.80);
-	FRAME_HEIGHT = (int) ((int) s_SCREEN_HEIGHT *0.80);
+	System.out.println("" + s_SCREEN_WIDTH);
+	if(s_SCREEN_WIDTH > 1350)
+	{
+		FRAME_WIDTH = (int) ((int) s_SCREEN_WIDTH *0.90);
+		FRAME_HEIGHT = (int) ((int) s_SCREEN_HEIGHT *0.90);
+	}else
+	{
+		FRAME_WIDTH = (int) ((int) s_SCREEN_WIDTH *0.80);
+		FRAME_HEIGHT = (int) ((int) s_SCREEN_HEIGHT *0.80);
+	}
 
 	// Set up menu UI window
     createComponents();
@@ -295,6 +303,7 @@ private class ButtonListener implements ActionListener, Printable
 										}
 									}
 				break;
+				
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);
 				break;
 		}

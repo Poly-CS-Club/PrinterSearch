@@ -246,5 +246,22 @@
                 <FINISH>1</FINISH>
             </printer>
         </vendor>
+    <vendor name="sadf">
+            <webSite info="asdf"/>
+            <VendorInfo info="a"/>
+            <printer>
+                <NAME>asdf</NAME>
+                <VENDOR>sadf</VENDOR>
+                <TENSION>1234</TENSION>
+                <COMPRESSION>1234</COMPRESSION>
+                <IMPACT>1234</IMPACT>
+                <PART_COMPLEXITY>123</PART_COMPLEXITY>
+                <LEAD_TIME>1123</LEAD_TIME>
+                <EOC>True</EOC>
+                <ROM>Aluminum</ROM>
+                <TOLERANCE>3124</TOLERANCE>
+                <FINISH>1234</FINISH>
+            </printer>
+        </vendor>
     </VENDORS>
 </INFO>
