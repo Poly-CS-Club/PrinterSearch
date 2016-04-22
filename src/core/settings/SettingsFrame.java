@@ -67,6 +67,8 @@ public class SettingsFrame extends JFrame
         // Add tab for changing search weights
         settingsLibrary.addTab("Search Weights", new JScrollPane(new SearchWeightSettings()));
 
+        //Add tab for changing search highlight color
+        settingsLibrary.addTab("Highlight Color", new JScrollPane(new HighlightColorSettings()));
     }
     
     /**

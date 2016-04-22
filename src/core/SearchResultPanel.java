@@ -14,6 +14,7 @@ import javax.swing.JPanel;
  */
 public class SearchResultPanel extends JPanel{
 	PrinterLabel m_ResultHeader;
+	public static Color highlight = new Color(0,200,0);
 	private PrinterList m_PrinterList;
 	/**
 	 * auto generated serial version UID for panel
@@ -152,7 +153,6 @@ public class SearchResultPanel extends JPanel{
 	 * @return            the String of the parameter
 	 */
 	private PrinterLabel highlightMatch(PrinterLabel label, Printer printer) {
-		Color highlight = new Color(0,200,0);
 		/* Matches array Index Reference:
 		 * 
 		 *  0 = Tension
