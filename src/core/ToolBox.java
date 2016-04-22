@@ -2,6 +2,7 @@ package core;
 import java.util.*;
 import java.io.*;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,23 +35,26 @@ public class ToolBox {
 	{
 		DocumentBuilderFactory documentBuilderFactory;
 		DocumentBuilder documentBuilder;
+		File file = null;
 
 		// Build list of Printer objects from XML file;
 		try{
 			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
 			String stringSearch = System.getProperty("os.name");
 			String keyword = "Mac";
-			File file = new File("src\\printerInformation.xml");
-			Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-			if(found){
-				File fileChange = new File("src/printerInformation.xml");	// Mac image path.
-				file = fileChange;
-			}
+			file = new File("src\\printerInformation.xml");
+				Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+				if(found){
+					File fileChange = new File("src/printerInformation.xml");	// Mac image path.
+					file = fileChange;
+				}
+			
+
 			documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			m_Document = documentBuilder.parse(file);
 		} catch(FileNotFoundException e){
-			System.out.println("File Not Found" + e);
+			ToolBox.getPathOfXML();
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -477,5 +481,54 @@ public class ToolBox {
 			i++;
 		}
 		return vendorList;
+	}
+	/**
+	 * getting the path from the user
+	 */
+	public static void getPathOfXML()
+	{
+		DocumentBuilderFactory documentBuilderFactory;
+		DocumentBuilder documentBuilder;
+		File file = null;
+		
+		int result = JOptionPane.showConfirmDialog(null, "Error printerInformation.xml was not found.", "", JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_OPTION);
+		
+		if(result == JOptionPane.CLOSED_OPTION)
+		{
+			System.exit(0);
+		}
+
+		JFileChooser fc = new JFileChooser();
+		fc.setDialogTitle("Navigate to printerInformation.xml");
+		fc.showOpenDialog(null);
+		// Build list of Printer objects from XML file;
+		try{
+			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
+			String stringSearch = System.getProperty("os.name");
+			String keyword = "Mac";
+			file = fc.getSelectedFile();
+				Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+				if(found){
+					File fileChange = new File("src/ffprinterInformation.xml");	// Mac image path.
+					file = fileChange;
+				}
+			
+
+			documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			m_Document = documentBuilder.parse(file);
+			
+		}catch(FileNotFoundException e){
+			ToolBox.getPathOfXML();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
