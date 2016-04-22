@@ -210,6 +210,7 @@ public class AddPrinterFrame extends JFrame{
 					String tolerance = null;
 					String Vendor = null;
 					String name = null;
+					String finish = null;
 					
 					tension = m_Tension.getInput();
 					compression = m_Compression.getInput();
@@ -217,9 +218,10 @@ public class AddPrinterFrame extends JFrame{
 					tolerance = m_Tolerance.getInput();
 					Vendor = m_Vendor.getInput();
 					name = m_Name.getInput();
+					finish = m_Finish.getInput();
 					
 					if(tension.equals("") || compression.equals("") || impact.equals("") || tolerance.equals("") ||
-					   Vendor.equals("") || name.equals(""))
+					   Vendor.equals("") || name.equals("") || finish.equals(""))
 					{
 						emptyField = true;
 						
@@ -236,6 +238,8 @@ public class AddPrinterFrame extends JFrame{
 							addHighlight(m_Vendor, EMPTY_TEXT_HIGHLIGHT);
 						if (name.equals(""))
 							addHighlight(m_Name, EMPTY_TEXT_HIGHLIGHT);
+						if(finish.equalsIgnoreCase(""))
+							addHighlight(m_Finish, EMPTY_TEXT_HIGHLIGHT);
 					}
 					
 				    try
@@ -246,6 +250,7 @@ public class AddPrinterFrame extends JFrame{
 				    	Double.parseDouble(compression);
 				    	Double.parseDouble(impact);
 				    	Double.parseDouble(tolerance);
+				    	Double.parseDouble(finish);
 				    }catch(NumberFormatException e)
 				    {
 				    	errorFlag = true;
@@ -260,7 +265,7 @@ public class AddPrinterFrame extends JFrame{
 						
 						// adding printer to data base
 						ToolBox.addPrinter(name, Vendor, tension, compression, (String) m_Materials.getSelectedItem(), 
-										   impact, tolerance, (String) m_Finish.getSelectedItem());
+										   impact, tolerance, finish);
 						m_MenuUI.getSearchResultsPanel().reload();
 				    }else if(errorFlag && !emptyField)
 				    {
