@@ -6,6 +6,7 @@ import java.awt.print.*;
 import java.util.Arrays;
 
 import core.help.HelpFrame;
+import core.settings.SettingsFrame;
 
 import javax.swing.*;
 
@@ -272,10 +273,9 @@ private class ButtonListener implements ActionListener, Printable
 			                help.setVisible(true);
 				break;
 			case "Settings"://TODO Settings Window or pop-up
-									
-							SettingsFrame stf = new SettingsFrame();
-							stf.pack();
-							stf.setVisible(true);
+							SettingsFrame settingsFrame = new SettingsFrame();
+							settingsFrame.pack();
+							settingsFrame.setVisible(true);
 				break;
 			case "Add Printer": 
 							AddPrinterFrame apf = new AddPrinterFrame(m_MenuUI);
@@ -405,8 +405,9 @@ private class ButtonListener implements ActionListener, Printable
 		return m_SearchFilter_P;
 	}
 
+
 	/**
-	 * @param m_SearchParam_P the m_SearchParam_P to set
+	 * @param m_SearchFilter_P the m_SearchParam_P to set
 	 */
 	public void setSearchFilterPanel(SearchFiltersPanel m_SearchFilter_P) {
 		this.m_SearchFilter_P = m_SearchFilter_P;
