@@ -50,7 +50,11 @@ public class AddPrinterLabel extends JLabel
 		this.add(m_Title_L);
 		this.add(m_Component);
 	}
-	
+
+	public void setM_ComponentText(String text){
+		((JTextField) m_Component).setText(text);
+	}
+
 	@SuppressWarnings("unchecked")
 	public String getSelectedItem()
 	{

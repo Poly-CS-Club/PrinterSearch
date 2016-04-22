@@ -2,6 +2,7 @@ package core.settings;
 
 import core.AddPrinterLabel;
 import core.MenuWindow;
+import core.Printer;
 import core.PrinterList;
 
 import javax.swing.*;
@@ -39,7 +40,7 @@ public class SearchWeightSettings extends SettingsPanel
         setTitle("Search Weights");
         setVisible(true);
         createComponents();
-        desingComponents();
+        designComponents();
         addActionListeners();
         addComponents();
     }
@@ -63,11 +64,12 @@ public class SearchWeightSettings extends SettingsPanel
         m_Materials = new AddPrinterLabel("Materials", new JTextField());
     }
 
-    private void desingComponents() {
+    private void designComponents() {
         // Button building
         int frameWidth = (int) (MenuWindow.s_SCREEN_WIDTH*.3);
         int frameHeight = (int) (MenuWindow.s_SCREEN_HEIGHT*.25);
 
+        updateWeightHints();
 
         updateWeightButton.setText("Update Weighting");
         updateWeightButton.setPreferredSize(new Dimension(145, 25));
@@ -80,6 +82,15 @@ public class SearchWeightSettings extends SettingsPanel
                 (MenuWindow.s_SCREEN_HEIGHT/2) - (frameHeight/2));
         setPreferredSize(new Dimension(frameWidth,frameHeight));
 
+    }
+
+    private void updateWeightHints(){
+        m_Compression.setM_ComponentText(PrinterList.compressionWeighting + "");
+        m_Tension.setM_ComponentText(PrinterList.tensionWeighting + "");
+        m_Impact.setM_ComponentText(PrinterList.impactWeighting + "");
+        m_Tolerance.setM_ComponentText(PrinterList.toleranceWeighting +"");
+        m_Finish.setM_ComponentText(PrinterList.finishWeighting + "");
+        m_Materials.setM_ComponentText(PrinterList.materialsWeighting + "");
     }
     private void addActionListeners() {
         updateWeightButton.addActionListener(new WeightButtonListener());
@@ -169,6 +180,8 @@ public class SearchWeightSettings extends SettingsPanel
                 PrinterList.finishWeighting = Integer.parseInt(finish);
                 //PrinterList.weightToChange = 6;
             }
+
+            updateWeightHints();
         }
     }
 
