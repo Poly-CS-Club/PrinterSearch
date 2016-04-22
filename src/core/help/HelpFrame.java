@@ -71,11 +71,11 @@ public class HelpFrame extends JFrame
         // Add tab for "Search" tutorial
         helpLibrary.add("Searching", new JScrollPane(new SearchHelp()));
         
+        // Add tab for "Search Weights" tutorial
+        helpLibrary.add("Search Weights", new JScrollPane(new SearchWeightsHelp()));
+        
         // Add tab for "Printing" tutorial
         helpLibrary.add("Printing", new JScrollPane(new PrintResultsHelp()));
-        
-        // TODO: Add tab for "Search Weights" tutorial
-        //helpLibrary.add("Search Weights", new SearchWeightsHelp());
     }
     
     /**

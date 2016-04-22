@@ -11,9 +11,9 @@ import javax.swing.ImageIcon;
  * @see     HelpPanel
  * @see     HelpFrame
  */
-public class SettingsHelp extends HelpPanel
+public class SearchWeightsHelp extends HelpPanel
 {
-    public SettingsHelp()
+    public SearchWeightsHelp()
     {
         setTitle("Setting Search Filter Weights");
         setTutorialText();
@@ -33,13 +33,19 @@ public class SettingsHelp extends HelpPanel
  
         // Add step 1 : Click toolbar button
         step1 = "Step 1: Press the \"Settings\" button on the upper toolbar.";
-        iconPath1 = getIconPath("Settings-S1.png");
+        iconPath1 = getIconPath("Weights-S1.png");
         stepIcon1 = new ImageIcon(iconPath1);
         addStep(step1);
         addStep(stepIcon1);
         addSpacing();
         
-        // TODO: Add step 2 (add weight numbers)
+        // Add step 2 : Add search weight numbers
+        step2 = "Step 2: Enter integers into search weight fields.";
+        iconPath2 = getIconPath("Weights-S2.png");
+        stepIcon2 = new ImageIcon(iconPath2);
+        addStep(step2);
+        addStep(stepIcon2);
+        addSpacing();
         
         // TODO: Add error references
     }
