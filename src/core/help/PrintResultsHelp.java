@@ -32,7 +32,7 @@ public class PrintResultsHelp extends HelpPanel
         
         // Add step 1 : Click toolbar button
         step1 = "Open the print menu by pressing “Export” on the upper toolbar.";
-        iconPath1 = getIconPath("PrintResults-S1.png");
+        iconPath1 = getIconPath("Print-S1.png");
         stepIcon1 = new ImageIcon(iconPath1);
         addStep(step1);
         addStep(stepIcon1);
