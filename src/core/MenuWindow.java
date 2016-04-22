@@ -49,10 +49,9 @@ public MenuWindow(String name)
 			getDefaultScreenDevice();
 	s_SCREEN_WIDTH = graphicsDevice.getDisplayMode().getWidth();
 	s_SCREEN_HEIGHT = graphicsDevice.getDisplayMode().getHeight();
-	System.out.println("" + s_SCREEN_WIDTH);
-	if(s_SCREEN_WIDTH > 1350)
+	if(s_SCREEN_WIDTH < 1370)
 	{
-		FRAME_WIDTH = (int) ((int) s_SCREEN_WIDTH *0.90);
+		FRAME_WIDTH = (int) ((int) s_SCREEN_WIDTH *.90);
 		FRAME_HEIGHT = (int) ((int) s_SCREEN_HEIGHT *0.90);
 	}else
 	{
