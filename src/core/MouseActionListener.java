@@ -66,7 +66,7 @@ public class MouseActionListener extends MouseAdapter{
 		@Override
 		public void mouseExited(java.awt.event.MouseEvent evt) 
 		{
-			if(!m_VendorInfoUI.isOnLink())
+			//if(!m_VendorInfoUI.isOnLink())
 				m_VendorInfoUI.setVisible(false);
 			
 			m_VendorInfoUI.setOnLink(true);

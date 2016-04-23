@@ -56,7 +56,7 @@ public class VendorInfoFrame extends JFrame
 		setMinimumSize(new Dimension(FRAME_WIDTH-100, FRAME_HEIGHT-100));
 		setMaximumSize(new Dimension(FRAME_WIDTH+100, FRAME_HEIGHT+100));
 		setResizable(false);
-		m_VendorInfo_L.getwebSite().addMouseListener(new MouseListener());
+		//m_VendorInfo_L.getwebSite().addMouseListener(new MouseListener());
 		
 		m_Main_P.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
