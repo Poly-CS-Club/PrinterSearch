@@ -24,11 +24,13 @@ public class SearchWeightSettings extends SettingsPanel
     // Frame building
     JFrame settingsFrame;
     // Panel Building
-    JPanel overAllSettingsPanel;			// Overall panel for adding all other panels with a layout.
+    JPanel overAllSettingsPanel;		// Overall panel for adding all other panels with a layout.
     JPanel settingsPanelTopRow;			// Top row panel
     JPanel settingsPanelBottomRow;		// Bottom row panel
     JPanel updateButtonPanel;			// Panel for adding button so we can follow overall panel grid layout
+    JPanel resetButtonPanel;            // Panel for adding reset button onto.
     JButton updateWeightButton;			// Actual button to be added to updateButtonPanel.
+    JButton resetWeightButton;
     AddPrinterLabel m_Name, m_Tension, m_Impact,
             m_Vendor, m_Tolerance, m_Compression,
             m_Finish, m_Materials;
@@ -52,7 +54,9 @@ public class SearchWeightSettings extends SettingsPanel
         settingsPanelTopRow = new JPanel();			// Top row panel
         settingsPanelBottomRow = new JPanel();		// Bottom row panel
         updateButtonPanel = new JPanel();			// Panel for adding button so we can follow overall panel grid layout
+        resetButtonPanel = new JPanel();
         updateWeightButton = new JButton();
+        resetWeightButton = new JButton();
         // Instantiating the labels/textfields/combo-boxes
         //m_Name = new AddPrinterLabel("Name", new JTextField());
         m_Compression = new AddPrinterLabel("Compression", new JTextField());
@@ -77,6 +81,12 @@ public class SearchWeightSettings extends SettingsPanel
         updateWeightButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         updateButtonPanel.add(updateWeightButton);
 
+        resetWeightButton.setText("Reset Weighting");
+        resetWeightButton.setPreferredSize(new Dimension(150, 25));     // Longer width because of longer text.
+        resetWeightButton.setMaximumSize(new Dimension(160, 30));
+        resetWeightButton.setAlignmentX(Component.CENTER_ALIGNMENT);     // MAY CHANGE
+        resetButtonPanel.add(resetWeightButton);
+
         setLocation(
                 (MenuWindow.s_SCREEN_WIDTH/2) - (frameWidth/2),
                 (MenuWindow.s_SCREEN_HEIGHT/2) - (frameHeight/2));
@@ -94,6 +104,7 @@ public class SearchWeightSettings extends SettingsPanel
     }
     private void addActionListeners() {
         updateWeightButton.addActionListener(new WeightButtonListener());
+        resetWeightButton.addActionListener(new ResetWeightButtonListener());
         // After button is clicked  close frame because we have updated values from previous call.
     }
 
@@ -113,7 +124,8 @@ public class SearchWeightSettings extends SettingsPanel
         overAllSettingsPanel.add(settingsPanelTopRow);
         overAllSettingsPanel.add(settingsPanelBottomRow);
         overAllSettingsPanel.add(updateButtonPanel);
-        overAllSettingsPanel.setLayout(new GridLayout(3,1,2,2));
+        overAllSettingsPanel.add(resetButtonPanel);
+        overAllSettingsPanel.setLayout(new GridLayout(4,1,2,2));
         // Frame building.
         add(overAllSettingsPanel);
 
@@ -185,5 +197,35 @@ public class SearchWeightSettings extends SettingsPanel
         }
     }
 
+    private class ResetWeightButtonListener implements ActionListener {
 
+        /**
+         * Invoked when an action occurs, resets all weighting back to default values as specified by client.
+         * @param action
+         */
+        @Override
+        public void actionPerformed(ActionEvent action) {
+            int tension = 2;
+            int compression = 2;
+            int impact = 2;
+            int tolerance = 1;
+            int materials = 1;
+            int finish = 1;
+
+            // Setting weight value given for tension and coordinating the index to know which value we're altering for set matches.
+            PrinterList.tensionWeighting = tension;
+
+            PrinterList.compressionWeighting = compression;
+
+            PrinterList.impactWeighting = impact;
+
+            PrinterList.materialsWeighting = materials;
+
+            PrinterList.toleranceWeighting = tolerance;
+
+            PrinterList.finishWeighting = finish;
+
+            updateWeightHints();
+        }
+    }
 }
