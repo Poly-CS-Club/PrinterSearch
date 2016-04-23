@@ -36,7 +36,11 @@ public class MenuWindow extends JFrame
 	public static int FRAME_HEIGHT;
 	public static int s_SCREEN_WIDTH;
 	public static int s_SCREEN_HEIGHT;
+
 	public static boolean haveWeUpdated = false;
+	private boolean  macOSFound = false;
+	private final String stringSearch = System.getProperty("os.name");
+	private final String keyword = "Mac";
 
 /**
  * Creates window for Printer Search Program
@@ -179,12 +183,10 @@ private void addComponents()
  */
 private void addIcon()
 {
-	String stringSearch = System.getProperty("os.name");
-	String keyword = "Mac";
 	ImageIcon img = new ImageIcon("src\\sift-logo-color.png");	// Windows image path.;
 	
-	Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
-	if(found){
+	macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+	if(macOSFound){
 		ImageIcon imgChange = new ImageIcon("sift-logo-color.png");	// Mac image path.
 		img = imgChange;
 	}
@@ -294,17 +296,47 @@ private class ButtonListener implements ActionListener, Printable
 							apf.pack();
 							apf.setVisible(true);
 				break;
-			case "Export": 
-									// Printing portion for printing the results from the results.
-									PrinterJob job = PrinterJob.getPrinterJob();
-									job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
-									job.setPrintable(this);
-									boolean ok = job.printDialog();
-									if (ok) {
-										try {
-											job.print();
-										} catch (PrinterException ex) {
-											/* The job did not successfully complete */
+			case "Export":
+									if (!haveWeUpdated) {
+										PrinterJob job = PrinterJob.getPrinterJob();
+										macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+										if (!macOSFound) {
+											job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
+										}
+										job.setPrintable(this);
+										boolean ok = job.printDialog();
+										if (ok) {
+											try {
+												job.print();
+											} catch (PrinterException ex) {		// In case job doesn't work, error dialog box.
+												/* The job did not successfully complete */
+												String message = "\"There was an error!\"\n"
+														+ "Please try restarting the application!\n";
+												JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+														JOptionPane.ERROR_MESSAGE);
+											}
+										}
+
+									} else {
+
+										// Printing portion for printing the results from the results.
+										PrinterJob job = PrinterJob.getPrinterJob();
+										macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+										if (!macOSFound) {
+											job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
+										}
+										job.setPrintable(this);
+										boolean ok = job.printDialog();
+										if (ok) {
+											try {
+												job.print();
+											} catch (PrinterException ex) {		// In case job doesn't work, error dialog box.
+												/* The job did not successfully complete */
+												String message = "\"There was an error!\"\n"
+														+ "Please try restarting the application!\n";
+												JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
+														JOptionPane.ERROR_MESSAGE);
+											}
 										}
 									}
 				break;
@@ -368,14 +400,50 @@ private class ButtonListener implements ActionListener, Printable
 
 			BufferedImage panelImage = createImage(m_SearchResult_P);
 			//Image img = panelImage.getScaledInstance(792, 600,Image.SCALE_SMOOTH);
-			
-			pageFormat.setOrientation(PageFormat.REVERSE_LANDSCAPE);
-			
-			
-			((Graphics2D) graphics).drawImage(panelImage,0,0, x_axis, y_axis, null);
+
+
+			macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(macOSFound){
+				pageFormat.setOrientation(PageFormat.LANDSCAPE);
+			} else {
+				pageFormat.setOrientation(PageFormat.REVERSE_LANDSCAPE);
+			}
+
+			((Graphics2D) graphics).drawImage(panelImage,0,0, x_axis-60, y_axis-100, null);
 
 		} else {
-			return NO_SUCH_PAGE;
+			ArrayList<Printer> printingResults = new ArrayList<Printer>();        // Create a array list that will store all results of printer.
+			// At this point we have updated the arraylist for printer results based on query, so we can safely call accessor
+			// method for retrieval of printer list.
+			printingResults = m_SearchResult_P.getPrinterList().getPrinterList();
+
+
+			// User (0,0) is typically outside the
+			// imageable area, so we must translate
+			// by the X and Y values in the PageFormat
+			// to avoid clipping.
+			Graphics2D g2d = (Graphics2D) graphics;
+			g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+			// Now we perform our rendering
+			//int widthPanel = m_SearchResult_P.getWidth();
+			//int heightPanel = m_SearchResult_P.getHeight();
+			int x_axis = (int) pageFormat.getWidth();
+			int y_axis = (int) pageFormat.getHeight();
+
+			BufferedImage panelImage = createImage(m_SearchResult_P);
+			//Image img = panelImage.getScaledInstance(792, 600,Image.SCALE_SMOOTH);
+
+
+			macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+			if(macOSFound){
+				pageFormat.setOrientation(PageFormat.LANDSCAPE);
+			} else {
+				pageFormat.setOrientation(PageFormat.REVERSE_LANDSCAPE);
+			}
+
+			g2d.drawString("\t\t\tUnfiltered Results", 0, 10);
+			((Graphics2D) graphics).drawImage(panelImage,0,30, x_axis-60, y_axis-100, null);
 		}
 
 		// tell the caller that this page is part
