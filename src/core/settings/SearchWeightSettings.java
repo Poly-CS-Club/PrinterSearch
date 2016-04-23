@@ -102,6 +102,7 @@ public class SearchWeightSettings extends SettingsPanel
         m_Finish.setM_ComponentText(PrinterList.finishWeighting + "");
         m_Materials.setM_ComponentText(PrinterList.materialsWeighting + "");
     }
+
     private void addActionListeners() {
         updateWeightButton.addActionListener(new WeightButtonListener());
         resetWeightButton.addActionListener(new ResetWeightButtonListener());
@@ -145,55 +146,85 @@ public class SearchWeightSettings extends SettingsPanel
             String tolerance = null;
             String materials = null;
             String finish = null;
+            boolean inputError = false;
 
             // Setting weight value given for tension and coordinating the index to know which value we're altering for set matches.
             tension = m_Tension.getInput();
+            /**
+             * There are try catch blocks for each of the input-weight changes because we try to convert input to an integer
+             * and store that integer value into the static attribute value. If we cannot perform a successful parsing of string to int
+             * that means the input is not a valid integer, therefore we catch the exception as a number format exception
+             * and print onto the printerlabel textfield stating we have invalid input so user can see
+             * where they went wrong with updating weight values.
+             * Boolean error flag is used so we know not to update weight values with previous values if there is an error,
+             * if there isn't a error we make use of the serializable implementation of the printer labels.
+             */
             if (!(tension.equals(""))) {
-                //if (tension != "") {
-                PrinterList.tensionWeighting = Integer.parseInt(tension);
-                //PrinterList.weightToChange = 0;
+                try {
+                    PrinterList.tensionWeighting = Integer.parseInt(tension);
+                } catch (NumberFormatException n1) {
+                    inputError = true;
+                    m_Tension.setM_ComponentText("Invalid Input!");
+                }
             }
 
             // CHANGE COMPRESSION WEIGHTING INDEX 1
             compression = m_Compression.getInput();
             if (!(compression.equals(""))) {
-                //if (compression != "") {
-                PrinterList.compressionWeighting = Integer.parseInt(compression);
-                //PrinterList.weightToChange = 1;
+                try {
+                    PrinterList.compressionWeighting = Integer.parseInt(compression);
+                } catch (NumberFormatException n2) {
+                    inputError = true;
+                    m_Compression.setM_ComponentText("Invalid Input!");
+                }
             }
             // CHANGE IMPACT WEIGHTING INDEX 2
             impact = m_Impact.getInput();
             if (!(impact.equals(""))) {
-                //if (impact != "") {
-                PrinterList.impactWeighting = Integer.parseInt(impact);
-                //PrinterList.weightToChange = 2;
+                try {
+                    PrinterList.impactWeighting = Integer.parseInt(impact);
+                } catch (NumberFormatException n3) {
+                    inputError = true;
+                    m_Impact.setM_ComponentText("Invalid Input!");
+                }
             }
 
             // CHANGE MATERIALS WEIGHTING INDEX 4
             materials = m_Materials.getInput();
             if (!(materials.equals(""))) {
-                //if (materials != "") {
-                PrinterList.materialsWeighting = Integer.parseInt(materials);
-                //PrinterList.weightToChange = 4;
+                try {
+                    PrinterList.materialsWeighting = Integer.parseInt(materials);
+                } catch (NumberFormatException n4) {
+                    inputError = true;
+                    m_Materials.setM_ComponentText("Invalid Input!");
+                }
             }
 
             // CHANGE TOLERANCE WEIGHTING INDEX 5
             tolerance = m_Tolerance.getInput();
             if (!(tolerance.equals(""))) {
-                //if (tolerance != "") {
-                PrinterList.toleranceWeighting = Integer.parseInt(tolerance);
-                //PrinterList.weightToChange = 5;
+                try {
+                    PrinterList.toleranceWeighting = Integer.parseInt(tolerance);
+                } catch (NumberFormatException n5) {
+                    inputError = true;
+                    m_Tolerance.setM_ComponentText("Invalid Input!");
+                }
             }
 
             // CHANGE FINISH WEIGHTING INDEX 6
             finish = m_Finish.getInput();
             if (!(finish.equals(""))) {
-                //if (finish != "") {
-                PrinterList.finishWeighting = Integer.parseInt(finish);
-                //PrinterList.weightToChange = 6;
+                try {
+                    PrinterList.finishWeighting = Integer.parseInt(finish);
+                } catch (NumberFormatException n6) {
+                    inputError = true;
+                    m_Finish.setM_ComponentText("Invalid Input!");
+                }
             }
 
-            updateWeightHints();
+            if (!inputError) {
+                updateWeightHints();
+            }
         }
     }
 
