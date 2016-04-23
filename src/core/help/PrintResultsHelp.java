@@ -19,7 +19,6 @@ public class PrintResultsHelp extends HelpPanel
     {
         setTitle("Printing Search Results");
         setTutorialText();
-        setVisible(true);
     }
 
     /**

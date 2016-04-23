@@ -28,6 +28,7 @@ public class SettingsFrame extends JFrame
      */
     public SettingsFrame()
     {
+        setTitle("Settings");
         designSettingsFrame();
         createSettingsLibrary();
         logo = new ImageIcon(getLogoPath("sif" + "t-logo-color.png"));

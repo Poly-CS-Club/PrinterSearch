@@ -21,7 +21,6 @@ public class SearchHelp extends HelpPanel
     {
         setTitle("Performing a Search");
         setTutorialText();
-        setVisible(true);
     }
     
     /**

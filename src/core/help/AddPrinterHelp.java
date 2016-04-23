@@ -21,7 +21,6 @@ public class AddPrinterHelp extends HelpPanel
     {
         setTitle("Adding a Printer to the Database");
         setTutorialText();
-        setVisible(true);
     }
     
     /**

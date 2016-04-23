@@ -17,7 +17,6 @@ public class SearchWeightsHelp extends HelpPanel
     {
         setTitle("Setting Search Filter Weights");
         setTutorialText();
-        setVisible(true);
     }
     
     /**

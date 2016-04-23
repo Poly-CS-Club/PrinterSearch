@@ -50,6 +50,7 @@ public class AddPrinterFrame extends JFrame{
 		m_MenuUI = menuUI;
 		
 		// Create and add window and components
+		setTitle("Add Printer");
 	    createComponents();
 	    designComponents();
 	    addActionListeners();

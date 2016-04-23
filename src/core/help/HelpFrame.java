@@ -29,6 +29,7 @@ public class HelpFrame extends JFrame
      */
     public HelpFrame()
     {
+        setTitle("Help");
         designHelpFrame();
         createHelpLibrary();
         logo = new ImageIcon(getLogoPath("sift-logo-color.png"));
