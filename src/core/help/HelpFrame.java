@@ -14,7 +14,7 @@ import core.MenuWindow;
  * Creates a pop-up window containing help information for the printer search
  * program.
  * 
- * @author Marcinina Alvaran
+ * @author Marcinina Alvaran, Alireza Bahremand
  * @version 1.0
  */
 public class HelpFrame extends JFrame
@@ -77,6 +77,10 @@ public class HelpFrame extends JFrame
         
         // Add tab for "Printing" tutorial
         helpLibrary.add("Printing", new JScrollPane(new PrintResultsHelp()));
+        
+        // Add tab for "About" section
+        // NOTE: Should always be listed last to stay at end of tabs.
+        helpLibrary.add("About", new JScrollPane(new AboutHelp()));
     }
     
     /**

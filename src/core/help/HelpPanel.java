@@ -4,7 +4,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
@@ -22,12 +21,14 @@ public abstract class HelpPanel extends JPanel
     private static final long serialVersionUID = -8567384508791776256L;
     
     protected JLabel title;
-    protected JTextPane tutorialText;
+    protected JPanel tutorialText;
     
-    protected final Font DEFAULT_STEP_FONT = new Font(null, 1, 18);
+    protected final Font DEFAULT_STEP_FONT = new Font(null, 1, 18),
+                         DEFAULT_BODY_FONT = new Font(null, 0, 12);
     
     /**
-     * Creates a default help panel with one tutorial step.
+     * Creates a default help panel with the header "Help Panel" with
+     * one tutorial step.
      */
     public HelpPanel()
     {
@@ -55,7 +56,7 @@ public abstract class HelpPanel extends JPanel
     protected abstract void setTutorialText();
     
     /**
-     * Adds step spacing (i.e. an empty line).
+     * Adds step spacing (i.e. an empty line) in the form of a panel.
      */
     protected void addSpacing()
     {
@@ -71,7 +72,7 @@ public abstract class HelpPanel extends JPanel
     }
     
     /**
-     * Adds an image tutorial step to the tutorial panel.
+     * Adds a centered image tutorial step panel to the tutorial panel.
      * 
      * @param icon the ImageIcon with the tutorial image
      */
@@ -90,7 +91,9 @@ public abstract class HelpPanel extends JPanel
     }
     
     /**
-     * Adds a text tutorial step to the tutorial panel.
+     * Adds a centered text tutorial step panel to the tutorial panel.
+     * <p>
+     * Text is contained in a JLabel.
      * 
      * @param text the String with the tutorial step text
      */
@@ -111,8 +114,30 @@ public abstract class HelpPanel extends JPanel
     }
     
     /**
+     * Adds one line of centered body text in a panel to the tutorial panel.
+     * <p>
+     * Text is contained in a JLabel.
+     * 
+     * @param text the String containing the body text
+     */
+    protected void addBody(String text)
+    {
+        JLabel bodyText = new JLabel(text);
+        JPanel    body = new JPanel();
+        
+        // Create text body component
+        body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+        body.setAlignmentX(CENTER_ALIGNMENT);
+        body.setFont(DEFAULT_BODY_FONT);
+        body.add(bodyText, SwingConstants.CENTER);
+        body.setVisible(true);
+        
+        add(body);
+    }
+    
+    /**
      * Returns the appropriate icon path depending on the user's
-     * operating system
+     * operating system.
      * 
      * @param fileName the String with the icon's file name
      * @return the String containing the icon's path

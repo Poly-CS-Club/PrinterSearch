@@ -31,24 +31,20 @@ public class SearchHelp extends HelpPanel
         String filterIconPath, reviewIconPath,
                filterStep, reviewStep1, reviewStep2;
         
-        ImageIcon filterIcon, reviewIcon;
-        
         // Add filter step
         filterStep = "Filter currently databased printers.";
         filterIconPath = getIconPath("Search-S1.png");
-        filterIcon = new ImageIcon(filterIconPath);
         addStep(filterStep);
-        addStep(filterIcon);
+        addStep(new ImageIcon(filterIconPath));
         addSpacing();
         
         // Add review results step
         reviewStep1 = "Review results";
         reviewStep2 = "(Best matches on top of the list, Filter matches denoted in green)";
         reviewIconPath = getIconPath("Search-S2.png");
-        reviewIcon = new ImageIcon(reviewIconPath);
         addStep(reviewStep1);
         addStep(reviewStep2);
-        addStep(reviewIcon);
+        addStep(new ImageIcon(reviewIconPath));
         addSpacing();
     }
 
