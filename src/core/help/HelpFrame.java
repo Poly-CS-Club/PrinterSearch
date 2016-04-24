@@ -32,8 +32,6 @@ public class HelpFrame extends JFrame
         setTitle("Help");
         designHelpFrame();
         createHelpLibrary();
-        logo = new ImageIcon(getLogoPath("sift-logo-color.png"));
-        setIconImage(logo.getImage());
         add(helpLibrary);
         helpLibrary.setVisible(true);
         pack();
@@ -50,7 +48,9 @@ public class HelpFrame extends JFrame
         frameWidth = (int) (MenuWindow.FRAME_WIDTH*0.65);
         frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.8);
 
-        // Set up window
+        // Set up window attributes
+        logo = new ImageIcon(getLogoPath("sift-logo-color.png"));
+        setIconImage(logo.getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         pack();
@@ -94,11 +94,11 @@ public class HelpFrame extends JFrame
     {
         String operatingSystem = System.getProperty("os.name"),
                keyword = "Mac";
-        boolean checkMac;
+        boolean macOSFound;
         
         // Check if user's operating system contains "Mac"
-        checkMac = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
-        if (checkMac)
+        macOSFound = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        if (macOSFound)
             return "src\\" + fileName;
         else
             return "src/" + fileName;

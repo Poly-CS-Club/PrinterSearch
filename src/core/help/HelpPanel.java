@@ -12,7 +12,7 @@ import java.util.Arrays;
 /**
  * Base panel for help window tutorial panels.
  * 
- * @author  Marcinina Alvaran
+ * @author  Marcinina Alvaran, Alireza Bahremand
  * @version 1.0
  * @see     HelpFrame
  */
@@ -146,11 +146,11 @@ public abstract class HelpPanel extends JPanel
     {
         String operatingSystem = System.getProperty("os.name"),
                keyword = "Mac";
-        boolean checkMac;
+        boolean macOSFound;
         
         // Check if user's operating system contains "Mac"
-        checkMac = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
-        if (checkMac)
+        macOSFound = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        if (macOSFound)
             return "src\\core\\help\\images\\" + fileName;
         else
             return "src/core/help/images/" + fileName;
