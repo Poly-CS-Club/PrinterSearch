@@ -1,6 +1,7 @@
 package core.settings;
 
 import core.MenuWindow;
+import core.ToolBox;
 import core.help.AddPrinterHelp;
 import core.help.PrintResultsHelp;
 import core.help.SearchHelp;
@@ -81,12 +82,7 @@ public class SettingsFrame extends JFrame
      */
     public String getLogoPath(String fileName)
     {
-        String operatingSystem = System.getProperty("os.name"),
-               keyword = "Mac";
-        boolean checkMac;
-        
-        // Check if user's operating system contains "Mac"
-        checkMac = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        boolean checkMac = ToolBox.isMacOS();
         if (checkMac)
             return "src\\" + fileName;
         else

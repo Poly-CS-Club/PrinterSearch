@@ -1,5 +1,7 @@
 package core.help;
 
+import core.ToolBox;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -144,12 +146,8 @@ public abstract class HelpPanel extends JPanel
      */
     public String getIconPath(String fileName)
     {
-        String operatingSystem = System.getProperty("os.name"),
-               keyword = "Mac";
-        boolean macOSFound;
+        boolean macOSFound = ToolBox.isMacOS();
         
-        // Check if user's operating system contains "Mac"
-        macOSFound = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
         if (macOSFound)
             return "src\\core\\help\\images\\" + fileName;
         else

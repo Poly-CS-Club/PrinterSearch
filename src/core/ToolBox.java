@@ -41,10 +41,8 @@ public class ToolBox {
 		// Build list of Printer objects from XML file;
 		try{
 			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
-			String stringSearch = System.getProperty("os.name");
-			String keyword = "Mac";
+			boolean found = isMacOS();
 			file = new File("src\\printerInformation.xml");
-				Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 				if(found){
 					File fileChange = new File("src/printerInformation.xml");	// Mac image path.
 					file = fileChange;
@@ -66,6 +64,13 @@ public class ToolBox {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public static boolean isMacOS() {
+		String stringSearch = System.getProperty("os.name");
+		String keyword = "Mac";
+		Boolean foundMac = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+		return foundMac;
 	}
 	/**
 	 * Generates printer list from XML file and returns list to calling method.
@@ -161,10 +166,9 @@ public class ToolBox {
 	            /*
 	             * Creates link to xml file
 	             */
-						  String stringSearch = System.getProperty("os.name");
-							String keyword = "Mac";
+
 							StreamResult result = new StreamResult("src\\printerInformation.xml");
-							Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+							Boolean found = isMacOS();
 							if(found){
 								StreamResult resultChange = new StreamResult("src/printerInformation.xml");	// Mac image path.
 								result = resultChange;
@@ -505,10 +509,8 @@ public class ToolBox {
 		// Build list of Printer objects from XML file;
 		try{
 			// This is a important line, for when using a mac directory must be switched, the directory has \\ because of eclipse.
-			String stringSearch = System.getProperty("os.name");
-			String keyword = "Mac";
 			file = fc.getSelectedFile();
-				Boolean found = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+				Boolean found = isMacOS();
 				if(found){
 					File fileChange = new File("src/ffprinterInformation.xml");	// Mac image path.
 					file = fileChange;
@@ -544,13 +546,8 @@ public class ToolBox {
      */
     public static ImageIcon getLogoIcon()
     {
-        String operatingSystem = System.getProperty("os.name"),
-               keyword = "Mac",
-               iconName = "sift-logo-color.png";
-        boolean macOSFound;
-        
-        // Check if user's operating system contains "Mac"
-        macOSFound = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        String iconName = "sift-logo-color.png";
+        boolean macOSFound = isMacOS();
         if (macOSFound)
             return new ImageIcon("src\\" + iconName);
         else

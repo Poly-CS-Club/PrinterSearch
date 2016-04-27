@@ -38,9 +38,8 @@ public class MenuWindow extends JFrame
 	public static int s_SCREEN_HEIGHT;
 
 	public static boolean haveWeUpdated = false;
-	private boolean  macOSFound = false;
-	private final String stringSearch = System.getProperty("os.name");
-	private final String keyword = "Mac";
+	private boolean  macOSFound = ToolBox.isMacOS();
+
 
 /**
  * Creates window for Printer Search Program
@@ -184,8 +183,7 @@ private void addComponents()
 private void addIcon()
 {
 	ImageIcon img = new ImageIcon("src\\sift-logo-color.png");	// Windows image path.;
-	
-	macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
+
 	if(macOSFound){
 		ImageIcon imgChange = new ImageIcon("sift-logo-color.png");	// Mac image path.
 		img = imgChange;
@@ -316,7 +314,6 @@ private class ButtonListener implements ActionListener, Printable
 			case "Export":
 									if (!haveWeUpdated) {
 										PrinterJob job = PrinterJob.getPrinterJob();
-										macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 										if (!macOSFound) {
 											job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
 										}
@@ -338,7 +335,6 @@ private class ButtonListener implements ActionListener, Printable
 
 										// Printing portion for printing the results from the results.
 										PrinterJob job = PrinterJob.getPrinterJob();
-										macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 										if (!macOSFound) {
 											job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
 										}
@@ -418,8 +414,6 @@ private class ButtonListener implements ActionListener, Printable
 			BufferedImage panelImage = createImage(m_SearchResult_P);
 			//Image img = panelImage.getScaledInstance(792, 600,Image.SCALE_SMOOTH);
 
-
-			macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 			if(macOSFound){
 				pageFormat.setOrientation(PageFormat.LANDSCAPE);
 			} else {
@@ -451,8 +445,6 @@ private class ButtonListener implements ActionListener, Printable
 			BufferedImage panelImage = createImage(m_SearchResult_P);
 			//Image img = panelImage.getScaledInstance(792, 600,Image.SCALE_SMOOTH);
 
-
-			macOSFound = Arrays.asList(stringSearch.split(" ")).contains(keyword);
 			if(macOSFound){
 				pageFormat.setOrientation(PageFormat.LANDSCAPE);
 			} else {

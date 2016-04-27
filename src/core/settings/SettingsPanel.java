@@ -1,5 +1,6 @@
 package core.settings;
 
+import core.ToolBox;
 import core.help.HelpFrame;
 
 import javax.swing.*;
@@ -52,12 +53,8 @@ public abstract class SettingsPanel extends JPanel
      */
     public String getIconPath(String fileName)
     {
-        String operatingSystem = System.getProperty("os.name"),
-               keyword = "Mac";
-        boolean checkMac;
-        
         // Check if user's operating system contains "Mac"
-        checkMac = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        boolean checkMac = ToolBox.isMacOS();
         if (checkMac)
             return "src\\core\\settings\\images\\" + fileName;
         else
