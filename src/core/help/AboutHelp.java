@@ -2,6 +2,8 @@ package core.help;
 
 import javax.swing.ImageIcon;
 
+import core.ToolBox;
+
 /**
  * An "About" panel containing release information and credits.
  * 
@@ -26,13 +28,8 @@ public class AboutHelp extends HelpPanel
      */
     protected void setTutorialText()
     {
-        String iconPath;
-        
-        // Add header and icon
-        // NOTE: Logo icon intentionally copied into help image folder for
-        //       path conversion.
-        iconPath = getIconPath("sift-logo-color.png");
-        addStep(new ImageIcon(iconPath));
+        // Add logo
+        addStep(ToolBox.getLogoIcon());
         
         // Add general Information
         addBody("Version: 1.0");
@@ -43,6 +40,7 @@ public class AboutHelp extends HelpPanel
         
         // Add credits
         addStep("Credits");
+        addBody("Klariza Alvran (Logo)");
         addBody("Marcinina Alvaran");
         addBody("Alireza Bahremand");
         addBody("Joshua Becker");

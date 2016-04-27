@@ -2,6 +2,7 @@ package core;
 import java.util.*;
 import java.io.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -23,7 +24,7 @@ import javax.xml.transform.dom.*;
  * allowing the user to add printers to the printer list and searching
  * the subsequent list.
  *
- * @author  Jake Leonard, Trevor Forrey, (others on team), Marcinina Alvaran
+ * @author  Jake Leonard, Trevor Forrey, Joshua Becker, Alireza Bahremand, Marcinina Alvaran
  * @version (TODO: to be included by original programmer)
  * @see PrinterList
  * @see Printer
@@ -531,4 +532,28 @@ public class ToolBox {
 			e.printStackTrace();
 		}
 	}
+	
+
+    
+    /**
+     * Returns the appropriate logo icon path depending on the user's
+     * operating system
+     * 
+     * @param fileName the String with the logo's file name
+     * @return the String containing the logo's path
+     */
+    public static ImageIcon getLogoIcon()
+    {
+        String operatingSystem = System.getProperty("os.name"),
+               keyword = "Mac",
+               iconName = "sift-logo-color.png";
+        boolean macOSFound;
+        
+        // Check if user's operating system contains "Mac"
+        macOSFound = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
+        if (macOSFound)
+            return new ImageIcon("src\\" + iconName);
+        else
+            return new ImageIcon("src/" + iconName);
+    }
 }

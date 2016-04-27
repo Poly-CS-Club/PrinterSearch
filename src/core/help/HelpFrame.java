@@ -9,12 +9,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import core.MenuWindow;
+import core.ToolBox;
 
 /**
  * Creates a pop-up window containing help information for the printer search
  * program.
  * 
- * @author Marcinina Alvaran, Alireza Bahremand
+ * @author Marcinina Alvaran
  * @version 1.0
  */
 public class HelpFrame extends JFrame
@@ -49,8 +50,7 @@ public class HelpFrame extends JFrame
         frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.8);
 
         // Set up window attributes
-        logo = new ImageIcon(getLogoPath("sift-logo-color.png"));
-        setIconImage(logo.getImage());
+        setIconImage(ToolBox.getLogoIcon().getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         pack();
@@ -81,26 +81,5 @@ public class HelpFrame extends JFrame
         // Add tab for "About" section
         // NOTE: Should always be listed last to stay at end of tabs.
         helpLibrary.add("About", new JScrollPane(new AboutHelp()));
-    }
-    
-    /**
-     * Returns the appropriate logo icon path depending on the user's
-     * operating system
-     * 
-     * @param fileName the String with the logo's file name
-     * @return the String containing the logo's path
-     */
-    public String getLogoPath(String fileName)
-    {
-        String operatingSystem = System.getProperty("os.name"),
-               keyword = "Mac";
-        boolean macOSFound;
-        
-        // Check if user's operating system contains "Mac"
-        macOSFound = Arrays.asList(operatingSystem.split(" ")).contains(keyword);
-        if (macOSFound)
-            return "src\\" + fileName;
-        else
-            return "src/" + fileName;
     }
 }
