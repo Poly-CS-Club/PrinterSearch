@@ -4,13 +4,20 @@ import javax.swing.*;
 
 /**
  * A type of text field that has a min and a max
- * @author Joshua Becker, Marcinina Alvaran
- *
+ * 
+ * @author  Joshua Becker, Marcinina Alvaran
+ * @version 1.0
  */
 public class RangedTextField<N extends Number> extends JPanel{
 	//These are types of number ranges
 	public static final int INTEGER = 1;
 	public static final int DOUBLE = 2;
+	
+	// Minimum/Maximum indicator constants
+	public static final int MIN = 1;
+	public static final int MAX = 2;
+	private int limitType;
+	
 	//this is for JComponent
 	private static final long serialVersionUID = 1L;
 	
@@ -20,23 +27,24 @@ public class RangedTextField<N extends Number> extends JPanel{
 	        minModel = new SpinnerNumberModel(0.000, 0.000, 10.00, 1.000);
 	
 	/**
-	 * Creates generic ranged text field with spinners from 0 to 10
-	 * incremented by 1.
+	 * Creates generic ranged text field with both min and max fields from 0
+	 * to 10 incremented by 1.
 	 */
 	public RangedTextField()
 	{
+        Dimension defaultSize = new Dimension(50, 25);
 		setMin(new JSpinner());
 		setMax(new JSpinner());
 		
 		// Set up minimum value spinner
-		m_Min_TF.setMinimumSize(new Dimension(50,25));
-		m_Min_TF.setPreferredSize(new Dimension(50,25));
+		m_Min_TF.setMinimumSize(defaultSize);
+		m_Min_TF.setPreferredSize(defaultSize);
 		m_Min_TF.setModel(minModel);
 		//m_Min_TF.setEditor(new JSpinner.NumberEditor(m_Min_TF));
 		
 		// Set up maximum value spinner
-		m_Max_TF.setMinimumSize(new Dimension(50,25));
-		m_Max_TF.setPreferredSize(new Dimension(50,25));
+		m_Max_TF.setMinimumSize(defaultSize);
+		m_Max_TF.setPreferredSize(defaultSize);
 		m_Max_TF.setModel(maxModel);
 		//m_Max_TF.setEditor(new JSpinner.NumberEditor(m_Max_TF));
 		
@@ -46,115 +54,155 @@ public class RangedTextField<N extends Number> extends JPanel{
 		add(new JLabel("Max"));
 		add(m_Max_TF);
 	}
-	
-	// TODO: Commented out due to making class a generic type for numbers
-	
-	public RangedTextField(double max, double min, int type)
-	{
-		setMin(new JSpinner());
-		setMax(new JSpinner());
-		
-		m_Min_TF.setMinimumSize(new Dimension(50,25));
-		m_Min_TF.setPreferredSize(new Dimension(50,25));
-		if(type == RangedTextField.DOUBLE)
-			m_Min_TF.setModel(new SpinnerNumberModel(0.000, min, max, 0.001));
-		else
-			m_Min_TF.setModel(new SpinnerNumberModel(0, min, max, 1));
-		
-		
-		m_Max_TF.setMinimumSize(new Dimension(50,25));
-		m_Max_TF.setPreferredSize(new Dimension(50,25));
-		if(type == RangedTextField.DOUBLE)
-			m_Max_TF.setModel(new SpinnerNumberModel(0.000, min, max, 0.001));
-		else
-			m_Max_TF.setModel(new SpinnerNumberModel(0, min, max, 1));
-		
-		add(new JLabel("Min"));
-		add(m_Min_TF);
-		add(new JLabel("Max"));
-		add(m_Max_TF);
-	}
-	
+    
+	/**
+	 * Creates a ranged text field with specified min and max fields that are 
+	 * incremented either by 0.001 if Double or 1 if Integer.
+	 * <p>
+	 * Accepted <b>type</b> values: <b>1</b> if Integer, <b>2</b> if Double
+	 * 
+	 * @param max   the maximum value of the range limit
+	 * @param min   the minimum value of the range limit
+	 * @param type  the int representing the numerical data type of the range
+	 */
+    public RangedTextField(double max, double min, int type)
+    {
+        setMin(new JSpinner());
+        setMax(new JSpinner());
+        
+        m_Min_TF.setMinimumSize(new Dimension(50,25));
+        m_Min_TF.setPreferredSize(new Dimension(50,25));
+        if(type == RangedTextField.DOUBLE)
+            m_Min_TF.setModel(new SpinnerNumberModel(0.000, min, max, 0.001));
+        else
+            m_Min_TF.setModel(new SpinnerNumberModel(0, min, max, 1));
+        
+        
+        m_Max_TF.setMinimumSize(new Dimension(50,25));
+        m_Max_TF.setPreferredSize(new Dimension(50,25));
+        if(type == RangedTextField.DOUBLE)
+            m_Max_TF.setModel(new SpinnerNumberModel(0.000, min, max, 0.001));
+        else
+            m_Max_TF.setModel(new SpinnerNumberModel(0, min, max, 1));
+        
+        add(new JLabel("Min"));
+        add(m_Min_TF);
+        add(new JLabel("Max"));
+        add(m_Max_TF);
+    }
 	
 	/**
-	 * Creates a ranged text field with specified minimum, maximum, and
-	 * increment values.
+	 * Creates a single-field range text field with specified range limit that 
+     * is incremented either by 0.001 if Double or 1 if Integer.
+     * <p>
+     * Accepted <b>type</b> values: <b>1</b> if Integer, <b>2</b> if Double
 	 * 
-	 * @param max       the maximum value of the number range
-	 * @param min       the minimum value of the number range
-	 * @param stepSize  the increment of number within the range
+	 * @param max         the maximum value of the range limit
+	 * @param min         the minimum value of the range limit
+	 * @param numberType  the int representing the numerical data type of the range
+	 * @param limitType   the int representing the limit type of the range
 	 */
-	/*
-	public RangedTextField(Number max, Number min, Number stepSize)
+	public RangedTextField(double max, double min, int numberType, int limitType)
 	{
-		setMin(new JSpinner());
-		setMax(new JSpinner());
-		
-		// Set up minimum value spinner
-		m_Min_TF.setMinimumSize(new Dimension(50,25));
-		m_Min_TF.setPreferredSize(new Dimension(50,25));
-		minModel.setValue(min);
-		minModel.setStepSize(stepSize);
-		minModel.setMinimum((Comparable<?>)min);
-		minModel.setMaximum((Comparable<?>)max);
-		m_Min_TF.setModel(minModel);
-		//m_Min_TF.setEditor(new JSpinner.NumberEditor(m_Min_TF));
-		
-		// Set up maximum value spinner
-		m_Max_TF.setMinimumSize(new Dimension(50,25));
-		m_Max_TF.setPreferredSize(new Dimension(50,25));
-		maxModel.setValue(max);
-		maxModel.setStepSize(stepSize);
-		maxModel.setMinimum((Comparable<?>)min);
-		maxModel.setMaximum((Comparable<?>)max);
-		m_Max_TF.setModel(maxModel);
-		//m_Max_TF.setEditor(new JSpinner.NumberEditor(m_Max_TF));
-		
-		// Include spinners in UI
-		add(new JLabel("Min"));
-		add(m_Min_TF);
-		add(new JLabel("Max"));
-		add(m_Max_TF);
+	    Dimension defaultSize = new Dimension(75, 25);
+	    
+	    this.limitType = limitType;
+	    
+	    // Set up appropriate spinner
+	    if (limitType == RangedTextField.MAX)
+	    {
+	        setMax(new JSpinner());
+	        m_Max_TF.setMinimumSize(defaultSize);
+	        m_Max_TF.setPreferredSize(defaultSize);
+	        if(numberType == RangedTextField.DOUBLE)
+	            m_Max_TF.setModel(new SpinnerNumberModel(0.000, min, max, 0.001));
+	        else
+	            m_Max_TF.setModel(new SpinnerNumberModel(0, min, max, 1));
+            add(new JLabel("MAX"));
+            add(m_Max_TF);
+	    }
+	    else
+	    {
+	        setMin(new JSpinner());
+	        m_Min_TF.setMinimumSize(defaultSize);
+	        m_Min_TF.setPreferredSize(defaultSize);
+            if(numberType == RangedTextField.DOUBLE)
+                m_Min_TF.setModel(new SpinnerNumberModel(0.000, min, max, 0.001));
+            else
+                m_Min_TF.setModel(new SpinnerNumberModel(0, min, max, 1));
+            add(new JLabel("MIN"));
+            add(m_Min_TF);
+	    }
 	}
-	*/
-	public Number getMin() {
+	
+	public Number getMin() throws RangeLimitException {
+	    if (limitType == RangedTextField.MAX)
+	        throw new RangeLimitException("minimum");
+	    
 		return (Number)m_Min_TF.getValue();
 	}
 	
-	public Number getMax() {
+	public Number getMax() throws RangeLimitException  {
+        if (limitType == RangedTextField.MIN)
+            throw new RangeLimitException("maximum");
+        
 		return (Number)m_Max_TF.getValue();
 	}
 	
 
-	public JSpinner getMinSpinner() {
+	public JSpinner getMinSpinner() throws RangeLimitException  {
+        if (limitType == RangedTextField.MAX)
+            throw new RangeLimitException("minimum");
+        
 		return m_Min_TF;
 	}
 
-	public void setMin(JSpinner m_Min_TF) {
+	public void setMin(JSpinner m_Min_TF) throws RangeLimitException  {
+        if (limitType == RangedTextField.MAX)
+            throw new RangeLimitException("minimum");
+        
 		this.m_Min_TF = m_Min_TF;
 	}
 
-	public JSpinner getMaxSpinner() {
+	public JSpinner getMaxSpinner() throws RangeLimitException  {
+        if (limitType == RangedTextField.MIN)
+            throw new RangeLimitException("maximum");
+        
 		return m_Max_TF;
 	}
 
-	public void setMax(JSpinner m_Max_TF) {
+	public void setMax(JSpinner m_Max_TF) throws RangeLimitException  {
+        if (limitType == RangedTextField.MIN)
+            throw new RangeLimitException("maximum");
+        
 		this.m_Max_TF = m_Max_TF;
 	}
 	
-	public Number getMaxStep() {
+	public Number getMaxStep() throws RangeLimitException  {
+        if (limitType == RangedTextField.MIN)
+            throw new RangeLimitException("maximum");
+        
 		return maxModel.getStepSize();
 	}
 	
-	public void setMaxStep(Number stepSize) {
+	public void setMaxStep(Number stepSize) throws RangeLimitException  {
+        if (limitType == RangedTextField.MIN)
+            throw new RangeLimitException("maximum");
+        
 		maxModel.setStepSize(stepSize);
 	}
 	
-	public Number getMinStepSize() {
+	public Number getMinStepSize() throws RangeLimitException  {
+        if (limitType == RangedTextField.MAX)
+            throw new RangeLimitException("minimum");
+        
 		return minModel.getStepSize();
 	}
 	
-	public void setMinStepSize(Number stepSize) {
+	public void setMinStepSize(Number stepSize) throws RangeLimitException  {
+        if (limitType == RangedTextField.MAX)
+            throw new RangeLimitException("minimum");
+        
 		minModel.setStepSize(stepSize);
 	}
 }

@@ -85,12 +85,12 @@ public class SearchResultPanel extends JPanel{
 		m_PrinterList.clearMatches(m_PrinterList.getPrinterList());
 		
 	    m_PrinterList.setMatches(
-	    		(Double) filter.getTension().getMin(), (Double) filter.getTension().getMax(),
-	    		(Double) filter.getCompression().getMin(), (Double)filter.getCompression().getMax(),
-	    		(Double) filter.getImpact().getMin(), (Double) filter.getImpact().getMax(),
+                (Double) filter.getCompression().getMin(),
+	    		(Double) filter.getTension().getMin(),
+	    		(Double) filter.getImpact().getMin(),
 	    		(String) filter.getMaterials().getSelectedItem(),
-	    		(Double) filter.getTolerance().getMin(), (Double) filter.getTolerance().getMax(),
-	    		(double) filter.getFinish().getMin(),(double) filter.getFinish().getMax(),
+	    		(Double) filter.getTolerance().getMax(),
+	    		(double) filter.getFinish().getMax(),
 	    		(String) filter.getVendor().getSelectedItem());
 	    
 	    ArrayList<Printer> outputList = ToolBox.outputSearchedList(m_PrinterList);

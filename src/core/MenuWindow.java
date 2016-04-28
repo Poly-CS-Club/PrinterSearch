@@ -277,18 +277,13 @@ private class ButtonListener implements ActionListener, Printable
 									m_SearchResult_P.clearResults();
 									// Reset compression
 									m_SearchFilter_P.getCompression().getMinSpinner().setValue(0.000);
-									m_SearchFilter_P.getCompression().getMaxSpinner().setValue(0.000);
 									// Reset tension
 									m_SearchFilter_P.getTension().getMinSpinner().setValue(0.000);
-									m_SearchFilter_P.getTension().getMaxSpinner().setValue(0.000);
 									// Reset tolerance
-									m_SearchFilter_P.getTolerance().getMinSpinner().setValue(0.000);
 									m_SearchFilter_P.getTolerance().getMaxSpinner().setValue(0.000);
 									// Reset impact
 									m_SearchFilter_P.getImpact().getMinSpinner().setValue(0.000);
-									m_SearchFilter_P.getImpact().getMaxSpinner().setValue(0.000);
 									// Reset finish
-									m_SearchFilter_P.getFinish().getMinSpinner().setValue(0.000);
 									m_SearchFilter_P.getFinish().getMaxSpinner().setValue(0.000);
 									// Reset Materials
 									m_SearchFilter_P.getMaterials().setSelectedIndex(2);

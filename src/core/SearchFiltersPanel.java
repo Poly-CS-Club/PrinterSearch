@@ -46,16 +46,21 @@ public class SearchFiltersPanel extends JPanel {
 	{
 
 		// Instantiate ranged text fields
-		m_Compression_RTF = new RangedTextField<Double>(500.00, 0.000, RangedTextField.DOUBLE);
-		m_Tolerance_RTF = new RangedTextField<Double>(2000, .000, RangedTextField.DOUBLE);
-		m_Tension_RTF = new RangedTextField<Double>(500.00, 0.000, RangedTextField.DOUBLE);
-		m_Impact_RTF = new RangedTextField<Double>(500.00, 0.000, RangedTextField.DOUBLE);
-		m_Finish_RTF = new RangedTextField<Double>(2000, 0, RangedTextField.INTEGER);
+		m_Compression_RTF = new RangedTextField<Double>(500.00, 0.000,
+		        RangedTextField.DOUBLE, RangedTextField.MIN);
+		m_Tolerance_RTF = new RangedTextField<Double>(2000, 0.000,
+		        RangedTextField.DOUBLE, RangedTextField.MAX);
+		m_Tension_RTF = new RangedTextField<Double>(500.00, 0.000,
+		        RangedTextField.DOUBLE, RangedTextField.MIN);
+		m_Impact_RTF = new RangedTextField<Double>(500.00, 0.000,
+		        RangedTextField.DOUBLE, RangedTextField.MIN);
+		m_Finish_RTF = new RangedTextField<Double>(2000, 0,
+		        RangedTextField.DOUBLE, RangedTextField.MAX);
 		
-		m_Compression_RTF.getMaxSpinner().setValue(0.000);
+		m_Compression_RTF.getMinSpinner().setValue(0.000);
 		m_Tolerance_RTF.getMaxSpinner().setValue(0.000);
-		m_Tension_RTF.getMaxSpinner().setValue(0.000);
-		m_Impact_RTF.getMaxSpinner().setValue(0.000);
+		m_Tension_RTF.getMinSpinner().setValue(0.000);
+		m_Impact_RTF.getMinSpinner().setValue(0.000);
 		
 		m_FilterResults_B = new JButton("Filter Results");
 		m_ClearResults_B = new JButton("Clear Results");

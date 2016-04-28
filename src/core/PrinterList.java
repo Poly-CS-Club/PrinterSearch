@@ -70,25 +70,20 @@ public class PrinterList {
 	 * indicate that the particular parameters meets desired specifications.
 	 *
 	 * @param minTension      the specified minimum tension
-	 * @param maxTension      the specified maximum tension
 	 * @param minCompression  the specified minimum compression
-	 * @param maxCompression  the specified maximum compression
 	 * @param minImpact       the specified minimum impact
-	 * @param maxImpact       the specified maximum impact
-	 * @param materials       the specified materials
-	 * @param minTolerance    the specified minimum tolerance
+	 * @param materials       the String with the specified materials
 	 * @param maxTolerance    the specified maximum tolerance
-	 * @param minFinish          the specified finish
-	 * @param maxFinish
-	 * @param vendor
+	 * @param maxFinish       the specified maximum finish
+	 * @param vendor          the String with the specified vendor
 	 */
 	public void setMatches(
-			double minTension, double maxTension,
-			double minCompression, double maxCompression,
-			double minImpact, double maxImpact,
+			double minTension,
+			double minCompression,
+			double minImpact,
 			String materials,
-			double minTolerance, double maxTolerance,
-			double minFinish, double maxFinish,
+			double maxTolerance,
+			double maxFinish,
 			String vendor){
 
 		/* Matches array Index Reference:
@@ -107,29 +102,24 @@ public class PrinterList {
 			// Tension Section
 			// If we have altered our value, let's put proper weighting in.
 
-				if (minTension <= printer.getTension() && maxTension >= printer.getTension()) {
+				if (minTension <= printer.getTension()) {
 					printer.setMatches(tensionWeighting, 0);
 				}
 
 			// Compression Section
-				if(minCompression <= printer.getCompression()
-						&& maxCompression >= printer.getCompression()) {
+				if(minCompression <= printer.getCompression()) {
 					printer.setMatches(compressionWeighting, 1);
 				}
 
 
 			// Impact Section
 
-				if (minImpact <= printer.getImpact()
-						&& printer.getImpact() <= maxImpact) {
+				if (minImpact <= printer.getImpact()) {
 					printer.setMatches(impactWeighting, 2);
 				}
 
 
-			/**
-			 * Vendor Section
-			 * DONT KNOW ABOUT CHANGING WEIGHT FOR VENDOR.
-			 */
+			// Vendor Section
 			System.out.println("Vendor: " + vendor + " VENDOR: " + printer.getVendor());
 			if(vendor.equalsIgnoreCase("Select All"))
 			{
@@ -155,18 +145,13 @@ public class PrinterList {
 			
 
 			// Tolerance Section
-			if (minTolerance <= printer.getTolerance()
-					&& maxTolerance >= printer.getTolerance()) {
+			if (maxTolerance >= printer.getTolerance()) {
 				printer.setMatches(toleranceWeighting, 5);
 			}
 
 
 			// Finish Section
-			// TODO: Will need significant String validation,
-			// splitting, case, etc. Unless drop-down list?
-
-			if(minFinish <= printer.getFinish()
-					&& maxFinish >= printer.getFinish())  {
+			if(maxFinish >= printer.getFinish())  {
 				printer.setMatches(finishWeighting, 6);
 			}
 		}
