@@ -79,7 +79,7 @@ public class PrintDocument extends JFrame
         for (int column = 0; column < TOTAL_PARAMETERS; column++)
                 frameWidth += columnWidths[column];
         
-        // Added 30 to take into account space occupied by border
+        // Added 25 to take into account space occupied by border
         setMinimumSize(new Dimension(frameWidth+25, frameHeight));
         setResizable(false);
     }
