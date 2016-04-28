@@ -312,46 +312,9 @@ private class ButtonListener implements ActionListener, Printable
 							apf.setVisible(true);
 				break;
 			case "Export":
-									if (!haveWeUpdated) {
-										PrinterJob job = PrinterJob.getPrinterJob();
-										if (!macOSFound) {
-											job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
-										}
-										job.setPrintable(this);
-										boolean ok = job.printDialog();
-										if (ok) {
-											try {
-												job.print();
-											} catch (PrinterException ex) {		// In case job doesn't work, error dialog box.
-												/* The job did not successfully complete */
-												String message = "\"There was an error!\"\n"
-														+ "Please try restarting the application!\n";
-												JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
-														JOptionPane.ERROR_MESSAGE);
-											}
-										}
-
-									} else {
-
-										// Printing portion for printing the results from the results.
-										PrinterJob job = PrinterJob.getPrinterJob();
-										if (!macOSFound) {
-											job.defaultPage().setOrientation(PageFormat.LANDSCAPE);
-										}
-										job.setPrintable(this);
-										boolean ok = job.printDialog();
-										if (ok) {
-											try {
-												job.print();
-											} catch (PrinterException ex) {		// In case job doesn't work, error dialog box.
-												/* The job did not successfully complete */
-												String message = "\"There was an error!\"\n"
-														+ "Please try restarting the application!\n";
-												JOptionPane.showMessageDialog(new JFrame(), message, "Dialog",
-														JOptionPane.ERROR_MESSAGE);
-											}
-										}
-									}
+						    PrintDocument printDocument = new PrintDocument(
+						            m_SearchResult_P.getPrinterList());
+						    printDocument.print();
 				break;
 				
 			default: JOptionPane.showMessageDialog(m_Menu_F,"Command: " + command,"Unknown Command", JOptionPane.PLAIN_MESSAGE);

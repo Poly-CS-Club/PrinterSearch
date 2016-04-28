@@ -26,7 +26,7 @@ public abstract class HelpPanel extends JPanel
     protected JPanel tutorialText;
     
     protected final Font DEFAULT_STEP_FONT = new Font(null, 1, 18),
-                         DEFAULT_BODY_FONT = new Font(null, 0, 12);
+                         DEFAULT_BODY_FONT = new Font(null, 0, 14);
     
     /**
      * Creates a default help panel with the header "Help Panel" with

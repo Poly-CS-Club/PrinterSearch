@@ -26,13 +26,32 @@ public class PrintResultsHelp extends HelpPanel
      */
     protected void setTutorialText()
     {
-        String iconPath1, step1;
+        String iconPath1, iconPath2, iconPath3, step1, step2, step3;
         
         // Add step 1 : Click toolbar button
         step1 = "Open the print menu by pressing “Export” on the upper toolbar.";
         iconPath1 = getIconPath("Print-S1.png");
         addStep(step1);
         addStep(new ImageIcon(iconPath1));
+        addSpacing();
+        
+        // Add step 2 : Click "Page Setup" tab
+        step2 = "Click \"Page Setup\" tab on the upper area of the print dialog";
+        iconPath2 = getIconPath("Print-S2.png");
+        addStep(step2);
+        addStep(new ImageIcon(iconPath2));
+        addSpacing();
+        
+        // Add step 3 : Click toolbar button
+        step3 = "Manually update page orientation and margins to specified values";
+        iconPath3 = getIconPath("Print-S3.png");
+        addStep(step3);
+        addBody("Orentation: Landscape");
+        addBody("Left Margin: 0.07");
+        addBody("Right Margin: 0.3");
+        addBody("Top/Bottom Margin: 0.17");
+        addSpacing();
+        addStep(new ImageIcon(iconPath3));
         addSpacing();
     }
 
