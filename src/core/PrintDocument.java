@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,19 +28,22 @@ public class PrintDocument extends JFrame
     JTable printerTable;
     JPanel tablePanel = new JPanel();
     
+    ArrayList<Printer> printerList;
+    boolean filtered;
+    
     static final int TOTAL_PARAMETERS = 8;
     static final String[] header =
-            {"PRINTER", "VENDOR", "TENSION (ksi)", "COMPRESSION (ksi)",
-            "IMPACT (lb-ft)", "MATERIALS", "TOLERANCE (in)", "FINISH (\u00B5in)"};
+            {"PRINTER", "VENDOR", "TENSION (ksi)", "COMPR. (ksi)",
+            "IMPACT (lb-ft)", "MATERIALS", "TOL. (in)", "FINISH (\u00B5in)"};
     
     // Declared as a class variable due to use in both designFrame and formatTable
     static final int[] columnWidths = {120,  // Printer name
                                         90,  // Vendor
                                         85,  // Tension
-                                       120,  // Compression
+                                        82,  // Compression
                                         85,  // Impact
                                         80,  // Materials
-                                       100,  // Tolerance
+                                        65,  // Tolerance
                                         75}; // Finish
     
     /**
@@ -57,12 +61,15 @@ public class PrintDocument extends JFrame
     /**
      * Creates a preview window with table containing the specified printer data.
      * 
-     * @param printerList the PrinterList with the data to add to the table
+     * @param printerList the ArrayList<Printer> with the data to add to the table
+     * @param filtered    the boolean that describes if the list is search filtered
      */
-    public PrintDocument(PrinterList printerList)
+    public PrintDocument(ArrayList<Printer> printerList, boolean filtered)
     {
+        this.printerList = printerList;
+        this.filtered = filtered;
         designFrame();
-        fillTable(printerList);
+        fillTable();
         setContentPane(new JScrollPane(printerTable));
         pack();
         setVisible(true);
@@ -84,42 +91,29 @@ public class PrintDocument extends JFrame
         setResizable(false);
     }
     
-    private void fillTable(PrinterList printerList)
+    /**
+     * Adds printer list data to a JTable.
+     */
+    private void fillTable()
     {
         Printer currentPrinter;
-        int listSize = printerList.getNumberOfPrinters();
+        int listSize = printerList.size();
         
         String[][] data = new String[listSize][TOTAL_PARAMETERS];
         
         // Fill table with printer data
         for(int row = 0; row < listSize; row++)
         {
-            currentPrinter = printerList.getPrinter(row);
+            if (!filtered)
+                currentPrinter = printerList.get(row);
+            else
+                currentPrinter = printerList.get((listSize-1)-row);
             
+            // Fill cell data
             for (int column = 0; column < TOTAL_PARAMETERS; column++)
-            {
-                switch (column)
-                {
-                case 0: data[row][column] = currentPrinter.getPrinterName();
-                    break;
-                case 1: data[row][column] = currentPrinter.getVendor();
-                    break;
-                case 2: data[row][column] = currentPrinter.getTension() + "";
-                    break;
-                case 3: data[row][column] = currentPrinter.getCompression() + "";
-                    break;
-                case 4: data[row][column] = currentPrinter.getImpact() + "";
-                    break;
-                case 5: data[row][column] = currentPrinter.materialsString();
-                    break;
-                case 6: data[row][column] = currentPrinter.getTolerance() + "";
-                    break;
-                case 7: data[row][column] = currentPrinter.getFinish() + "";
-                    break;
-                default: System.out.println("Invalid column number.");
-                }
-            }
-            
+                fillCells(currentPrinter, data, row, column);
+        }
+        
             // Set up table panel
             printerTable = new JTable(data, header);
             formatTable();
@@ -127,6 +121,81 @@ public class PrintDocument extends JFrame
             tablePanel.add(new JScrollPane(printerTable));
             tablePanel.setOpaque(true);
             tablePanel.setVisible(true);
+    }
+    
+    /**
+     * Add printer data to a two-dimension String array.
+     * 
+     * @param currentPrinter  the Printer whose data will be added to the table
+     * @param data            the String array to store the data
+     * @param row             the row index in the String array
+     * @param column          the column index in the String array
+     */
+    private void fillCells(Printer currentPrinter, String[][] data,
+            int row, int column)
+    {
+        String open, close;
+
+        open = "<html><font color=\"rgb(0,200,0)\"><b>";
+        close = "</b></font></html>";
+        
+        /* Matches array Index Reference:
+         * 
+         *  0 = Tension
+         *  1 = Compression
+         *  2 = Impact
+         *  3 = vendor
+         *  4 = Range of Mats.
+         *  5 = Tolerance
+         *  6 = Finish
+         */
+        switch (column)
+        {
+        case 0: data[row][column] = currentPrinter.getPrinterName();
+            break;
+        case 1:
+            if (filtered && currentPrinter.getMatches()[3] > 0)
+                data[row][column] = open + currentPrinter.getVendor() + close;
+            else
+                data[row][column] = currentPrinter.getVendor();
+            break;
+        case 2: 
+            if (filtered && currentPrinter.getMatches()[0] > 0)
+                data[row][column] = open + currentPrinter.getTension() + close;
+            else
+                data[row][column] = currentPrinter.getTension() + "";
+            break;
+        case 3:
+            if (filtered && currentPrinter.getMatches()[1] > 0)
+                data[row][column] = open + currentPrinter.getCompression() + close;
+            else
+                data[row][column] = currentPrinter.getCompression() + "";
+            break;
+        case 4:
+            if (filtered && currentPrinter.getMatches()[2] > 0)
+                data[row][column] = open + currentPrinter.getImpact() + close;
+            else
+                data[row][column] = currentPrinter.getImpact() + "";
+            break;
+        case 5: 
+            if (filtered && currentPrinter.getMatches()[4] > 0)
+                data[row][column] = open + currentPrinter.materialsString() + close;
+            else
+                data[row][column] = currentPrinter.materialsString() + "";
+            break;
+        case 6:
+            if (filtered && currentPrinter.getMatches()[5] > 0)
+                data[row][column] = open + currentPrinter.getTolerance() + close;
+            else
+                data[row][column] = currentPrinter.getTolerance() + "";
+            break;
+        case 7:
+            if (filtered && currentPrinter.getMatches()[6] > 0)
+                data[row][column] = open + currentPrinter.getFinish() + close;
+            else
+                data[row][column] = currentPrinter.getFinish() + "";
+            break;
+        default: System.out.println("Invalid column number.");
         }
     }
     

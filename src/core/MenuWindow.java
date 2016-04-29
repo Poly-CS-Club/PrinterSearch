@@ -307,8 +307,15 @@ private class ButtonListener implements ActionListener, Printable
 							apf.setVisible(true);
 				break;
 			case "Export":
-						    PrintDocument printDocument = new PrintDocument(
-						            m_SearchResult_P.getPrinterList());
+						    PrintDocument printDocument;
+						    
+						    // getPrinterList is called twice to access ArrayList<Printer>.
+						    if (!haveWeUpdated) 
+						        printDocument = new PrintDocument(
+						                m_SearchResult_P.getPrinterList().getPrinterList(), haveWeUpdated);
+						    else
+						        printDocument = new PrintDocument(
+	                                    m_SearchResult_P.getFilteredList(), haveWeUpdated);
 						    printDocument.print();
 				break;
 				

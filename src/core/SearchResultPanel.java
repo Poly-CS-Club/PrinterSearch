@@ -16,6 +16,7 @@ public class SearchResultPanel extends JPanel{
 	PrinterLabel m_ResultHeader;
 	public static Color highlight = new Color(0,200,0);
 	private PrinterList m_PrinterList;
+	private ArrayList<Printer> outputList;
 	/**
 	 * auto generated serial version UID for panel
 	 */
@@ -93,8 +94,8 @@ public class SearchResultPanel extends JPanel{
 	    		(double) filter.getFinish().getMax(),
 	    		(String) filter.getVendor().getSelectedItem());
 	    
-	    ArrayList<Printer> outputList = ToolBox.outputSearchedList(m_PrinterList);
-	    updateSearchResults(outputList);
+	    outputList = ToolBox.outputSearchedList(m_PrinterList);
+	    updateSearchResults();
 	}
 	/**
 	 * resets to default values
@@ -110,7 +111,7 @@ public class SearchResultPanel extends JPanel{
 	/**
 	 * Updates filtered printer list.
 	 */
-	public void updateSearchResults(ArrayList<Printer> outputList){
+	public void updateSearchResults(){
 		//removeAll();
 		Printer currentPrinter;
 		PrinterLabel tableHeader;
@@ -215,5 +216,12 @@ public class SearchResultPanel extends JPanel{
 	 */
 	public void setPrinterList(PrinterList m_PrinterList) {
 		this.m_PrinterList = m_PrinterList;
+	}
+	
+	/**
+	 * @return the ArrayList<Printer> with printer that match the filtering
+	 */
+	public ArrayList<Printer> getFilteredList() {
+	    return outputList;
 	}
 }
