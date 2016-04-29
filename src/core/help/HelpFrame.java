@@ -15,8 +15,9 @@ import core.ToolBox;
  * Creates a pop-up window containing help information for the printer search
  * program.
  * 
- * @author Marcinina Alvaran
+ * @author  Marcinina Alvaran
  * @version 1.0
+ * @see     HelpPanel
  */
 public class HelpFrame extends JFrame
 {
@@ -46,7 +47,7 @@ public class HelpFrame extends JFrame
         int frameWidth, frameHeight;
 
         // Determine window dimensions
-        frameWidth = (int) (MenuWindow.FRAME_WIDTH*0.65);
+        frameWidth = (int) (MenuWindow.FRAME_WIDTH*0.85);
         frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.8);
 
         // Set up window attributes
@@ -77,6 +78,9 @@ public class HelpFrame extends JFrame
         
         // Add tab for "Printing" tutorial
         helpLibrary.add("Printing", new JScrollPane(new PrintResultsHelp()));
+        
+        // Add tab for "Vendor Info" tutorial
+        helpLibrary.add("Vendor Info", new JScrollPane(new VendorInfoHelp()));
         
         // Add tab for "About" section
         // NOTE: Should always be listed last to stay at end of tabs.
