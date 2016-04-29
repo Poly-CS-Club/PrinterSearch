@@ -18,7 +18,7 @@ import javax.swing.table.TableColumnModel;
 /**
  * Displays a table preview of the data and opens a print dialog.
  * 
- * @author  Marcinina ALvaran, Alireza Bahremand
+ * @author  Marcinina Alvaran, Alireza Bahremand
  * @version 1.0
  */
 public class PrintDocument extends JFrame
@@ -32,6 +32,8 @@ public class PrintDocument extends JFrame
     boolean filtered;
     
     static final int TOTAL_PARAMETERS = 8;
+    
+    // Some headers are abbreviated to allow all columns to fit on a single page.
     static final String[] header =
             {"PRINTER", "VENDOR", "TENSION (ksi)", "COMPR. (ksi)",
             "IMPACT (lb-ft)", "MATERIALS", "TOL. (in)", "FINISH (\u00B5in)"};
