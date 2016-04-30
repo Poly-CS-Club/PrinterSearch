@@ -10,12 +10,18 @@ import javax.swing.ImageIcon;
  */
 public class VendorInfoHelp extends HelpPanel
 {
+    /**
+     * Creates a "Vendor Info" help panel.
+     */
     public VendorInfoHelp()
     {
         setTitle("Vendor Info");
         setTutorialText();
     }
     
+    /**
+     * Adds instructions to the panel about how to view vendor information.
+     */
     protected void setTutorialText()
     {
         String iconPath1, iconPath2, step1, step2A, step2B;
