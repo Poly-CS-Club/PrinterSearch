@@ -45,14 +45,9 @@ public class PrintResultsHelp extends HelpPanel
         addSpacing();
         
         // Add step 3 : Click toolbar button
-        step3 = "Manually update page orientation and margins to specified values";
+        step3 = "Manually update page orientation to \"Landscape\"";
         iconPath3 = getIconPath("Print-S3.png");
         addStep(step3);
-        addBody("Orentation: Landscape");
-        addBody("Left Margin: 0.07");
-        addBody("Right Margin: 0.3");
-        addBody("Top/Bottom Margin: 0.17");
-        addSpacing();
         addStep(new ImageIcon(iconPath3));
         addSpacing();
     }
