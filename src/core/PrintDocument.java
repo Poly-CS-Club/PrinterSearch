@@ -35,18 +35,18 @@ public class PrintDocument extends JFrame
     
     // Some headers are abbreviated to allow all columns to fit on a single page.
     static final String[] header =
-            {"PRINTER", "VENDOR", "TENSION (ksi)", "COMPR. (ksi)",
-            "IMPACT (lb-ft)", "MATERIALS", "TOL. (in)", "FINISH (\u00B5in)"};
+            {"PRINTER", "VENDOR", "TENS.(ksi)", "COMPR.(ksi)",
+            "IMPACT (lb-ft)", "MATERIALS", "TOL.(in)", "FIN.(\u00B5in)"};
     
     // Declared as a class variable due to use in both designFrame and formatTable
     static final int[] columnWidths = {120,  // Printer name
                                         90,  // Vendor
-                                        85,  // Tension
-                                        82,  // Compression
+                                        65,  // Tension
+                                        80,  // Compression
                                         85,  // Impact
                                         80,  // Materials
-                                        65,  // Tolerance
-                                        75}; // Finish
+                                        55,  // Tolerance
+                                        55}; // Finish
     
     /**
      * Creates a preview window with an empty table.
@@ -77,6 +77,9 @@ public class PrintDocument extends JFrame
         setVisible(true);
     }
     
+    /**
+     * Sets up table preview window.
+     */
     private void designFrame()
     {
         int frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.8);
