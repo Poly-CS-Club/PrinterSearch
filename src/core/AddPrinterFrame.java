@@ -93,7 +93,7 @@ public class AddPrinterFrame extends JFrame{
 		screenWidth = MenuWindow.s_SCREEN_WIDTH;
 		screenHeight = MenuWindow.s_SCREEN_HEIGHT;
 		frameWidth = MenuWindow.FRAME_WIDTH/2;
-		frameHeight = MenuWindow.FRAME_HEIGHT/4;
+		frameHeight = MenuWindow.FRAME_HEIGHT/3;
 		
 		// Set up window
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

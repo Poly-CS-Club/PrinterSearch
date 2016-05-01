@@ -26,7 +26,8 @@ public class PrintResultsHelp extends HelpPanel
      */
     protected void setTutorialText()
     {
-        String iconPath1, iconPath2, iconPath3, step1A, step1B, step2, step3;
+        String iconPath1, iconPath2, iconPath3,
+               step1A, step1B, step2, step3A, step3B;
         
         // Add step 1 : Click toolbar button
         step1A = "Open the print menu by pressing “Export” on the upper toolbar.";
@@ -45,9 +46,11 @@ public class PrintResultsHelp extends HelpPanel
         addSpacing();
         
         // Add step 3 : Click toolbar button
-        step3 = "Manually update page orientation to \"Landscape\"";
+        step3A = "Manually update page orientation to \"Landscape\"";
+        step3B = "NOTE: For Macs, use \"Reverse Landscape\"";
         iconPath3 = getIconPath("Print-S3.png");
-        addStep(step3);
+        addStep(step3A);
+        addStep(step3B);
         addStep(new ImageIcon(iconPath3));
         addSpacing();
     }
