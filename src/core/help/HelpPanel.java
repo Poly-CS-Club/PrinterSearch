@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
-import java.util.Arrays;
 
 /**
  * Base panel for help window tutorial panels.

@@ -1,16 +1,11 @@
 package core.settings;
 
-import core.AddPrinterLabel;
-import core.MenuWindow;
-import core.PrinterList;
 import core.SearchResultPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * A settings panel to change search weights

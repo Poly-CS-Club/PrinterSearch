@@ -9,6 +9,7 @@ import java.io.*;
  * @author Joshua Becker
  *
  */
+@SuppressWarnings("serial")
 public class VendorLabel extends JLabel implements Serializable
 {
 	private JLabel printerInfo, name, webSite, otherPrinters;
@@ -83,20 +84,20 @@ public class VendorLabel extends JLabel implements Serializable
         this.webSite.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.otherPrinters.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        this.printerInfo.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-    	this.name.setBorder(BorderFactory.createLineBorder(Color.black));
-        this.webSite.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
-        this.otherPrinters.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.printerInfo.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+    	this.name.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        this.webSite.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        this.otherPrinters.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         
         this.printerInfo.setBackground(Color.GRAY);
         this.name.setBackground(Color.GRAY);
         this.webSite.setBackground(Color.GRAY);
         this.otherPrinters.setBackground(Color.GRAY);
         
-        this.printerInfo.setPreferredSize(new Dimension((int) (width),(int)(height*.53)));
-    	this.name.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
-        this.webSite.setPreferredSize(new Dimension((int) (width*.30),(int)(height*.18)));
-        this.otherPrinters.setPreferredSize(new Dimension((int) width-10,(int)(height*.18)));
+        this.printerInfo.setPreferredSize(new Dimension((int) (width*.98),(int)(height*.53)));
+    	this.name.setPreferredSize(new Dimension((int) (width*.36),(int)(height*.18)));
+        this.webSite.setPreferredSize(new Dimension((int) (width*.61),(int)(height*.18)));
+        this.otherPrinters.setPreferredSize(new Dimension((int) width-15,(int)(height*.18)));
         
         this.printerInfo.setMinimumSize(new Dimension((int) (width),(int)(height*.53)));
     	this.name.setMinimumSize(new Dimension((int) (width*.30),(int)(height*.05)));

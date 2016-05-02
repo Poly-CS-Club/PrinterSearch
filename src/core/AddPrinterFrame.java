@@ -24,6 +24,7 @@ import javax.swing.JTextField;
  * 
  * @author Joshua Becker, Marcinina Alvaran
  */
+@SuppressWarnings("serial")
 public class AddPrinterFrame extends JFrame{
 
 
@@ -66,7 +67,7 @@ public class AddPrinterFrame extends JFrame{
 		m_AddPrinter_B = new JButton("Add New Printer");
 		
 		// Instantiate test fields
-		m_Name = new AddPrinterLabel("Name", new JTextField());
+		m_Name = new AddPrinterLabel("Printer", new JTextField());
 		m_Compression = new AddPrinterLabel("Compression", new JTextField());
 		m_Tension = new AddPrinterLabel("Tension", new JTextField());
 		m_Impact = new AddPrinterLabel("Impact", new JTextField());

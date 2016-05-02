@@ -7,25 +7,11 @@
             <VendorInfo info="Vendor Info Goes Here">
             </VendorInfo>
             <printer>
-            
-                <NAME>Test Printer One</NAME>
-                <VENDOR>Vendor One</VENDOR>
-                <TENSION>.35</TENSION>
-                <COMPRESSION>.05</COMPRESSION>
-                <IMPACT>.001</IMPACT>
-                <PART_COMPLEXITY>8</PART_COMPLEXITY>
-                <LEAD_TIME>5</LEAD_TIME>
-                <EOC>false</EOC> 
-                <ROM>aluminum, stainless</ROM>
-                <TOLERANCE>.0001</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-            <printer>
-                <NAME>Test 4</NAME>
+                <NAME>Test 1</NAME>
                 <VENDOR>Vendor One</VENDOR>
                 <TENSION>1234</TENSION>
                 <COMPRESSION>1234</COMPRESSION>
-                <IMPACT>1234</IMPACT>
+                <IMPACT>225</IMPACT>
                 <PART_COMPLEXITY>123</PART_COMPLEXITY>
                 <LEAD_TIME>1123</LEAD_TIME>
                 <EOC>True</EOC>
@@ -40,48 +26,8 @@
             <VendorInfo info="Vendor Info Goes Here">
             </VendorInfo>
             <printer>
-                <NAME>Test 5</NAME>
+                <NAME>Test 2</NAME>
                 <VENDOR>Vendor Two</VENDOR>
-                <TENSION>1234</TENSION>
-                <COMPRESSION>1234</COMPRESSION>
-                <IMPACT>1243</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>aluminum, stainless</ROM>
-                <TOLERANCE>1223</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-            <printer>
-                <NAME>Test 3</NAME>
-                <VENDOR>Vendor Two</VENDOR>
-                <TENSION>.5</TENSION>
-                <COMPRESSION>.5</COMPRESSION>
-                <IMPACT>.3</IMPACT>
-                <PART_COMPLEXITY>.06</PART_COMPLEXITY>
-                <LEAD_TIME>5</LEAD_TIME>
-                <EOC>true</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>.004</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-            <printer>
-                <NAME>Test 4</NAME>
-                <VENDOR>Vendor Two</VENDOR>
-                <TENSION>1234</TENSION>
-                <COMPRESSION>1234</COMPRESSION>
-                <IMPACT>1234</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>1234</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-            <printer>
-            
-                <NAME>Test Printer One</NAME>
-                <VENDOR>Vender Two</VENDOR>
                 <TENSION>.35</TENSION>
                 <COMPRESSION>.05</COMPRESSION>
                 <IMPACT>.001</IMPACT>
@@ -91,89 +37,14 @@
                 <ROM>aluminum, stainless</ROM>
                 <TOLERANCE>.0001</TOLERANCE>
                 <FINISH>1</FINISH>
-            
-            </printer>
-        <printer>
-                <NAME>Name</NAME>
-                <VENDOR>Vendor Two</VENDOR>
-                <TENSION>123</TENSION>
-                <COMPRESSION>123</COMPRESSION>
-                <IMPACT>123</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>123</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        <printer>
-                <NAME>Name 2</NAME>
-                <VENDOR>Vendor Two</VENDOR>
-                <TENSION>123</TENSION>
-                <COMPRESSION>123</COMPRESSION>
-                <IMPACT>23</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>123</TOLERANCE>
-                <FINISH>1</FINISH>
             </printer>
         </vendor>
-        
-        <vendor name="Vendor Three">
-            <webSite info="@vendorThree.com">
-            </webSite>
-            <VendorInfo info="Vendor Info Goes Here">
-            </VendorInfo>            
-            <printer>
-                <NAME>Test 6</NAME>
-                <VENDOR>Vendor Three</VENDOR>
-                <TENSION>1243</TENSION>
-                <COMPRESSION>1243</COMPRESSION>
-                <IMPACT>1234</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>aluminum, stainless</ROM>
-                <TOLERANCE>234</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-            <printer>
-        
-                <NAME>Test Printer Three</NAME>
-                <VENDOR>Vendor Two</VENDOR>
-                <TENSION>.37</TENSION>
-                <COMPRESSION>.0001</COMPRESSION>
-                <IMPACT>.3</IMPACT>
-                <PART_COMPLEXITY>11</PART_COMPLEXITY>
-                <LEAD_TIME>1</LEAD_TIME>
-                <EOC>true</EOC>
-                <ROM>Stainless</ROM>
-                <TOLERANCE>.01</TOLERANCE>
-                <FINISH>1500</FINISH>
-            
-        
-            </printer>
-            <printer>
-                <NAME>Test Printer THree</NAME>
-                <VENDOR>Vendor Three</VENDOR>
-                <TENSION>123</TENSION>
-                <COMPRESSION>321</COMPRESSION>
-                <IMPACT>213</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>123</LEAD_TIME>
-                <EOC>true</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>123</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        </vendor>
+		
     <vendor name="Vendor Six">
             <webSite info="@VendorSix.com"/>
             <VendorInfo info="Vendor Six makes quality stuff"/>
             <printer>
-                <NAME>Test 7</NAME>
+                <NAME>Test 3</NAME>
                 <VENDOR>Vendor Six</VENDOR>
                 <TENSION>12</TENSION>
                 <COMPRESSION>12</COMPRESSION>
@@ -181,87 +52,29 @@
                 <PART_COMPLEXITY>123</PART_COMPLEXITY>
                 <LEAD_TIME>1123</LEAD_TIME>
                 <EOC>True</EOC>
-                <ROM>aluminum, stainless</ROM>
-                <TOLERANCE>12</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        <printer>
-                <NAME>Test 13</NAME>
-                <VENDOR>Vendor Six</VENDOR>
-                <TENSION>1232</TENSION>
-                <COMPRESSION>1231</COMPRESSION>
-                <IMPACT>1231</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>aluminum, stainless</ROM>
-                <TOLERANCE>1231</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        <printer>
-                <NAME>asd</NAME>
-                <VENDOR>Vendor Six</VENDOR>
-                <TENSION>1234</TENSION>
-                <COMPRESSION>1234</COMPRESSION>
-                <IMPACT>1234</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>1234</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        </vendor>
-    <vendor name="Vendor How">
-            <webSite info="@Test.com"/>
-            <VendorInfo info="This is the Info on Test 11"/>
-            <printer>
-                <NAME>Test 11</NAME>
-                <VENDOR>Vendor How</VENDOR>
-                <TENSION>12</TENSION>
-                <COMPRESSION>12</COMPRESSION>
-                <IMPACT>12</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>aluminum, stainless</ROM>
+                <ROM>aluminum, stainless, inconel</ROM>
                 <TOLERANCE>12</TOLERANCE>
                 <FINISH>1</FINISH>
             </printer>
         </vendor>
+
     <vendor name="Vendor">
             <webSite info="asdf"/>
             <VendorInfo info="asdf"/>
             <printer>
-                <NAME>Vendor Ten</NAME>
+                <NAME>Test 4</NAME>
                 <VENDOR>Vendor</VENDOR>
-                <TENSION>1234</TENSION>
+                <TENSION>500</TENSION>
                 <COMPRESSION>2123</COMPRESSION>
                 <IMPACT>1234</IMPACT>
                 <PART_COMPLEXITY>123</PART_COMPLEXITY>
                 <LEAD_TIME>1123</LEAD_TIME>
                 <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
+                <ROM>Inconel</ROM>
                 <TOLERANCE>1234</TOLERANCE>
                 <FINISH>1</FINISH>
             </printer>
         </vendor>
-    <vendor name="sadf">
-            <webSite info="asdf"/>
-            <VendorInfo info="a"/>
-            <printer>
-                <NAME>asdf</NAME>
-                <VENDOR>sadf</VENDOR>
-                <TENSION>1234</TENSION>
-                <COMPRESSION>1234</COMPRESSION>
-                <IMPACT>1234</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>3124</TOLERANCE>
-                <FINISH>1234</FINISH>
-            </printer>
-        </vendor>
+
     </VENDORS>
 </INFO>

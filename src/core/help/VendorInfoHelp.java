@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
  * @author  Marcinina Alvaran
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class VendorInfoHelp extends HelpPanel
 {
     /**

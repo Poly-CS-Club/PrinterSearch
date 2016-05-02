@@ -1,11 +1,8 @@
 package core.settings;
 
 import core.ToolBox;
-import core.help.HelpFrame;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 /**
  * Base panel for settings window panels

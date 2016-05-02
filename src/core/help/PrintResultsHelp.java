@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
  * @see     HelpPanel
  * @see     HelpFrame
  */
+@SuppressWarnings("serial")
 public class PrintResultsHelp extends HelpPanel
 {
     /**

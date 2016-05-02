@@ -2,13 +2,8 @@ package core.settings;
 
 import core.MenuWindow;
 import core.ToolBox;
-import core.help.AddPrinterHelp;
-import core.help.PrintResultsHelp;
-import core.help.SearchHelp;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 /**
  * Creates a pop-up window containing settings
@@ -48,7 +43,7 @@ public class SettingsFrame extends JFrame
 
         // Determine window dimensions
         frameWidth = (int) (MenuWindow.FRAME_WIDTH*0.65);
-        frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.8);
+        frameHeight = (int) (MenuWindow.FRAME_HEIGHT*0.6);
 
         // Set up window
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -1,7 +1,5 @@
 package core.help;
 
-import javax.swing.ImageIcon;
-
 import core.ToolBox;
 
 /**

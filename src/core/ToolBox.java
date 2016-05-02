@@ -429,7 +429,7 @@ public class ToolBox {
 			for(int i=0;i<nodeList.getLength();i++){
 				nNode = nodeList.item(i);
 				Element element = (Element) nNode;
-				if(!materialList.contains(element.getTextContent()) && !element.getTextContent().equals("aluminum, stainless"))
+				if(!materialList.contains(element.getTextContent()) && !element.getTextContent().contains(" "))
 				{
 					materialList.add(element.getTextContent());
 				}

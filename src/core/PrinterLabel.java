@@ -9,6 +9,7 @@ import java.io.*;
  * @author Joshua Becker
  *
  */
+@SuppressWarnings("serial")
 public class PrinterLabel extends JLabel implements Serializable
 {
 	private JLabel name, vendor, tension, compression, impact,

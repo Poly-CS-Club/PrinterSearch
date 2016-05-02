@@ -1,8 +1,6 @@
 package core.help;
 
 import java.awt.Dimension;
-import java.util.Arrays;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -24,7 +22,8 @@ public class HelpFrame extends JFrame
     private static final long serialVersionUID = -2836575744299552995L;
     
     private JTabbedPane helpLibrary;
-    private ImageIcon logo;
+    @SuppressWarnings("unused")
+	private ImageIcon logo;
 
     /**
      * Creates a default help frame

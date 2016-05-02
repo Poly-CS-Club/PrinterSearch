@@ -106,6 +106,7 @@ public class VendorInfoFrame extends JFrame
 	 * @author Joshua Becker
 	 *
 	 */
+	@SuppressWarnings("unused")
 	private class MouseListener extends MouseAdapter
 	{
 	    /**

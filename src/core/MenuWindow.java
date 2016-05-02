@@ -5,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.print.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import core.help.HelpFrame;
 import core.settings.SettingsFrame;
 
@@ -20,6 +18,7 @@ import javax.swing.*;
  * @see     PrinterLabel
  * @see     AddPrinterFrame
  */
+@SuppressWarnings("serial")
 public class MenuWindow extends JFrame
 {
 	private JFrame m_Menu_F;
@@ -357,6 +356,7 @@ private class ButtonListener implements ActionListener, Printable
 		}
 
 		if (haveWeUpdated) {        // If we have clicked search thus updating the panel of printer list results/
+			@SuppressWarnings("unused")
 			ArrayList<Printer> printingResults = new ArrayList<Printer>();        // Create a array list that will store all results of printer.
 			// At this point we have updated the arraylist for printer results based on query, so we can safely call accessor
 			// method for retrieval of printer list.
@@ -388,6 +388,7 @@ private class ButtonListener implements ActionListener, Printable
 			((Graphics2D) graphics).drawImage(panelImage,0,0, x_axis-60, y_axis-100, null);
 
 		} else {
+			@SuppressWarnings("unused")
 			ArrayList<Printer> printingResults = new ArrayList<Printer>();        // Create a array list that will store all results of printer.
 			// At this point we have updated the arraylist for printer results based on query, so we can safely call accessor
 			// method for retrieval of printer list.

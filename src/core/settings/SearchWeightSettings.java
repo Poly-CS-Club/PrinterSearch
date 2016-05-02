@@ -2,7 +2,6 @@ package core.settings;
 
 import core.AddPrinterLabel;
 import core.MenuWindow;
-import core.Printer;
 import core.PrinterList;
 
 import javax.swing.*;
