@@ -11,7 +11,7 @@ import javax.swing.JTextField;
  * Creates a simple label and component table/grid used in AddPrinterFrame.
  * 
  * @author Joshua Becker
- * @see AddPrinterFrame
+ * @see    AddPrinterFrame
  */
 
 public class AddPrinterLabel extends JLabel

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 /**
  * This is the panel for the search filters seen in the menu
  * 
- * @author Joshua Becker
+ * @author Joshua Becker, Marcinina Alvaran
  */
 public class SearchFiltersPanel extends JPanel {
 	

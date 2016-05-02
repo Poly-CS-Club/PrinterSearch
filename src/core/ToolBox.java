@@ -25,9 +25,9 @@ import javax.xml.transform.dom.*;
  * the subsequent list.
  *
  * @author  Jake Leonard, Trevor Forrey, Joshua Becker, Alireza Bahremand, Marcinina Alvaran
- * @version (TODO: to be included by original programmer)
- * @see PrinterList
- * @see Printer
+ * @version 1.0
+ * @see     PrinterList
+ * @see     Printer
  */
 public class ToolBox {
 	public static Document m_Document;

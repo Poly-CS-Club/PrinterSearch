@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 /**
  * A panel that displays the printer search results.
  * 
- * @author Joshua Becker, Jacob Leonard, Marcinina Alvaran, Alireza Bahremand 
+ * @author Joshua Becker, Jake Leonard, Marcinina Alvaran, Alireza Bahremand 
  *
  */
 public class SearchResultPanel extends JPanel{

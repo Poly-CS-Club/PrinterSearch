@@ -5,9 +5,9 @@ import java.util.ArrayList;
  * A list of 3D metal printers being considered for the
  * product (TODO: replace with a brief description of the product).
  *
- * @author Jake Leonard, (others on team), Marcinina Alvaran
- * @version (TODO: to be added by original programmer)
- * @see Printer
+ * @author  Jake Leonard, Joshua Becker, Alireza Bahremand, Marcinina Alvaran
+ * @version 1.0
+ * @see     Printer
  */
 public class PrinterList {
 

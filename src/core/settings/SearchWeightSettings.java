@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 /**
  * A settings panel to change search weights
  * 
- * @author  James Quigley
+ * @author  James Quigley, Alireza Bahremand
  * @version 1.0
  * @see     SettingsPanel
  * @see     SettingsFrame

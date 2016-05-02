@@ -4,8 +4,8 @@ import java.util.HashSet;
 /**
  * A 3D metal printer.
  *
- * @author  Jake Leonard, (others on team), Marcinina Alvaran
- * @version (to be added by original programmer)
+ * @author  Jake Leonard, Joshua Becker, Marcinina Alvaran, Alireza Bahremand
+ * @version 1.0
  */
 public class Printer {
 

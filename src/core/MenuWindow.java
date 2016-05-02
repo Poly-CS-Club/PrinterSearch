@@ -15,7 +15,7 @@ import javax.swing.*;
 /**
  * GUI for the Printer Search Program.
  * 
- * @author  Joshua Becker
+ * @author  Joshua Becker, Jake Leonard, Alireza Bahremand, Marcinina Alvaran
  * @version 1.1
  * @see     PrinterLabel
  * @see     AddPrinterFrame
