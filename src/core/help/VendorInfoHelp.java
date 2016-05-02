@@ -27,7 +27,7 @@ public class VendorInfoHelp extends HelpPanel
         String iconPath1, iconPath2, step1, step2A, step2B, note;
         
         // Program restart information
-        note = "NOTE: New vendors will not be displayed until " +
+        note = "NOTE: New vendors will not be displayed in the filter list until " +
                "the program is restarted.";
         addStep(note);
         addSpacing();
