@@ -47,6 +47,9 @@ public class SearchWeightSettings extends SettingsPanel
         addComponents();
     }
 
+    /**
+     * Instantiates search weight settings components.
+     */
     private void createComponents() {
         settingsFrame = new JFrame();
         // Panel Building
@@ -68,6 +71,9 @@ public class SearchWeightSettings extends SettingsPanel
         m_Materials = new AddPrinterLabel("Materials", new JTextField());
     }
 
+    /**
+     * Sets component values.
+     */
     private void designComponents() {
         // Button building
         int frameWidth = (int) (MenuWindow.s_SCREEN_WIDTH*.3);
@@ -94,6 +100,9 @@ public class SearchWeightSettings extends SettingsPanel
 
     }
 
+    /**
+     * Displays current search weights in the text field.
+     */
     private void updateWeightHints(){
         m_Compression.setM_ComponentText(PrinterList.compressionWeighting + "");
         m_Tension.setM_ComponentText(PrinterList.tensionWeighting + "");
@@ -103,12 +112,18 @@ public class SearchWeightSettings extends SettingsPanel
         m_Materials.setM_ComponentText(PrinterList.materialsWeighting + "");
     }
 
+    /**
+     * Adds action listeners to buttons.
+     */
     private void addActionListeners() {
         updateWeightButton.addActionListener(new WeightButtonListener());
         resetWeightButton.addActionListener(new ResetWeightButtonListener());
         // After button is clicked  close frame because we have updated values from previous call.
     }
 
+    /**
+     * Adds components to the search weights settings panel.
+     */
     private void addComponents() {
         // Panel Building for top row panel
         //settingsPanelTopRow.add(m_Name);
@@ -132,6 +147,12 @@ public class SearchWeightSettings extends SettingsPanel
 
     }
 
+    /**
+     * A button listener to validate search weight inputs and update search weights.
+     *  
+     * @author Alireza Bahremand
+     *
+     */
     private class WeightButtonListener implements ActionListener {
 
         /**
@@ -228,6 +249,22 @@ public class SearchWeightSettings extends SettingsPanel
         }
     }
 
+    /**
+     * Returns search weights to default values.
+     * <p>
+     * <b>Default values</b>
+     * <ul>
+     * <li>Tension = 2</li>
+     * <li>Compression = 2</li>
+     * <li>Impact = 2</li>
+     * <li>Tolerance = 1</li>
+     * <li>Materials = 1</li>
+     * <li>Finish = 1</li>
+     * </ul>
+     * 
+     * @author James Quigley
+     *
+     */
     private class ResetWeightButtonListener implements ActionListener {
 
         /**

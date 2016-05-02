@@ -32,6 +32,9 @@ import javax.xml.transform.dom.*;
 public class ToolBox {
 	public static Document m_Document;
 	
+	/**
+	 * Creates a default tool box.
+	 */
 	public ToolBox()
 	{
 		DocumentBuilderFactory documentBuilderFactory;
@@ -66,6 +69,11 @@ public class ToolBox {
 		}
 	}
 
+	/**
+	 * Checks if the operating system is for a Mac.
+	 * 
+	 * @return true if the operating system is for a Mac and false otherwise
+	 */
 	public static boolean isMacOS() {
 		String stringSearch = System.getProperty("os.name");
 		String keyword = "Mac";
@@ -146,17 +154,18 @@ public class ToolBox {
 		}
 	}
 	/**
+	 * Adds a printer to the XML file.
 	 * 
-	 * @param printerName
-	 * @param vendor
-	 * @param printerTension
-	 * @param printerCompression
-	 * @param printerPartComplexity
-	 * @param printerROM
-	 * @param printerImpact
-	 * @param printerLeadTime
-	 * @param printerEaseOfChange
-	 * @param printerTolerance
+	 * @param printerName            the String containing the printer's name
+	 * @param vendor                 the String containing the vendor's name
+	 * @param printerTension         the String containing the printer's tension value
+	 * @param printerCompression     the String containing the printer's compression value
+	 * @param printerPartComplexity  the String containing the printer's part complexity
+	 * @param printerROM             the String containing the printer's range of materials
+	 * @param printerImpact          the String containing the printer's impact value
+	 * @param printerLeadTime        the String containing the associated vendor's lead time
+	 * @param printerEaseOfChange    the String containing the printer's ease of change value
+	 * @param printerTolerance       the String containing the printer's finish value
 	 * @param printerFinish
 	 */
 	public static void addPrinter(String printerName, String vendor, String printerTension, String printerCompression, String printerROM,
@@ -339,11 +348,11 @@ public class ToolBox {
 }
 
 	/**
-	 * Insert description here.
+	 * Returns a String representing the value at the specified XML element.
 	 *
 	 * @param tagName the String with a printer tag
-	 * @param element the Element
-	 * @return a String with...
+	 * @param element the XML element
+	 * @return a String with the XML element value
 	 */
 	public static String getString(String tagName, Element element) {
 		NodeList list = element.getElementsByTagName(tagName);

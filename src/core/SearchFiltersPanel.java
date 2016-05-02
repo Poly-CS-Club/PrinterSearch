@@ -24,7 +24,9 @@ public class SearchFiltersPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = -3913570132700721319L;
 	
-	
+	/**
+	 * Creates a default JPanel containing search filter components.
+	 */
 	public SearchFiltersPanel()
 	{
 		this.setName("Filter Panel");
@@ -32,6 +34,13 @@ public class SearchFiltersPanel extends JPanel {
 		designComponents();
 		addComponents();
 	}
+	
+	/**
+	 * Creates a JPanel with the specified name and containing search filter
+	 * components.
+	 * 
+	 * @param name the String with the search filter panel's name
+	 */
 	public SearchFiltersPanel(String name)
 	{
 		this.setName(name);

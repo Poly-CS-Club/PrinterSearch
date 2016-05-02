@@ -135,6 +135,14 @@ public class RangedTextField<N extends Number> extends JPanel{
 	    }
 	}
 	
+	/**
+	 * Returns a Number object representing the value in the minimum ranged
+	 * text field.
+	 * 
+	 * @return  the Number representing the current minimum value
+	 * @throws  RangeLimitException if the component does not have a
+	 *          minimum ranged text field
+	 */
 	public Number getMin() throws RangeLimitException {
 	    if (limitType == RangedTextField.MAX)
 	        throw new RangeLimitException("minimum");
@@ -142,6 +150,14 @@ public class RangedTextField<N extends Number> extends JPanel{
 		return (Number)m_Min_TF.getValue();
 	}
 	
+	/**
+     * Returns a Number object representing the value in the maximum ranged
+     * text field.
+     * 
+     * @return  the Number representing the current maximum value
+     * @throws  RangeLimitException if the component does not have a
+     *          maximum ranged text field
+     */
 	public Number getMax() throws RangeLimitException  {
         if (limitType == RangedTextField.MIN)
             throw new RangeLimitException("maximum");
@@ -149,7 +165,13 @@ public class RangedTextField<N extends Number> extends JPanel{
 		return (Number)m_Max_TF.getValue();
 	}
 	
-
+	/**
+	 * Returns the JSpinner from the minimum ranged text field.
+	 * 
+	 * @return  the JSpinner from the minimum ranged text field.
+     * @throws  RangeLimitException if the component does not have a
+     *          minimum ranged text field
+	 */
 	public JSpinner getMinSpinner() throws RangeLimitException  {
         if (limitType == RangedTextField.MAX)
             throw new RangeLimitException("minimum");
@@ -157,6 +179,13 @@ public class RangedTextField<N extends Number> extends JPanel{
 		return m_Min_TF;
 	}
 
+	/**
+	 * Sets the JSpinner for the minimum ranged text field.
+	 * 
+	 * @param   m_Min_TF the new JSpinner for the minimum ranged text field
+     * @throws  RangeLimitException if the component does not have a
+     *          minimum ranged text field
+	 */
 	public void setMin(JSpinner m_Min_TF) throws RangeLimitException  {
         if (limitType == RangedTextField.MAX)
             throw new RangeLimitException("minimum");
@@ -164,6 +193,13 @@ public class RangedTextField<N extends Number> extends JPanel{
 		this.m_Min_TF = m_Min_TF;
 	}
 
+	/**
+     * Returns the JSpinner from the maximum ranged text field.
+     * 
+     * @return  the JSpinner from the maximum ranged text field.
+     * @throws  RangeLimitException if the component does not have a
+     *          maximum ranged text field
+     */
 	public JSpinner getMaxSpinner() throws RangeLimitException  {
         if (limitType == RangedTextField.MIN)
             throw new RangeLimitException("maximum");
@@ -171,6 +207,13 @@ public class RangedTextField<N extends Number> extends JPanel{
 		return m_Max_TF;
 	}
 
+	/**
+     * Sets the JSpinner for the maximum ranged text field.
+     * 
+     * @param   m_Min_TF the new JSpinner for the maximum ranged text field
+     * @throws  RangeLimitException if the component does not have a
+     *          maximum ranged text field
+     */
 	public void setMax(JSpinner m_Max_TF) throws RangeLimitException  {
         if (limitType == RangedTextField.MIN)
             throw new RangeLimitException("maximum");
@@ -178,6 +221,15 @@ public class RangedTextField<N extends Number> extends JPanel{
 		this.m_Max_TF = m_Max_TF;
 	}
 	
+	/**
+	 * Returns a Number object with the increment amount for the maximum
+	 * ranged text field.
+	 * 
+	 * @return  the Number representing the increment amount for the maximum
+	 *          ranged text field
+     * @throws  RangeLimitException if the component does not have a
+     *          maximum ranged text field
+	 */
 	public Number getMaxStep() throws RangeLimitException  {
         if (limitType == RangedTextField.MIN)
             throw new RangeLimitException("maximum");
@@ -185,6 +237,14 @@ public class RangedTextField<N extends Number> extends JPanel{
 		return maxModel.getStepSize();
 	}
 	
+	/**
+	 * Sets the increment amount for the maximum ranged text field.
+	 * 
+	 * @param   stepSize the Number representing the increment amount for
+	 *          the maximum ranged text field
+     * @throws  RangeLimitException if the component does not have a
+     *          maximum ranged text field
+	 */
 	public void setMaxStep(Number stepSize) throws RangeLimitException  {
         if (limitType == RangedTextField.MIN)
             throw new RangeLimitException("maximum");
@@ -192,6 +252,15 @@ public class RangedTextField<N extends Number> extends JPanel{
 		maxModel.setStepSize(stepSize);
 	}
 	
+	/**
+     * Returns a Number object with the increment amount for the minimum
+     * ranged text field.
+     * 
+     * @return  the Number representing the increment amount for the minimum
+     *          ranged text field
+     * @throws  RangeLimitException if the component does not have a
+     *          minimum ranged text field
+     */
 	public Number getMinStepSize() throws RangeLimitException  {
         if (limitType == RangedTextField.MAX)
             throw new RangeLimitException("minimum");
@@ -199,6 +268,15 @@ public class RangedTextField<N extends Number> extends JPanel{
 		return minModel.getStepSize();
 	}
 	
+	/**
+     * Returns a Number object with the increment amount for the minimum
+     * ranged text field.
+     * 
+     * @return  the Number representing the increment amount for the minimum
+     *          ranged text field
+     * @throws  RangeLimitException if the component does not have a
+     *          minimum ranged text field
+     */
 	public void setMinStepSize(Number stepSize) throws RangeLimitException  {
         if (limitType == RangedTextField.MAX)
             throw new RangeLimitException("minimum");

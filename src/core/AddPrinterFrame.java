@@ -213,6 +213,7 @@ public class AddPrinterFrame extends JFrame{
 					String name = null;
 					String finish = null;
 					
+					// Receive user input
 					tension = m_Tension.getInput();
 					compression = m_Compression.getInput();
 					impact = m_Impact.getInput();
@@ -221,6 +222,7 @@ public class AddPrinterFrame extends JFrame{
 					name = m_Name.getInput();
 					finish = m_Finish.getInput();
 					
+					// Highlight any text fields that were not filled out
 					if(tension.equals("") || compression.equals("") || impact.equals("") || tolerance.equals("") ||
 					   Vendor.equals("") || name.equals("") || finish.equals(""))
 					{
@@ -243,9 +245,9 @@ public class AddPrinterFrame extends JFrame{
 							addHighlight(m_Finish, EMPTY_TEXT_HIGHLIGHT);
 					}
 					
+					// Validate input format
 				    try
 				    {
-				    	//Checking for valid inputs
 				    	//TODO give a more descriptive error message, with exactly witch one is causing the error.
 				    	Double.parseDouble(tension);
 				    	Double.parseDouble(compression);

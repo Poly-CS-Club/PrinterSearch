@@ -36,6 +36,13 @@ public class HighlightColorSettings extends SettingsPanel
         setVisible(true);
     }
 
+    /**
+     * A color change listener that adjusts search filter match
+     * highlighting within the program.
+     * 
+     * @author James Quigley
+     *
+     */
     private class ColorChangeListener implements ChangeListener{
         public void stateChanged(ChangeEvent e) {
             Color newColor = colorChooser.getColor();

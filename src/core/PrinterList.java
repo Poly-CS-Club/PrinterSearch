@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * A list of 3D metal printers being considered for the
- * product (TODO: replace with a brief description of the product).
+ * product.
  *
  * @author  Jake Leonard, Joshua Becker, Alireza Bahremand, Marcinina Alvaran
  * @version 1.0
@@ -34,24 +34,50 @@ public class PrinterList {
 		
 	}
 
+	/**
+	 * Returns an array of all printers in the database.
+	 * 
+	 * @return  the ArrayList<Printer> containing all the printers in the database.
+	 */
 	public ArrayList<Printer> getPrinterList() {
 		return printerList;
 	}
 
+	/**
+	 * Returns the total number of printers in the database.
+	 * 
+	 * @return the number of printers in the database
+	 */
 	public int getNumberOfPrinters()
 	{
 		return printerList.size();
 	}
 
+	/**
+	 * Sets the list of printers to the specified array list of printers.
+	 * 
+	 * @param printerList  the ArrayList<Printer> with the printers
+	 */
 	public void setPrinterList(ArrayList<Printer> printerList) {
 		this.printerList = printerList;
 	}
 
+	/**
+	 * Adds a printer to the printer list.
+	 * 
+	 * @param printer  the Printer to add to the printer list
+	 */
 	public void addPrinter(Printer printer){
 		printerList.add(printer);
 
 	}
 
+	/**
+	 * Returns the printer at the specified list index.
+	 * 
+	 * @param index  the index of the desired printer
+	 * @return       the printer at the specified index
+	 */
 	public Printer getPrinter(int index){
 		return printerList.get(index);
 	}
@@ -157,6 +183,11 @@ public class PrinterList {
 		}
 	}
 
+	/**
+	 * Resets match information for the specified array list of printers.
+	 * 
+	 * @param list the ArrayList<Printer> whose match information will be reset
+	 */
 	public void clearMatches(ArrayList<Printer> list)
 	{
 		for(Printer printer : list){

@@ -32,6 +32,11 @@ public class VendorInfoFrame extends JFrame
 	public static int FRAME_HEIGHT = (int) (MenuWindow.FRAME_HEIGHT*.25);
 	public static int FRAME_WIDTH = (int) (MenuWindow.FRAME_WIDTH*.5);
 	
+	/**
+	 * Creates a JLabel with vendor information.
+	 * 
+	 * @param target the JLabel containing the vendor's name
+	 */
 	public VendorInfoFrame(JLabel target)
 	{
 		onLink = true;
@@ -41,11 +46,17 @@ public class VendorInfoFrame extends JFrame
 		addComponents();
 	}
 
+	/**
+	 * Instantiates label components.
+	 */
 	private void createComponents() {
 		m_Main_P = new JPanel();
 		m_VendorInfo_L = new VendorLabel(m_Vendor_L.getText());
 	}
 
+	/**
+	 * Sets default values, dimensions, and borders for the fram.
+	 */
 	private void designComponents() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		m_Main_P.setBackground(Color.GRAY);
@@ -61,21 +72,45 @@ public class VendorInfoFrame extends JFrame
 		m_Main_P.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 
+	/**
+	 * Adds the background panel and vendor name label to the frame.
+	 */
 	private void addComponents() 
 	{
 		m_Main_P.add(m_VendorInfo_L);
 		add(m_Main_P);
 	}
 
+	/**
+	 * Returns whether vendor information is being viewed
+	 * 
+	 * @return true if vendor information is being viewed and false otherwise
+	 */
 	public boolean isOnLink() {
 		return onLink;
 	}
 
+	/**
+	 * Sets whether vendor information is being viewed.
+	 * 
+	 * @param onLink the boolean representing whether vendor information
+	 *               is being viewed
+	 */
 	public void setOnLink(boolean onLink) {
 		this.onLink = onLink;
 	}
+	
+	/**
+	 * A mouse listener that checks vendor label interaction.
+	 * 
+	 * @author Joshua Becker
+	 *
+	 */
 	private class MouseListener extends MouseAdapter
 	{
+	    /**
+	     * Sets onLink to true when mouse is actively hovering.
+	     */
 		@Override
 		public void mouseEntered(java.awt.event.MouseEvent evt) 
 		{
@@ -83,12 +118,19 @@ public class VendorInfoFrame extends JFrame
 			//System.out.println("true");
 		}
 
+		/**
+		 * Sets onLink to false when mouse exits.
+		 */
 		@Override
 		public void mouseExited(java.awt.event.MouseEvent evt) 
 		{	
 			onLink = false;
 			//System.out.println("false");
 		}
+		
+		/**
+		 * Opens vendor website on click.
+		 */
 		@Override
 		public void mouseClicked(java.awt.event.MouseEvent evt) 
 		{
@@ -98,6 +140,12 @@ public class VendorInfoFrame extends JFrame
 				JOptionPane.showMessageDialog(null, "Broken link");
 			}
 		}
+		
+		/**
+		 * Opens specified website using a desktop browser.
+		 * 
+		 * @param uri the URI containing the vendor's website url
+		 */
 		private void open(URI uri) {
 		    if (Desktop.isDesktopSupported()) {
 		      try {

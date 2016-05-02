@@ -15,12 +15,12 @@ public class VendorLabel extends JLabel implements Serializable
 	private JPanel header_P, body_P;
 	private String [] vendorInfo;
     
-/**
- * 
- * @param vendorName
- * @param webSite
- * @param otherPrinters
- */
+
+	/**
+	 * Creates a vendor label with the specified vendor name.
+	 * 
+	 * @param vendorName  the String containing the vendor's name
+	 */
     VendorLabel(String vendorName)
     {
     	vendorInfo = ToolBox.getVendorInfo(vendorName);
@@ -47,6 +47,14 @@ public class VendorLabel extends JLabel implements Serializable
         addComponents();
     }
     
+    /**
+     * Instantiates vendor label components.
+     * 
+     * @param vendorName   the String with the vendor's name
+     * @param webSite      the String with the vndor's website
+     * @param vendorInfo   the String with additional vendor information
+     * @param printerList  the String with printers associated with the vendor
+     */
     private void createComponents(String vendorName, String webSite, String vendorInfo, String printerList)
     {
     	String tag = "<html><h2>  ", endTag = "  </h2></html>";
@@ -57,9 +65,10 @@ public class VendorLabel extends JLabel implements Serializable
         this.body_P = new JPanel();
         this.header_P = new JPanel();
     }
-/**
- * 
- */
+
+    /**
+     * Sets default component dimensions, alignment, and colors.
+     */
     private void designComponents()
     {
     	int height = VendorInfoFrame.FRAME_HEIGHT - 10;
@@ -129,14 +138,29 @@ public class VendorLabel extends JLabel implements Serializable
     	add(body_P);
     }
     
+    /**
+     * Returns the JLabel with the vendor's name.
+     * 
+     * @return the JLabel containing the vendor's name
+     */
     public JLabel getPrinterName() {
     	return name;
     }
     
+    /**
+     * Returns the JLabel with the vendor's website.
+     * 
+     * @return the JLabel containing the vendor's website
+     */
     public JLabel getwebSite() {
     	return webSite;
     }
     
+    /**
+     * Returns the JLabel with the vendor's associated printers.
+     * 
+     * @return the JLabel containing the vendor's associated printers
+     */
     public JLabel getotherPrinters() {
     	return otherPrinters;
     }

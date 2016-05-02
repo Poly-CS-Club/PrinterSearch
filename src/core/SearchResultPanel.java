@@ -22,12 +22,21 @@ public class SearchResultPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = -8720386740444854808L;
 	
+	/**
+	 * Creates a default JPanel containing search results.
+	 */
 	public SearchResultPanel()
 	{
 		createComponents();
 		designComponents();
 		addComponents();
 	}
+	
+	/**
+	 * Creates a JPanel with the specified name and containing search results.
+	 * 
+	 * @param name the String containing the search results panel name
+	 */
 	public SearchResultPanel(String name)
 	{
 		this.setName(name);
@@ -35,6 +44,10 @@ public class SearchResultPanel extends JPanel{
 		designComponents();
 		addComponents();
 	}
+	
+	/**
+	 * Instantiates and sets up component values.
+	 */
 	private void createComponents()
 	{
 		// Create search results' table header
@@ -46,7 +59,7 @@ public class SearchResultPanel extends JPanel{
 		m_PrinterList = ToolBox.generatePrinterList();
 	}
 	/**
-	 * designs the look and populates the Panel. components
+	 * designs the component's layout and border
 	 */
 	private void designComponents() 
 	{

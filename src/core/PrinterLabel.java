@@ -23,18 +23,19 @@ public class PrinterLabel extends JLabel implements Serializable
      * @param frameWidth      the width of the frame
      * @param frameHeight     the height of the frame
      * @param name            the String with the printer's name
+     * @param vendor          the String with the vendor's name
      * @param tension         the String with the printer's tension value
      * @param compression     the String with the printer's compression value
      * @param impact          the String with the printer's impact value
-     * @param partComplexity  the String with the printer's complexity
-     * @param customizable    the String with the printer's ease of customization
      * @param materials       the String with the printer's range of materials
      * @param tolerance       the String with the printer's tolerance value
      * @param finish          the String with the printer's finish
+     * @param needsLink       the boolean for if the component is associated with vendor info
      */
     PrinterLabel(int index, int frameWidth, int frameHeight, String name,String vendor, String tension,
     		String compression, String impact, String materials, String tolerance, String finish, boolean needsLink)
     {
+        // Init printer label values
         m_index = index;
         this.name = new JLabel(name, JTextField.CENTER);
         this.vendor = new JLabel(vendor, JTextField.CENTER);
@@ -46,6 +47,7 @@ public class PrinterLabel extends JLabel implements Serializable
         this.finish = new JLabel(finish, JTextField.CENTER);
         this.needsLink = needsLink;
         
+        // Design printer label
         setPreferredSize(new Dimension(frameWidth-200, 40));
         setMinimumSize(new Dimension(frameWidth-300, 40));
         setMaximumSize(new Dimension(frameWidth-190, 60));
@@ -53,11 +55,13 @@ public class PrinterLabel extends JLabel implements Serializable
         setAlignmentX(Component.CENTER_ALIGNMENT);
         setOpaque(true);
         
+        // Set alternating list entry backgrounds
         if (m_index % 2 == 0)
         	setOpaque(false);
         else
         	setBackground(new Color(215, 215, 215));
 
+        // Include components
         designComponents();
         addComponents();
     }
@@ -71,6 +75,7 @@ public class PrinterLabel extends JLabel implements Serializable
      */
     PrinterLabel(int index, int frameWidth, int frameHeight)
     {
+        // Init printer label
         m_index = index;
         name = new JLabel("default", JTextField.CENTER);
         vendor = new JLabel("default", JTextField.CENTER);
@@ -81,19 +86,21 @@ public class PrinterLabel extends JLabel implements Serializable
         tolerance = new JLabel("default", JTextField.CENTER);
         finish = new JLabel("default", JTextField.CENTER);
         
+        // Design printer label
         setPreferredSize(new Dimension(frameWidth-200, 45));
         setMinimumSize(new Dimension(frameWidth-220, 40));
         setMaximumSize(new Dimension(frameWidth-190, 50));
         setLayout(new GridLayout(1,9,2,2));
         setAlignmentX(Component.CENTER_ALIGNMENT);
-        if(m_index % 2 == 0)
-        {
-        	setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
-        }else
-        {
-        	setBorder(BorderFactory.createLineBorder(Color.black));
-        }
+        setOpaque(true);
+        
+        // Set alternating list entry backgrounds
+        if (m_index % 2 == 0)
+            setOpaque(false);
+        else
+            setBackground(new Color(215, 215, 215));
 
+        // Include components
         designComponents();
         addComponents();
     }
@@ -103,15 +110,17 @@ public class PrinterLabel extends JLabel implements Serializable
      */
     private void designComponents()
     {
+        // Center components
     	this.name.setAlignmentX(Component.CENTER_ALIGNMENT);
     	vendor.setAlignmentX(Component.CENTER_ALIGNMENT);
         tension.setAlignmentX(Component.CENTER_ALIGNMENT);
-        compression.setAlignmentX(Component.CENTER_ALIGNMENT); // <---- Refactor comprestion --> compression 
+        compression.setAlignmentX(Component.CENTER_ALIGNMENT); 
         impact.setAlignmentX(Component.CENTER_ALIGNMENT);
         materials.setAlignmentX(Component.CENTER_ALIGNMENT);
         tolerance.setAlignmentX(Component.CENTER_ALIGNMENT);
         finish.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        // Links component to vendor information
         if(needsLink)
         {
         	vendor.setPreferredSize(new Dimension(90,30));
@@ -137,34 +146,74 @@ public class PrinterLabel extends JLabel implements Serializable
         
     }
     
+    /**
+     * Returns the label with the printer's name.
+     * 
+     * @return the JLabel containing the printer's name
+     */
     public JLabel getPrinterName() {
     	return name;
     }
     
+    /**
+     * Returns the label with the printer's tension value.
+     * 
+     * @return the JLabel containing the printer's tension value
+     */
     public JLabel getTension() {
     	return tension;
     }
     
+    /**
+     * Returns the label with the printer's compression value.
+     * 
+     * @return the JLabel containing the printer's compression value
+     */
     public JLabel getCompression() {
     	return compression;
     }
     
+    /**
+     * Returns the label with the printer's impact value.
+     * 
+     * @return the JLabel containing the printer's impact value
+     */
     public JLabel getImpact() {
     	return impact;
     }
     
+    /**
+     * Returns the label with the vendor's name.
+     * 
+     * @return the JLabel containing the vendor's name
+     */
     public JLabel getVendor(){
     	return vendor;
     }
     
+    /**
+     * Returns the label with the printer's range of materials.
+     * 
+     * @return the JLabel containing the printer's range of materials
+     */
     public JLabel getMaterials() {
     	return materials;
     }
     
+    /**
+     * Returns the label with the printer's tolerance value.
+     * 
+     * @return the JLabel with the printer's tolerance value
+     */
     public JLabel getTolerance() {
     	return tolerance;
     }
     
+    /**
+     * Returns the label with the printer's finish value.
+     * 
+     * @return the JLabel containing the printer's finish value
+     */
     public JLabel getFinish() {
     	return finish;
     }

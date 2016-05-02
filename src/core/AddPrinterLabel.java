@@ -13,7 +13,6 @@ import javax.swing.JTextField;
  * @author Joshua Becker
  * @see    AddPrinterFrame
  */
-
 public class AddPrinterLabel extends JLabel
 {
 	/**
@@ -24,6 +23,12 @@ public class AddPrinterLabel extends JLabel
 	private JLabel m_Title_L;
 	private Component m_Component;
 	
+	/**
+	 * Creates a JLabel with the specified title and text field.
+	 * 
+	 * @param title      the String with the text field's title
+	 * @param textField  the text field to incorporate into the label
+	 */
 	public AddPrinterLabel(String title, JTextField textField)
 	{
 		m_Title_L = new JLabel(title, JLabel.CENTER);
@@ -32,6 +37,13 @@ public class AddPrinterLabel extends JLabel
 		designLabel();
 		addComponents();
 	}
+	
+	/**
+	 * Creates a JLabel with the specified title and combo box.
+	 * 
+	 * @param title     the String with the combo box's title
+	 * @param comboBox  the combo box to incorporate into the label
+	 */
 	public AddPrinterLabel(String title, JComboBox<String> comboBox)
 	{
 		m_Title_L = new JLabel(title, JLabel.CENTER);
@@ -40,27 +52,50 @@ public class AddPrinterLabel extends JLabel
 		designLabel();
 		addComponents();
 	}
+	
+	/**
+	 * Sets the label's layout and size.
+	 */
 	public void designLabel()
 	{
 		this.setLayout(new GridLayout(2,1,5,5));
 		this.setPreferredSize(new Dimension(100,45));
 	}
+	
+	/**
+	 * Adds the specified title and component to the label.
+	 */
 	public void addComponents()
 	{
 		this.add(m_Title_L);
 		this.add(m_Component);
 	}
 
+	/**
+	 * Sets a text field component's text.
+	 * 
+	 * @param text  the String containing text for the text field
+	 */
 	public void setM_ComponentText(String text){
 		((JTextField) m_Component).setText(text);
 	}
 
+	/**
+	 * Returns a String of the item specified in a combo box component.
+	 * 
+	 * @return  the String representing the item in the combo box
+	 */
 	@SuppressWarnings("unchecked")
 	public String getSelectedItem()
 	{
 		return (String) ((JComboBox<String>) m_Component).getSelectedItem();
 	}
 	
+	/**
+	 * Retrieves the text from a text field component.
+	 * 
+	 * @return  the String containing the text field text
+	 */
 	public String getInput()
 	{
 		if(!m_Component.equals(null))

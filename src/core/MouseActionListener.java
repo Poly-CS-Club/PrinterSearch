@@ -15,12 +15,22 @@ public class MouseActionListener extends MouseAdapter{
 	VendorInfoFrame m_VendorInfoUI;
 	JLabel m_Target_L;
 	Color m_OldColor;
+	
+	/**
+	 * Creates a mouse action listener for a JLabel.
+	 * 
+	 * @param target  the JLabel to associate with the mouse listener
+	 */
 	public MouseActionListener(JLabel target)
 	{
 		m_VendorInfoUI = new VendorInfoFrame(target);
 		m_VendorInfoUI.addMouseListener(new MouseListener());
 		m_Target_L = target;
 	}
+	
+	/**
+	 * Changes text color to blue upon hover.
+	 */
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent evt) 
 	{
@@ -28,12 +38,19 @@ public class MouseActionListener extends MouseAdapter{
 		m_Target_L.setForeground(Color.blue);
 	}
 
+	/**
+	 * Returns text colour to original color upon mouse exit.
+	 */
 	@Override
 	public void mouseExited(java.awt.event.MouseEvent evt) 
 	{
 		m_Target_L.setForeground(m_OldColor);
 		//m_VendorInfoUI.setVisible(false);
 	}
+	
+	/**
+	 * Displays vendor information box on click.
+	 */
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent evt) 
 	{
@@ -53,6 +70,12 @@ public class MouseActionListener extends MouseAdapter{
 		m_Target_L.setForeground(m_OldColor);
 	}
 	
+	/**
+	 * Creates a mouse adapter to hide the vendor information box.
+	 * 
+	 * @author Joshua Becker
+	 * 
+	 */
 	private class MouseListener extends MouseAdapter
 	{
 		public MouseListener()
@@ -63,6 +86,9 @@ public class MouseActionListener extends MouseAdapter{
 		{
 		}
 
+		/**
+		 * Hides vendor information box upon mouse exit.
+		 */
 		@Override
 		public void mouseExited(java.awt.event.MouseEvent evt) 
 		{

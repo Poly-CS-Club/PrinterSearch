@@ -254,7 +254,7 @@ private class ComboListener implements ActionListener
  * information.  If the <code>Printable</code> object aborts the
  * print job then it throws a {@link PrinterException}.
  * 
- * @author Joshua Becker (and other team members:) Jacob Leonard, Alireza Bahremand
+ * @author Joshua Becker, Jacob Leonard, Alireza Bahremand, Marcinina Alvaran
  *
  */
 private class ButtonListener implements ActionListener, Printable
@@ -296,7 +296,7 @@ private class ButtonListener implements ActionListener, Printable
 			                help.pack();
 			                help.setVisible(true);
 				break;
-			case "Settings"://TODO Settings Window or pop-up
+			case "Settings":
 							SettingsFrame settingsFrame = new SettingsFrame();
 							settingsFrame.pack();
 							settingsFrame.setVisible(true);
@@ -310,10 +310,10 @@ private class ButtonListener implements ActionListener, Printable
 						    PrintDocument printDocument;
 						    
 						    // getPrinterList is called twice to access ArrayList<Printer>.
-						    if (!haveWeUpdated) 
+						    if (!haveWeUpdated) // Print full printer database
 						        printDocument = new PrintDocument(
 						                m_SearchResult_P.getPrinterList().getPrinterList(), haveWeUpdated);
-						    else
+						    else   // Print filtered reslts
 						        printDocument = new PrintDocument(
 	                                    m_SearchResult_P.getFilteredList(), haveWeUpdated);
 						    printDocument.print();
@@ -461,12 +461,22 @@ private class ButtonListener implements ActionListener, Printable
 	    this.repaint();
 	}
 	//----------------------------Getters/Setters--------------------------------//
+	/**
+	 * Returns menu frame.
+	 * 
+	 * @return the menu frame
+	 */
 	public JFrame getMenu_F(){
 		
 		return  m_Menu_F;
 		
 	}
 
+	/**
+	 * Returns the search result panel.
+	 * 
+	 * @return the search result panel
+	 */
 	public SearchResultPanel getSearchResultsPanel()
 	{
 		return m_SearchResult_P;
