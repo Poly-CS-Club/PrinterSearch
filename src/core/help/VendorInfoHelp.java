@@ -24,13 +24,7 @@ public class VendorInfoHelp extends HelpPanel
      */
     protected void setTutorialText()
     {
-        String iconPath1, iconPath2, step1, step2A, step2B, note;
-        
-        // Program restart information
-        note = "NOTE: New vendors will not be displayed in the filter list until " +
-               "the program is restarted.";
-        addStep(note);
-        addSpacing();
+        String iconPath1, iconPath2, step1, step2A, step2B;
         
         // Add step 1: Click vendor name
         step1 = "Click on the vendor name in the list of printers.";
