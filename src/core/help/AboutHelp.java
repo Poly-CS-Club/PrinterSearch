@@ -30,7 +30,7 @@ public class AboutHelp extends HelpPanel
         addStep(ToolBox.getLogoIcon());
         
         // Add general Information
-        addBody("Version: 1.0");
+        addBody("Version: 1.0.1");
         addBody("Polytechnic Computer Science Club");
         addBody("Arizona State University");
         addSpacing();

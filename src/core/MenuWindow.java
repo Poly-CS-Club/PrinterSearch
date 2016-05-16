@@ -285,7 +285,7 @@ private class ButtonListener implements ActionListener, Printable
 									// Reset finish
 									m_SearchFilter_P.getFinish().getMaxSpinner().setValue(0.000);
 									// Reset Materials
-									m_SearchFilter_P.getMaterials().setSelectedIndex(2);
+									m_SearchFilter_P.getMaterials().setSelectedIndex(0);
 									m_Menu_P.revalidate();
 									revalidate();
 				break;

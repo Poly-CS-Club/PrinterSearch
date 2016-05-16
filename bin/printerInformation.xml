@@ -1,80 +1,42 @@
 <?xml version="1.0" encoding="us-ascii" standalone="no"?>
 <INFO>
     <VENDORS>
-        <vendor name="Vendor One">
-            <webSite info="@vendorOne.com">
-            </webSite>
-            <VendorInfo info="Vendor Info Goes Here">
-            </VendorInfo>
+    <vendor name="Stratasys">
+            <webSite info="http://www.stratasys.com/"/>
+            <VendorInfo info="1 800.801.6491"/>
             <printer>
-                <NAME>Test 1</NAME>
-                <VENDOR>Vendor One</VENDOR>
-                <TENSION>1234</TENSION>
-                <COMPRESSION>1234</COMPRESSION>
-                <IMPACT>225</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
+                <NAME>EOS M280</NAME>
+                <VENDOR>Stratasys</VENDOR>
+                <TENSION>59.173</TENSION>
+                <COMPRESSION>0</COMPRESSION>
+                <IMPACT>20.82</IMPACT>
+                <PART_COMPLEXITY></PART_COMPLEXITY>
+                <LEAD_TIME></LEAD_TIME>
                 <EOC>True</EOC>
-                <ROM>Aluminum</ROM>
-                <TOLERANCE>1234</TOLERANCE>
-                <FINISH>1</FINISH>
+                <ROM>Inconel-718</ROM>
+                <TOLERANCE>.0025</TOLERANCE>
+                <FINISH>.001</FINISH>
             </printer>
         </vendor>
-        <vendor name="Vendor Two">
-            <webSite info="@vendorTwo.com">
-            </webSite>
-            <VendorInfo info="Vendor Info Goes Here">
-            </VendorInfo>
+        
+            <vendor name="GPI">
+            <webSite info="http://gpiprototype.com/"/>
+            <VendorInfo info="(847) 615-8900"/>
             <printer>
-                <NAME>Test 2</NAME>
-                <VENDOR>Vendor Two</VENDOR>
-                <TENSION>.35</TENSION>
-                <COMPRESSION>.05</COMPRESSION>
-                <IMPACT>.001</IMPACT>
-                <PART_COMPLEXITY>8</PART_COMPLEXITY>
-                <LEAD_TIME>5</LEAD_TIME>
-                <EOC>false</EOC> 
-                <ROM>aluminum, stainless</ROM>
-                <TOLERANCE>.0001</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        </vendor>
-		
-    <vendor name="Vendor Six">
-            <webSite info="@VendorSix.com"/>
-            <VendorInfo info="Vendor Six makes quality stuff"/>
-            <printer>
-                <NAME>Test 3</NAME>
-                <VENDOR>Vendor Six</VENDOR>
-                <TENSION>12</TENSION>
-                <COMPRESSION>12</COMPRESSION>
-                <IMPACT>12</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
+                <NAME>N/A</NAME>
+                <VENDOR>GPI</VENDOR>
+                <TENSION>50.543</TENSION>
+                <COMPRESSION>0</COMPRESSION>
+                <IMPACT>33.41</IMPACT>
+                <PART_COMPLEXITY></PART_COMPLEXITY>
+                <LEAD_TIME></LEAD_TIME>
                 <EOC>True</EOC>
-                <ROM>aluminum, stainless, inconel</ROM>
-                <TOLERANCE>12</TOLERANCE>
-                <FINISH>1</FINISH>
+                <ROM>Inconel-718</ROM>
+                <TOLERANCE>0</TOLERANCE>
+                <FINISH>0</FINISH>
             </printer>
         </vendor>
-
-    <vendor name="Vendor">
-            <webSite info="asdf"/>
-            <VendorInfo info="asdf"/>
-            <printer>
-                <NAME>Test 4</NAME>
-                <VENDOR>Vendor</VENDOR>
-                <TENSION>500</TENSION>
-                <COMPRESSION>2123</COMPRESSION>
-                <IMPACT>1234</IMPACT>
-                <PART_COMPLEXITY>123</PART_COMPLEXITY>
-                <LEAD_TIME>1123</LEAD_TIME>
-                <EOC>True</EOC>
-                <ROM>Inconel</ROM>
-                <TOLERANCE>1234</TOLERANCE>
-                <FINISH>1</FINISH>
-            </printer>
-        </vendor>
-
+        
+        
     </VENDORS>
 </INFO>
